@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/editor.h"
+#include "editor.h"
 
 using namespace std;
 
