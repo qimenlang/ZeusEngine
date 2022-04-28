@@ -6,7 +6,7 @@
 namespace zeus{
     class editor{
         private:
-            std::shared_ptr<engine> m_zeus_engine;
+         
         public:
             editor();
             virtual ~editor();//虚析构

@@ -1,12 +1,16 @@
+#include "core/base/singleton.h"
 namespace zeus{
-    class engine
+    class engine : public singleton<engine>
     {
-    private:
-        /* data */
-    public:
-        engine(/* args */);
-        virtual ~engine();
-        void run();
+        //父类为什么要作为友元？？？
+        friend class singleton<engine>;
+        protected:
+            engine();
+        public:
+            virtual ~engine();
+            engine(const engine&) = delete;
+            engine& operator=(const engine&) = delete;
+            void run();
     };
     
 }
