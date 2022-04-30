@@ -7,24 +7,7 @@
 *	    拷贝构造、赋值操作符、移动构造、移动赋值操作符都应该delete
 *		
 */
-
 namespace zeus {
-	//template<typename T>
-	//class singleton
-	//{
-	//public:
-	//	virtual ~singleton() noexcept = default;
-	//	singleton(const singleton&) = delete;//这里为什么没有T
-	//	singleton& operator =(const singleton&) = delete;
-
-	//	T instance() noexcept(std::is_nothrow_constructible<T>::value) {
-	//		static T instance;
-	//		return instance;
-	//	}
-	//private:
-	//	singleton() = default;
-
-	//};
 	template<typename T>
 	class singleton
 	{

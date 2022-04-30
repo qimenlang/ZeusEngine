@@ -19,4 +19,4 @@ target_include_directories(${TARGET_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(${TARGET_NAME} ZeusRuntime)
+target_link_libraries(${TARGET_NAME} ZeusRuntime glfw)
