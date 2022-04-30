@@ -5,6 +5,11 @@ In memory of being dismissed during the probation period of xiaohongshu
 1. IDE  使用vscode + cmake + cpp,配置方式参考[这里](https://computingonplains.wordpress.com/building-c-applications-with-cmake-and-visual-studio-code/)
 1. 代码风格使用 [Google c++编程规范](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
 
+##### 第三方库
+
+1. [glfw](https://github.com/glfw/glfw) ：用于绘制window
+2. glad 参考https://rpxomi.github.io/ 引入
+
 ##### 实现功能
 
 1. 引擎五层架构
