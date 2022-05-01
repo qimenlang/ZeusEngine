@@ -5,6 +5,13 @@ In memory of being dismissed during the probation period of xiaohongshu
 1. IDE  使用vscode + cmake + cpp,配置方式参考[这里](https://computingonplains.wordpress.com/building-c-applications-with-cmake-and-visual-studio-code/)
 1. 代码风格使用 [Google c++编程规范](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)
 
+##### TODO
+
+1. 优化UI，引入imgui配合glfw
+2. 配置C++编程规范静态检查
+3. 搭建opengl渲染管线
+4. 完善引擎五层架构
+
 ##### 第三方库
 
 1. [glfw](https://github.com/glfw/glfw) ：用于绘制window
