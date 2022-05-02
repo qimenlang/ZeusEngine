@@ -21,6 +21,10 @@ namespace zeus
                 {
                     m_shader_folder = m_root_folder / value;
                 }
+                if (name.compare("TextureFolder") == 0)
+                {
+                    m_texture_folder = m_root_folder / value;
+                }
             }
         }
     }
@@ -39,6 +43,11 @@ namespace zeus
     const std::filesystem::path& zeus::ConfigManager::getShaderFolder() const
     {
         return m_shader_folder;
+    }
+
+    const std::filesystem::path& ConfigManager::getTextureFolder() const
+    {
+        return m_texture_folder;
     }
     
 }

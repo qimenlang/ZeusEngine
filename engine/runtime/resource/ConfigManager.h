@@ -20,6 +20,8 @@ namespace zeus {
     private:
         std::filesystem::path m_root_folder;
         std::filesystem::path m_shader_folder;
+        std::filesystem::path m_texture_folder;
+
 
 
     public:
@@ -27,5 +29,7 @@ namespace zeus {
         void clear();
         const std::filesystem::path& getRootFolder() const;
         const std::filesystem::path& getShaderFolder() const;
+        const std::filesystem::path& getTextureFolder() const;
+
     };
 }
