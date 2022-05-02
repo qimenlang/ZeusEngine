@@ -26,15 +26,6 @@ namespace zeus{
     engine::engine() {};
     engine::~engine(){};
     void engine::run(){
-        std::filesystem::path zeus_root_folder = std::filesystem::path(GET_ZEUS_STR(ZEUS_ROOT_DIR));
-        std::cout << zeus_root_folder << std::endl;
-
-        zeus::EngineInitParams zeus_init_paras;
-        zeus_init_paras.m_root_folder = zeus_root_folder;
-        zeus_init_paras.m_config_file_path = zeus_root_folder/"ZeusEditor.ini";
-
-        zeus::ConfigManager::instance().initialize(zeus_init_paras);
-
         // init glfw window
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -57,12 +48,9 @@ namespace zeus{
 
         // vertex shader
         auto shader_folder = zeus::ConfigManager::instance().getShaderFolder();
-        std::cout << shader_folder.c_str() << std::endl;
         std::string vs_path = shader_folder.string()+"\\default.vs";
         std::string fs_path = shader_folder.string() + "\\default.fs";
-
         Shader default_shader(vs_path.c_str(), fs_path.c_str());
-
 
         // set up vertex data (and buffer(s)) and configure vertex attributes
         // ------------------------------------------------------------------
