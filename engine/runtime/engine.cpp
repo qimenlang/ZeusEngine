@@ -3,24 +3,12 @@
 #include <GLFW/glfw3.h>
 
 #include "engine.h"
+#include "Shader.h"
+#include "ConfigManager.h"
 
-const char* vertexShaderSource = "#version 330 core\n"
-"layout(location = 0) in vec3 aPos; // the position variable has attribute position 0 \n"
-"layout(location = 1) in vec3 aColor; // the color variable has attribute position 1\n"
-"out vec4 vertexColor; // specify a color output to the fragment shader \n"
-"void main()\n"
-"{\n"
-    "gl_Position = vec4(aPos, 1.0); // see how we directly give a vec3 to vec4's constructor\n"
-    "vertexColor = vec4(aColor, 1.0); // set the output variable to a dark-red color\n"
-"}\0";
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"in vec4 vertexColor; // the input variable from the vertex shader (same name and same type)\n"
-"void main()\n"
-"{\n"
-"   FragColor = vertexColor;\n"
-"}\n\0";
-
+// get compile var form cmake , why 2 macro func ???
+#define GET_ZEUS_STR(s) GET_STR(s)
+#define GET_STR(s) #s
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
@@ -38,6 +26,14 @@ namespace zeus{
     engine::engine() {};
     engine::~engine(){};
     void engine::run(){
+        std::filesystem::path zeus_root_folder = std::filesystem::path(GET_ZEUS_STR(ZEUS_ROOT_DIR));
+        std::cout << zeus_root_folder << std::endl;
+
+        zeus::EngineInitParams zeus_init_paras;
+        zeus_init_paras.m_root_folder = zeus_root_folder;
+        zeus_init_paras.m_config_file_path = zeus_root_folder/"ZeusEditor.ini";
+
+        zeus::ConfigManager::instance().initialize(zeus_init_paras);
 
         // init glfw window
         glfwInit();
@@ -60,44 +56,13 @@ namespace zeus{
         }
 
         // vertex shader
-        unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-        glCompileShader(vertexShader);
-        // check for shader compile errors
-        int success;
-        char infoLog[512];
-        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-        if (!success)
-        {
-            glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-        }
+        auto shader_folder = zeus::ConfigManager::instance().getShaderFolder();
+        std::cout << shader_folder.c_str() << std::endl;
+        std::string vs_path = shader_folder.string()+"\\default.vs";
+        std::string fs_path = shader_folder.string() + "\\default.fs";
 
-        // fragment shader
-        unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-        glCompileShader(fragmentShader);
-        // check for shader compile errors
-        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-        if (!success)
-        {
-            glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-        }
+        Shader default_shader(vs_path.c_str(), fs_path.c_str());
 
-        // link shaders
-        unsigned int shaderProgram = glCreateProgram();
-        glAttachShader(shaderProgram, vertexShader);
-        glAttachShader(shaderProgram, fragmentShader);
-        glLinkProgram(shaderProgram);
-        // check for linking errors
-        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-            std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-        }
-        glDeleteShader(vertexShader);
-        glDeleteShader(fragmentShader);
 
         // set up vertex data (and buffer(s)) and configure vertex attributes
         // ------------------------------------------------------------------
@@ -154,7 +119,7 @@ namespace zeus{
             glClear(GL_COLOR_BUFFER_BIT);
 
             // draw our first triangle
-            glUseProgram(shaderProgram);
+            default_shader.use();
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
             //glDrawArrays(GL_TRIANGLES, 0, 6);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -168,7 +133,6 @@ namespace zeus{
         // ------------------------------------------------------------------------
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
-        glDeleteProgram(shaderProgram);
 
         glfwTerminate();
     }

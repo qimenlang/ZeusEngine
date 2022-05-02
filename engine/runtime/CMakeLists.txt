@@ -12,4 +12,5 @@ target_link_libraries(${TARGET_NAME} glfw)
 
 target_include_directories(${TARGET_NAME} 
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/resource)
