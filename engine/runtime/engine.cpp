@@ -1,14 +1,17 @@
+#include "engine.h"
+
 #include <iostream>
+
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include <Eigen/Dense>
 
-#include "engine.h"
 #include "Shader.h"
 #include "ConfigManager.h"
 
+using Eigen::MatrixXd;
 // get compile var form cmake , why 2 macro func ???
 #define GET_ZEUS_STR(s) GET_STR(s)
 #define GET_STR(s) #s
