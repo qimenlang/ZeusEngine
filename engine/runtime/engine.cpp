@@ -1,6 +1,7 @@
 #include "engine.h"
 
 #include <iostream>
+#include <cassert>
 
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -31,6 +32,47 @@ void processInput(GLFWwindow* window)
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+}
+
+
+float euler_2_radius(float euler)
+{   
+    return euler * 0.01745329251994329576923690768489;
+}
+
+// Affine3d is a 4*4 Homogeneous matrix
+Eigen::Matrix4f create_rotation_matrix(float ax, float ay, float az) {
+    Eigen::Affine3f rx =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ax), Eigen::Vector3f(1, 0, 0)));
+    Eigen::Affine3f ry =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ay), Eigen::Vector3f(0, 1, 0)));
+    Eigen::Affine3f rz =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(az), Eigen::Vector3f(0, 0, 1)));
+    return (rz * ry * rx).matrix();
+}
+
+Eigen::Matrix4f create_translation_matrix(float tx, float ty, float tz)
+{
+    Eigen::Affine3f translation(Eigen::Translation3f(Eigen::Vector3f(tx, ty, tz)));
+    return translation.matrix();
+}
+
+Eigen::Matrix4f create_projection_martrix(float fovy,float aspect,float zNear, float zFar)
+{
+    Eigen::Transform<float, 3, Eigen::Projective> tr;
+    tr.matrix().setZero();
+    assert(aspect > 0);
+    assert(zFar > zNear);
+    assert(zNear > 0);
+    double radf = euler_2_radius(fovy);
+    double tan_half_fovy = std::tan(radf / 2.0);
+    tr(0, 0) = 1.0 / (aspect * tan_half_fovy);
+    tr(1, 1) = 1.0 / (tan_half_fovy);
+    tr(2, 2) = -(zFar + zNear) / (zFar - zNear);
+    tr(3, 2) = -1.0;
+    tr(2, 3) = -(2.0 * zFar * zNear) / (zFar - zNear);
+
+    return tr.matrix();
 }
 namespace zeus{
     engine::engine() {};
@@ -154,33 +196,14 @@ namespace zeus{
             // draw our first triangle
             default_shader.use();
 
-            // create transformations
-            glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-            glm::mat4 view = glm::mat4(1.0f);
-            glm::mat4 projection = glm::mat4(1.0f);
-            model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-            view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-            projection = glm::perspective(glm::radians(45.0f), (float)window_width / (float)window_height, 0.1f, 100.0f);
+            float roll, yaw, pitch = 0.0;
+            Eigen::Matrix4f model = create_rotation_matrix(-55.0, 0.0, 0.0);
+            Eigen::Matrix4f view = create_translation_matrix(0.0,0.0,-3.0);
+            Eigen::Matrix4f projection = create_projection_martrix(45.0,float(window_width)/window_height,0.1,100.0);
 
-            Eigen::Matrix4d model_ = Eigen::Matrix4d::Identity();
-
-            double roll, yaw, pitch = 0.0;
-
-            Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitZ());
-            Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitY());
-            Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitX());
-
-            Eigen::Quaternion<double> q = rollAngle * yawAngle * pitchAngle;
-
-            Eigen::Matrix3d rotationMatrix = q.matrix();            
-
-            // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-            default_shader.setMat4("model", glm::value_ptr(model));
-            default_shader.setMat4("view", glm::value_ptr(view));
-            default_shader.setMat4("projection", glm::value_ptr(projection));
-
-            //glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
+            default_shader.setMat4("model", model.data());
+            default_shader.setMat4("view", view.data());
+            default_shader.setMat4("projection", projection.data());
 
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
