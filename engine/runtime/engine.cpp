@@ -8,6 +8,10 @@
 #include <stb_image.h>
 #include <Eigen/Dense>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Shader.h"
 #include "ConfigManager.h"
 
@@ -32,12 +36,15 @@ namespace zeus{
     engine::engine() {};
     engine::~engine(){};
     void engine::run(){
+        int window_width = 800;
+        int window_height = 600;
+
         // init glfw window
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+        GLFWwindow* window = glfwCreateWindow(window_width, window_height, "LearnOpenGL", NULL, NULL);
         if (window == NULL)
         {
             std::cout << "Failed to create GLFW window" << std::endl;
@@ -135,7 +142,6 @@ namespace zeus{
 
         while (!glfwWindowShouldClose(window))
         {
-            std::cout<<"engine runing..."<<std::endl;
             processInput(window);
 
             //rendering 
@@ -147,6 +153,35 @@ namespace zeus{
 
             // draw our first triangle
             default_shader.use();
+
+            // create transformations
+            glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+            glm::mat4 view = glm::mat4(1.0f);
+            glm::mat4 projection = glm::mat4(1.0f);
+            model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+            view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+            projection = glm::perspective(glm::radians(45.0f), (float)window_width / (float)window_height, 0.1f, 100.0f);
+
+            Eigen::Matrix4d model_ = Eigen::Matrix4d::Identity();
+
+            double roll, yaw, pitch = 0.0;
+
+            Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitZ());
+            Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitY());
+            Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitX());
+
+            Eigen::Quaternion<double> q = rollAngle * yawAngle * pitchAngle;
+
+            Eigen::Matrix3d rotationMatrix = q.matrix();            
+
+            // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+            default_shader.setMat4("model", glm::value_ptr(model));
+            default_shader.setMat4("view", glm::value_ptr(view));
+            default_shader.setMat4("projection", glm::value_ptr(projection));
+
+            //glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
