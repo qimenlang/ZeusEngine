@@ -40,15 +40,32 @@ float euler_2_radius(float euler)
     return euler * 0.01745329251994329576923690768489;
 }
 
+Eigen::Matrix4f translate(const Eigen::Matrix4f& model,const Eigen::Vector3f& tranlation)
+{
+    Eigen::Affine3f target = Eigen::Affine3f::Identity();
+    target.translate(tranlation);
+    return target.matrix() * model;
+}
+Eigen::Matrix4f rotate(const Eigen::Matrix4f& model, float euler,Eigen::Vector3f axis)
+{
+    axis.normalize();
+    Eigen::Affine3f target = Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(euler), axis));
+    target.rotate(Eigen::AngleAxisf(euler_2_radius(euler), axis));
+    return target.matrix() * model;
+}
+
+Eigen::Matrix4f scale(const Eigen::Matrix4f& model, const Eigen::Vector3f& scale)
+{
+    Eigen::Affine3f target = Eigen::Affine3f::Identity();
+    target.scale(scale);
+    return target.matrix() * model;
+}
+
 // Affine3d is a 4*4 Homogeneous matrix
-Eigen::Matrix4f create_rotation_matrix(float ax, float ay, float az) {
-    Eigen::Affine3f rx =
-        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ax), Eigen::Vector3f(1, 0, 0)));
-    Eigen::Affine3f ry =
-        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ay), Eigen::Vector3f(0, 1, 0)));
-    Eigen::Affine3f rz =
-        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(az), Eigen::Vector3f(0, 0, 1)));
-    return (rz * ry * rx).matrix();
+Eigen::Matrix4f create_rotation_matrix(float euler, Eigen::Vector3f axis) {
+    axis.normalize();
+    Eigen::Affine3f rotate = Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(euler), axis));
+    return rotate.matrix();
 }
 
 Eigen::Matrix4f create_translation_matrix(float tx, float ty, float tz)
@@ -117,9 +134,23 @@ namespace zeus{
             -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
             -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
         };
+
         unsigned int indices[] = {  // note that we start from 0!
             0, 1, 3,   // first triangle
             1, 2, 3    // second triangle
+        };
+
+        glm::vec3 cubePositions[] = {
+            glm::vec3(0.0f,  0.0f,  0.0f),
+            glm::vec3(2.0f,  5.0f, -15.0f),
+            glm::vec3(-1.5f, -2.2f, -2.5f),
+            glm::vec3(-3.8f, -2.0f, -12.3f),
+            glm::vec3(2.4f, -0.4f, -3.5f),
+            glm::vec3(-1.7f,  3.0f, -7.5f),
+            glm::vec3(1.3f, -2.0f, -2.5f),
+            glm::vec3(1.5f,  2.0f, -2.5f),
+            glm::vec3(1.5f,  0.2f, -1.5f),
+            glm::vec3(-1.3f,  1.0f, -1.5f)
         };
 
         unsigned int VBO, VAO, EBO;
@@ -143,7 +174,7 @@ namespace zeus{
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
         // uv attribute
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(2);
 
         // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
@@ -182,13 +213,15 @@ namespace zeus{
         }
         stbi_image_free(data);
 
+        glEnable(GL_DEPTH_TEST);
+
         while (!glfwWindowShouldClose(window))
         {
             processInput(window);
 
             //rendering 
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // bind Texture
             glBindTexture(GL_TEXTURE_2D, texture);
@@ -197,16 +230,30 @@ namespace zeus{
             default_shader.use();
 
             float roll, yaw, pitch = 0.0;
-            Eigen::Matrix4f model = create_rotation_matrix(-55.0, 0.0, 0.0);
+            float rotate_euler = (float)glfwGetTime() * 50.0;
+            //Eigen::Matrix4f model = create_rotation_matrix(rotate_euler,Eigen::Vector3f(1.0,1.0,1.0));
             Eigen::Matrix4f view = create_translation_matrix(0.0,0.0,-3.0);
             Eigen::Matrix4f projection = create_projection_martrix(45.0,float(window_width)/window_height,0.1,100.0);
 
-            default_shader.setMat4("model", model.data());
+            //default_shader.setMat4("model", model.data());
             default_shader.setMat4("view", view.data());
             default_shader.setMat4("projection", projection.data());
 
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+            for (int i = 0; i < 10; i++) {
+                auto pos = cubePositions[i];
+
+                float rotate_euler = (float)glfwGetTime() * 20.0;
+                Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
+                model = rotate(model, rotate_euler, Eigen::Vector3f(1.0, 1.0, 1.0));
+                model = translate(model,Eigen::Vector3f(pos.x,pos.y,pos.z));
+
+                default_shader.setMat4("model", model.data());
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+                //glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            }
 
             // swap buffers and poll IO events
             glfwSwapBuffers(window);
