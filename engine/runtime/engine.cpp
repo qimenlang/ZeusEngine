@@ -1,12 +1,17 @@
 #include "engine.h"
 
 #include <iostream>
+#include <cassert>
 
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <Eigen/Dense>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Shader.h"
 #include "ConfigManager.h"
@@ -28,16 +33,60 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
+
+
+float euler_2_radius(float euler)
+{   
+    return euler * 0.01745329251994329576923690768489;
+}
+
+// Affine3d is a 4*4 Homogeneous matrix
+Eigen::Matrix4f create_rotation_matrix(float ax, float ay, float az) {
+    Eigen::Affine3f rx =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ax), Eigen::Vector3f(1, 0, 0)));
+    Eigen::Affine3f ry =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(ay), Eigen::Vector3f(0, 1, 0)));
+    Eigen::Affine3f rz =
+        Eigen::Affine3f(Eigen::AngleAxisf(euler_2_radius(az), Eigen::Vector3f(0, 0, 1)));
+    return (rz * ry * rx).matrix();
+}
+
+Eigen::Matrix4f create_translation_matrix(float tx, float ty, float tz)
+{
+    Eigen::Affine3f translation(Eigen::Translation3f(Eigen::Vector3f(tx, ty, tz)));
+    return translation.matrix();
+}
+
+Eigen::Matrix4f create_projection_martrix(float fovy,float aspect,float zNear, float zFar)
+{
+    Eigen::Transform<float, 3, Eigen::Projective> tr;
+    tr.matrix().setZero();
+    assert(aspect > 0);
+    assert(zFar > zNear);
+    assert(zNear > 0);
+    double radf = euler_2_radius(fovy);
+    double tan_half_fovy = std::tan(radf / 2.0);
+    tr(0, 0) = 1.0 / (aspect * tan_half_fovy);
+    tr(1, 1) = 1.0 / (tan_half_fovy);
+    tr(2, 2) = -(zFar + zNear) / (zFar - zNear);
+    tr(3, 2) = -1.0;
+    tr(2, 3) = -(2.0 * zFar * zNear) / (zFar - zNear);
+
+    return tr.matrix();
+}
 namespace zeus{
     engine::engine() {};
     engine::~engine(){};
     void engine::run(){
+        int window_width = 800;
+        int window_height = 600;
+
         // init glfw window
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+        GLFWwindow* window = glfwCreateWindow(window_width, window_height, "LearnOpenGL", NULL, NULL);
         if (window == NULL)
         {
             std::cout << "Failed to create GLFW window" << std::endl;
@@ -135,7 +184,6 @@ namespace zeus{
 
         while (!glfwWindowShouldClose(window))
         {
-            std::cout<<"engine runing..."<<std::endl;
             processInput(window);
 
             //rendering 
@@ -147,6 +195,16 @@ namespace zeus{
 
             // draw our first triangle
             default_shader.use();
+
+            float roll, yaw, pitch = 0.0;
+            Eigen::Matrix4f model = create_rotation_matrix(-55.0, 0.0, 0.0);
+            Eigen::Matrix4f view = create_translation_matrix(0.0,0.0,-3.0);
+            Eigen::Matrix4f projection = create_projection_martrix(45.0,float(window_width)/window_height,0.1,100.0);
+
+            default_shader.setMat4("model", model.data());
+            default_shader.setMat4("view", view.data());
+            default_shader.setMat4("projection", projection.data());
+
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 

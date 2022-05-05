@@ -8,7 +8,7 @@ file(GLOB_RECURSE SOURCE_FILES *.cpp *.c)
 add_library(${TARGET_NAME}  ${HEADER_FILES} ${SOURCE_FILES})
 #add_library(${TARGET_NAME}   ${SOURCE_FILES})
 
-target_link_libraries(${TARGET_NAME} glfw stb eigen)
+target_link_libraries(${TARGET_NAME} glfw stb eigen glm)
 
 
 target_include_directories(${TARGET_NAME} 
