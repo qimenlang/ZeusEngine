@@ -52,6 +52,11 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
+glm::vec3 camera_pos = glm::vec3(0);
+glm::vec3 camera_direction= glm::vec3(0,0,-1);
+glm::vec3 camera_up= glm::vec3(0,1,0);
+float camera_speed = 0.01;
+
 GLFWwindow* window;
 Shader default_shader;
 Camera camera;
@@ -62,6 +67,14 @@ void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera_pos += camera_speed * camera_direction;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera_pos -= camera_speed * camera_direction;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera_pos -= camera_speed * glm::cross(camera_direction,camera_up);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera_pos += camera_speed * glm::cross(camera_direction, camera_up);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -130,6 +143,8 @@ namespace zeus{
     engine::engine() {}
     void engine::LogicTick(float delta_time)
     {
+        camera.LookAt(camera_pos, camera_direction
+            , camera_up);
     }
     void engine::RenderTick()
     {
@@ -137,21 +152,10 @@ namespace zeus{
         //rendering 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         // bind Texture
         glBindTexture(GL_TEXTURE_2D, texture);
-
-        // draw our first triangle
         default_shader.use();
 
-        float roll, yaw, pitch = 0.0;
-        float rotate_euler = (float)glfwGetTime() * 50.0;
-
-        const float radius = 10.0f;
-        float camX = sin(glfwGetTime()) * radius;
-        float camZ = cos(glfwGetTime()) * radius;
-
-        camera.LookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
         glm::mat4 view = camera.GetViewMatrix();
 
         float aspect = float(window_width) / window_height;
@@ -279,7 +283,7 @@ namespace zeus{
                 duration<float> time_span = time_now - time_last_frame;
                 delta_time = time_span.count(); 
             }
-            LogicTick();
+            LogicTick(delta_time);
             RenderTick();
         }
         glDeleteVertexArrays(1, &VAO);

@@ -8,11 +8,11 @@ glm::mat4 Camera::GetProjectionMatrix() const
 {
 	return m_project_matrix;
 }
-void Camera::LookAt(glm::vec3 pos, glm::vec3 target, glm::vec3 up) {
+void Camera::LookAt(glm::vec3 pos, glm::vec3 direction, glm::vec3 up) {
 	m_position = pos;
-	m_direction = target - pos;
+	m_direction = direction;
 	m_world_up = up;
-	m_view_matrix = glm::lookAt(m_position, target, m_world_up);
+	m_view_matrix = glm::lookAt(m_position, m_position+m_direction, m_world_up);
 }
 
 void Camera::SetPerspective(float fovy, float aspect, float near, float far)
