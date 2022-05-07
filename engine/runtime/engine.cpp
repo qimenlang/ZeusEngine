@@ -3,8 +3,9 @@
 #include <iostream>
 #include <cassert>
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <Eigen/Dense>
@@ -21,6 +22,39 @@ using Eigen::MatrixXd;
 // get compile var form cmake , why 2 macro func ???
 #define GET_ZEUS_STR(s) GET_STR(s)
 #define GET_STR(s) #s
+
+ // set up vertex data (and buffer(s)) and configure vertex attributes
+        // ------------------------------------------------------------------
+
+float vertices[] = {
+    // positions          // colors           // texture coords
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+};
+
+unsigned int indices[] = {  // note that we start from 0!
+    0, 1, 3,   // first triangle
+    1, 2, 3    // second triangle
+};
+
+glm::vec3 cubePositions[] = {
+    glm::vec3(0.0f,  0.0f,  0.0f),
+    glm::vec3(2.0f,  5.0f, -15.0f),
+    glm::vec3(-1.5f, -2.2f, -2.5f),
+    glm::vec3(-3.8f, -2.0f, -12.3f),
+    glm::vec3(2.4f, -0.4f, -3.5f),
+    glm::vec3(-1.7f,  3.0f, -7.5f),
+    glm::vec3(1.3f, -2.0f, -2.5f),
+    glm::vec3(1.5f,  2.0f, -2.5f),
+    glm::vec3(1.5f,  0.2f, -1.5f),
+    glm::vec3(-1.3f,  1.0f, -1.5f)
+};
+
+GLFWwindow* window;
+Shader default_shader;
+Camera camera;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
@@ -93,18 +127,69 @@ Eigen::Matrix4f create_projection_martrix(float fovy,float aspect,float zNear, f
     return tr.matrix();
 }
 namespace zeus{
-    engine::engine() {};
-    engine::~engine(){};
-    void engine::run(){
-        int window_width = 800;
-        int window_height = 600;
+    engine::engine() {}
+    void engine::LogicTick(float delta_time)
+    {
+    }
+    void engine::RenderTick()
+    {
+        processInput(window);
+        //rendering 
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // bind Texture
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        // draw our first triangle
+        default_shader.use();
+
+        float roll, yaw, pitch = 0.0;
+        float rotate_euler = (float)glfwGetTime() * 50.0;
+
+        const float radius = 10.0f;
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
+
+        camera.LookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+        glm::mat4 view = camera.GetViewMatrix();
+
+        float aspect = float(window_width) / window_height;
+        camera.SetPerspective(45.0, aspect, 0.1, 100.0);
+        glm::mat4 projection = camera.GetProjectionMatrix();
+
+        default_shader.setMat4("view", glm::value_ptr(view));
+        default_shader.setMat4("projection", glm::value_ptr(projection));
+
+        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+        for (int i = 0; i < 10; i++) {
+            auto pos = cubePositions[i];
+
+            float rotate_euler = (float)glfwGetTime() * 20.0;
+            Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
+            model = rotate(model, rotate_euler, Eigen::Vector3f(1.0, 1.0, 1.0));
+            model = translate(model, Eigen::Vector3f(pos.x, pos.y, pos.z));
+
+            default_shader.setMat4("model", model.data());
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            //glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        }
+
+        // swap buffers and poll IO events
+        glfwSwapBuffers(window);
+        glfwPollEvents();// checks if any events are triggered,updates the window state, and calls the corresponding functions 
+    };
+    engine::~engine(){};
+    void engine::init()
+    {
         // init glfw window
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        GLFWwindow* window = glfwCreateWindow(window_width, window_height, "LearnOpenGL", NULL, NULL);
+        window = glfwCreateWindow(window_width, window_height, "LearnOpenGL", NULL, NULL);
         if (window == NULL)
         {
             std::cout << "Failed to create GLFW window" << std::endl;
@@ -118,43 +203,12 @@ namespace zeus{
         {
             std::cout << "Failed to initialize GLAD" << std::endl;
         }
-
         // vertex shader
         auto shader_folder = zeus::ConfigManager::instance().getShaderFolder();
         std::string vs_path = shader_folder.string() + "\\default.vs";
         std::string fs_path = shader_folder.string() + "\\default.fs";
-        Shader default_shader(vs_path.c_str(), fs_path.c_str());
+        default_shader.load(vs_path.c_str(), fs_path.c_str());
 
-        // set up vertex data (and buffer(s)) and configure vertex attributes
-        // ------------------------------------------------------------------
-
-        float vertices[] = {
-            // positions          // colors           // texture coords
-             0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-             0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-            -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-            -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
-        };
-
-        unsigned int indices[] = {  // note that we start from 0!
-            0, 1, 3,   // first triangle
-            1, 2, 3    // second triangle
-        };
-
-        glm::vec3 cubePositions[] = {
-            glm::vec3(0.0f,  0.0f,  0.0f),
-            glm::vec3(2.0f,  5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3(2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f,  3.0f, -7.5f),
-            glm::vec3(1.3f, -2.0f, -2.5f),
-            glm::vec3(1.5f,  2.0f, -2.5f),
-            glm::vec3(1.5f,  0.2f, -1.5f),
-            glm::vec3(-1.3f,  1.0f, -1.5f)
-        };
-
-        unsigned int VBO, VAO, EBO;
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
         glGenBuffers(1, &EBO);
@@ -189,7 +243,6 @@ namespace zeus{
         glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
 
         // apply texture
-        unsigned int texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
         // set the texture wrapping/filtering options (on the currently bound texture object)
@@ -215,68 +268,25 @@ namespace zeus{
         stbi_image_free(data);
 
         glEnable(GL_DEPTH_TEST);
-
-        Camera camera;
-
+    }
+    void engine::run() {
         while (!glfwWindowShouldClose(window))
         {
-            processInput(window);
-
-            //rendering 
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            // bind Texture
-            glBindTexture(GL_TEXTURE_2D, texture);
-
-            // draw our first triangle
-            default_shader.use();
-
-            float roll, yaw, pitch = 0.0;
-            float rotate_euler = (float)glfwGetTime() * 50.0;
-
-            const float radius = 10.0f;
-            float camX = sin(glfwGetTime()) * radius;
-            float camZ = cos(glfwGetTime()) * radius;
-
-            camera.LookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-            glm::mat4 view = camera.GetViewMatrix();
-
-            float aspect = float(window_width) / window_height;
-            camera.SetPerspective(45.0,aspect, 0.1, 100.0);
-            glm::mat4 projection = camera.GetProjectionMatrix();
-            
-            default_shader.setMat4("view", glm::value_ptr(view));
-            default_shader.setMat4("projection", glm::value_ptr(projection));
-
-            glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
-            for (int i = 0; i < 10; i++) {
-                auto pos = cubePositions[i];
-
-                float rotate_euler = (float)glfwGetTime() * 20.0;
-                Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
-                model = rotate(model, rotate_euler, Eigen::Vector3f(1.0, 1.0, 1.0));
-                model = translate(model,Eigen::Vector3f(pos.x,pos.y,pos.z));
-
-                default_shader.setMat4("model", model.data());
-                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-                //glDrawArrays(GL_TRIANGLES, 0, 36);
-
+            float delta_time;
+            {       
+                using namespace std::chrono;
+                steady_clock::time_point time_now = steady_clock::now();
+                duration<float> time_span = time_now - time_last_frame;
+                delta_time = time_span.count(); 
             }
-
-            // swap buffers and poll IO events
-            glfwSwapBuffers(window);
-            glfwPollEvents();// checks if any events are triggered,updates the window state, and calls the corresponding functions 
+            LogicTick();
+            RenderTick();
         }
-
-        // optional: de-allocate all resources once they've outlived their purpose:
-        // ------------------------------------------------------------------------
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);
-
-
         glfwTerminate();
     }
+    
+
 }

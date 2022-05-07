@@ -7,6 +7,7 @@ namespace zeus{
     }
     editor::~editor(){}
     void editor::run(){
+        zeus::engine::instance().init();
         zeus::engine::instance().run();
     }
 }

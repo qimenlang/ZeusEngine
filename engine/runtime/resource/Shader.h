@@ -9,7 +9,8 @@
 class Shader
 {
 public:
-	Shader(const char* vertexPath, const char* fragmentPath);
+	Shader()noexcept = default;
+	void load(const char* vertexPath, const char* fragmentPath);
 	~Shader() noexcept = default;
 	void use();
 	void setBool(const std::string& name, bool value) const;
