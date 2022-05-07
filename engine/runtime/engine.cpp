@@ -15,6 +15,7 @@
 
 #include "Shader.h"
 #include "ConfigManager.h"
+#include "function/render/camera.h"
 
 using Eigen::MatrixXd;
 // get compile var form cmake , why 2 macro func ???
@@ -120,7 +121,7 @@ namespace zeus{
 
         // vertex shader
         auto shader_folder = zeus::ConfigManager::instance().getShaderFolder();
-        std::string vs_path = shader_folder.string()+"\\default.vs";
+        std::string vs_path = shader_folder.string() + "\\default.vs";
         std::string fs_path = shader_folder.string() + "\\default.fs";
         Shader default_shader(vs_path.c_str(), fs_path.c_str());
 
@@ -215,6 +216,8 @@ namespace zeus{
 
         glEnable(GL_DEPTH_TEST);
 
+        Camera camera;
+
         while (!glfwWindowShouldClose(window))
         {
             processInput(window);
@@ -231,13 +234,20 @@ namespace zeus{
 
             float roll, yaw, pitch = 0.0;
             float rotate_euler = (float)glfwGetTime() * 50.0;
-            //Eigen::Matrix4f model = create_rotation_matrix(rotate_euler,Eigen::Vector3f(1.0,1.0,1.0));
-            Eigen::Matrix4f view = create_translation_matrix(0.0,0.0,-3.0);
-            Eigen::Matrix4f projection = create_projection_martrix(45.0,float(window_width)/window_height,0.1,100.0);
 
-            //default_shader.setMat4("model", model.data());
-            default_shader.setMat4("view", view.data());
-            default_shader.setMat4("projection", projection.data());
+            const float radius = 10.0f;
+            float camX = sin(glfwGetTime()) * radius;
+            float camZ = cos(glfwGetTime()) * radius;
+
+            camera.LookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+            glm::mat4 view = camera.GetViewMatrix();
+
+            float aspect = float(window_width) / window_height;
+            camera.SetPerspective(45.0,aspect, 0.1, 100.0);
+            glm::mat4 projection = camera.GetProjectionMatrix();
+            
+            default_shader.setMat4("view", glm::value_ptr(view));
+            default_shader.setMat4("projection", glm::value_ptr(projection));
 
             glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
