@@ -52,14 +52,18 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
-glm::vec3 camera_pos = glm::vec3(0);
-glm::vec3 camera_direction= glm::vec3(0,0,-1);
-glm::vec3 camera_up= glm::vec3(0,1,0);
 float camera_speed = 0.01;
+
+int window_width = 800;
+int window_height = 600;
+float cursor_last_x = window_width / 2, cursor_last_y = window_height / 2;
 
 GLFWwindow* window;
 Shader default_shader;
 Camera camera;
+
+float pitch, yaw, roll;
+bool firstMouse = true;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
@@ -67,6 +71,9 @@ void processInput(GLFWwindow* window ,float delta_time)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    auto camera_pos = camera.position();
+    auto camera_direction = camera.direction();
+    auto camera_up = camera.world_up();
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera_pos += camera_speed  * delta_time * glm::normalize(camera_direction);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -75,7 +82,40 @@ void processInput(GLFWwindow* window ,float delta_time)
         camera_pos -= camera_speed * delta_time * glm::normalize(glm::cross(camera_direction,camera_up));
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera_pos += camera_speed * delta_time * glm::normalize(glm::cross(camera_direction, camera_up));
+
+    camera.set_position(camera_pos);
 }
+
+// handle mouse movement
+void mouse_callback(GLFWwindow* window, double xpos, double ypos){
+    std::cout << "[" << xpos << "," << ypos << "]" << std::endl;
+    if (firstMouse)
+    {
+        cursor_last_x = xpos;
+        cursor_last_y = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - cursor_last_x;
+    float yoffset = cursor_last_y - ypos;
+    cursor_last_x = xpos;
+    cursor_last_y = ypos;
+
+    float sensitivity = 0.03f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw += xoffset;
+    pitch += yoffset;
+
+    if (pitch > 89.0f)
+        pitch = 89.0f;
+    if (pitch < -89.0f)
+        pitch = -89.0f;
+
+    camera.SetEuler(pitch, yaw, roll);
+}
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -143,9 +183,7 @@ namespace zeus{
     engine::engine() {}
     void engine::LogicTick(float delta_time)
     {
-        processInput(window,delta_time);
-        camera.LookAt(camera_pos, camera_direction
-            , camera_up);
+        processInput(window, delta_time);
     }
     void engine::RenderTick()
     {
@@ -270,8 +308,13 @@ namespace zeus{
             std::cout << "Failed to load texture" << std::endl;
         }
         stbi_image_free(data);
-
+        
+        //depth test
         glEnable(GL_DEPTH_TEST);
+        //hide and capture the cursor
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetCursorPosCallback(window, mouse_callback);
+
     }
     void engine::run() {
         while (!glfwWindowShouldClose(window))

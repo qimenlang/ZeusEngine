@@ -17,8 +17,6 @@ namespace zeus{
             void init();
             void run();
     private:
-        int window_width = 800;
-        int window_height = 600;
         unsigned int VBO, VAO, EBO;
         unsigned int texture;
         std::chrono::steady_clock::time_point time_last_frame = std::chrono::steady_clock::now();
