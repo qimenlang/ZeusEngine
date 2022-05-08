@@ -22,8 +22,6 @@ namespace zeus{
         unsigned int VBO, VAO, EBO;
         unsigned int texture;
         std::chrono::steady_clock::time_point time_last_frame = std::chrono::steady_clock::now();
-
-
     };
     
 }

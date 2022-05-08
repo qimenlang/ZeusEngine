@@ -63,18 +63,18 @@ Camera camera;
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window)
+void processInput(GLFWwindow* window ,float delta_time)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera_pos += camera_speed * camera_direction;
+        camera_pos += camera_speed  * delta_time * glm::normalize(camera_direction);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera_pos -= camera_speed * camera_direction;
+        camera_pos -= camera_speed * delta_time * glm::normalize(camera_direction);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera_pos -= camera_speed * glm::cross(camera_direction,camera_up);
+        camera_pos -= camera_speed * delta_time * glm::normalize(glm::cross(camera_direction,camera_up));
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera_pos += camera_speed * glm::cross(camera_direction, camera_up);
+        camera_pos += camera_speed * delta_time * glm::normalize(glm::cross(camera_direction, camera_up));
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -143,12 +143,12 @@ namespace zeus{
     engine::engine() {}
     void engine::LogicTick(float delta_time)
     {
+        processInput(window,delta_time);
         camera.LookAt(camera_pos, camera_direction
             , camera_up);
     }
     void engine::RenderTick()
     {
-        processInput(window);
         //rendering 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
