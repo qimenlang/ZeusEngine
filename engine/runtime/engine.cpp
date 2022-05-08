@@ -27,16 +27,51 @@ using Eigen::MatrixXd;
         // ------------------------------------------------------------------
 
 float vertices[] = {
-    // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+    // positions             // texture coords
+    -1.0, -1.0, 1.0, 0.0, 0.0,
+    1.0, -1.0,  1.0, 0.0, 1.0,
+    1.0, 1.0,   1.0, 1.0, 1.0,
+    -1.0, 1.0,  1.0, 1.0, 0.0,
+
+    1.0, -1.0,  1.0, 0.0, 0.0,
+    1.0, 1.0,   1.0, 0.0, 1.0,
+    1.0, -1.0,  -1.0, 1.0, 1.0,
+    1.0, 1.0,   -1.0, 1.0, 0.0,
+
+    1.0, -1.0,  -1.0, 0.0, 0.0,
+    1.0, 1.0,   -1.0, 0.0, 1.0,
+    -1.0, -1.0,  -1.0, 1.0, 1.0,
+    -1.0, 1.0,   -1.0, 1.0, 0.0,
+
+    -1.0, -1.0,  -1.0, 0.0, 0.0,
+    -1.0, 1.0,   -1.0, 0.0, 1.0,
+    -1.0, -1.0,  1.0, 1.0, 1.0,
+    -1.0, 1.0,   1.0, 1.0, 0.0,
+
+    -1.0, -1.0, -1.0,  0.0, 0.0,
+    1.0, -1.0, -1.0,   0.0, 1.0,
+    1.0, -1.0, 1.0,    1.0, 1.0,
+    -1.0, -1.0, 1.0,   1.0, 0.0,
+
+    -1.0, 1.0, -1.0,  0.0, 0.0,
+    1.0, 1.0, -1.0,   0.0, 1.0,
+    1.0, 1.0, 1.0,    1.0, 1.0,
+    -1.0, 1.0, 1.0,   1.0, 0.0,
 };
 
 unsigned int indices[] = {  // note that we start from 0!
     0, 1, 3,   // first triangle
-    1, 2, 3    // second triangle
+    1, 2, 3,    // second triangle
+    4, 5, 6,
+    5, 6, 7,
+    8, 9, 10,
+    9, 10, 11,
+    12, 13, 14,
+    13, 14, 15,
+    16, 17, 18,
+    16, 18, 19,
+    20, 21, 22,
+    20, 22, 23
 };
 
 glm::vec3 cubePositions[] = {
@@ -52,7 +87,7 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 
-float camera_speed = 0.01;
+float camera_speed = 0.005;
 
 int window_width = 800;
 int window_height = 600;
@@ -78,6 +113,10 @@ void processInput(GLFWwindow* window ,float delta_time)
         camera_pos += camera_speed  * delta_time * glm::normalize(camera_direction);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         camera_pos -= camera_speed * delta_time * glm::normalize(camera_direction);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        camera_pos += camera_speed * delta_time * glm::normalize(camera_up);
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        camera_pos -= camera_speed * delta_time * glm::normalize(camera_up);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         camera_pos -= camera_speed * delta_time * glm::normalize(glm::cross(camera_direction,camera_up));
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
@@ -221,13 +260,13 @@ namespace zeus{
         for (int i = 0; i < 10; i++) {
             auto pos = cubePositions[i];
 
-            float rotate_euler = (float)glfwGetTime() * 20.0;
+            float rotate_euler = (float)glfwGetTime() * 20.0 * 0.0;
             Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
             model = rotate(model, rotate_euler, Eigen::Vector3f(1.0, 1.0, 1.0));
             model = translate(model, Eigen::Vector3f(pos.x, pos.y, pos.z));
 
             default_shader.setMat4("model", model.data());
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
             //glDrawArrays(GL_TRIANGLES, 0, 36);
 
         }
@@ -279,13 +318,13 @@ namespace zeus{
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
         // position attribute
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
         // color attribute
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
         // uv attribute
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(2);
 
         // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
