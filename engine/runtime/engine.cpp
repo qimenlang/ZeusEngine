@@ -27,36 +27,36 @@ using Eigen::MatrixXd;
         // ------------------------------------------------------------------
 
 float vertices[] = {
-    // positions             // texture coords
-    -1.0, -1.0, 1.0, 0.0, 0.0,
-    1.0, -1.0,  1.0, 0.0, 1.0,
-    1.0, 1.0,   1.0, 1.0, 1.0,
-    -1.0, 1.0,  1.0, 1.0, 0.0,
+    // positions             // texture coords  //normal
+    -1.0, -1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 
+    1.0, -1.0,  1.0, 0.0, 1.0, 0.0, 0.0, 1.0,
+    1.0, 1.0,   1.0, 1.0, 1.0, 0.0, 0.0, 1.0,
+    -1.0, 1.0,  1.0, 1.0, 0.0, 0.0, 0.0, 1.0,
 
-    1.0, -1.0,  1.0, 0.0, 0.0,
-    1.0, 1.0,   1.0, 0.0, 1.0,
-    1.0, -1.0,  -1.0, 1.0, 1.0,
-    1.0, 1.0,   -1.0, 1.0, 0.0,
+    1.0, -1.0,  1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+    1.0, 1.0,   1.0, 0.0, 1.0, 1.0, 0.0, 0.0,
+    1.0, -1.0,  -1.0, 1.0, 1.0, 1.0, 0.0, 0.0,
+    1.0, 1.0,   -1.0, 1.0, 0.0, 1.0, 0.0, 0.0,
 
-    1.0, -1.0,  -1.0, 0.0, 0.0,
-    1.0, 1.0,   -1.0, 0.0, 1.0,
-    -1.0, -1.0,  -1.0, 1.0, 1.0,
-    -1.0, 1.0,   -1.0, 1.0, 0.0,
+    1.0, -1.0,  -1.0, 0.0, 0.0, 0.0, 0.0, -1.0,
+    1.0, 1.0,   -1.0, 0.0, 1.0, 0.0, 0.0, -1.0,
+    -1.0, -1.0, -1.0, 1.0, 1.0, 0.0, 0.0, -1.0,
+    -1.0, 1.0,  -1.0, 1.0, 0.0, 0.0, 0.0, -1.0,
 
-    -1.0, -1.0,  -1.0, 0.0, 0.0,
-    -1.0, 1.0,   -1.0, 0.0, 1.0,
-    -1.0, -1.0,  1.0, 1.0, 1.0,
-    -1.0, 1.0,   1.0, 1.0, 0.0,
+    -1.0, -1.0,  -1.0, 0.0, 0.0, -1.0, 0.0, 0.0,
+    -1.0, 1.0,   -1.0, 0.0, 1.0, -1.0, 0.0, 0.0,
+    -1.0, -1.0,  1.0, 1.0, 1.0,  -1.0, 0.0, 0.0,
+    -1.0, 1.0,   1.0, 1.0, 0.0,  -1.0, 0.0, 0.0,
 
-    -1.0, -1.0, -1.0,  0.0, 0.0,
-    1.0, -1.0, -1.0,   0.0, 1.0,
-    1.0, -1.0, 1.0,    1.0, 1.0,
-    -1.0, -1.0, 1.0,   1.0, 0.0,
+    -1.0, -1.0, -1.0,  0.0, 0.0,  0.0, -1.0, 0.0,
+    1.0, -1.0, -1.0,   0.0, 1.0,  0.0, -1.0, 0.0,
+    1.0, -1.0, 1.0,    1.0, 1.0,  0.0, -1.0, 0.0,
+    -1.0, -1.0, 1.0,   1.0, 0.0,  0.0, -1.0, 0.0,
 
-    -1.0, 1.0, -1.0,  0.0, 0.0,
-    1.0, 1.0, -1.0,   0.0, 1.0,
-    1.0, 1.0, 1.0,    1.0, 1.0,
-    -1.0, 1.0, 1.0,   1.0, 0.0,
+    -1.0, 1.0, -1.0,  0.0, 0.0, 0.0, 1.0, 0.0,
+    1.0, 1.0, -1.0,   0.0, 1.0, 0.0, 1.0, 0.0,
+    1.0, 1.0, 1.0,    1.0, 1.0, 0.0, 1.0, 0.0,
+    -1.0, 1.0, 1.0,   1.0, 0.0, 0.0, 1.0, 0.0,
 };
 
 unsigned int indices[] = {  // note that we start from 0!
@@ -127,7 +127,6 @@ void processInput(GLFWwindow* window ,float delta_time)
 
 // handle mouse movement
 void mouse_callback(GLFWwindow* window, double xpos, double ypos){
-    std::cout << "[" << xpos << "," << ypos << "]" << std::endl;
     if (firstMouse)
     {
         cursor_last_x = xpos;
@@ -303,8 +302,8 @@ namespace zeus{
         }
         // vertex shader
         auto shader_folder = zeus::ConfigManager::instance().getShaderFolder();
-        std::string vs_path = shader_folder.string() + "\\default.vs";
-        std::string fs_path = shader_folder.string() + "\\default.fs";
+        std::string vs_path = shader_folder.string() + "\\phong.vs";
+        std::string fs_path = shader_folder.string() + "\\phong.fs";
         default_shader.load(vs_path.c_str(), fs_path.c_str());
 
         glGenVertexArrays(1, &VAO);
@@ -321,13 +320,16 @@ namespace zeus{
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
         // position attribute
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
         // color attribute
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(1);
+        //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+        //glEnableVertexAttribArray(1);
         // uv attribute
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
         glEnableVertexAttribArray(2);
 
         // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
