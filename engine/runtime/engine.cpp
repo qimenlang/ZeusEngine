@@ -252,8 +252,11 @@ namespace zeus{
         float aspect = float(window_width) / window_height;
         glm::mat4 projection = camera.GetProjectionMatrix();
 
+        glm::vec3 lightColor(0.33f, 0.42f, 0.18f);
+
         default_shader.setMat4("view", glm::value_ptr(view));
         default_shader.setMat4("projection", glm::value_ptr(projection));
+        default_shader.setVec3("lightColor", glm::value_ptr(lightColor));
 
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 

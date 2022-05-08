@@ -81,6 +81,11 @@ void Shader::setMat4(const std::string& name, float* value) const
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()),1,GL_FALSE, value);
 }
 
+void Shader::setVec3(const std::string& name, float* value) const
+{
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()),1, value);
+}
+
 void Shader::checkCompileErrors(unsigned int shader, std::string type)
 {
     int success;
