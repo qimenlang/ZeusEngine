@@ -16,7 +16,12 @@ public:
 	void set_world_up(glm::vec3 in_up);
 	glm::vec3 world_up();
 	void SetEuler(float pitch, float yaw, float roll);
-	void SetPerspective(float fovy, float aspect, float near, float far);
+	void set_aspect(float aspect);
+	float aspect() const;
+	void set_fovy(float fovy);
+	float fovy()const;
+
+	void Update();
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix() const;
 
@@ -25,9 +30,9 @@ private:
 	glm::vec3 direction_ = glm::vec3(0, 0, -1);
 	glm::vec3 world_up_ = glm::vec3(0, 1, 0);
 	glm::mat4 view_matrix_;
-	float fovy_;
+	float fovy_ = 45.0;
 	float aspect_;
-	float near_;
-	float far_;
+	float near_ = 0.1;
+	float far_ =100.0;
 	glm::mat4 project_matrix_;
 };

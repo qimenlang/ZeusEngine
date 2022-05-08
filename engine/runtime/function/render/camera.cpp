@@ -1,6 +1,10 @@
 #include "camera.h"
-glm::mat4 Camera::GetViewMatrix(){
+void Camera::Update()
+{
 	view_matrix_ = glm::lookAt(position_, position_ + direction_, world_up_);
+	project_matrix_ = glm::perspective<float>(glm::radians(fovy_), aspect_, near_, far_);
+}
+glm::mat4 Camera::GetViewMatrix(){
 	return view_matrix_;
 }
 
@@ -47,12 +51,22 @@ void Camera::SetEuler(float pitch, float yaw, float roll)
 	direction_ = glm::normalize(direction);
 }
 
-void Camera::SetPerspective(float fovy, float aspect, float near, float far)
+void Camera::set_aspect(float aspect)
+{
+	aspect_ = aspect;
+}
+
+float Camera::aspect() const
+{
+	return aspect_;
+}
+
+void Camera::set_fovy(float fovy)
 {
 	fovy_ = fovy;
-	aspect_ = aspect;
-	near_ = near;
-	far_ = far;
-	project_matrix_ = glm::perspective<float>(fovy_, aspect_, near_, far_);
+}
 
+float Camera::fovy() const
+{
+	return fovy_;
 }

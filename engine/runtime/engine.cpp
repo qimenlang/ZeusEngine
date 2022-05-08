@@ -118,12 +118,14 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    float fov;
+    float fov = camera.fovy();
+    std::cout << fov << std::endl;
     fov -= (float)yoffset;
     if (fov < 1.0f)
         fov = 1.0f;
     if (fov > 45.0f)
         fov = 45.0f;
+    camera.set_fovy(fov);
 }
 
 
@@ -194,6 +196,8 @@ namespace zeus{
     void engine::LogicTick(float delta_time)
     {
         processInput(window, delta_time);
+        glfwPollEvents();// checks if any events are triggered,updates the window state, and calls the corresponding functions 
+        camera.Update();
     }
     void engine::RenderTick()
     {
@@ -207,7 +211,6 @@ namespace zeus{
         glm::mat4 view = camera.GetViewMatrix();
 
         float aspect = float(window_width) / window_height;
-        camera.SetPerspective(45.0, aspect, 0.1, 100.0);
         glm::mat4 projection = camera.GetProjectionMatrix();
 
         default_shader.setMat4("view", glm::value_ptr(view));
@@ -228,14 +231,15 @@ namespace zeus{
             //glDrawArrays(GL_TRIANGLES, 0, 36);
 
         }
-
         // swap buffers and poll IO events
         glfwSwapBuffers(window);
-        glfwPollEvents();// checks if any events are triggered,updates the window state, and calls the corresponding functions 
     };
     engine::~engine(){};
     void engine::init()
     {
+        // init camera
+        float aspect = float(window_width) / window_height;
+        camera.set_aspect(aspect);
         // init glfw window
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -325,6 +329,7 @@ namespace zeus{
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         glfwSetCursorPosCallback(window, mouse_callback);
 
+        glfwSetScrollCallback(window, scroll_callback);
     }
     void engine::run() {
         while (!glfwWindowShouldClose(window))
