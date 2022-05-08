@@ -100,6 +100,8 @@ Camera camera;
 float pitch, yaw, roll;
 bool firstMouse = true;
 
+glm::vec3 lightPos(0.0, 0.0, 5.0);
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow* window ,float delta_time)
@@ -251,11 +253,17 @@ namespace zeus{
         float aspect = float(window_width) / window_height;
         glm::mat4 projection = camera.GetProjectionMatrix();
 
-        glm::vec3 lightColor(0.33f, 0.42f, 0.18f);
+        glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+        lightPos.x = sin(glfwGetTime() / 10.0) * 5.0;
+
+        glm::vec3 camera_pos = camera.position();
 
         default_shader.setMat4("view", glm::value_ptr(view));
         default_shader.setMat4("projection", glm::value_ptr(projection));
         default_shader.setVec3("lightColor", glm::value_ptr(lightColor));
+        default_shader.setVec3("lightPos", glm::value_ptr(lightPos));
+        default_shader.setVec3("viewPos", glm::value_ptr(camera_pos));
+
 
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
