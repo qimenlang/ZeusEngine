@@ -1,40 +1,40 @@
 #include "camera.h"
 glm::mat4 Camera::GetViewMatrix(){
-	m_view_matrix = glm::lookAt(m_position, m_position + m_direction, m_world_up);
-	return m_view_matrix;
+	view_matrix_ = glm::lookAt(position_, position_ + direction_, world_up_);
+	return view_matrix_;
 }
 
 //要求先set 相关成员变量再 get 投影矩阵，怎么改？？
 glm::mat4 Camera::GetProjectionMatrix() const
 {
-	return m_project_matrix;
+	return project_matrix_;
 }
 
 void Camera::set_position(glm::vec3 in_pos)
 {
-	m_position = in_pos;
+	position_ = in_pos;
 }
 
 glm::vec3 Camera::position() const {
-	return m_position;
+	return position_;
 }
 
 void Camera::set_direcction(glm::vec3 in_dir)
 {
-	m_direction = in_dir;
+	direction_ = in_dir;
 }
 glm::vec3 Camera::direction() const {
-	return m_direction;
+	return direction_;
 }
 
 void Camera::set_world_up(glm::vec3 in_up)
 {
-	m_world_up = in_up;
+	world_up_ = in_up;
 }
 
 glm::vec3 Camera::world_up()
 {
-	return m_world_up;
+	return world_up_;
 }
 
 // 
@@ -44,15 +44,15 @@ void Camera::SetEuler(float pitch, float yaw, float roll)
 	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	m_direction = glm::normalize(direction);
+	direction_ = glm::normalize(direction);
 }
 
 void Camera::SetPerspective(float fovy, float aspect, float near, float far)
 {
-	m_fovy = fovy;
-	m_aspect = aspect;
-	m_near = near;
-	m_far = far;
-	m_project_matrix = glm::perspective<float>(m_fovy, m_aspect, m_near, m_far);
+	fovy_ = fovy;
+	aspect_ = aspect;
+	near_ = near;
+	far_ = far;
+	project_matrix_ = glm::perspective<float>(fovy_, aspect_, near_, far_);
 
 }

@@ -116,6 +116,16 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
     camera.SetEuler(pitch, yaw, roll);
 }
 
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    float fov;
+    fov -= (float)yoffset;
+    if (fov < 1.0f)
+        fov = 1.0f;
+    if (fov > 45.0f)
+        fov = 45.0f;
+}
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
