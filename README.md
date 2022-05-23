@@ -33,6 +33,9 @@ In memory of being dismissed during the probation period of xiaohongshu
    - 平台层
      - RHI
 2. 渲染管线搭建
+   - 前向渲染
+   - 延迟渲染
+   - Cluster-Based渲染管线
 3. 大自然的渲染
 
    - 地形
@@ -40,4 +43,6 @@ In memory of being dismissed during the probation period of xiaohongshu
    - 大气
 
    - 云
-4. 人物的真实感渲染
+4. 基于物理的渲染
+   - PBR
+5. 

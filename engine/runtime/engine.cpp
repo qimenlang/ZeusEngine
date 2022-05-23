@@ -253,16 +253,36 @@ namespace zeus{
         float aspect = float(window_width) / window_height;
         glm::mat4 projection = camera.GetProjectionMatrix();
 
-        glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
-        lightPos.x = sin(glfwGetTime() / 10.0) * 5.0;
+        lightPos.x = sin(glfwGetTime()) * 5.0;
 
         glm::vec3 camera_pos = camera.position();
 
+        glm::vec3 lightColor;
+        lightColor.x = sin(glfwGetTime() * 2.0f);
+        lightColor.y = sin(glfwGetTime() * 0.7f);
+        lightColor.z = sin(glfwGetTime() * 1.3f);
+
+        glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+        glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+
         default_shader.setMat4("view", glm::value_ptr(view));
         default_shader.setMat4("projection", glm::value_ptr(projection));
-        default_shader.setVec3("lightColor", glm::value_ptr(lightColor));
-        default_shader.setVec3("lightPos", glm::value_ptr(lightPos));
         default_shader.setVec3("viewPos", glm::value_ptr(camera_pos));
+
+        default_shader.setVec3("light.position", glm::value_ptr(lightPos));
+        default_shader.setVec3("light.ambient", ambientColor);
+        default_shader.setVec3("light.diffuse", diffuseColor);
+        default_shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        glm::vec3 mat_ambinet = glm::vec3(1.0f, 0.5f, 0.31f);
+        glm::vec3 mat_diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
+        glm::vec3 mat_specular = glm::vec3(0.5f, 0.5f, 0.5f);
+
+
+        default_shader.setVec3("material.ambient", glm::value_ptr(mat_ambinet));
+        default_shader.setVec3("material.diffuse", glm::value_ptr(mat_diffuse));
+        default_shader.setVec3("material.specular", glm::value_ptr(mat_specular));
+        default_shader.setFloat("material.shininess", 32.0f);
 
 
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized

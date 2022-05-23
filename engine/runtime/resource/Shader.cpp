@@ -86,6 +86,17 @@ void Shader::setVec3(const std::string& name, float* value) const
     glUniform3fv(glGetUniformLocation(ID, name.c_str()),1, value);
 }
 
+void Shader::setVec3(const std::string& name, glm::vec3 vector3) const
+{
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(vector3));
+}
+
+void Shader::setVec3(const std::string& name, float value1,float value2, float value3) const
+{
+    glm::vec3 vector3 = glm::vec3(value1,value2,value3);
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(vector3));
+}
+
 void Shader::checkCompileErrors(unsigned int shader, std::string type)
 {
     int success;
