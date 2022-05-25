@@ -231,6 +231,43 @@ Eigen::Matrix4f create_projection_martrix(float fovy,float aspect,float zNear, f
 
     return tr.matrix();
 }
+
+unsigned int LoadTexture(const std::string& texture_path)
+{
+    unsigned int texture;
+    // apply texture
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    // set the texture wrapping/filtering options (on the currently bound texture object)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // load and generate the texture
+    int width, height, nrChannels;
+
+    unsigned char* data = stbi_load(texture_path.c_str(), &width, &height, &nrChannels, 0);
+
+    GLenum format{};
+    if (nrChannels == 1)
+        format = GL_RED;
+    else if (nrChannels == 3)
+        format = GL_RGB;
+    else if (nrChannels == 4)
+        format = GL_RGBA;
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
+    return texture;
+}
+
 namespace zeus{
     engine::engine() {}
     void engine::LogicTick(float delta_time)
@@ -244,9 +281,12 @@ namespace zeus{
         //rendering 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // bind Texture
-        glBindTexture(GL_TEXTURE_2D, texture);
-        default_shader.use();
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, diffuse);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, specular);
 
         glm::mat4 view = camera.GetViewMatrix();
 
@@ -257,10 +297,7 @@ namespace zeus{
 
         glm::vec3 camera_pos = camera.position();
 
-        glm::vec3 lightColor;
-        lightColor.x = sin(glfwGetTime() * 2.0f);
-        lightColor.y = sin(glfwGetTime() * 0.7f);
-        lightColor.z = sin(glfwGetTime() * 1.3f);
+        glm::vec3 lightColor = glm::vec3(1.0, 1.0, 1.0);
 
         glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
@@ -274,14 +311,6 @@ namespace zeus{
         default_shader.setVec3("light.diffuse", diffuseColor);
         default_shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
-        glm::vec3 mat_ambinet = glm::vec3(1.0f, 0.5f, 0.31f);
-        glm::vec3 mat_diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
-        glm::vec3 mat_specular = glm::vec3(0.5f, 0.5f, 0.5f);
-
-
-        default_shader.setVec3("material.ambient", glm::value_ptr(mat_ambinet));
-        default_shader.setVec3("material.diffuse", glm::value_ptr(mat_diffuse));
-        default_shader.setVec3("material.specular", glm::value_ptr(mat_specular));
         default_shader.setFloat("material.shininess", 32.0f);
 
 
@@ -370,30 +399,17 @@ namespace zeus{
         // uncomment this call to draw in wireframe polygons.
         glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
 
-        // apply texture
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        // set the texture wrapping/filtering options (on the currently bound texture object)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        // load and generate the texture
-        int width, height, nrChannels;
         auto texture_folder = zeus::ConfigManager::instance().getTextureFolder();
-        std::string texture_file = texture_folder.string() + "\\container.jpg";
+        std::string diffuse_texture = texture_folder.string() + "\\container2.png";
+        std::string spec_texture = texture_folder.string() + "\\container2_specular.png";
+        
+        diffuse = LoadTexture(diffuse_texture);
+        specular = LoadTexture(spec_texture);
 
-        unsigned char* data = stbi_load(texture_file.c_str(), &width, &height, &nrChannels, 0);
-        if (data)
-        {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-            glGenerateMipmap(GL_TEXTURE_2D);
-        }
-        else
-        {
-            std::cout << "Failed to load texture" << std::endl;
-        }
-        stbi_image_free(data);
+
+        default_shader.use();
+        default_shader.setInt("material.diffuse", 0);
+        default_shader.setInt("material.specular", 1);
         
         //depth test
         glEnable(GL_DEPTH_TEST);

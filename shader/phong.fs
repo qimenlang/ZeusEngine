@@ -19,36 +19,36 @@ struct Light{
 };
 
 struct Material{
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
+    sampler2D diffuse;
+    sampler2D specular;
     float shininess; 
 };
-uniform Light light;
+uniform Light light;    
 uniform Material material;
 
 void main()
 {
-    vec4 tex = texture(ourTexture, TexCoord);
+    vec4 tex = texture(material.diffuse, TexCoord);
     //ambient = Ka * I
-    vec3 ambient = Ka * light.ambient*material.ambient;
+    vec3 ambient = Ka * light.ambient*tex.rgb;
 
     //diffuse  = Kd * I/r^2 *max(0,n*l)
     // 漫反射系数、光照的强度、半径的平方、0和 法线与光线反方向 cos的最大值
     vec3 lightDir =  normalize(light.position - FragPos);
     vec3 norm  = normalize(normal);
     float diff = max(0.0,dot(norm,lightDir));
-    vec3 diffuse = light.diffuse * (diff * material.diffuse);
+    vec3 diffuse = light.diffuse * (diff * tex.rgb);
 
     //specular  = Ks * I/r^2 * max(0,h*n)  
     // h 是半程向量， h = (v+l) ;视线与光线方向相加得到半程向量
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir,viewDir);
     float spec = pow(max(dot(reflectDir,viewDir),0.0),material.shininess);
-    vec3 specular = Ks * spec * light.specular * material.specular;
+
+    vec4 spec_tex = texture(material.specular, TexCoord);
+    vec3 specular = Ks * spec * light.specular * spec_tex.rgb;
 
 
-    //vec3 result = (ambient+diffuse +specular) * tex.rgb;
     vec3 result = (ambient+diffuse +specular); 
     FragColor = vec4(result, 1.0);
 }
