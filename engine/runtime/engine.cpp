@@ -282,12 +282,6 @@ namespace zeus{
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, diffuse);
-
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, specular);
-
         glm::mat4 view = camera.GetViewMatrix();
 
         float aspect = float(window_width) / window_height;
@@ -406,6 +400,11 @@ namespace zeus{
         diffuse = LoadTexture(diffuse_texture);
         specular = LoadTexture(spec_texture);
 
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, diffuse);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, specular);
 
         default_shader.use();
         default_shader.setInt("material.diffuse", 0);

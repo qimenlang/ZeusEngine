@@ -30,7 +30,7 @@ void main()
 {
     vec4 tex = texture(material.diffuse, TexCoord);
     //ambient = Ka * I
-    vec3 ambient = Ka * light.ambient*tex.rgb;
+    vec3 ambient = light.ambient*tex.rgb;
 
     //diffuse  = Kd * I/r^2 *max(0,n*l)
     // 漫反射系数、光照的强度、半径的平方、0和 法线与光线反方向 cos的最大值
