@@ -1,16 +1,15 @@
 
+#include "include/glad/glad.h"
+
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-
-#include "include/glad/glad.h"
 
 using namespace std;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
             << std::endl;
-
   glViewport(0, 0, width, height);
 }
 
