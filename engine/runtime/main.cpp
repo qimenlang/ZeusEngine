@@ -1,8 +1,7 @@
-#include <GLFW/glfw3.h>
-
-#include <iostream>
 
 #include "include/glad/glad.h"
+#include <GLFW/glfw3.h>
+#include <iostream>
 
 using namespace std;
 
@@ -102,15 +101,15 @@ int main() {
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   float vertices[] = {
-      0.5f,  0.5f,  0.0f,  // top right
-      0.5f,  -0.5f, 0.0f,  // bottom right
-      -0.5f, -0.5f, 0.0f,  // bottom left
-      -0.5f, 0.5f,  0.0f   // top left
+      0.5f,  0.5f,  0.0f, // top right
+      0.5f,  -0.5f, 0.0f, // bottom right
+      -0.5f, -0.5f, 0.0f, // bottom left
+      -0.5f, 0.5f,  0.0f  // top left
   };
   unsigned int indices[] = {
       // note that we start from 0!
-      0, 1, 3,  // first triangle
-      1, 2, 3   // second triangle
+      0, 1, 3, // first triangle
+      1, 2, 3  // second triangle
   };
   unsigned int VBO, VAO, EBO;
   glGenVertexArrays(1, &VAO);
@@ -152,9 +151,9 @@ int main() {
 
     // draw our first triangle
     glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);  // seeing as we only have a single VAO there's no
-                             // need to bind it every time, but we'll do so to
-                             // keep things a bit more organized
+    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no
+                            // need to bind it every time, but we'll do so to
+                            // keep things a bit more organized
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     // glBindVertexArray(0); // no need to unbind it every time
 
