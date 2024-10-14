@@ -1,9 +1,12 @@
 
+#include "Shader.h"
 #include "include/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
 using namespace std;
+
+#define PRINTAPI(x) std::cout << #x << std::endl;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
@@ -17,24 +20,6 @@ void processInput(GLFWwindow *window) {
     glfwSetWindowShouldClose(window, true);
   }
 }
-
-const char *vertexShaderSource =
-    "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "layout (location = 1) in vec3 aColor;\n"
-    "out vec4 vertexColor; // specify a color output to the fragment shader\n"
-    "void main()\n"
-    "{\n"
-    "  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "  vertexColor = vec4(aColor,1.0f);\n"
-    "}\0";
-const char *fragmentShaderSource = "#version 330 core\n"
-                                   "out vec4 FragColor;\n"
-                                   "in vec4 vertexColor;\n"
-                                   "void main()\n"
-                                   "{\n"
-                                   "   FragColor = vertexColor;\n"
-                                   "}\n\0";
 
 int main() {
   // init glfw
@@ -60,52 +45,13 @@ int main() {
     return -1;
   }
 
-  int nrAttributes;
-  glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-  std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes
-            << std::endl;
+#ifdef ZEUS_ROOT_DIR
+  PRINTAPI(ZEUS_ROOT_DIR);
+#endif
 
   // build and compile our shader program
   // ------------------------------------
-  // vertex shader
-  unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-  glCompileShader(vertexShader);
-  // check for shader compile errors
-  int success;
-  char infoLog[512];
-  glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-    std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
-              << infoLog << std::endl;
-  }
-  // fragment shader
-  unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-  glCompileShader(fragmentShader);
-  // check for shader compile errors
-  glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-    std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
-              << infoLog << std::endl;
-  }
-  // link shaders
-  unsigned int shaderProgram = glCreateProgram();
-  glAttachShader(shaderProgram, vertexShader);
-  glAttachShader(shaderProgram, fragmentShader);
-  glLinkProgram(shaderProgram);
-  // check for linking errors
-  glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-  if (!success) {
-    glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-    std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
-              << infoLog << std::endl;
-  }
-  glDeleteShader(vertexShader);
-  glDeleteShader(fragmentShader);
-
+  Shader ourShader("shader.vs", "shader.fs");
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   float vertices[] = {
@@ -160,7 +106,7 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // be sure to activate the shader
-    glUseProgram(shaderProgram);
+    ourShader.use();
     // update the uniform color
     glBindVertexArray(VAO); // seeing as we only have a single VAO there's no
                             // need to bind it every time, but we'll do so to
@@ -178,7 +124,6 @@ int main() {
   // ------------------------------------------------------------------------
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
-  glDeleteProgram(shaderProgram);
 
   // glfw: terminate, clearing all previously allocated GLFW resources.
   glfwTerminate();
