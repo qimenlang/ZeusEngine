@@ -5,9 +5,9 @@ file(GLOB_RECURSE SOURCE_FILES *.cpp *.c)
 
 add_executable(${TARGET_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
-set(ZEUS_ROOT_DIR1 "${CMAKE_CURRENT_SOURCE_DIR}")
+# set(ZEUS_ROOT_DIR1 "${CMAKE_CURRENT_SOURCE_DIR}")
 
-target_compile_definitions(${TARGET_NAME} PRIVATE ZEUS_ROOT_DIR=${ZEUS_ROOT_DIR1})
+target_compile_definitions(${TARGET_NAME} PRIVATE ZEUS_ROOT_DIR=\"${CMAKE_SOURCE_DIR}/resources\")
 
 target_link_libraries(${TARGET_NAME} glfw)
 

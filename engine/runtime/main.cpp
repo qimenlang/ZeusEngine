@@ -51,7 +51,11 @@ int main() {
 
   // build and compile our shader program
   // ------------------------------------
-  Shader ourShader("shader.vs", "shader.fs");
+  std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader.vs");
+  std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader.fs");
+  std::cout << vs_path << std::endl;
+
+  Shader ourShader(vs_path.c_str(), fs_path.c_str());
   // set up vertex data (and buffer(s)) and configure vertex attributes
   // ------------------------------------------------------------------
   float vertices[] = {
