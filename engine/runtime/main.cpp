@@ -3,6 +3,8 @@
 #include "include/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 using namespace std;
 
@@ -51,8 +53,8 @@ int main() {
 
   // build and compile our shader program
   // ------------------------------------
-  std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader.vs");
-  std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader.fs");
+  std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.vs");
+  std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.fs");
   std::cout << vs_path << std::endl;
 
   Shader ourShader(vs_path.c_str(), fs_path.c_str());
@@ -65,7 +67,7 @@ int main() {
       0.0f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f  // top
   };
   unsigned int indices[] = {
-      // note that we start from 0!
+      // note that we start from 0![]
       0, 1, 2, // first triangle
   };
   unsigned int VBO, VAO, EBO;
@@ -100,6 +102,12 @@ int main() {
   // VBOs) when it's not directly necessary.
   glBindVertexArray(0);
 
+  int width, height, nrChannels;
+  std::string containerPath =
+      std::string(ZEUS_ROOT_DIR).append("/texture/container.jpg");
+  unsigned char *data =
+      stbi_load(containerPath.c_str(), &width, &height, &nrChannels, 0);
+
   // render loop
   while (!glfwWindowShouldClose(window)) {
     // input
@@ -128,6 +136,7 @@ int main() {
   // ------------------------------------------------------------------------
   glDeleteVertexArrays(1, &VAO);
   glDeleteBuffers(1, &VBO);
+  glDeleteBuffers(1, &EBO);
 
   // glfw: terminate, clearing all previously allocated GLFW resources.
   glfwTerminate();
