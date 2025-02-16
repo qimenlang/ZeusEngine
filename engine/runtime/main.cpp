@@ -17,6 +17,12 @@ using namespace std;
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+float deltaTime = 0.0f; // 当前帧与上一帧的时间差
+float lastFrame = 0.0f; // 上一帧的时间
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
             << std::endl;
@@ -28,6 +34,19 @@ void processInput(GLFWwindow *window) {
     std::cout << "processInput " << GLFW_KEY_ESCAPE << std::endl;
     glfwSetWindowShouldClose(window, true);
   }
+
+  float cameraSpeed = 1.0f * deltaTime;
+
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    cameraPos += cameraSpeed * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    cameraPos -= cameraSpeed * cameraFront;
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    cameraPos -=
+        cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    cameraPos +=
+        cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
 }
 
 void loadTexture(std::string texturePath) {
@@ -196,6 +215,9 @@ int main() {
   glEnable(GL_DEPTH_TEST);
   // render loop
   while (!glfwWindowShouldClose(window)) {
+    float currentTime = glfwGetTime();
+    deltaTime = currentTime - lastFrame;
+    lastFrame = currentTime;
     // input
     processInput(window);
 
@@ -215,9 +237,8 @@ int main() {
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    model =
-        glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-    view = glm::translate(view, glm::vec3(0, 0, -3));
+    model = glm::rotate(model, 0.f, glm::vec3(0.5f, 1.0f, 0.0f));
+    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
     projection =
         glm::perspective(glm::radians(45.0f),
                          (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
