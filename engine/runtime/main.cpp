@@ -2,13 +2,20 @@
 #include "Shader.h"
 #include "include/glad/glad.h"
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 using namespace std;
 
 #define PRINTAPI(x) std::cout << #x << std::endl;
+// settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
@@ -38,6 +45,7 @@ void loadTexture(std::string texturePath) {
   }
   stbi_image_free(data);
 }
+
 int main() {
   // init glfw
   std::cout << "Zeus Engine Start" << std::endl;
@@ -47,7 +55,8 @@ int main() {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   // create window
-  GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+  GLFWwindow *window =
+      glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
   if (window == NULL) {
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -194,6 +203,19 @@ int main() {
 
     // be sure to activate the shader
     ourShader.use();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 projection = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(-55.f), glm::vec3(1, 0, 0));
+    view = glm::translate(view, glm::vec3(0, 0, -3));
+    projection = glm::perspective(
+        glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_WIDTH, 0.1f, 100.0f);
+
+    ourShader.setMat4("model", model);
+    ourShader.setMat4("view", view);
+    ourShader.setMat4("projection", projection);
+
     // update the uniform color
     glBindVertexArray(VAO); // seeing as we only have a single VAO there's no
                             // need to bind it every time, but we'll do so to
