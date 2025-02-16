@@ -1,4 +1,5 @@
 
+#include "Camera.h"
 #include "Shader.h"
 #include "include/glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -23,10 +24,16 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 float deltaTime = 0.0f; // 当前帧与上一帧的时间差
 float lastFrame = 0.0f; // 上一帧的时间
 
+Camera camera(cameraPos, cameraUp);
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
             << std::endl;
   glViewport(0, 0, width, height);
+}
+
+void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
+  std::cout << "mouse(" << xpos << " , " << ypos << " )" << std::endl;
 }
 
 void processInput(GLFWwindow *window) {
@@ -34,19 +41,14 @@ void processInput(GLFWwindow *window) {
     std::cout << "processInput " << GLFW_KEY_ESCAPE << std::endl;
     glfwSetWindowShouldClose(window, true);
   }
-
-  float cameraSpeed = 1.0f * deltaTime;
-
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    cameraPos += cameraSpeed * cameraFront;
+    camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
   if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    cameraPos -= cameraSpeed * cameraFront;
+    camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
   if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    cameraPos -=
-        cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+    camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    cameraPos +=
-        cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+    camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
 }
 
 void loadTexture(std::string texturePath) {
@@ -83,12 +85,14 @@ int main() {
   }
   glfwMakeContextCurrent(window);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
+  glfwSetCursorPosCallback(window, mouse_callback);
   //  glad: load all OpenGL function pointers
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "Failed to initialize GLAD" << std::endl;
     return -1;
   }
+  // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 #ifdef ZEUS_ROOT_DIR
   PRINTAPI(ZEUS_ROOT_DIR);
@@ -238,7 +242,7 @@ int main() {
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
     model = glm::rotate(model, 0.f, glm::vec3(0.5f, 1.0f, 0.0f));
-    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    view = camera.GetViewMatrix();
     projection =
         glm::perspective(glm::radians(45.0f),
                          (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
