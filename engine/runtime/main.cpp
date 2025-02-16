@@ -24,6 +24,10 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 float deltaTime = 0.0f; // 当前帧与上一帧的时间差
 float lastFrame = 0.0f; // 上一帧的时间
 
+float lastX = SCR_WIDTH / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f;
+bool firstMouse = true;
+
 Camera camera(cameraPos, cameraUp);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -34,6 +38,24 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
   std::cout << "mouse(" << xpos << " , " << ypos << " )" << std::endl;
+  if (firstMouse) {
+    lastX = xpos;
+    lastY = ypos;
+    firstMouse = false;
+  }
+
+  float xoffset = xpos - lastX;
+  float yoffset =
+      lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+  lastX = xpos;
+  lastY = ypos;
+
+  camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
+  camera.ProcessMouseScroll(yoffset);
 }
 
 void processInput(GLFWwindow *window) {
@@ -86,6 +108,7 @@ int main() {
   glfwMakeContextCurrent(window);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetCursorPosCallback(window, mouse_callback);
+  glfwSetScrollCallback(window, scroll_callback);
   //  glad: load all OpenGL function pointers
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "Failed to initialize GLAD" << std::endl;
@@ -215,6 +238,8 @@ int main() {
                    // uniforms!
   ourShader.setInt("texture1", 0); // 0是纹理单元索引即GL_TEXTURE0
   ourShader.setInt("texture2", 1);
+
+  camera.MouseSensitivity = 0.01f;
 
   glEnable(GL_DEPTH_TEST);
   // render loop
