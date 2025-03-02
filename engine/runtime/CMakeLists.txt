@@ -6,12 +6,11 @@ Camera.cpp
 main.cpp
 Mesh.cpp
 Shader.cpp
-#Model.cpp
+# Model.cpp
+# TestScene1.cpp
 )
 
 add_executable(${TARGET_NAME} ${HEADER_FILES} ${SOURCE_FILES})
-
-# set(ZEUS_ROOT_DIR1 "${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_compile_definitions(${TARGET_NAME} PRIVATE ZEUS_ROOT_DIR=\"${CMAKE_SOURCE_DIR}/resources\")
 
