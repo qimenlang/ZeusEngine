@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Mesh.h"
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
+#include <assimp/scene.h>
 #include <string>
 #include <vector>
 
@@ -25,6 +29,7 @@ private:
 
 public:
   Model(char *path) { loadModel(path); }
-  ~Model();
+  Model(const char *path) { loadModel(path); }
+  ~Model() {};
   void Draw(Shader shader);
 };
