@@ -1,12 +1,12 @@
 set(TARGET_NAME ZeusRuntime)
 
 file(GLOB_RECURSE HEADER_FILES *.h)
-file(GLOB_RECURSE SOURCE_FILES *.c 
-Camera.cpp
-main.cpp
-Mesh.cpp
-Shader.cpp
-#Model.cpp
+file(GLOB_RECURSE SOURCE_FILES *.c
+    Camera.cpp
+    main.cpp
+    Mesh.cpp
+    Shader.cpp
+    Model.cpp
 )
 
 add_executable(${TARGET_NAME} ${HEADER_FILES} ${SOURCE_FILES})
