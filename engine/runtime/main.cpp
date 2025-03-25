@@ -8,6 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include "Model.h"
+#include <glm/gtx/string_cast.hpp>
 
 using namespace std;
 
@@ -115,7 +116,8 @@ int main() {
   camera.MouseSensitivity = 0.01f;
 
  std::string cubePath =
-      std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
+      std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
+      
   Model cube(cubePath.c_str());
 
   std::cout<<"Model Load :"<<cubePath<<std::endl;
@@ -137,8 +139,10 @@ int main() {
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    model = glm::rotate(model, 0.f, glm::vec3(0.5f, 1.0f, 0.0f));
-    model = glm::translate(model,glm::vec3{0,0,-10});
+    model = glm::translate(model,glm::vec3{0,0,-3});
+    model = glm::rotate(model, 180.f, glm::vec3(1.f, 0.0f, 0.0f));
+    model = glm::scale(model,glm::vec3{0.01});
+
     view = camera.GetViewMatrix();
     projection =
         glm::perspective(glm::radians(45.0f),
