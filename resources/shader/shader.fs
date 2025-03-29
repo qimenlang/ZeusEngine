@@ -11,5 +11,8 @@ void main()
     // FragColor = mix(texture(texture_diffuse1, texCoord), texture(texture_diffuse2, texCoord), 0.2);
     // FragColor = vec4(normal,1.0);
     // FragColor = vec4(texCoord.x,0.0,0.0,1.0);
-    FragColor = texture(texture_diffuse1, texCoord);
+     if(gl_FragCoord.x < 960)
+        FragColor = texture(texture_diffuse1, texCoord);
+    else
+        FragColor = vec4(normal,1.0);
 }
