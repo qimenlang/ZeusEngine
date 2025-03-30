@@ -6,7 +6,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory,
                              bool gamma) {
   std::string filename = std::string(path);
   filename = directory + '/' + filename;
-
+  
   unsigned int textureID;
   glGenTextures(1, &textureID);
 
@@ -35,7 +35,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory,
 
     stbi_image_free(data);
   } else {
-    std::cout << "Texture failed to load at path: " << path << std::endl;
+    std::cout << "Texture failed to load at path: " << filename << std::endl;
     stbi_image_free(data);
   }
 
@@ -134,21 +134,26 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat,
   for (unsigned int i = 0; i < mat->GetTextureCount(type); i++) {
     aiString str;
     mat->GetTexture(type, i, &str);
+    std::string relativePath = str.C_Str();
+     // 替换反斜杠为正斜杠
+    std::replace(relativePath.begin(), relativePath.end(), '\\', '/');
+    std::cout<<"typet:"<<type<<" ,i: "<<i<<"path:"<<relativePath.c_str()<<std::endl;
 
     bool skip = false;
     for (unsigned int j = 0; j < textures_loaded.size(); j++) {
-      if (std::strcmp(textures_loaded[j].path.data(), str.C_Str()) == 0) {
+      if (std::strcmp(textures_loaded[j].path.data(), relativePath.c_str()) == 0) {
         textures.push_back(textures_loaded[j]);
         skip = true;
         break;
       }
     }
+    
     if (!skip) {
       Texture texture;
-      texture.id = TextureFromFile(str.C_Str(), directory);
+      texture.id = TextureFromFile(relativePath.c_str(), directory);
       texture.type = typeName;
       // 材质路径是相对于模型文件的本地路径
-      texture.path = str.C_Str();
+      texture.path = relativePath.c_str();
       textures.push_back(texture);
       textures_loaded.push_back(texture); // 添加到已加载的纹理中
     }

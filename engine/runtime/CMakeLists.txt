@@ -6,7 +6,7 @@ Camera.cpp
 main.cpp
 Mesh.cpp
 Shader.cpp
-# Model.cpp
+Model.cpp
 # TestScene1.cpp
 )
 
