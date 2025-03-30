@@ -1,14 +1,14 @@
 
 #include "Camera.h"
+#include "Model.h"
 #include "Shader.h"
 #include "include/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <iostream>
-#include "Model.h"
 #include <glm/gtx/string_cast.hpp>
+#include <iostream>
 
 using namespace std;
 
@@ -116,12 +116,15 @@ int main() {
                    // uniforms!
   camera.MouseSensitivity = 0.01f;
 
- std::string cubePath =
+  std::string DragonPath =
       std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
-      
+
+  Model dragon(DragonPath.c_str());
+
+  std::string cubePath = std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
   Model cube(cubePath.c_str());
 
-  std::cout<<"Model Load :"<<cubePath<<std::endl;
+  std::cout << "Model Load :" << DragonPath << std::endl;
 
   glEnable(GL_DEPTH_TEST);
   // render loop
@@ -137,15 +140,20 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // be sure to activate the shader
     ourShader.use();
-    glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 view = glm::mat4(1.0f);
-    glm::mat4 projection = glm::mat4(1.0f);
-    model = glm::translate(model,glm::vec3{0,0,-3});
-    model = glm::rotate(model, 180.f, glm::vec3(1.f, 0.0f, 0.0f));
-    model = glm::scale(model,glm::vec3{0.01});
 
-    view = camera.GetViewMatrix();
-    projection =
+    std::cout << "Model default transform :"
+              << glm::to_string(dragon.transform().position) << ","
+              << glm::to_string(dragon.transform().rotateAxis) << ","
+              << dragon.transform().rotation << ","
+              << glm::to_string(dragon.transform().scale) << std::endl;
+
+    dragon.setPosition(glm::vec3{0, 0, 0});
+    dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
+    dragon.setScale(glm::vec3{0.01});
+
+    glm::mat4 model = dragon.GetModelMatrix();
+    glm::mat4 view = camera.GetViewMatrix();
+    glm::mat4 projection =
         glm::perspective(glm::radians(45.0f),
                          (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
@@ -153,7 +161,7 @@ int main() {
     ourShader.setMat4("view", view);
     ourShader.setMat4("projection", projection);
 
-    cube.Draw(ourShader);
+    dragon.Draw(ourShader);
     // check poll events & swap buffer
     glfwPollEvents();
     glfwSwapBuffers(window);
