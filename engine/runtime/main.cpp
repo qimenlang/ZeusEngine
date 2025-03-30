@@ -121,8 +121,9 @@ int main() {
 
   Model dragon(DragonPath.c_str());
 
-  std::string cubePath = std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-  Model cube(cubePath.c_str());
+  std::string lightCubePath =
+      std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
+  Model lightCube(lightCubePath.c_str());
 
   std::cout << "Model Load :" << DragonPath << std::endl;
 
@@ -156,16 +157,17 @@ int main() {
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     dragon.setScale(glm::vec3{0.01});
 
-    cube.setPosition(glm::vec3{1, 0, 0});
-    cube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    cube.setScale(glm::vec3(0.1f));
+    lightCube.setPosition(glm::vec3{1, 0, 0});
+    lightCube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+    lightCube.setScale(glm::vec3(0.1f));
+
+    shader.setVec3("lightPos", lightCube.transform().position);
+    shader.setVec3("lightColor", glm::vec3{1.0});
 
     // Drawing
     {
-      shader.setMat4("model", dragon.GetModelMatrix());
+      lightCube.Draw(shader);
       dragon.Draw(shader);
-      shader.setMat4("model", cube.GetModelMatrix());
-      cube.Draw(shader);
     }
     // check poll events & swap buffer
     glfwPollEvents();

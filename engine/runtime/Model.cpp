@@ -6,7 +6,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory,
                              bool gamma) {
   std::string filename = std::string(path);
   filename = directory + '/' + filename;
-  
+
   unsigned int textureID;
   glGenTextures(1, &textureID);
 
@@ -135,19 +135,21 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat,
     aiString str;
     mat->GetTexture(type, i, &str);
     std::string relativePath = str.C_Str();
-     // 替换反斜杠为正斜杠
+    // 替换反斜杠为正斜杠
     std::replace(relativePath.begin(), relativePath.end(), '\\', '/');
-    std::cout<<"typet:"<<type<<" ,i: "<<i<<"path:"<<relativePath.c_str()<<std::endl;
+    std::cout << "typet:" << type << " ,i: " << i
+              << "path:" << relativePath.c_str() << std::endl;
 
     bool skip = false;
     for (unsigned int j = 0; j < textures_loaded.size(); j++) {
-      if (std::strcmp(textures_loaded[j].path.data(), relativePath.c_str()) == 0) {
+      if (std::strcmp(textures_loaded[j].path.data(), relativePath.c_str()) ==
+          0) {
         textures.push_back(textures_loaded[j]);
         skip = true;
         break;
       }
     }
-    
+
     if (!skip) {
       Texture texture;
       texture.id = TextureFromFile(relativePath.c_str(), directory);
@@ -162,6 +164,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat,
 }
 
 void Model::Draw(Shader shader) {
+  shader.setMat4("model", GetModelMatrix());
   for (unsigned int i = 0; i < meshes.size(); i++)
     meshes[i].Draw(shader);
 }
