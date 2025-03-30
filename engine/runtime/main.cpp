@@ -111,9 +111,9 @@ int main() {
   std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.fs");
   std::cout << vs_path << std::endl;
 
-  Shader ourShader(vs_path.c_str(), fs_path.c_str());
-  ourShader.use(); // don't forget to activate/use the shader before setting
-                   // uniforms!
+  Shader shader(vs_path.c_str(), fs_path.c_str());
+  shader.use();
+
   camera.MouseSensitivity = 0.01f;
 
   std::string DragonPath =
@@ -139,29 +139,34 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // be sure to activate the shader
-    ourShader.use();
-
+    shader.use();
     std::cout << "Model default transform :"
               << glm::to_string(dragon.transform().position) << ","
               << glm::to_string(dragon.transform().rotateAxis) << ","
               << dragon.transform().rotation << ","
               << glm::to_string(dragon.transform().scale) << std::endl;
+    glm::mat4 view = camera.GetViewMatrix();
+    glm::mat4 projection =
+        glm::perspective(glm::radians(45.0f),
+                         (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    shader.setMat4("view", view);
+    shader.setMat4("projection", projection);
 
     dragon.setPosition(glm::vec3{0, 0, 0});
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     dragon.setScale(glm::vec3{0.01});
 
-    glm::mat4 model = dragon.GetModelMatrix();
-    glm::mat4 view = camera.GetViewMatrix();
-    glm::mat4 projection =
-        glm::perspective(glm::radians(45.0f),
-                         (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    cube.setPosition(glm::vec3{1, 0, 0});
+    cube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+    cube.setScale(glm::vec3(0.1f));
 
-    ourShader.setMat4("model", model);
-    ourShader.setMat4("view", view);
-    ourShader.setMat4("projection", projection);
-
-    dragon.Draw(ourShader);
+    // Drawing
+    {
+      shader.setMat4("model", dragon.GetModelMatrix());
+      dragon.Draw(shader);
+      shader.setMat4("model", cube.GetModelMatrix());
+      cube.Draw(shader);
+    }
     // check poll events & swap buffer
     glfwPollEvents();
     glfwSwapBuffers(window);
