@@ -144,7 +144,8 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glm::vec3 lightColor = glm::vec3{0.7};
+    auto lightColor = glm::vec3{1.0};
+    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
 
     // be sure to activate the phongShader
     phongShader.use();
@@ -161,6 +162,7 @@ int main() {
     phongShader.setMat4("projection", projection);
     phongShader.setVec3("lightPos", lightCube.transform().position);
     phongShader.setVec3("lightColor", lightColor);
+    phongShader.setVec3("objectColor", objectColor);
 
     dragon.setPosition(glm::vec3{0, 0, 0});
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
@@ -172,9 +174,9 @@ int main() {
     LightShader.setMat4("projection", projection);
     LightShader.setVec3("lightColor", lightColor);
 
-    lightCube.setPosition(glm::vec3{1, 0, 0});
+    lightCube.setPosition(glm::vec3{0.5,0,0.5});
     lightCube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    lightCube.setScale(glm::vec3(0.1f));
+    lightCube.setScale(glm::vec3(0.04f));
     lightCube.Draw(LightShader);
 
     // check poll events & swap buffer
