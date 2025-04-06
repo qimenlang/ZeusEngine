@@ -180,6 +180,10 @@ int main() {
     phongShader.setVec3("objectColor", objectColor);
     phongShader.setVec3("viewPos", camera.Position);
 
+    phongShader.setVec3("material.ambient", objectColor);
+    phongShader.setVec3("material.diffuse", objectColor);
+    phongShader.setVec3("material.specular", glm::vec3{0.5f});
+
     dragon.setPosition(glm::vec3{0, 1, 0});
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     dragon.setScale(glm::vec3{0.01});
@@ -187,27 +191,27 @@ int main() {
 
     cube.setScale(glm::vec3{0.25f});
     cube.setPosition(glm::vec3{-2, 0, 0});
-    phongShader.setInt("specularPower", 2);
+    phongShader.setFloat("material.shininess", 2);
     cube.Draw(phongShader);
 
     cube1.setScale(glm::vec3{0.25f});
     cube1.setPosition(glm::vec3{-1, 0, 0});
-    phongShader.setInt("specularPower", 8);
+    phongShader.setFloat("material.shininess", 8);
     cube1.Draw(phongShader);
 
     cube2.setScale(glm::vec3{0.25f});
     cube2.setPosition(glm::vec3{0, 0, 0});
-    phongShader.setInt("specularPower", 32);
+    phongShader.setFloat("material.shininess", 32);
     cube2.Draw(phongShader);
 
     cube3.setScale(glm::vec3{0.25f});
     cube3.setPosition(glm::vec3{1, 0, 0});
-    phongShader.setInt("specularPower", 128);
+    phongShader.setFloat("material.shininess", 128);
     cube3.Draw(phongShader);
 
     cube3.setScale(glm::vec3{0.25f});
     cube3.setPosition(glm::vec3{2, 0, 0});
-    phongShader.setInt("specularPower", 256);
+    phongShader.setFloat("material.shininess", 256);
     cube3.Draw(phongShader);
 
     // check poll events & swap buffer
