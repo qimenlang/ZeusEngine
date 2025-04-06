@@ -173,8 +173,10 @@ int main() {
     phongShader.use();
     phongShader.setMat4("view", view);
     phongShader.setMat4("projection", projection);
-    phongShader.setVec3("lightPos", lightCube.transform().position);
-    phongShader.setVec3("lightColor", lightColor);
+    phongShader.setVec3("light.position", lightCube.transform().position);
+    phongShader.setVec3("light.ambient", glm::vec3{0.2f});
+    phongShader.setVec3("light.diffuse", glm::vec3{0.5f});
+    phongShader.setVec3("light.specular", glm::vec3{1.0f});
     auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
     // auto objectColor = glm::vec3{1.0f};
     phongShader.setVec3("objectColor", objectColor);
