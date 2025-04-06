@@ -9,6 +9,7 @@ uniform sampler2D texture_diffuse2;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor;
+uniform vec3 objectColor;
 
 void main()
 {
@@ -24,7 +25,7 @@ void main()
     vec3 diffuse= diff * lightColor;
 
     vec3 result1 = (diffuse+ambient)*vec3(texture(texture_diffuse1, texCoord));
-    vec3 result2 = (diffuse+ambient)*vec3(1,1,1); 
+    vec3 result2 = (diffuse+ambient)*objectColor; 
 
      if(gl_FragCoord.y > 540)
         FragColor = vec4(result1,1.0);

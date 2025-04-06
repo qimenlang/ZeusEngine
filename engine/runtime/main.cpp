@@ -105,14 +105,18 @@ int main() {
   std::cout << ZEUS_ROOT_DIR << std::endl;
 #endif
 
-  // build and compile our shader program
+  // build and compile our phongShader program
   // ------------------------------------
   std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.vs");
   std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.fs");
+  std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
+
   std::cout << vs_path << std::endl;
 
-  Shader shader(vs_path.c_str(), fs_path.c_str());
-  shader.use();
+  Shader phongShader(vs_path.c_str(), fs_path.c_str());
+  phongShader.use();
+  Shader LightShader(vs_path.c_str(), ls_path.c_str());
+  LightShader.use();
 
   camera.MouseSensitivity = 0.01f;
 
@@ -139,8 +143,12 @@ int main() {
     // rendering
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // be sure to activate the shader
-    shader.use();
+
+    auto lightColor = glm::vec3{1.0};
+    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
+
+    // be sure to activate the phongShader
+    phongShader.use();
     std::cout << "Model default transform :"
               << glm::to_string(dragon.transform().position) << ","
               << glm::to_string(dragon.transform().rotateAxis) << ","
@@ -150,25 +158,27 @@ int main() {
     glm::mat4 projection =
         glm::perspective(glm::radians(45.0f),
                          (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    shader.setMat4("view", view);
-    shader.setMat4("projection", projection);
+    phongShader.setMat4("view", view);
+    phongShader.setMat4("projection", projection);
+    phongShader.setVec3("lightPos", lightCube.transform().position);
+    phongShader.setVec3("lightColor", lightColor);
+    phongShader.setVec3("objectColor", objectColor);
 
     dragon.setPosition(glm::vec3{0, 0, 0});
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     dragon.setScale(glm::vec3{0.01});
+    dragon.Draw(phongShader);
 
-    lightCube.setPosition(glm::vec3{1, 0, 0});
+    LightShader.use();
+    LightShader.setMat4("view", view);
+    LightShader.setMat4("projection", projection);
+    LightShader.setVec3("lightColor", lightColor);
+
+    lightCube.setPosition(glm::vec3{0.5,0,0.5});
     lightCube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    lightCube.setScale(glm::vec3(0.1f));
+    lightCube.setScale(glm::vec3(0.04f));
+    lightCube.Draw(LightShader);
 
-    shader.setVec3("lightPos", lightCube.transform().position);
-    shader.setVec3("lightColor", glm::vec3{1.0});
-
-    // Drawing
-    {
-      lightCube.Draw(shader);
-      dragon.Draw(shader);
-    }
     // check poll events & swap buffer
     glfwPollEvents();
     glfwSwapBuffers(window);
