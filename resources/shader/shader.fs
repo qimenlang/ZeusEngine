@@ -11,6 +11,8 @@ uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform vec3 objectColor;
 uniform vec3 viewPos;
+uniform int specularPower;
+
 
 void main()
 {
@@ -25,8 +27,7 @@ void main()
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse= diff * lightColor;
 
-    int specularPower = 32;
-    float specularStrength = 0.5;
+    float specularStrength = 0.2;
     vec3 viewDir = normalize(viewPos-fragPos);
     vec3 reflectDir = reflect(-lightDir,normal);
     float spec = pow(max(dot(viewDir,reflectDir),0.0),specularPower);
@@ -34,10 +35,13 @@ void main()
 
     vec3 result1 = (diffuse+ambient+specular)*vec3(texture(texture_diffuse1, texCoord));
     vec3 result2 = (diffuse+ambient+specular)*objectColor; 
+    vec3 result3 = specular*objectColor; 
 
     //  if(gl_FragCoord.y > 540)
     //     FragColor = vec4(result1,1.0);
     // else
         //FragColor = vec4(normal,1.0);
-        FragColor = vec4(result2,1.0);
+
+    FragColor = vec4(result2,1.0);
+    // FragColor = vec4(result3,1.0);
 }

@@ -131,6 +131,13 @@ int main() {
   std::string cubePath =
       std::string(ZEUS_ROOT_DIR).append("/model/cubeWithNormal.obj");
   Model cube(cubePath.c_str());
+  Model cube1(cubePath.c_str());
+  Model cube2(cubePath.c_str());
+  Model cube3(cubePath.c_str());
+  Model cube4(cubePath.c_str());
+  Model cube5(cubePath.c_str());
+  Model cube6(cubePath.c_str());
+  Model cube7(cubePath.c_str());
 
   glEnable(GL_DEPTH_TEST);
   // render loop
@@ -157,7 +164,7 @@ int main() {
     LightShader.setMat4("projection", projection);
     LightShader.setVec3("lightColor", lightColor);
 
-    lightCube.setPosition(glm::vec3{sin(currentTime), 0.0, 1.0});
+    lightCube.setPosition(glm::vec3{2 * sin(currentTime), 0.0, 2.0});
     lightCube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
     lightCube.setScale(glm::vec3(0.04f));
     lightCube.Draw(LightShader);
@@ -169,6 +176,7 @@ int main() {
     phongShader.setVec3("lightPos", lightCube.transform().position);
     phongShader.setVec3("lightColor", lightColor);
     auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
+    // auto objectColor = glm::vec3{1.0f};
     phongShader.setVec3("objectColor", objectColor);
     phongShader.setVec3("viewPos", camera.Position);
 
@@ -178,7 +186,29 @@ int main() {
     dragon.Draw(phongShader);
 
     cube.setScale(glm::vec3{0.25f});
+    cube.setPosition(glm::vec3{-2, 0, 0});
+    phongShader.setInt("specularPower", 2);
     cube.Draw(phongShader);
+
+    cube1.setScale(glm::vec3{0.25f});
+    cube1.setPosition(glm::vec3{-1, 0, 0});
+    phongShader.setInt("specularPower", 8);
+    cube1.Draw(phongShader);
+
+    cube2.setScale(glm::vec3{0.25f});
+    cube2.setPosition(glm::vec3{0, 0, 0});
+    phongShader.setInt("specularPower", 32);
+    cube2.Draw(phongShader);
+
+    cube3.setScale(glm::vec3{0.25f});
+    cube3.setPosition(glm::vec3{1, 0, 0});
+    phongShader.setInt("specularPower", 128);
+    cube3.Draw(phongShader);
+
+    cube3.setScale(glm::vec3{0.25f});
+    cube3.setPosition(glm::vec3{2, 0, 0});
+    phongShader.setInt("specularPower", 256);
+    cube3.Draw(phongShader);
 
     // check poll events & swap buffer
     glfwPollEvents();
