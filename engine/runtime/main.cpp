@@ -107,16 +107,21 @@ int main() {
 
   // build and compile our phongShader program
   // ------------------------------------
-  std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.vs");
-  std::string fs_path = std::string(ZEUS_ROOT_DIR).append("/shader/shader.fs");
+  std::string vs_path = std::string(ZEUS_ROOT_DIR).append("/shader/default.vs");
   std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
+  std::string phong_path =
+      std::string(ZEUS_ROOT_DIR).append("/shader/phong.fs");
+  std::string phong_sample_path =
+      std::string(ZEUS_ROOT_DIR).append("/shader/phongSampleColor.fs");
 
   std::cout << vs_path << std::endl;
 
-  Shader phongShader(vs_path.c_str(), fs_path.c_str());
-  phongShader.use();
   Shader LightShader(vs_path.c_str(), ls_path.c_str());
   LightShader.use();
+  Shader phongShader(vs_path.c_str(), phong_path.c_str());
+  phongShader.use();
+  Shader phongSampleShader(vs_path.c_str(), phong_sample_path.c_str());
+  phongSampleShader.use();
 
   camera.MouseSensitivity = 0.01f;
 
@@ -175,46 +180,56 @@ int main() {
     phongShader.setMat4("projection", projection);
     phongShader.setVec3("light.position", lightCube.transform().position);
     phongShader.setVec3("light.ambient", glm::vec3{0.2f});
-    phongShader.setVec3("light.diffuse", glm::vec3{0.5f});
+    phongShader.setVec3("light.diffuse", glm::vec3{1.0f});
     phongShader.setVec3("light.specular", glm::vec3{1.0f});
-    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
-    // auto objectColor = glm::vec3{1.0f};
-    phongShader.setVec3("objectColor", objectColor);
     phongShader.setVec3("viewPos", camera.Position);
-
-    phongShader.setVec3("material.ambient", objectColor);
-    phongShader.setVec3("material.diffuse", objectColor);
     phongShader.setVec3("material.specular", glm::vec3{0.5f});
+    phongShader.setFloat("material.shininess", 32);
 
     dragon.setPosition(glm::vec3{0, 1, 0});
     dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     dragon.setScale(glm::vec3{0.01});
     dragon.Draw(phongShader);
 
+    phongSampleShader.use();
+    phongSampleShader.setMat4("view", view);
+    phongSampleShader.setMat4("projection", projection);
+    phongSampleShader.setVec3("light.position", lightCube.transform().position);
+    phongSampleShader.setVec3("light.ambient", glm::vec3{0.2f});
+    phongSampleShader.setVec3("light.diffuse", glm::vec3{0.5f});
+    phongSampleShader.setVec3("light.specular", glm::vec3{1.0f});
+    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
+    phongSampleShader.setVec3("objectColor", objectColor);
+    phongSampleShader.setVec3("viewPos", camera.Position);
+
+    phongSampleShader.setVec3("material.ambient", objectColor);
+    phongSampleShader.setVec3("material.diffuse", objectColor);
+    phongSampleShader.setVec3("material.specular", glm::vec3{0.5f});
+
     cube.setScale(glm::vec3{0.25f});
     cube.setPosition(glm::vec3{-2, 0, 0});
-    phongShader.setFloat("material.shininess", 2);
-    cube.Draw(phongShader);
+    phongSampleShader.setFloat("material.shininess", 2);
+    cube.Draw(phongSampleShader);
 
     cube1.setScale(glm::vec3{0.25f});
     cube1.setPosition(glm::vec3{-1, 0, 0});
-    phongShader.setFloat("material.shininess", 8);
-    cube1.Draw(phongShader);
+    phongSampleShader.setFloat("material.shininess", 8);
+    cube1.Draw(phongSampleShader);
 
     cube2.setScale(glm::vec3{0.25f});
     cube2.setPosition(glm::vec3{0, 0, 0});
-    phongShader.setFloat("material.shininess", 32);
-    cube2.Draw(phongShader);
+    phongSampleShader.setFloat("material.shininess", 32);
+    cube2.Draw(phongSampleShader);
 
     cube3.setScale(glm::vec3{0.25f});
     cube3.setPosition(glm::vec3{1, 0, 0});
-    phongShader.setFloat("material.shininess", 128);
-    cube3.Draw(phongShader);
+    phongSampleShader.setFloat("material.shininess", 128);
+    cube3.Draw(phongSampleShader);
 
     cube3.setScale(glm::vec3{0.25f});
     cube3.setPosition(glm::vec3{2, 0, 0});
-    phongShader.setFloat("material.shininess", 256);
-    cube3.Draw(phongShader);
+    phongSampleShader.setFloat("material.shininess", 256);
+    cube3.Draw(phongSampleShader);
 
     // check poll events & swap buffer
     glfwPollEvents();
