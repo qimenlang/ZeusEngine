@@ -120,16 +120,17 @@ int main() {
 
   camera.MouseSensitivity = 0.01f;
 
-  std::string DragonPath =
-      std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
-
-  Model dragon(DragonPath.c_str());
-
   std::string lightCubePath =
       std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
   Model lightCube(lightCubePath.c_str());
-
+  std::string DragonPath =
+      std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
+  Model dragon(DragonPath.c_str());
   std::cout << "Model Load :" << DragonPath << std::endl;
+
+  std::string cubePath =
+      std::string(ZEUS_ROOT_DIR).append("/model/cubeWithNormal.obj");
+  Model cube(cubePath.c_str());
 
   glEnable(GL_DEPTH_TEST);
   // render loop
@@ -145,39 +146,39 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     auto lightColor = glm::vec3{1.0};
-    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
 
-    // be sure to activate the phongShader
-    phongShader.use();
-    std::cout << "Model default transform :"
-              << glm::to_string(dragon.transform().position) << ","
-              << glm::to_string(dragon.transform().rotateAxis) << ","
-              << dragon.transform().rotation << ","
-              << glm::to_string(dragon.transform().scale) << std::endl;
     glm::mat4 view = camera.GetViewMatrix();
     glm::mat4 projection =
         glm::perspective(glm::radians(45.0f),
                          (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    phongShader.setMat4("view", view);
-    phongShader.setMat4("projection", projection);
-    phongShader.setVec3("lightPos", lightCube.transform().position);
-    phongShader.setVec3("lightColor", lightColor);
-    phongShader.setVec3("objectColor", objectColor);
-
-    dragon.setPosition(glm::vec3{0, 0, 0});
-    dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
-    dragon.setScale(glm::vec3{0.01});
-    dragon.Draw(phongShader);
 
     LightShader.use();
     LightShader.setMat4("view", view);
     LightShader.setMat4("projection", projection);
     LightShader.setVec3("lightColor", lightColor);
 
-    lightCube.setPosition(glm::vec3{0.5,0,0.5});
+    lightCube.setPosition(glm::vec3{sin(currentTime), 0.0, 1.0});
     lightCube.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
     lightCube.setScale(glm::vec3(0.04f));
     lightCube.Draw(LightShader);
+
+    // be sure to activate the phongShader
+    phongShader.use();
+    phongShader.setMat4("view", view);
+    phongShader.setMat4("projection", projection);
+    phongShader.setVec3("lightPos", lightCube.transform().position);
+    phongShader.setVec3("lightColor", lightColor);
+    auto objectColor = glm::vec3{1.0f, 0.5f, 0.31f};
+    phongShader.setVec3("objectColor", objectColor);
+    phongShader.setVec3("viewPos", camera.Position);
+
+    dragon.setPosition(glm::vec3{0, 1, 0});
+    dragon.setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
+    dragon.setScale(glm::vec3{0.01});
+    dragon.Draw(phongShader);
+
+    cube.setScale(glm::vec3{0.25f});
+    cube.Draw(phongShader);
 
     // check poll events & swap buffer
     glfwPollEvents();
