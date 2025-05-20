@@ -11,3 +11,11 @@ TEST_CASE("Factorials are computed", "[factorial]") {
   REQUIRE(factorial(3) == 6);
   REQUIRE(factorial(10) == 3'628'800);
 }
+
+TEST_CASE("Factorials are computed1", "[factorial]") {
+  REQUIRE(factorial(1) == 1);
+  REQUIRE(factorial(2) == 2);
+  REQUIRE(factorial(3) == 6);
+  REQUIRE(factorial(4) == 24);
+  REQUIRE(factorial(10) == 3'628'800);
+}
