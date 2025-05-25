@@ -3,3 +3,14 @@ build/
 .vs/
 out/
 .cache/
+#可执行程序
+*.[Ee][Xx][Ee]  # Windows 的 .exe 文件
+*.out           # 部分编译器生成的默认输出（如 gcc -o a.out）
+*.bin           # 其他二进制文件
+
+#库文件
+*.o             # 对象文件
+*.a             # 静态库
+*.so            # 动态库
+*.dll           # Windows 动态库
+test/testGDB/testGDB
