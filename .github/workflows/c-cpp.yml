@@ -30,3 +30,8 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure -C ${{ matrix.build_type }}
+      - name: Run Catch2 Unit tests 
+        run: |
+          cd build/engine/unit_test
+          ./${{ matrix.build_type }}/UnitTest.exe
+
