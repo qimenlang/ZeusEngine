@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        # with:
-        #  submodules: recursive  # 如果有子模块
+        with:
+         submodules: recursive  # 如果有子模块
 
       - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -GNinja
