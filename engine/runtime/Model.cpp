@@ -1,4 +1,4 @@
-#include "Model.h"
+﻿#include "Model.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -116,11 +116,11 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     std::vector<Texture> specularMaps = loadMaterialTextures(
         material, aiTextureType_SPECULAR, "texture_specular");
     textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-    std::vector<Texture> normalMaps = loadMaterialTextures(
-        material, aiTextureType_NORMALS, "texture_normal");
+    std::vector<Texture> normalMaps =
+        loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
     textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-    std::vector<Texture> heightMaps = loadMaterialTextures(
-        material, aiTextureType_HEIGHT, "texture_height");
+    std::vector<Texture> heightMaps =
+        loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_height");
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
   }
 

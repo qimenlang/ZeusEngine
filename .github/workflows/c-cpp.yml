@@ -18,10 +18,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-         submodules: recursive  # 如果有子模块
+         submodules: recursive  
 
       - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
       - name: Build
         run: cmake --build build --config ${{ matrix.build_type }}
+
+      - name: Run tests with CTest
+        run: |
+          cd build
+          ctest --output-on-failure -C ${{ matrix.build_type }}
