@@ -1,4 +1,5 @@
 cmake -B build 
 cd build/
 cmake --build .
-./engine/unit_test/UnitTest
+./testUtils/Debug/testUtils
+./engine/unit_test/Debug/UnitTest

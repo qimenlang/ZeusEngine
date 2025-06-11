@@ -10,3 +10,5 @@ add_subdirectory ("thirdparty")
 # 启用测试
 enable_testing()
 add_subdirectory ("engine")
+
+add_subdirectory("testUtils")
