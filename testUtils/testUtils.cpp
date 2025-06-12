@@ -3,6 +3,9 @@
 
 int main() {
   std::cout << "test pimpl" << std::endl;
-  Widget widget;
-  widget.process();
+  {
+    Widget widget;
+    widget.process();
+  }
+
 }
