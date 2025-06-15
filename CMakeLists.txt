@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory ("thirdparty")
 # 启用测试
 enable_testing()
+add_subdirectory("utils")
 add_subdirectory ("engine")
 
 add_subdirectory("testUtils")
