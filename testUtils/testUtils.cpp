@@ -1,4 +1,6 @@
 #include "cpp/SmartPointTest.hpp"
+#include "cpp/cppQuiz/cppQuiz.hpp"
+#include "cpp/cppWeekly/cppWeekly.h"
 #include "testPimpl/Widget.h"
 #include <iostream>
 
@@ -11,7 +13,14 @@ int main() {
   // }
 
   // test cpp shared ptr thread safe
-  {
-    testSharedPtrThreadSafe();
-  }
+  // {
+  //   testSharedPtrThreadSafe();
+  // }
+
+  // cpp Weekly
+  cppWeekly::run();
+  // cpp Quiz
+  cppQuiz::run();
+
+  std::cout << "test end" << std::endl;
 }
