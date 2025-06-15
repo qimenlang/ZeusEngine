@@ -12,4 +12,4 @@ enable_testing()
 add_subdirectory("utils")
 add_subdirectory ("engine")
 
-add_subdirectory("testUtils")
+add_subdirectory("bestPractice")

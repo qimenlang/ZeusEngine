@@ -1,12 +1,14 @@
 #pragma once
 #include <memory>
-class Widget {
+namespace design {
+class pimplTest {
 public:
-  Widget(/* args */);
-  ~Widget();
+  pimplTest(/* args */);
+  ~pimplTest();
   void process();
 
 private:
   struct Impl;
   std::unique_ptr<Impl> pimpl;
 };
+} // namespace design
