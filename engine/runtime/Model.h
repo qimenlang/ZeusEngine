@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mesh.h"
+#include "Shader.h"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -9,7 +10,6 @@
 
 class Mesh;
 struct Texture;
-class Shader;
 
 unsigned int TextureFromFile(const char *path, const std::string &directory,
                              bool gamma = false);
@@ -29,6 +29,8 @@ private:
   std::vector<Texture> textures_loaded;
 
   ModelTransform m_transform;
+
+  std::weak_ptr<Shader> m_shader;
 
   void loadModel(std::string path);
   void processNode(aiNode *node, const aiScene *scene);
@@ -57,5 +59,6 @@ public:
     return model;
   }
 
-  void Draw(Shader shader);
+  void Draw();
+  void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
 };

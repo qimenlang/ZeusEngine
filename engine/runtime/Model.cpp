@@ -1,5 +1,6 @@
 ﻿#include "Model.h"
 #define STB_IMAGE_IMPLEMENTATION
+#include "Engine.h"
 #include "stb_image.h"
 
 unsigned int TextureFromFile(const char *path, const std::string &directory,
@@ -163,8 +164,15 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat,
   return textures;
 }
 
-void Model::Draw(Shader shader) {
-  shader.setMat4("model", GetModelMatrix());
+void Model::Draw() {
+  if (m_shader.expired()) {
+    std::cerr << "Model shader is expired!" << std::endl;
+    return;
+  }
+  m_shader.lock()->use();
+  m_shader.lock()->setMat4("model", GetModelMatrix());
+  m_shader.lock()->setMat4("view", Zeus::camera.GetViewMatrix());
+  m_shader.lock()->setMat4("projection", Zeus::projection);
   for (unsigned int i = 0; i < meshes.size(); i++)
-    meshes[i].Draw(shader);
+    meshes[i].Draw(*m_shader.lock());
 }
