@@ -7,6 +7,7 @@
 #include <assimp/scene.h>
 #include <string>
 #include <vector>
+#include <memory>
 
 class Mesh;
 struct Texture;

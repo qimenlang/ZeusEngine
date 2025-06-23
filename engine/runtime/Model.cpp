@@ -1,7 +1,10 @@
-﻿#include "Model.h"
+﻿#include <memory>
+
+#include "Model.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "Engine.h"
 #include "stb_image.h"
+
 
 unsigned int TextureFromFile(const char *path, const std::string &directory,
                              bool gamma) {
@@ -171,7 +174,16 @@ void Model::Draw() {
   }
   m_shader.lock()->use();
   m_shader.lock()->setMat4("model", GetModelMatrix());
-  m_shader.lock()->setMat4("view", Zeus::camera.GetViewMatrix());
+
+  auto cameraPos = Zeus::Engine::getInstance().camera().Position;
+
+  std::cout << "Model Camera Position: (" 
+            << cameraPos.x << ", " 
+            << cameraPos.y << ", " 
+            << cameraPos.z << ")" << " ,camera :"<<&Zeus::Engine::getInstance().camera()
+            << std::endl;
+
+  m_shader.lock()->setMat4("view", Zeus::Engine::getInstance().camera().GetViewMatrix());
   m_shader.lock()->setMat4("projection", Zeus::projection);
   for (unsigned int i = 0; i < meshes.size(); i++)
     meshes[i].Draw(*m_shader.lock());

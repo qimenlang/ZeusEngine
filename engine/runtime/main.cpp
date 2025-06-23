@@ -45,11 +45,11 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
   lastX = xpos;
   lastY = ypos;
 
-  Zeus::camera.ProcessMouseMovement(xoffset, yoffset);
+  Zeus::Engine::getInstance().camera().ProcessMouseMovement(xoffset, yoffset);
 }
 
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
-  Zeus::camera.ProcessMouseScroll(yoffset);
+  Zeus::Engine::getInstance().camera().ProcessMouseScroll(yoffset);
 }
 
 void processInput(GLFWwindow *window) {
@@ -60,20 +60,20 @@ void processInput(GLFWwindow *window) {
 
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
     std::cout << "deltaTime: " << engine.deltaTime() << std::endl;
-    Zeus::camera.ProcessKeyboard(Camera_Movement::FORWARD, engine.deltaTime());
-    std::cout << "Camera Position: " << glm::to_string(Zeus::camera.Position)
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::FORWARD, engine.deltaTime());
+    std::cout << "Camera Position: " << glm::to_string(Zeus::Engine::getInstance().camera().Position)<< " ,camera :"<<&Zeus::Engine::getInstance().camera()
               << std::endl;
   }
   if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-    Zeus::camera.ProcessKeyboard(Camera_Movement::BACKWARD, engine.deltaTime());
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::BACKWARD, engine.deltaTime());
   if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-    Zeus::camera.ProcessKeyboard(Camera_Movement::LEFT, engine.deltaTime());
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::LEFT, engine.deltaTime());
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-    Zeus::camera.ProcessKeyboard(Camera_Movement::RIGHT, engine.deltaTime());
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::RIGHT, engine.deltaTime());
   if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-    Zeus::camera.ProcessKeyboard(Camera_Movement::UP, engine.deltaTime());
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::UP, engine.deltaTime());
   if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-    Zeus::camera.ProcessKeyboard(Camera_Movement::DOWN, engine.deltaTime());
+    Zeus::Engine::getInstance().camera().ProcessKeyboard(Camera_Movement::DOWN, engine.deltaTime());
 }
 
 int main() {
@@ -128,7 +128,7 @@ int main() {
       std::make_shared<Shader>(vs_path.c_str(), phong_sample_path.c_str());
   phongSampleShader->use();
 
-  Zeus::camera.MouseSensitivity = 0.01f;
+  Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
   std::string lightCubePath =
       std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
@@ -183,7 +183,7 @@ int main() {
 
     // be sure to activate the phongShader
     // phongShader->use();
-    // phongShader->setVec3("viewPos", Zeus::camera.Position);
+    // phongShader->setVec3("viewPos", Zeus::Engine::getInstance().camera().Position);
     // phongShader->setVec3("light.position", lightCube.transform().position);
     // phongShader->setVec3("light.ambient", glm::vec3{0.2f});
     // phongShader->setVec3("light.diffuse", glm::vec3{1.0f});

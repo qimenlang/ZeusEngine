@@ -67,7 +67,7 @@ void CubeScene::update() {
   m_lightCube->Draw();
 
   m_phongSampleShader->use();
-  m_phongSampleShader->setVec3("viewPos", Zeus::camera.Position);
+  m_phongSampleShader->setVec3("viewPos", Zeus::Engine::getInstance().camera().Position);
   m_phongSampleShader->setVec3("light.position",
                                m_lightCube->transform().position);
   m_phongSampleShader->setVec3("light.ambient", glm::vec3{0.2f});
