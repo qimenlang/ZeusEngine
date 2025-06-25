@@ -22,5 +22,19 @@ void quiz2(const void *);
 
 void cppQuiz2();
 
+// quiz29
+struct quiz29A {
+  quiz29A() { foo(); }
+  virtual ~quiz29A() { foo(); }
+  virtual void foo() { std::cout << "1"; }
+  void bar() { foo(); }
+};
+
+struct quiz29B : public quiz29A {
+  virtual void foo() { std::cout << "2"; }
+};
+
+void cppQuiz29();
+
 void run();
 } // namespace cppQuiz

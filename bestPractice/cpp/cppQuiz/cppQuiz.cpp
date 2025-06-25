@@ -18,6 +18,7 @@ void cppQuiz1() {
   // 2.常量性影响匹配：const 修饰符会导致不同的函数签名
   // 3.精确匹配优先：C++ 总是优先选择需要最少隐式转换的版本
   quiz1_2(i);
+  std::cout << std::endl;
 }
 
 void quiz2(const std::string &) { PRINT_FUNC_NAME(); }
@@ -34,10 +35,24 @@ void cppQuiz2() {
   const void *bar2 = "bar2";
   quiz2(bar2);
   quiz2(std::string("string"));
+  std::cout << std::endl;
+}
+
+void cppQuiz29() {
+  PRINT_FUNC_NAME();
+  quiz29A a;
+  a.bar(); // 输出1
+  // 构造b时，先调用父类构造函数quiz29A()，
+  // 此时B的部分未初始化，调用派生类函数可能访问未初始化的成员,因此调用A的foo()，输出1
+  quiz29B b;
+  b.bar(); // 输出2
+  // 析构b时，B无析构函数，调用父类析构函数quiz29A()，此时B的部分已析构，调用A的foo()，输出1
+  std::cout << std::endl;
 }
 
 void run() {
   cppQuiz1();
   cppQuiz2();
+  cppQuiz29();
 }
 } // namespace cppQuiz
