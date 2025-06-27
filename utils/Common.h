@@ -2,7 +2,7 @@
 #if defined(__clang__) || defined(__GNUC__)
 #define PRINT_FUNC_NAME()                                                      \
   do {                                                                         \
-    std::cout << __PRETTY_FUNCTION__ << "\n"                                   \
+    std::cout << __PRETTY_FUNCTION__ << "\n";                                   \
   } while (0)
 #elif defined(_MSC_VER)
 #define PRINT_FUNC_NAME()                                                      \

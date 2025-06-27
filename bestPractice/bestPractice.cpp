@@ -1,4 +1,4 @@
-#include "cpp/SmartPointTest.hpp"
+#include "cpp/features/SmartPointTest.h"
 #include "cpp/cppQuiz/cppQuiz.hpp"
 #include "cpp/cppWeekly/cppWeekly.h"
 #include "design/pimpl/pimplTest.h"
