@@ -1,7 +1,9 @@
-#include "cpp/features/SmartPointTest.h"
+#include "cpp/features/cppFeature.h"
 #include "cpp/cppQuiz/cppQuiz.hpp"
 #include "cpp/cppWeekly/cppWeekly.h"
+
 #include "design/pimpl/pimplTest.h"
+
 #include <iostream>
 
 int main() {
@@ -12,10 +14,10 @@ int main() {
     pimplTest.process();
   }
 
-  // test cpp shared ptr thread safe
-  // {
-  //   testSharedPtrThreadSafe();
-  // }
+  // test cpp Features
+  {
+    cppFeature::run();
+  }
 
   // cpp Weekly
   cppWeekly::run();
