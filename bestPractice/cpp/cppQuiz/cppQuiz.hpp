@@ -36,5 +36,19 @@ struct quiz29B : public quiz29A {
 
 void cppQuiz29();
 
+// quiz31
+
+struct Quiz31X {
+  Quiz31X() { std::cout << "Quiz31X"; }
+};
+
+struct Quiz31Y {
+  Quiz31Y(const Quiz31X &x) { std::cout << "Y"; }
+  void f() { std::cout << "f"; }
+};
+
+void cppQuiz31();
+
+
 void run();
 } // namespace cppQuiz

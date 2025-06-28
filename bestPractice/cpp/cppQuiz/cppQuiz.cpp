@@ -50,9 +50,23 @@ void cppQuiz29() {
   std::cout << std::endl;
 }
 
+void cppQuiz31(){
+  PRINT_FUNC_NAME();
+  //烦人的解析:most vexing parse
+  // 以下创建y对象的方式，实际是声明了一个返回Quiz31Y类型，参数为函数指针的的函数y； 
+  // 参数是一个函数指针，该函数指针无参且返回Quiz31X类型； 
+  // Quiz31Y y(Quiz31X());
+  //创建 Quiz31X 对象，需要使用初始化列表，避免直接调用无参构造函数;
+  Quiz31Y y(Quiz31X{});
+  y.f();
+  std::cout << std::endl;
+}
+
+
 void run() {
   cppQuiz1();
   cppQuiz2();
   cppQuiz29();
+  cppQuiz31();
 }
 } // namespace cppQuiz
