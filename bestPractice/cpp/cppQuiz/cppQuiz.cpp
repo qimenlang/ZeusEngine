@@ -80,11 +80,22 @@ void cppQuiz38() {
 }
 
 
+void cppQuiz42(){
+  PRINT_FUNC_NAME();
+  cppQuiz42A a1;
+  cppQuiz42A a2{}; // 使用{}初始化，优先匹配默认构造函数,而非std::initializer_list构造函数
+  cppQuiz42A a3{ 1 };//非空初始化列表，优先匹配std::initializer_list构造函数，即便其他构造函数更匹配
+  cppQuiz42A a4{ 1, 2 };
+  std::cout << std::endl;
+}
+
+
 void run() {
   cppQuiz1();
   cppQuiz2();
   cppQuiz29();
   cppQuiz31();
   cppQuiz38();
+  cppQuiz42();
 }
 } // namespace cppQuiz

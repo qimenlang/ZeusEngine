@@ -51,6 +51,16 @@ void cppQuiz31();
 
 void cppQuiz38();
 
+struct cppQuiz42A {
+  cppQuiz42A() { std::cout << "1"; }
+
+  cppQuiz42A(int) { std::cout << "2"; }
+
+  cppQuiz42A(std::initializer_list<int>) { std::cout << "3"; }
+};
+
+void cppQuiz42();
+
 
 void run();
 } // namespace cppQuiz
