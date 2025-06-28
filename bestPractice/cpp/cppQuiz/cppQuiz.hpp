@@ -49,6 +49,8 @@ struct Quiz31Y {
 
 void cppQuiz31();
 
+void cppQuiz38();
+
 
 void run();
 } // namespace cppQuiz

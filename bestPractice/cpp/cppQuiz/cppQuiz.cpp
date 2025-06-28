@@ -1,4 +1,5 @@
 #include "cppQuiz.hpp"
+#include <type_traits>
 
 namespace cppQuiz {
 
@@ -62,11 +63,28 @@ void cppQuiz31(){
   std::cout << std::endl;
 }
 
+void cppQuiz38() {
+  PRINT_FUNC_NAME();
+  /*
+  如果表达式是变量名（如 decltype(a)），则推导出变量的声明类型（这里是 int）。
+  如果表达式带有额外括号（如 decltype((a))），则它被视为一个左值表达式（lvalue expression）。对于左值表达式，decltype 推导出类型的引用（reference）。
+  */
+ int a = 0;
+  decltype(a) b = a;// b 是 int 类型
+  decltype((a)) c = a; // c 是 int& 类型，因为decltype((a)) 返回的是 a 的引用类型
+  c++;
+  // 检查 c 的类型是否是 int&
+  if(std::is_same_v<decltype(c), int&>) std::cout<< "c is int&"<<std::endl;
+  std::cout << a <<b<< c; // 输出 101
+  std::cout << std::endl;
+}
+
 
 void run() {
   cppQuiz1();
   cppQuiz2();
   cppQuiz29();
   cppQuiz31();
+  cppQuiz38();
 }
 } // namespace cppQuiz
