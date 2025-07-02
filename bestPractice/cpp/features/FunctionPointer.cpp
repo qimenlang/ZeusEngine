@@ -12,20 +12,16 @@ int (*math_op)(int, int);
 typedef int (*MathOp)(int, int);
 
 // 1. 普通函数声明
-int add(int a, int b) {
-    return a + b;
-}
+int add(int a, int b) { return a + b; }
 
-int subtract(int a, int b) {
-    return a - b;
-}
+int subtract(int a, int b) { return a - b; }
 
-void test(){
-    math_op = add; 
-    std::cout<<"3+4 = "<<math_op(3, 4)<<std::endl; // 调用add函数
-    math_op = subtract;
-    std::cout<<"7-4 = "<<math_op(7, 4)<<std::endl; // 调用add函数
-    MathOp mathOp = add; 
-    std::cout<<"3+4 = "<<mathOp(3, 4)<<std::endl; // 调用add函数
+void test() {
+  math_op = add;
+  std::cout << "3+4 = " << math_op(3, 4) << std::endl; // 调用add函数
+  math_op = subtract;
+  std::cout << "7-4 = " << math_op(7, 4) << std::endl; // 调用add函数
+  MathOp mathOp = add;
+  std::cout << "3+4 = " << mathOp(3, 4) << std::endl; // 调用add函数
 }
-}
+} // namespace FunctionPointerTest
