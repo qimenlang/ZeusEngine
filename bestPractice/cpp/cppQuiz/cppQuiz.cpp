@@ -90,6 +90,24 @@ void cppQuiz42(){
 }
 
 
+
+// 引用
+int y116(int&) {return 1;}
+// 右值引用
+int y116(int&&) {return 2;}
+
+void cppQuiz116() {
+  PRINT_FUNC_NAME();
+  int x = 0;
+  std::cout << f116(x) <<f116(1) << std::endl; // 输出12
+  std::cout << g116(x) <<g116(1) << std::endl; // 输出22
+  std::cout << h116(x) <<h116(1) << std::endl; // 输出12
+  std::cout << j116(1) << std::endl; // 输出12
+
+}
+
+
+
 void run() {
   cppQuiz1();
   cppQuiz2();
@@ -97,5 +115,6 @@ void run() {
   cppQuiz31();
   cppQuiz38();
   cppQuiz42();
+  cppQuiz116();
 }
 } // namespace cppQuiz
