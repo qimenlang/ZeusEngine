@@ -64,26 +64,24 @@ void cppQuiz42();
 // quiz116
 
 // 引用
-int y116(int&);
+int y116(int &);
 // 右值引用
-int y116(int&&);
+int y116(int &&);
 
-
-//T&& 在模板参数推导时被称为转发引用（也称为万能引用），它既可以绑定到左值也可以绑定到右值。
-template <typename T> int f116(T&& t) {
-  return y116(t);}
+// T&&
+// 在模板参数推导时被称为转发引用（也称为万能引用），它既可以绑定到左值也可以绑定到右值。
+template <typename T> int f116(T &&t) { return y116(t); }
 
 // std::move 无条件将参数转换为右值引用
-template <typename T> int g116(T&& t) {
-  return y116(std::move(t));}
+template <typename T> int g116(T &&t) { return y116(std::move(t)); }
 
-// std::forward 保留参数的值类别（左值或右值）；T&& 和 std::forward配合实现完美转发；
-template <typename T> int h116(T&& t) {
-  return y116(std::forward<T>(t));}
+// std::forward 保留参数的值类别（左值或右值）；T&& 和
+// std::forward配合实现完美转发；
+template <typename T> int h116(T &&t) { return y116(std::forward<T>(t)); }
 
 // 函数使用int&& t作为参数时，如果直接传递t，t会被当作左值；
-int j116(int&& t) { return y116(t); }
-      
+int j116(int &&t);
+
 void cppQuiz116();
 
 void run();

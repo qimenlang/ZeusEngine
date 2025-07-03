@@ -51,13 +51,13 @@ void cppQuiz29() {
   std::cout << std::endl;
 }
 
-void cppQuiz31(){
+void cppQuiz31() {
   PRINT_FUNC_NAME();
-  //烦人的解析:most vexing parse
-  // 以下创建y对象的方式，实际是声明了一个返回Quiz31Y类型，参数为函数指针的的函数y； 
-  // 参数是一个函数指针，该函数指针无参且返回Quiz31X类型； 
-  // Quiz31Y y(Quiz31X());
-  //创建 Quiz31X 对象，需要使用初始化列表，避免直接调用无参构造函数;
+  // 烦人的解析:most vexing parse
+  //  以下创建y对象的方式，实际是声明了一个返回Quiz31Y类型，参数为函数指针的的函数y；
+  //  参数是一个函数指针，该函数指针无参且返回Quiz31X类型；
+  //  Quiz31Y y(Quiz31X());
+  // 创建 Quiz31X 对象，需要使用初始化列表，避免直接调用无参构造函数;
   Quiz31Y y(Quiz31X{});
   y.f();
   std::cout << std::endl;
@@ -67,46 +67,47 @@ void cppQuiz38() {
   PRINT_FUNC_NAME();
   /*
   如果表达式是变量名（如 decltype(a)），则推导出变量的声明类型（这里是 int）。
-  如果表达式带有额外括号（如 decltype((a))），则它被视为一个左值表达式（lvalue expression）。对于左值表达式，decltype 推导出类型的引用（reference）。
+  如果表达式带有额外括号（如 decltype((a))），则它被视为一个左值表达式（lvalue
+  expression）。对于左值表达式，decltype 推导出类型的引用（reference）。
   */
- int a = 0;
-  decltype(a) b = a;// b 是 int 类型
-  decltype((a)) c = a; // c 是 int& 类型，因为decltype((a)) 返回的是 a 的引用类型
+  int a = 0;
+  decltype(a) b = a; // b 是 int 类型
+  decltype((a)) c =
+      a; // c 是 int& 类型，因为decltype((a)) 返回的是 a 的引用类型
   c++;
   // 检查 c 的类型是否是 int&
-  if(std::is_same_v<decltype(c), int&>) std::cout<< "c is int&"<<std::endl;
-  std::cout << a <<b<< c; // 输出 101
+  if (std::is_same_v<decltype(c), int &>)
+    std::cout << "c is int&" << std::endl;
+  std::cout << a << b << c; // 输出 101
   std::cout << std::endl;
 }
 
-
-void cppQuiz42(){
+void cppQuiz42() {
   PRINT_FUNC_NAME();
   cppQuiz42A a1;
-  cppQuiz42A a2{}; // 使用{}初始化，优先匹配默认构造函数,而非std::initializer_list构造函数
-  cppQuiz42A a3{ 1 };//非空初始化列表，优先匹配std::initializer_list构造函数，即便其他构造函数更匹配
-  cppQuiz42A a4{ 1, 2 };
+  cppQuiz42A
+      a2{}; // 使用{}初始化，优先匹配默认构造函数,而非std::initializer_list构造函数
+  cppQuiz42A a3{
+      1}; // 非空初始化列表，优先匹配std::initializer_list构造函数，即便其他构造函数更匹配
+  cppQuiz42A a4{1, 2};
   std::cout << std::endl;
 }
 
-
-
 // 引用
-int y116(int&) {return 1;}
+int y116(int &) { return 1; }
 // 右值引用
-int y116(int&&) {return 2;}
+int y116(int &&) { return 2; }
+
+int j116(int &&t) { return y116(t); }
 
 void cppQuiz116() {
   PRINT_FUNC_NAME();
   int x = 0;
-  std::cout << f116(x) <<f116(1) << std::endl; // 输出12
-  std::cout << g116(x) <<g116(1) << std::endl; // 输出22
-  std::cout << h116(x) <<h116(1) << std::endl; // 输出12
-  std::cout << j116(1) << std::endl; // 输出12
-
+  std::cout << f116(x) << f116(1) << std::endl; // 输出12
+  std::cout << g116(x) << g116(1) << std::endl; // 输出22
+  std::cout << h116(x) << h116(1) << std::endl; // 输出12
+  std::cout << j116(1) << std::endl;            // 输出12
 }
-
-
 
 void run() {
   cppQuiz1();

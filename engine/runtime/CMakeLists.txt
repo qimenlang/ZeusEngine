@@ -10,6 +10,7 @@ Model.cpp
 Engine.cpp
 Scene.cpp
 CubeScene.cpp
+ModelScene.cpp
 # TestScene1.cpp
 )
 

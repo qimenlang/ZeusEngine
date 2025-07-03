@@ -54,8 +54,8 @@ void testSharedFromThis() {
   //   StructEnabledShared instance;
   //   instance.print();
   //  不能再堆上通过new创建
-  //   StructEnabledShared *raw_ptr = new StructEnabledShared();
-  //   raw_ptr->print();
+  // StructEnabledShared *raw_ptr = new StructEnabledShared();
+  // raw_ptr->print();
 }
 
 void testSharedPtrThreadSafe() {
