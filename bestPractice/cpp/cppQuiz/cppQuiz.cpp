@@ -93,6 +93,25 @@ void cppQuiz42() {
   std::cout << std::endl;
 }
 
+// quiz109
+
+void cppQuiz109(){
+  PRINT_FUNC_NAME();
+  auto print = [] (int x) { std::cout << x; };
+  //C++规则：模板类型推导严格基于实参的静态类型，不考虑构造函数或转换操作符的隐式转换
+  //编译失败：lambda的闭包类型无法直接匹配std::function<void(T)>模板参数，类型推导失败
+  // call_with109(print, 42);
+  // 显示指定模板类型T = int,
+  call_with109<int>(print, 42);
+  // lambda与std::function不能隐式转换；强制转换 <lambda(int)>为 std::function<void(int)>;
+  call_with109(static_cast<std::function<void(int)>>(print), 42); 
+  // F模板类型推导为lambda的闭包类型，T模板类型推导为int 
+  call_with109_2(print, 42); 
+  std::cout<< std::endl;
+}
+
+
+// quiz116
 // 引用
 int y116(int &) { return 1; }
 // 右值引用
@@ -116,6 +135,7 @@ void run() {
   cppQuiz31();
   cppQuiz38();
   cppQuiz42();
+  cppQuiz109();
   cppQuiz116();
 }
 } // namespace cppQuiz

@@ -1,6 +1,7 @@
 #pragma once
 #include <Common.h>
 #include <iostream>
+#include <functional>
 
 namespace cppQuiz {
 // Quiz1
@@ -60,6 +61,25 @@ struct cppQuiz42A {
 };
 
 void cppQuiz42();
+
+
+// quiz109
+
+template <typename T>
+void call_with109(std::function<void(T)> f, T val)
+{
+    f(val);
+}
+
+template <typename F,typename T>
+void call_with109_2(F f, T val)
+{
+    f(val);
+}
+
+
+void cppQuiz109();
+
 
 // quiz116
 
