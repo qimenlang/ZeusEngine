@@ -1,9 +1,8 @@
 #pragma once
 #include <Common.h>
-#include <iostream>
 #include <functional>
+#include <iostream>
 
-namespace cppQuiz {
 // Quiz1
 // 主模板，可以放在头文件中定义
 template <class T> void quiz1_1(T &i) { PRINT_FUNC_NAME(); }
@@ -62,24 +61,15 @@ struct cppQuiz42A {
 
 void cppQuiz42();
 
-
 // quiz109
 
-template <typename T>
-void call_with109(std::function<void(T)> f, T val)
-{
-    f(val);
+template <typename T> void call_with109(std::function<void(T)> f, T val) {
+  f(val);
 }
 
-template <typename F,typename T>
-void call_with109_2(F f, T val)
-{
-    f(val);
-}
-
+template <typename F, typename T> void call_with109_2(F f, T val) { f(val); }
 
 void cppQuiz109();
-
 
 // quiz116
 
@@ -103,6 +93,3 @@ template <typename T> int h116(T &&t) { return y116(std::forward<T>(t)); }
 int j116(int &&t);
 
 void cppQuiz116();
-
-void run();
-} // namespace cppQuiz

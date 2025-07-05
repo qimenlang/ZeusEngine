@@ -1,10 +1,10 @@
-#include "cppFeature.h"
 #include "FunctionPointer.h"
 #include "SmartPointTest.h"
 #include "variant.h"
+#include <Common.h>
+#include <iostream>
 
-namespace cppFeature {
-void run() {
+int main() {
   PRINT_FUNC_NAME();
   // SmartPointTest::testRawStruct();
   SmartPointTest::testSharedFromThis();
@@ -12,4 +12,3 @@ void run() {
   FunctionPointerTest::test();
   VariantTest::test();
 }
-} // namespace cppFeature
