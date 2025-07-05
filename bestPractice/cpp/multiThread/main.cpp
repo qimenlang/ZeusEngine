@@ -4,7 +4,11 @@
 int main() {
   std::cout << "Multi Thread Tests!" << std::endl;
   // Run the multi-thread test
-  multiThreadTest::multiThreadBase();
+  //   multiThreadManageTest::threadCreateAndJoin();
+  // multiThreadManageTest::workWithLocalPtr();
+  // multiThreadManageTest::workWithLocalRef();
+  multiThreadManageTest::workWithLocalRef2();
+  // multiThreadManageTest::threadGuardTest();
 
   return 0;
 }
