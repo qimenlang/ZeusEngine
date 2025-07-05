@@ -60,7 +60,7 @@ void workWithLocalRef() {
   std::thread t(callable);
   // detach的线程在后台运行，无法通信、无法控制；
   t.detach();
-  // std::this_thread::sleep_for(std::chrono::seconds(1));
+  std::this_thread::sleep_for(std::chrono::seconds(1));
   std::cout << "workWithLocalRef End localVar :" << localVar << std::endl;
 }
 
@@ -95,6 +95,27 @@ void threadGuardTest() {
   // 当guard对象析构时，会自动调用t.join()
   // 无需手动调用join或detach
   std::cout << "Thread guard test completed." << std::endl;
+}
+
+struct BigObject {
+  void process(std::unique_ptr<int> data) {
+    std::cout << ++*data << std::endl;
+    std::cout << "in thread localData addr:" << data.get() << ",data :" << *data
+              << std::endl;
+  }
+};
+
+void passUniquePtrToThread() {
+  PRINT_FUNC_NAME();
+  std::unique_ptr<int> localData = std::make_unique<int>(42);
+  std::cout << "localData addr:" << localData.get() << ",data :" << *localData
+            << std::endl;
+  BigObject object;
+  // localData 的所有权先被转移到线程的内存存储中，然后转移给process(data);
+  std::thread t(&BigObject::process, &object, std::move(localData));
+  t.join();
+  if (!localData)
+    std::cout << "localData Moved" << std::endl;
 }
 
 } // namespace multiThreadManageTest

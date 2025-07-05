@@ -7,8 +7,9 @@ int main() {
   //   multiThreadManageTest::threadCreateAndJoin();
   // multiThreadManageTest::workWithLocalPtr();
   // multiThreadManageTest::workWithLocalRef();
-  multiThreadManageTest::workWithLocalRef2();
+  // multiThreadManageTest::workWithLocalRef2();
   // multiThreadManageTest::threadGuardTest();
+  multiThreadManageTest::passUniquePtrToThread();
 
   return 0;
 }

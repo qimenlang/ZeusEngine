@@ -31,10 +31,10 @@ private:
 
 void workWithLocalRef();
 
+// pass args to thread
 void workWithLocalRef2();
 
 // thread guard
-
 struct ThreadGuard {
   ThreadGuard(std::thread &t) : m_thread(t) {}
   ~ThreadGuard() {
@@ -50,6 +50,7 @@ struct ThreadGuard {
 
 void threadGuardTest();
 
-// pass args to thread
+// pass unique_ptr to thread
 
+void passUniquePtrToThread();
 } // namespace multiThreadManageTest
