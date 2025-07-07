@@ -59,11 +59,44 @@ public:
     return m_stack.empty();
   }
   size_t size() const {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    // std::lock_guard<std::mutex> lock(m_mutex);
     return m_stack.size();
+  }
+
+  friend void swapWithDeadLock(threadsafeStack &left, threadsafeStack &right) {
+    if (&left == &right)
+      return;
+    // 会因左右互换，分别锁住了两个stack的mutex,导致死锁；
+    std::lock_guard lock_left(left.m_mutex);
+    std::cout << std::this_thread::get_id() << " lock left :" << &left.m_mutex
+              << std::endl;
+    std::lock_guard lock_right(right.m_mutex);
+    std::cout << std::this_thread::get_id() << " lock right :" << &right.m_mutex
+              << std::endl;
+    left.m_stack.swap(right.m_stack);
+  }
+
+  friend void swapWithoutDeakLock(threadsafeStack &left,
+                                  threadsafeStack &right) {
+    if (&left == &right)
+      return;
+    // 同时锁住两个互斥，防止死锁
+    std::lock(left.m_mutex, right.m_mutex);
+    // 互斥的所有权转移到lock_guard, adopt_lock表示mutex已被锁住；
+    std::lock_guard lock_left(left.m_mutex, std::adopt_lock);
+    std::lock_guard lock_right(right.m_mutex, std::adopt_lock);
+    left.m_stack.swap(right.m_stack);
+  }
+
+  friend void swapWithScopeLock(threadsafeStack &left, threadsafeStack &right) {
+    if (&left == &right)
+      return;
+    std::scoped_lock(left.m_mutex, right.m_mutex);
+    left.m_stack.swap(right.m_stack);
   }
 };
 
 void threadsafeStackTest();
+void threadsafeStackSwapNoDeadLockTest();
 
 } // namespace threadMutexTest

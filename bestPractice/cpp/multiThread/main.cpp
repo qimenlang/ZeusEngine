@@ -11,7 +11,8 @@ int main() {
   // multiThreadManageTest::workWithLocalRef2();
   // multiThreadManageTest::threadGuardTest();
   // multiThreadManageTest::passUniquePtrToThread();
-  threadMutexTest::threadsafeStackTest();
+  // threadMutexTest::threadsafeStackTest();
+  threadMutexTest::threadsafeStackSwapNoDeadLockTest();
 
   return 0;
 }

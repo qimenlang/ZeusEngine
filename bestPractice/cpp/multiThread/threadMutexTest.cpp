@@ -42,4 +42,33 @@ void threadsafeStackTest() {
   popThread2.join();
 }
 
+void threadsafeStackSwapNoDeadLockTest() {
+  auto initStack = [](threadsafeStack<int> &stack, int begin, int size) {
+    for (int i = begin; i < begin + size; i++) {
+      stack.push(i);
+    }
+  };
+  threadsafeStack<int> stack1;
+  threadsafeStack<int> stack2;
+  initStack(stack1, 0, 5);
+  initStack(stack2, 5, 8);
+
+  auto swapStack = [](threadsafeStack<int> &left, threadsafeStack<int> &right,
+                      int count) {
+    while (count--) {
+      // swapWithDeadLock(left, right);
+      // swapWithoutDeakLock(left, right);
+      swapWithScopeLock(left, right);
+    }
+  };
+
+  std::thread swapThread1(swapStack, std::ref(stack1), std::ref(stack2), 100);
+  std::thread swapThread2(swapStack, std::ref(stack2), std::ref(stack1), 101);
+
+  swapThread1.join();
+  swapThread2.join();
+  std::cout << "stack1 size :" << stack1.size()
+            << ", stack2 size :" << stack2.size() << std::endl;
+}
+
 } // namespace threadMutexTest
