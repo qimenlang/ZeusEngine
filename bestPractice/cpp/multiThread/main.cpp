@@ -1,4 +1,5 @@
-#include "multiThread.h"
+#include "multiThreadManageTest.h"
+#include "threadMutexTest.h"
 #include <iostream>
 
 int main() {
@@ -9,7 +10,8 @@ int main() {
   // multiThreadManageTest::workWithLocalRef();
   // multiThreadManageTest::workWithLocalRef2();
   // multiThreadManageTest::threadGuardTest();
-  multiThreadManageTest::passUniquePtrToThread();
+  // multiThreadManageTest::passUniquePtrToThread();
+  threadMutexTest::threadsafeStackTest();
 
   return 0;
 }
