@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-namespace multiThreadManageTest {
+namespace ManagingThreads {
 // threadCreateAndJoin
 struct CallableStruct {
   void operator()() const;
@@ -53,4 +53,4 @@ void threadGuardTest();
 // pass unique_ptr to thread
 
 void passUniquePtrToThread();
-} // namespace multiThreadManageTest
+} // namespace ManagingThreads

@@ -1,9 +1,9 @@
-#include "multiThreadManageTest.h"
+#include "ManagingThreads.h"
 #include <Common.h>
 #include <iostream>
 #include <thread>
 
-namespace multiThreadManageTest {
+namespace ManagingThreads {
 
 void hello() { std::cout << "Hello from thread!" << std::endl; }
 
@@ -118,4 +118,4 @@ void passUniquePtrToThread() {
     std::cout << "localData Moved" << std::endl;
 }
 
-} // namespace multiThreadManageTest
+} // namespace ManagingThreads

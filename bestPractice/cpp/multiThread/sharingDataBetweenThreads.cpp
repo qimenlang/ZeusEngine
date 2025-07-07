@@ -1,8 +1,8 @@
-#include "threadMutexTest.h"
+#include "sharingDataBetweenThreads.h"
 #include <iostream>
 #include <thread>
 
-namespace threadMutexTest {
+namespace sharingDataBetweenThreads {
 
 void threadsafeStackTest() {
   threadsafeStack<int> stack;
@@ -58,7 +58,8 @@ void threadsafeStackSwapNoDeadLockTest() {
     while (count--) {
       // swapWithDeadLock(left, right);
       // swapWithoutDeakLock(left, right);
-      swapWithScopeLock(left, right);
+      // swapWithScopeLock(left, right);
+      swapWithUniqueLock(left, right);
     }
   };
 
@@ -71,4 +72,34 @@ void threadsafeStackSwapNoDeadLockTest() {
             << ", stack2 size :" << stack2.size() << std::endl;
 }
 
-} // namespace threadMutexTest
+int shared_value = 0; // 共享数据
+void increment() {
+  for (int i = 0; i < 100000; ++i)
+    ++shared_value; // 数据竞争！
+}
+
+void dataRaceTest() {
+  std::thread t1(increment);
+  std::thread t2(increment);
+  t1.join();
+  t2.join();
+  std::cout << "dataRaceTest shared_value:" << shared_value << std::endl;
+}
+
+int shared_value2 = 0; // 共享数据
+std::mutex shared_value_mutex;
+void safe_increament() {
+  std::lock_guard<std::mutex> lock(shared_value_mutex);
+  for (int i = 0; i < 100000; ++i)
+    shared_value2++;
+}
+
+void mutexDataRaceTest() {
+  std::thread t1(safe_increament);
+  std::thread t2(safe_increament);
+  t1.join();
+  t2.join();
+  std::cout << "mutexDataRaceTest shared_value2:" << shared_value2 << std::endl;
+}
+
+} // namespace sharingDataBetweenThreads

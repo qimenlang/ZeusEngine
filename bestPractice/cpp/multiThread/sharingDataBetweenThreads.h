@@ -3,7 +3,7 @@
 #include <mutex>
 #include <stack>
 
-namespace threadMutexTest {
+namespace sharingDataBetweenThreads {
 struct emptyStackException : std::exception {
   // 重载what()方法并提供异常消息
   // c++11 noexcept = c++98 throw()
@@ -59,7 +59,7 @@ public:
     return m_stack.empty();
   }
   size_t size() const {
-    // std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
     return m_stack.size();
   }
 
@@ -94,9 +94,23 @@ public:
     std::scoped_lock(left.m_mutex, right.m_mutex);
     left.m_stack.swap(right.m_stack);
   }
+  friend void swapWithUniqueLock(threadsafeStack &left,
+                                 threadsafeStack &right) {
+    if (&left == &right)
+      return;
+    // unique_lock : RAII ,获取互斥的控制权，defer_lock : 延迟锁定
+    std::unique_lock<std::mutex> lock_left(left.m_mutex, std::defer_lock);
+    std::unique_lock<std::mutex> lock_right(right.m_mutex, std::defer_lock);
+    std::lock(lock_left, lock_right);
+    left.m_stack.swap(right.m_stack);
+  }
 };
 
 void threadsafeStackTest();
 void threadsafeStackSwapNoDeadLockTest();
 
-} // namespace threadMutexTest
+void dataRaceTest();
+
+void mutexDataRaceTest();
+
+} // namespace sharingDataBetweenThreads
