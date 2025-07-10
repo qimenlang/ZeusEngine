@@ -4,6 +4,52 @@
 
 namespace sharingDataBetweenThreads {
 
+template<class U>
+void swapWithDeadLock(threadsafeStack<U> &left, threadsafeStack<U> &right) {
+    if (&left == &right)
+      return;
+    // 会因左右互换，分别锁住了两个stack的mutex,导致死锁；
+    std::lock_guard lock_left(left.m_mutex);
+    std::cout << std::this_thread::get_id() << " lock left :" << &left.m_mutex
+              << std::endl;
+    std::lock_guard lock_right(right.m_mutex);
+    std::cout << std::this_thread::get_id() << " lock right :" << &right.m_mutex
+              << std::endl;
+    left.m_stack.swap(right.m_stack);
+}
+
+template<class U>
+void swapWithoutDeakLock(threadsafeStack<U> &left,
+                              threadsafeStack<U> &right) {
+  if (&left == &right)
+    return;
+  // 同时锁住两个互斥，防止死锁
+  std::lock(left.m_mutex, right.m_mutex);
+  // 互斥的所有权转移到lock_guard, adopt_lock表示mutex已被锁住；
+  std::lock_guard lock_left(left.m_mutex, std::adopt_lock);
+  std::lock_guard lock_right(right.m_mutex, std::adopt_lock);
+  left.m_stack.swap(right.m_stack);
+}
+
+template<typename U>
+void swapWithScopeLock(threadsafeStack<U> &left, threadsafeStack<U> &right) {
+  if (&left == &right)
+    return;
+  std::scoped_lock(left.m_mutex, right.m_mutex);
+  left.m_stack.swap(right.m_stack);
+}
+
+template<typename U>
+void swapWithUniqueLock(threadsafeStack<U> &left,  threadsafeStack<U> &right) {
+  if (&left == &right)  
+    return;
+  // unique_lock : RAII ,获取互斥的控制权，defer_lock : 延迟锁定
+  std::unique_lock<std::mutex> lock_left(left.m_mutex, std::defer_lock);
+  std::unique_lock<std::mutex> lock_right(right.m_mutex, std::defer_lock);
+  std::lock(lock_left, lock_right);
+  left.m_stack.swap(right.m_stack);
+}
+
 void threadsafeStackTest() {
   threadsafeStack<int> stack;
   auto pushStack = [](threadsafeStack<int> &stack) {
@@ -58,8 +104,8 @@ void threadsafeStackSwapNoDeadLockTest() {
     while (count--) {
       // swapWithDeadLock(left, right);
       // swapWithoutDeakLock(left, right);
-      // swapWithScopeLock(left, right);
-      swapWithUniqueLock(left, right);
+      swapWithScopeLock(left, right);
+      // swapWithUniqueLock(left, right);
     }
   };
 

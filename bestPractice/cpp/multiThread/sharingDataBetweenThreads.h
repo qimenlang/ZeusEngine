@@ -1,3 +1,4 @@
+#pragma once
 #include <exception>
 #include <memory>
 #include <mutex>
@@ -63,47 +64,14 @@ public:
     return m_stack.size();
   }
 
-  friend void swapWithDeadLock(threadsafeStack &left, threadsafeStack &right) {
-    if (&left == &right)
-      return;
-    // 会因左右互换，分别锁住了两个stack的mutex,导致死锁；
-    std::lock_guard lock_left(left.m_mutex);
-    std::cout << std::this_thread::get_id() << " lock left :" << &left.m_mutex
-              << std::endl;
-    std::lock_guard lock_right(right.m_mutex);
-    std::cout << std::this_thread::get_id() << " lock right :" << &right.m_mutex
-              << std::endl;
-    left.m_stack.swap(right.m_stack);
-  }
-
-  friend void swapWithoutDeakLock(threadsafeStack &left,
-                                  threadsafeStack &right) {
-    if (&left == &right)
-      return;
-    // 同时锁住两个互斥，防止死锁
-    std::lock(left.m_mutex, right.m_mutex);
-    // 互斥的所有权转移到lock_guard, adopt_lock表示mutex已被锁住；
-    std::lock_guard lock_left(left.m_mutex, std::adopt_lock);
-    std::lock_guard lock_right(right.m_mutex, std::adopt_lock);
-    left.m_stack.swap(right.m_stack);
-  }
-
-  friend void swapWithScopeLock(threadsafeStack &left, threadsafeStack &right) {
-    if (&left == &right)
-      return;
-    std::scoped_lock(left.m_mutex, right.m_mutex);
-    left.m_stack.swap(right.m_stack);
-  }
-  friend void swapWithUniqueLock(threadsafeStack &left,
-                                 threadsafeStack &right) {
-    if (&left == &right)
-      return;
-    // unique_lock : RAII ,获取互斥的控制权，defer_lock : 延迟锁定
-    std::unique_lock<std::mutex> lock_left(left.m_mutex, std::defer_lock);
-    std::unique_lock<std::mutex> lock_right(right.m_mutex, std::defer_lock);
-    std::lock(lock_left, lock_right);
-    left.m_stack.swap(right.m_stack);
-  }
+  template <typename U>
+  friend void swapWithDeadLock(threadsafeStack<U> &left, threadsafeStack<U> &right);
+  template <typename U>
+  friend void swapWithoutDeakLock(threadsafeStack<U> &left,threadsafeStack<U> &right);
+  template <typename U>
+  friend void swapWithScopeLock(threadsafeStack<U> &left, threadsafeStack<U> &right);
+  template <typename U>
+  friend void swapWithUniqueLock(threadsafeStack<U> &left, threadsafeStack<U> &right);
 };
 
 void threadsafeStackTest();

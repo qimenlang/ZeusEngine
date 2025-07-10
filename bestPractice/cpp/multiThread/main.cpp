@@ -12,8 +12,8 @@ int main() {
   // ManagingThreads::threadGuardTest();
   // ManagingThreads::passUniquePtrToThread();
   // sharingDataBetweenThreads::threadsafeStackTest();
-  // sharingDataBetweenThreads::threadsafeStackSwapNoDeadLockTest();
-  sharingDataBetweenThreads::dataRaceTest();
-  sharingDataBetweenThreads::mutexDataRaceTest();
+  sharingDataBetweenThreads::threadsafeStackSwapNoDeadLockTest();
+  // sharingDataBetweenThreads::dataRaceTest();
+  // sharingDataBetweenThreads::mutexDataRaceTest();
   return 0;
 }
