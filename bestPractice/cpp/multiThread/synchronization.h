@@ -5,13 +5,11 @@
 #include <mutex>
 #include <queue>
 
-namespace sync {
-void testConditionVariable();
-void testConditionVariable2();
+namespace synchronization {
 
 template <typename T> class threadSafeQueue {
 private:
-  //
+  // 互斥量必须声明为 mutable,以允许在const成员函数中加锁解锁
   mutable std::mutex m_mutex;
   std::queue<T> m_queue;
   std::condition_variable m_cond;
@@ -60,4 +58,11 @@ public:
     return res;
   }
 };
-} // namespace sync
+
+void testConditionVariable();
+void testConditionVariable2();
+void testasync();
+void testPromise();
+void testSharedFuture();
+
+} // namespace synchronization

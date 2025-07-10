@@ -1,6 +1,6 @@
 #include "ManagingThreads.h"
 #include "sharingDataBetweenThreads.h"
-#include "sync.h"
+#include "synchronization.h"
 #include <iostream>
 
 int main() {
@@ -16,7 +16,11 @@ int main() {
   // sharingDataBetweenThreads::threadsafeStackSwapNoDeadLockTest();
   // sharingDataBetweenThreads::dataRaceTest();
   // sharingDataBetweenThreads::mutexDataRaceTest();
-  // sync::testConditionVariable();
-  sync::testConditionVariable2();
+
+  // synchronization::testConditionVariable();
+  // synchronization::testConditionVariable2();
+  // synchronization::testasync();
+  // synchronization::testPromise();
+  synchronization::testSharedFuture();
   return 0;
 }
