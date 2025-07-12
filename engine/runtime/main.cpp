@@ -1,4 +1,5 @@
-﻿
+﻿#include "include/glad/glad.h"
+// glad.h must before glfw3.h
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
@@ -12,7 +13,6 @@
 #include "Model.h"
 #include "ModelScene.h"
 #include "Shader.h"
-#include "include/glad/glad.h"
 
 using namespace std;
 

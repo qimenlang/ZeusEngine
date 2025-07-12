@@ -49,25 +49,26 @@ void ModelScene::update() {
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
 
-    m_lightCube->setPosition(glm::vec3{
+    m_lightCube->transform()->setPosition(glm::vec3{
         2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
-    m_lightCube->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    m_lightCube->setScale(glm::vec3(0.04f));
+    m_lightCube->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+    m_lightCube->transform()->setScale(glm::vec3(0.04f));
     m_lightCube->Draw();
 
     // be sure to activate the m_phongShader
     m_phongShader->use();
     m_phongShader->setVec3("viewPos",
                            Zeus::Engine::getInstance().camera().Position);
-    m_phongShader->setVec3("light.position", m_lightCube->transform().position);
+    m_phongShader->setVec3("light.position",
+                           m_lightCube->transform()->position());
     m_phongShader->setVec3("light.ambient", glm::vec3{0.2f});
     m_phongShader->setVec3("light.diffuse", glm::vec3{1.0f});
     m_phongShader->setVec3("light.specular", glm::vec3{1.0f});
     m_phongShader->setVec3("material.specular", glm::vec3{0.5f});
     m_phongShader->setFloat("material.shininess", 32);
 
-    m_dragon->setPosition(glm::vec3{0, 1, 0});
-    m_dragon->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
-    m_dragon->setScale(glm::vec3{0.01});
+    m_dragon->transform()->setPosition(glm::vec3{0, 1, 0});
+    m_dragon->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
+    m_dragon->transform()->setScale(glm::vec3{0.01});
     m_dragon->Draw();
 }

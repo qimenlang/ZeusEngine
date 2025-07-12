@@ -175,14 +175,14 @@ void Model::Draw() {
         return;
     }
     m_shader.lock()->use();
-    m_shader.lock()->setMat4("model", GetModelMatrix());
+    m_shader.lock()->setMat4("model", m_transform->GetModelMatrix());
 
     auto cameraPos = Zeus::Engine::getInstance().camera().Position;
 
-    std::cout << "Model Camera Position: (" << cameraPos.x << ", "
-              << cameraPos.y << ", " << cameraPos.z << ")"
-              << " ,camera :" << &Zeus::Engine::getInstance().camera()
-              << std::endl;
+    // std::cout << "Model Camera Position: (" << cameraPos.x << ", "
+    //           << cameraPos.y << ", " << cameraPos.z << ")"
+    //           << " ,camera :" << &Zeus::Engine::getInstance().camera()
+    //           << std::endl;
 
     m_shader.lock()->setMat4(
         "view", Zeus::Engine::getInstance().camera().GetViewMatrix());

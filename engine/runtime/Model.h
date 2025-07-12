@@ -10,19 +10,13 @@
 
 #include "Mesh.h"
 #include "Shader.h"
+#include "function/framework/component/transform_component.h"
 
 class Mesh;
 struct Texture;
 
 unsigned int TextureFromFile(const char *path, const std::string &directory,
                              bool gamma = false);
-
-struct ModelTransform {
-    glm::vec3 position = glm::vec3{0.f};
-    glm::vec3 rotateAxis = glm::vec3{1.f, 0, 0};
-    float rotation = 0.f;
-    glm::vec3 scale = glm::vec3{1.f};
-};
 
 class Model {
    private:
@@ -31,7 +25,7 @@ class Model {
 
     std::vector<Texture> textures_loaded;
 
-    ModelTransform m_transform;
+    std::unique_ptr<TransformComponent> m_transform;
 
     std::weak_ptr<Shader> m_shader;
 
@@ -43,26 +37,17 @@ class Model {
                                               std::string typeName);
 
    public:
-    Model(char *path) { loadModel(path); }
-    Model(const char *path) { loadModel(path); }
+    Model(char *path) {
+        loadModel(path);
+        m_transform = std::make_unique<TransformComponent>();
+    }
+    Model(const char *path) {
+        loadModel(path);
+        m_transform = std::make_unique<TransformComponent>();
+    }
     ~Model() {};
 
-    ModelTransform transform() { return m_transform; };
-    void setPosition(glm::vec3 position) { m_transform.position = position; }
-    void setRotation(glm::vec3 rotateAxis, float rotation) {
-        m_transform.rotateAxis = rotateAxis;
-        m_transform.rotation = rotation;
-    }
-    void setScale(glm::vec3 scale) { m_transform.scale = scale; }
-
-    glm::mat4 GetModelMatrix() {
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, m_transform.position);
-        model =
-            glm::rotate(model, m_transform.rotation, m_transform.rotateAxis);
-        model = glm::scale(model, m_transform.scale);
-        return model;
-    }
+    TransformComponent *transform() { return m_transform.get(); };
 
     void Draw();
     void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }

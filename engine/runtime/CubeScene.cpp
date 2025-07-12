@@ -43,20 +43,20 @@ void CubeScene::init() {
         [this](const std::string &path) -> std::unique_ptr<Model> {
         auto cube = std::make_unique<Model>(path.c_str());
         cube->setShader(m_phongSampleShader);
-        cube->setScale(glm::vec3{0.48});
+        cube->transform()->setScale(glm::vec3{0.48});
         return std::move(cube);
     };
 
     m_cube = createCube(cubePath);
-    m_cube->setPosition(glm::vec3{-2, 0, 0});
+    m_cube->transform()->setPosition(glm::vec3{-2, 0, 0});
     m_cube1 = createCube(cubePath);
-    m_cube1->setPosition(glm::vec3{-1, 0, 0});
+    m_cube1->transform()->setPosition(glm::vec3{-1, 0, 0});
     m_cube2 = createCube(cubePath);
-    m_cube2->setPosition(glm::vec3{0, 0, 0});
+    m_cube2->transform()->setPosition(glm::vec3{0, 0, 0});
     m_cube3 = createCube(cubePath);
-    m_cube3->setPosition(glm::vec3{1, 0, 0});
+    m_cube3->transform()->setPosition(glm::vec3{1, 0, 0});
     m_cube4 = createCube(cubePath);
-    m_cube4->setPosition(glm::vec3{2, 0, 0});
+    m_cube4->transform()->setPosition(glm::vec3{2, 0, 0});
 }
 
 void CubeScene::update() {
@@ -64,17 +64,17 @@ void CubeScene::update() {
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
 
-    m_lightCube->setPosition(glm::vec3{
+    m_lightCube->transform()->setPosition(glm::vec3{
         2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
-    m_lightCube->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    m_lightCube->setScale(glm::vec3(0.04f));
+    m_lightCube->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+    m_lightCube->transform()->setScale(glm::vec3(0.04f));
     m_lightCube->Draw();
 
     m_phongSampleShader->use();
     m_phongSampleShader->setVec3("viewPos",
                                  Zeus::Engine::getInstance().camera().Position);
     m_phongSampleShader->setVec3("light.position",
-                                 m_lightCube->transform().position);
+                                 m_lightCube->transform()->position());
     m_phongSampleShader->setVec3("light.ambient", glm::vec3{0.2f});
     m_phongSampleShader->setVec3("light.diffuse", glm::vec3{0.5f});
     m_phongSampleShader->setVec3("light.specular", glm::vec3{1.0f});

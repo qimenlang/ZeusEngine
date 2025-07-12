@@ -33,9 +33,9 @@ void Mesh::Draw(Shader &shader) {
         glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()),
                     i);
 
-        std::cout << "Draw texture id:" << shader.ID
-                  << ",name: " << (name + number).c_str() << ",index:" << i
-                  << "texturesId:" << textures[i].id << std::endl;
+        // std::cout << "Draw texture id:" << shader.ID
+        //           << ",name: " << (name + number).c_str() << ",index:" << i
+        //           << "texturesId:" << textures[i].id << std::endl;
         // and finally bind the texture
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
