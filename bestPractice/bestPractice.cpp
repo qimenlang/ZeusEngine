@@ -1,29 +1,27 @@
-#include "cpp/features/cppFeature.h"
+#include <iostream>
 
 #include "cpp/cppQuiz/cppQuiz.hpp"
 #include "cpp/cppWeekly/cppWeekly.h"
-
+#include "cpp/features/cppFeature.h"
 #include "design/pimpl/pimplTest.h"
 
-#include <iostream>
-
 int main() {
-  // test arch design
-  {
-    std::cout << "test arch design" << std::endl;
-    design::pimplTest pimplTest;
-    pimplTest.process();
-  }
+    // test arch design
+    {
+        std::cout << "test arch design" << std::endl;
+        design::pimplTest pimplTest;
+        pimplTest.process();
+    }
 
-  // test cpp Features
-  {
-    cppFeature::run();
-  }
+    // test cpp Features
+    {
+        cppFeature::run();
+    }
 
-  // cpp Weekly
-  cppWeekly::run();
-  // cpp Quiz
-  cppQuiz::run();
+    // cpp Weekly
+    cppWeekly::run();
+    // cpp Quiz
+    cppQuiz::run();
 
-  std::cout << "test end" << std::endl;
+    std::cout << "test end" << std::endl;
 }

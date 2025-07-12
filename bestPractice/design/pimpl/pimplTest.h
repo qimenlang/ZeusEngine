@@ -2,13 +2,13 @@
 #include <memory>
 namespace design {
 class pimplTest {
-public:
-  pimplTest(/* args */);
-  ~pimplTest();
-  void process();
+   public:
+    pimplTest(/* args */);
+    ~pimplTest();
+    void process();
 
-private:
-  struct Impl;
-  std::unique_ptr<Impl> pimpl;
+   private:
+    struct Impl;
+    std::unique_ptr<Impl> pimpl;
 };
-} // namespace design
+}  // namespace design

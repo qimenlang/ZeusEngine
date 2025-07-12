@@ -1,4 +1,5 @@
 #include "FunctionPointer.h"
+
 #include <iostream>
 /* 声明函数指针，需要指定指针所指向函数的返回值和参数类型； */
 namespace FunctionPointerTest {
@@ -17,11 +18,11 @@ int add(int a, int b) { return a + b; }
 int subtract(int a, int b) { return a - b; }
 
 void test() {
-  math_op = add;
-  std::cout << "3+4 = " << math_op(3, 4) << std::endl; // 调用add函数
-  math_op = subtract;
-  std::cout << "7-4 = " << math_op(7, 4) << std::endl; // 调用add函数
-  MathOp mathOp = add;
-  std::cout << "3+4 = " << mathOp(3, 4) << std::endl; // 调用add函数
+    math_op = add;
+    std::cout << "3+4 = " << math_op(3, 4) << std::endl;  // 调用add函数
+    math_op = subtract;
+    std::cout << "7-4 = " << math_op(7, 4) << std::endl;  // 调用add函数
+    MathOp mathOp = add;
+    std::cout << "3+4 = " << mathOp(3, 4) << std::endl;  // 调用add函数
 }
-} // namespace FunctionPointerTest
+}  // namespace FunctionPointerTest

@@ -5,28 +5,28 @@
 namespace ManagingThreads {
 // threadCreateAndJoin
 struct CallableStruct {
-  void operator()() const;
+    void operator()() const;
 };
 
 void threadCreateAndJoin();
 
 // workWithLocalVariable
 struct CallableStructWithLocalPtr {
-  CallableStructWithLocalPtr(int *localPtr) : varPtr(localPtr) {}
-  void operator()();
+    CallableStructWithLocalPtr(int *localPtr) : varPtr(localPtr) {}
+    void operator()();
 
-private:
-  int *varPtr;
+   private:
+    int *varPtr;
 };
 
 void workWithLocalPtr();
 
 struct CallableStructWithLocalRef {
-  CallableStructWithLocalRef(int &localVar) : varRef(localVar) {}
-  void operator()();
+    CallableStructWithLocalRef(int &localVar) : varRef(localVar) {}
+    void operator()();
 
-private:
-  int &varRef;
+   private:
+    int &varRef;
 };
 
 void workWithLocalRef();
@@ -38,4 +38,4 @@ void threadGuardTest();
 
 // pass unique_ptr to thread
 void passUniquePtrToThread();
-} // namespace ManagingThreads
+}  // namespace ManagingThreads

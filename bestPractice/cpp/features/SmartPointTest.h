@@ -4,7 +4,7 @@
 namespace SmartPointTest {
 
 struct RawStruct {
-  void print();
+    void print();
 };
 
 void testRawStruct();
@@ -20,11 +20,11 @@ void testRawStruct();
 
 struct StructEnabledShared
     : public std::enable_shared_from_this<StructEnabledShared> {
-  void print();
+    void print();
 };
 
 void testSharedFromThis();
 
 // SharedPtrThreadSafe
 void testSharedPtrThreadSafe();
-} // namespace SmartPointTest
+}  // namespace SmartPointTest

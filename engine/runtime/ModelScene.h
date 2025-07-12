@@ -4,17 +4,17 @@
 #include "Shader.h"
 
 class ModelScene : public Scene {
-private:
-  /* data */
-  std::shared_ptr<Shader> m_lightShader;
-  std::unique_ptr<Model> m_lightCube;
+   private:
+    /* data */
+    std::shared_ptr<Shader> m_lightShader;
+    std::unique_ptr<Model> m_lightCube;
 
-  std::shared_ptr<Shader> m_phongShader;
-  std::unique_ptr<Model> m_dragon;
+    std::shared_ptr<Shader> m_phongShader;
+    std::unique_ptr<Model> m_dragon;
 
-public:
-  ModelScene(/* args */);
-  ~ModelScene();
-  void init() override;
-  void update() override;
+   public:
+    ModelScene(/* args */);
+    ~ModelScene();
+    void init() override;
+    void update() override;
 };

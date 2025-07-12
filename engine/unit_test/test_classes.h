@@ -1,46 +1,60 @@
 /************************************************************************************
-*                                                                                   *
-*   Copyright (c) 2014 - 2018 Axel Menzel <info@rttr.org>                           *
-*                                                                                   *
-*   This file is part of RTTR (Run Time Type Reflection)                            *
-*   License: MIT License                                                            *
-*                                                                                   *
-*   Permission is hereby granted, free of charge, to any person obtaining           *
-*   a copy of this software and associated documentation files (the "Software"),    *
-*   to deal in the Software without restriction, including without limitation       *
-*   the rights to use, copy, modify, merge, publish, distribute, sublicense,        *
-*   and/or sell copies of the Software, and to permit persons to whom the           *
-*   Software is furnished to do so, subject to the following conditions:            *
-*                                                                                   *
-*   The above copyright notice and this permission notice shall be included in      *
-*   all copies or substantial portions of the Software.                             *
-*                                                                                   *
-*   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR      *
-*   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,        *
-*   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE     *
-*   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER          *
-*   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,   *
-*   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
-*   SOFTWARE.                                                                       *
-*                                                                                   *
-*************************************************************************************/
+ *                                                                                   *
+ *   Copyright (c) 2014 - 2018 Axel Menzel <info@rttr.org> *
+ *                                                                                   *
+ *   This file is part of RTTR (Run Time Type Reflection) * License: MIT License
+ **
+ *                                                                                   *
+ *   Permission is hereby granted, free of charge, to any person obtaining * a
+ *copy of this software and associated documentation files (the "Software"), *
+ *   to deal in the Software without restriction, including without limitation *
+ *   the rights to use, copy, modify, merge, publish, distribute, sublicense, *
+ *   and/or sell copies of the Software, and to permit persons to whom the *
+ *   Software is furnished to do so, subject to the following conditions: *
+ *                                                                                   *
+ *   The above copyright notice and this permission notice shall be included in
+ ** all copies or substantial portions of the Software. *
+ *                                                                                   *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ ** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, *
+ *   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ ** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER *
+ *   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *FROM,   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ *DEALINGS IN THE   * SOFTWARE. *
+ *                                                                                   *
+ *************************************************************************************/
 
 #ifndef RTTR_TESTCLASSES_H_
 #define RTTR_TESTCLASSES_H_
 
 #include <rttr/type>
 
-#define CLASS(CLASS_NAME) struct CLASS_NAME \
-{ virtual ~CLASS_NAME() {} RTTR_ENABLE() virtual int getType() { return dummyIntValue; } int dummyIntValue = 0; };
+#define CLASS(CLASS_NAME)                                             \
+    struct CLASS_NAME {                                               \
+        virtual ~CLASS_NAME() {}                                      \
+        RTTR_ENABLE() virtual int getType() { return dummyIntValue; } \
+        int dummyIntValue = 0;                                        \
+    };
 
-#define CLASS_INHERIT(CLASS1, CLASS2) struct CLASS1 : CLASS2 \
-{ virtual int getType() { return static_cast<int>(dummyDoubleValue); } RTTR_ENABLE(CLASS2) double dummyDoubleValue = 1; };
+#define CLASS_INHERIT(CLASS1, CLASS2)                                        \
+    struct CLASS1 : CLASS2 {                                                 \
+        virtual int getType() { return static_cast<int>(dummyDoubleValue); } \
+        RTTR_ENABLE(CLASS2) double dummyDoubleValue = 1;                     \
+    };
 
-#define CLASS_MULTI_INHERIT_2(CLASS1, CLASS2, CLASS3) struct CLASS1 : CLASS2, CLASS3 \
-{ virtual int getType() { return static_cast<int>(dummyBoolValue); } RTTR_ENABLE(CLASS2, CLASS3) bool dummyBoolValue = false; };
+#define CLASS_MULTI_INHERIT_2(CLASS1, CLASS2, CLASS3)                      \
+    struct CLASS1 : CLASS2, CLASS3 {                                       \
+        virtual int getType() { return static_cast<int>(dummyBoolValue); } \
+        RTTR_ENABLE(CLASS2, CLASS3) bool dummyBoolValue = false;           \
+    };
 
-#define CLASS_MULTI_INHERIT_5(CLASS1, CLASS2, CLASS3, CLASS4, CLASS5, CLASS6) struct CLASS1 : CLASS2, CLASS3, CLASS4, CLASS5, CLASS6 \
-{ virtual int getType() { return static_cast<int>(dummyBoolValue); } RTTR_ENABLE(CLASS2, CLASS3, CLASS4, CLASS5, CLASS6) bool dummyBoolValue = true; };
+#define CLASS_MULTI_INHERIT_5(CLASS1, CLASS2, CLASS3, CLASS4, CLASS5, CLASS6) \
+    struct CLASS1 : CLASS2, CLASS3, CLASS4, CLASS5, CLASS6 {                  \
+        virtual int getType() { return static_cast<int>(dummyBoolValue); }    \
+        RTTR_ENABLE(CLASS2, CLASS3, CLASS4, CLASS5, CLASS6)                   \
+        bool dummyBoolValue = true;                                           \
+    };
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // The following class structures has 7 hierarchy levels and is 5 classes wide;
@@ -85,7 +99,8 @@ CLASS_INHERIT(ClassSingle6E, ClassSingle5E)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // The following class structures has 7 hierarchy levels and 5 classes wide;
-// At the end is a final class which uses multiple inheritance to combine all classes
+// At the end is a final class which uses multiple inheritance to combine all
+// classes
 /////////////////////////////////////////////////////////////////////////////////////////
 
 CLASS(ClassMultipleBaseA)
@@ -128,41 +143,36 @@ CLASS_INHERIT(ClassMultiple4E, ClassMultiple3E)
 CLASS_INHERIT(ClassMultiple5E, ClassMultiple4E)
 CLASS_INHERIT(ClassMultiple6E, ClassMultiple5E)
 
-CLASS_MULTI_INHERIT_5(FinalClass, ClassMultiple6A, ClassMultiple6B, ClassMultiple6C, ClassMultiple6D, ClassMultiple6E)
-
+CLASS_MULTI_INHERIT_5(FinalClass, ClassMultiple6A, ClassMultiple6B,
+                      ClassMultiple6C, ClassMultiple6D, ClassMultiple6E)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // The diamond problem
 /////////////////////////////////////////////////////////////////////////////////////////
-struct DiamondTop
-{
-
+struct DiamondTop {
     double foo = 12;
     RTTR_ENABLE()
 };
 
-struct DiamondLeft : virtual DiamondTop
-{
+struct DiamondLeft : virtual DiamondTop {
     bool _left_var = true;
     RTTR_ENABLE(DiamondTop)
 };
 
-struct DiamondRight : virtual DiamondTop
-{
+struct DiamondRight : virtual DiamondTop {
     std::string _text = "Hello World";
     RTTR_ENABLE(DiamondTop)
 };
 
-
-struct DiamondBottom : DiamondLeft, DiamondRight
-{
+struct DiamondBottom : DiamondLeft, DiamondRight {
     int _finalVar = 42;
     RTTR_ENABLE(DiamondLeft, DiamondRight)
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // The following class structures has 7 hierarchy levels and 2 classes wide;
-// At the end is a final class which uses multiple inheritance to combine all classes
+// At the end is a final class which uses multiple inheritance to combine all
+// classes
 /////////////////////////////////////////////////////////////////////////////////////////
 
 CLASS(ClassMulti1A)
@@ -181,4 +191,4 @@ CLASS_MULTI_INHERIT_2(ClassMulti5A, ClassMulti4A, ClassMulti4B)
 CLASS_MULTI_INHERIT_2(ClassMulti6A, ClassMulti5A, ClassMulti5B)
 CLASS_MULTI_INHERIT_2(ClassMulti7A, ClassMulti6A, ClassMulti6B)
 
-#endif // RTTR_TESTCLASSES_H_
+#endif  // RTTR_TESTCLASSES_H_

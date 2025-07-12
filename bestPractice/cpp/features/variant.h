@@ -5,4 +5,4 @@
 namespace VariantTest {
 
 void test();
-} // namespace VariantTest
+}  // namespace VariantTest
