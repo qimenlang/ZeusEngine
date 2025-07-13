@@ -2,8 +2,11 @@
 
 #include <Singleton.h>
 
+#include <memory>
+
 #include "Camera.h"
 #include "Shader.h"
+#include "resource/asset_manager.h"
 
 namespace Zeus {
 // settings
@@ -21,6 +24,7 @@ class Engine : public Singleton<Engine> {
     /* data */
 
     Camera m_camera;
+    std::unique_ptr<AssetManager> m_assetManager;
 
    public:
     Engine(/* args */);
@@ -31,7 +35,8 @@ class Engine : public Singleton<Engine> {
     float deltaTime() const { return m_deltaTime; }
     float currentTime() const { return m_currentTime; }
 
-    Camera &camera() { return m_camera; }
+    Camera& camera() { return m_camera; }
+    AssetManager& assetManager() { return *m_assetManager; }
 };
 
 }  // namespace Zeus

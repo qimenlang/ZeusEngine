@@ -1,5 +1,6 @@
 #include "ModelScene.h"
 
+#include <glm/gtx/string_cast.hpp>
 #include <memory>
 
 #include "Engine.h"
@@ -66,7 +67,7 @@ void ModelScene::update() {
     m_phongShader->setVec3("material.specular", glm::vec3{0.5f});
     m_phongShader->setFloat("material.shininess", 32);
 
-    m_dragon->transform()->setPosition(glm::vec3{0, 1, 0});
+    m_dragon->transform()->setPosition(glm::vec3{1, 1, 0});
     m_dragon->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     m_dragon->transform()->setScale(glm::vec3{0.01});
     m_dragon->Draw();

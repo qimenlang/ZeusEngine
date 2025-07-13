@@ -14,6 +14,8 @@ void Engine::init() {
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     m_camera = Camera(cameraPos, cameraUp);
+
+    m_assetManager = std::make_unique<AssetManager>();
 }
 
 void Engine::update() {
