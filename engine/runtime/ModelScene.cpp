@@ -24,7 +24,6 @@ void ModelScene::init() {
     std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
 
     m_lightShader = std::make_shared<Shader>(vs_path.c_str(), ls_path.c_str());
-    m_lightShader->use();
 
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");

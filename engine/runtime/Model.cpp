@@ -65,7 +65,7 @@ void Model::loadModel(std::string path) {
 void Model::processNode(aiNode *node, const aiScene *scene) {
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
         auto mesh = scene->mMeshes[node->mMeshes[i]];
-        meshes.push_back(processMesh(mesh, scene));
+        m_mesh_component->addSubMesh(processMesh(mesh, scene));
     }
 
     for (unsigned int i = 0; i < node->mNumChildren; i++) {
@@ -73,7 +73,7 @@ void Model::processNode(aiNode *node, const aiScene *scene) {
     }
 }
 
-Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
+SubMesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
@@ -130,7 +130,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene) {
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
     }
 
-    return Mesh(vertices, indices, textures);
+    return {vertices, indices, textures};
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat,
@@ -187,6 +187,7 @@ void Model::Draw() {
     m_shader.lock()->setMat4(
         "view", Zeus::Engine::getInstance().camera().GetViewMatrix());
     m_shader.lock()->setMat4("projection", Zeus::projection);
-    for (unsigned int i = 0; i < meshes.size(); i++)
-        meshes[i].Draw(*m_shader.lock());
+
+    m_mesh_component->tick(0);
+    m_transform->tick(0);
 }

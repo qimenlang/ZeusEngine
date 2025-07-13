@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Shader.h"
+#include "component.h"
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -26,16 +27,30 @@ struct Texture {
     std::string path;
 };
 
-class Mesh {
-   public:
+struct SubMesh {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
-    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
-         std::vector<Texture> textures);
-    void Draw(Shader &shader);
+};
 
-   private:
+struct SubMeshRenderable : public SubMesh {
     unsigned int VAO, VBO, EBO;
     void setupMesh();
+    void Draw(unsigned int shaderID);
+};
+
+class MeshComponent : public Component {
+   public:
+    MeshComponent() {};
+    ~MeshComponent() {};
+
+    virtual void postLoadResource(std::weak_ptr<Object> parent_object) override;
+    void tick(float delta_time) override;
+    void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
+    void addSubMesh(const SubMesh& sub_mesh);
+
+   private:
+    std::vector<SubMeshRenderable> m_sub_meshs;
+    void setupMesh();
+    std::weak_ptr<Shader> m_shader;
 };
