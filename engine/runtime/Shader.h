@@ -8,7 +8,6 @@
 #include <sstream>
 #include <string>
 
-#include "include/glad/glad.h"  // include glad to get all the required OpenGL headers
 
 class Shader {
    public:

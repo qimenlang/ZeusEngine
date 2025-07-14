@@ -1,5 +1,4 @@
 #pragma once
-#include <include/glad/glad.h>  // holds all OpenGL type declarations
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -8,6 +7,9 @@
 
 #include "Shader.h"
 #include "component.h"
+
+#include <include/glad/glad.h>  // holds all OpenGL type declarations
+
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -27,15 +29,31 @@ struct Texture {
     std::string path;
 };
 
-struct SubMesh {
+struct Geometry {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
 };
 
-struct SubMeshRenderable : public SubMesh {
+enum class PrimitiveType {
+    POINTS = GL_POINTS,
+    LINES = GL_LINES,
+    LINE_LOOP = GL_LINE_LOOP,
+    LINE_STRIP = GL_LINE_STRIP,
+    TRIANGLES= GL_TRIANGLES,
+    TRIANGLE_STRIP = GL_TRIANGLE_STRIP,
+    TRIANGLE_FAN = GL_TRIANGLE_FAN,
+};
+
+struct Primitive  {
+    PrimitiveType type;
+    Geometry geometry;
+    // for submesh
+    uint32_t indexOffset = 0;
+    uint32_t indexCount = 0;
+
     unsigned int VAO, VBO, EBO;
-    void setupMesh();
+    void setup();
     void Draw(unsigned int shaderID);
 };
 
@@ -47,10 +65,10 @@ class MeshComponent : public Component {
     virtual void postLoadResource(std::weak_ptr<Object> parent_object) override;
     void tick(float delta_time) override;
     void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
-    void addSubMesh(const SubMesh& sub_mesh);
+    void addGeometry(const Geometry& geometry);
 
    private:
-    std::vector<SubMeshRenderable> m_sub_meshs;
-    void setupMesh();
+    std::vector<Primitive> m_primitives;
+    void setup();
     std::weak_ptr<Shader> m_shader;
 };

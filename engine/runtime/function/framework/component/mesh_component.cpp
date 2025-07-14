@@ -1,12 +1,16 @@
 #include "mesh_component.h"
 
-void SubMeshRenderable::setupMesh() {
+
+void Primitive::setup() {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    auto&vertices = geometry.vertices;
+    auto&indices = geometry.indices;
 
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                  &vertices[0], GL_STATIC_DRAW);
@@ -43,12 +47,13 @@ void SubMeshRenderable::setupMesh() {
     glBindVertexArray(0);
 }
 
-void SubMeshRenderable::Draw(unsigned int shaderID) {
+void Primitive::Draw(unsigned int shaderID) {
     // bind appropriate textures
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
     unsigned int normalNr = 1;
     unsigned int heightNr = 1;
+    auto &textures = geometry.textures;
     for (unsigned int i = 0; i < textures.size(); i++) {
         // active proper texture unit before binding
         glActiveTexture(GL_TEXTURE0 + i);
@@ -73,6 +78,7 @@ void SubMeshRenderable::Draw(unsigned int shaderID) {
         // and finally bind the texture
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
+    auto indices = geometry.indices;
 
     // draw mesh
     glBindVertexArray(VAO);
@@ -84,10 +90,10 @@ void SubMeshRenderable::Draw(unsigned int shaderID) {
     glActiveTexture(GL_TEXTURE0);
 }
 
-void MeshComponent::addSubMesh(const SubMesh &sub_mesh) {
-    SubMeshRenderable sub_mesh_renderable{sub_mesh};
-    sub_mesh_renderable.setupMesh();
-    m_sub_meshs.push_back(sub_mesh_renderable);
+void MeshComponent::addGeometry(const Geometry &geometry) {
+    Primitive primitive{geometry};
+    primitive.setup();
+    m_primitives.push_back(primitive);
 }
 
 void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
@@ -96,7 +102,7 @@ void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
 
 void MeshComponent::tick(float delta_time) {
     if (m_shader.expired()) return;
-    for (auto &sub_mesh : m_sub_meshs) {
+    for (auto &sub_mesh : m_primitives) {
         sub_mesh.Draw(m_shader.lock()->ID);
     }
 }

@@ -10,7 +10,7 @@
 #include "Shader.h"
 #include "function/framework/component/mesh_component.h"
 
-struct SubMesh;
+struct Geometry;
 struct Texture;
 
 unsigned int TextureFromFile(const char *path, const std::string &directory,
@@ -21,12 +21,12 @@ class AssetManager {
     AssetManager(/* args */) {};
     ~AssetManager() {};
 
-    std::vector<SubMesh> loadModel(std::string path);
+    std::vector<Geometry> loadModel(std::string path);
 
    private:
     void processNode(aiNode *node, const aiScene *scene,
-                     std::vector<SubMesh> &m_sub_meshs);
-    SubMesh processMesh(aiMesh *mesh, const aiScene *scene);
+                     std::vector<Geometry> &m_primitives);
+    Geometry processMesh(aiMesh *mesh, const aiScene *scene);
     std::vector<Texture> loadMaterialTextures(aiMaterial *mat,
                                               aiTextureType type,
                                               std::string typeName);

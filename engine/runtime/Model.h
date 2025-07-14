@@ -30,18 +30,18 @@ class Model {
     Model(char *path) {
         m_transform = std::make_unique<TransformComponent>();
         m_mesh_component = std::make_unique<MeshComponent>();
-        auto subMeshs =
+        auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &subMesh : subMeshs)
-            m_mesh_component->addSubMesh(subMesh);
+        for (const auto &geometry : geometrys)
+            m_mesh_component->addGeometry(geometry);
     }
     Model(const char *path) {
         m_transform = std::make_unique<TransformComponent>();
         m_mesh_component = std::make_unique<MeshComponent>();
-        auto subMeshs =
+        auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &subMesh : subMeshs)
-            m_mesh_component->addSubMesh(subMesh);
+        for (const auto &geometry : geometrys)
+            m_mesh_component->addGeometry(geometry);
     }
     ~Model() {};
 

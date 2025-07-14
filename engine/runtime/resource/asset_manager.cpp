@@ -1,5 +1,7 @@
 #include "asset_manager.h"
 
+#include <include/glad/glad.h>  // holds all OpenGL type declarations
+
 #define STB_IMAGE_IMPLEMENTATION
 #include <iostream>
 
@@ -47,8 +49,8 @@ unsigned int TextureFromFile(const char *path, const std::string &directory,
     return textureID;
 }
 
-std::vector<SubMesh> AssetManager::loadModel(std::string path) {
-    std::vector<SubMesh> m_sub_meshs;
+std::vector<Geometry> AssetManager::loadModel(std::string path) {
+    std::vector<Geometry> m_primitives;
     Assimp::Importer importer;
 
     const aiScene *scene =
@@ -59,13 +61,13 @@ std::vector<SubMesh> AssetManager::loadModel(std::string path) {
         std::cout << importer.GetErrorString() << std::endl;
     } else {
         directory = path.substr(0, path.find_last_of("/"));
-        processNode(scene->mRootNode, scene, m_sub_meshs);
+        processNode(scene->mRootNode, scene, m_primitives);
     }
-    return m_sub_meshs;
+    return m_primitives;
 }
 
 void AssetManager::processNode(aiNode *node, const aiScene *scene,
-                               std::vector<SubMesh> &sub_meshs) {
+                               std::vector<Geometry> &sub_meshs) {
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
         auto mesh = scene->mMeshes[node->mMeshes[i]];
         sub_meshs.push_back(processMesh(mesh, scene));
@@ -76,7 +78,7 @@ void AssetManager::processNode(aiNode *node, const aiScene *scene,
     }
 }
 
-SubMesh AssetManager::processMesh(aiMesh *mesh, const aiScene *scene) {
+Geometry AssetManager::processMesh(aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
