@@ -1,15 +1,24 @@
-#include "Object.h"
+﻿#include "function/framework/object/object.h"
 
-#include "function/framework/component/component.h"
+#include <memory>
 
-Object::Object(/* args */) {}
+#include "Engine.h"
+#include "resource/asset_manager.h"
 
-Object::~Object() {}
-
-void Object::tick(float delta_time) {
-    for (auto &component : m_components) {
-        component->tick(delta_time);
+void Object::tick() {
+    if (m_shader.expired()) {
+        std::cerr << "Object shader is expired!" << std::endl;
+        return;
     }
-}
 
-bool Object::load(const std::string &path) { return false; }
+    if (onTick) onTick(this);
+
+    m_shader.lock()->use();
+    m_shader.lock()->setMat4("model", m_transform->GetModelMatrix());
+    m_shader.lock()->setMat4(
+        "view", Zeus::Engine::getInstance().camera().GetViewMatrix());
+    m_shader.lock()->setMat4("projection", Zeus::projection);
+
+    m_transform->tick(0);
+    m_mesh_component->tick(0);
+}

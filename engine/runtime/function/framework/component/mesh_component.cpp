@@ -1,6 +1,5 @@
 #include "mesh_component.h"
 
-
 void Primitive::setup() {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -9,8 +8,8 @@ void Primitive::setup() {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    auto&vertices = geometry.vertices;
-    auto&indices = geometry.indices;
+    auto &vertices = geometry.vertices;
+    auto &indices = geometry.indices;
 
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                  &vertices[0], GL_STATIC_DRAW);

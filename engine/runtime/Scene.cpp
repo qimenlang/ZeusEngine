@@ -13,7 +13,7 @@ void Scene::update() {
     // 更新场景中的所有模型
     for (auto &model : m_models) {
         if (model) {
-            model->Draw();
+            model->tick();
         }
     }
 }

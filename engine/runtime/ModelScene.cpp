@@ -4,8 +4,8 @@
 #include <memory>
 
 #include "Engine.h"
-#include "Model.h"
 #include "Shader.h"
+#include "function/framework/object/object.h"
 
 ModelScene::ModelScene() : Scene() {
     // 初始化立方体场景
@@ -28,7 +28,14 @@ void ModelScene::init() {
 
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-    m_lightCube = std::make_unique<Model>(lightCubePath.c_str());
+    m_lightCube = std::make_unique<Object>(lightCubePath.c_str());
+    m_lightCube->onTick = [](Object *thiz) {
+        thiz->transform()->setPosition(glm::vec3{
+            2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
+        thiz->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+        thiz->transform()->setScale(glm::vec3(0.04f));
+    };
+
     m_lightCube->setShader(m_lightShader);
 
     std::string phong_path =
@@ -39,21 +46,16 @@ void ModelScene::init() {
 
     std::string DragonPath =
         std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
-    m_dragon = std::make_unique<Model>(DragonPath.c_str());
+    m_dragon = std::make_unique<Object>(DragonPath.c_str());
     m_dragon->setShader(m_phongShader);
-    std::cout << "Model Load :" << DragonPath << std::endl;
+    std::cout << "Object Load :" << DragonPath << std::endl;
 }
 
 void ModelScene::update() {
     auto lightColor = glm::vec3{1.0};
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
-
-    m_lightCube->transform()->setPosition(glm::vec3{
-        2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
-    m_lightCube->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    m_lightCube->transform()->setScale(glm::vec3(0.04f));
-    m_lightCube->Draw();
+    m_lightCube->tick();
 
     // be sure to activate the m_phongShader
     m_phongShader->use();
@@ -70,5 +72,5 @@ void ModelScene::update() {
     m_dragon->transform()->setPosition(glm::vec3{1, 1, 0});
     m_dragon->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 180.f);
     m_dragon->transform()->setScale(glm::vec3{0.01});
-    m_dragon->Draw();
+    m_dragon->tick();
 }

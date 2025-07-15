@@ -10,9 +10,9 @@
 
 #include "CubeScene.h"
 #include "Engine.h"
-#include "Model.h"
 #include "ModelScene.h"
 #include "Shader.h"
+#include "function/framework/object/object.h"
 
 using namespace std;
 
@@ -122,6 +122,7 @@ int main() {
 #endif
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
+
     // CubeScene cubeScene;
     // cubeScene.init();
     ModelScene modelScene;

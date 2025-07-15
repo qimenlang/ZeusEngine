@@ -1,5 +1,7 @@
 #pragma once
 
+#include <include/glad/glad.h>  // holds all OpenGL type declarations
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <string>
@@ -7,9 +9,6 @@
 
 #include "Shader.h"
 #include "component.h"
-
-#include <include/glad/glad.h>  // holds all OpenGL type declarations
-
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -40,14 +39,14 @@ enum class PrimitiveType {
     LINES = GL_LINES,
     LINE_LOOP = GL_LINE_LOOP,
     LINE_STRIP = GL_LINE_STRIP,
-    TRIANGLES= GL_TRIANGLES,
+    TRIANGLES = GL_TRIANGLES,
     TRIANGLE_STRIP = GL_TRIANGLE_STRIP,
     TRIANGLE_FAN = GL_TRIANGLE_FAN,
 };
 
-struct Primitive  {
-    PrimitiveType type;
+struct Primitive {
     Geometry geometry;
+    PrimitiveType type;
     // for submesh
     uint32_t indexOffset = 0;
     uint32_t indexCount = 0;

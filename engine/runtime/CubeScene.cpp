@@ -3,8 +3,8 @@
 #include <memory>
 
 #include "Engine.h"
-#include "Model.h"
 #include "Shader.h"
+#include "function/framework/object/object.h"
 
 CubeScene::CubeScene() : Scene() {
     // 初始化立方体场景
@@ -27,7 +27,13 @@ void CubeScene::init() {
 
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-    m_lightCube = std::make_unique<Model>(lightCubePath.c_str());
+    m_lightCube = std::make_unique<Object>(lightCubePath.c_str());
+    m_lightCube->onTick = [](Object *thiz) {
+        thiz->transform()->setPosition(glm::vec3{
+            20 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
+        thiz->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
+        thiz->transform()->setScale(glm::vec3(0.04f));
+    };
     m_lightCube->setShader(m_lightShader);
 
     std::string phong_sample_path =
@@ -39,8 +45,8 @@ void CubeScene::init() {
     std::string cubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cubeWithNormal.obj");
     auto createCube =
-        [this](const std::string &path) -> std::unique_ptr<Model> {
-        auto cube = std::make_unique<Model>(path.c_str());
+        [this](const std::string &path) -> std::unique_ptr<Object> {
+        auto cube = std::make_unique<Object>(path.c_str());
         cube->setShader(m_phongSampleShader);
         cube->transform()->setScale(glm::vec3{0.48});
         return std::move(cube);
@@ -62,12 +68,7 @@ void CubeScene::update() {
     auto lightColor = glm::vec3{1.0};
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
-
-    m_lightCube->transform()->setPosition(glm::vec3{
-        2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
-    m_lightCube->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
-    m_lightCube->transform()->setScale(glm::vec3(0.04f));
-    m_lightCube->Draw();
+    m_lightCube->tick();
 
     m_phongSampleShader->use();
     m_phongSampleShader->setVec3("viewPos",
@@ -85,13 +86,13 @@ void CubeScene::update() {
     m_phongSampleShader->setVec3("material.specular", glm::vec3{0.5f});
 
     m_phongSampleShader->setFloat("material.shininess", 2);
-    m_cube->Draw();
+    m_cube->tick();
     m_phongSampleShader->setFloat("material.shininess", 8);
-    m_cube1->Draw();
+    m_cube1->tick();
     m_phongSampleShader->setFloat("material.shininess", 32);
-    m_cube2->Draw();
+    m_cube2->tick();
     m_phongSampleShader->setFloat("material.shininess", 128);
-    m_cube3->Draw();
+    m_cube3->tick();
     m_phongSampleShader->setFloat("material.shininess", 256);
-    m_cube4->Draw();
+    m_cube4->tick();
 }
