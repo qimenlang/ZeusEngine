@@ -11,6 +11,7 @@
 
 #include "Engine.h"
 #include "Shader.h"
+#include "core/event.h"
 #include "function/framework/component/mesh_component.h"
 #include "function/framework/component/transform_component.h"
 
@@ -48,7 +49,7 @@ class Object {
         for (const auto &geometry : geometrys)
             m_mesh_component->addGeometry(geometry);
     }
-    ~Object() {};
+    ~Object(){};
 
     size_t getId() const { return m_id; }
 
@@ -59,7 +60,7 @@ class Object {
 
     void tick();
 
-    std::function<void(Object *thiz)> onTick;
+    Event<void(Object *thiz)> onTick;
 
     void setShader(std::shared_ptr<Shader> shader) {
         m_shader = shader;

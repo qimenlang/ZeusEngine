@@ -29,12 +29,12 @@ void ModelScene::init() {
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
     m_lightCube = std::make_unique<Object>(lightCubePath.c_str());
-    m_lightCube->onTick = [](Object *thiz) {
+    m_lightCube->onTick.add([](Object *thiz) {
         thiz->transform()->setPosition(glm::vec3{
             2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
         thiz->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
         thiz->transform()->setScale(glm::vec3(0.04f));
-    };
+    });
 
     m_lightCube->setShader(m_lightShader);
 

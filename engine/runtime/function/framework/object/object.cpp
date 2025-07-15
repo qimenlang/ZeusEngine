@@ -11,7 +11,7 @@ void Object::tick() {
         return;
     }
 
-    if (onTick) onTick(this);
+    if (onTick) onTick.invoke(this);
 
     m_shader.lock()->use();
     m_shader.lock()->setMat4("model", m_transform->GetModelMatrix());
