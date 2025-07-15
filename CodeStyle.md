@@ -1,5 +1,12 @@
 代码风格 类Google风格
 
+clang-format配置：
+    # BasedOnStyle google
+    linux\windows都运行以下脚本生成 .clang-format
+    clang-format --style=Google --dump-config > .clang-format
+    # IndentWidth Set to 4(唯一改动)
+
+
 类名 class FileReader  
 
 类方法 processData()  非google风格
