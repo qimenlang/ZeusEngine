@@ -27,7 +27,7 @@
 #endif
 #define __gl_h_
 
-#if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) && \
+#if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__) &&           \
     !defined(__SCITECH_SNAP__)
 #define APIENTRY __stdcall
 #endif
@@ -48,8 +48,8 @@ extern "C" {
 #endif
 
 struct gladGLversionStruct {
-    int major;
-    int minor;
+  int major;
+  int minor;
 };
 
 typedef void *(*GLADloadproc)(const char *name);
@@ -86,7 +86,7 @@ GLAPI int gladLoadGL(void);
 
 GLAPI int gladLoadGLLoader(GLADloadproc);
 
-#include <KHR/khrplatform.h>
+#include <include/KHR/khrplatform.h>
 typedef unsigned int GLenum;
 typedef unsigned char GLboolean;
 typedef unsigned int GLbitfield;
@@ -2678,8 +2678,8 @@ typedef void(APIENTRYP PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC)(
     GLenum target, GLenum attachment, GLenum pname, GLint *params);
 GLAPI PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC
     glad_glGetFramebufferAttachmentParameteriv;
-#define glGetFramebufferAttachmentParameteriv \
-    glad_glGetFramebufferAttachmentParameteriv
+#define glGetFramebufferAttachmentParameteriv                                  \
+  glad_glGetFramebufferAttachmentParameteriv
 typedef void(APIENTRYP PFNGLGENERATEMIPMAPPROC)(GLenum target);
 GLAPI PFNGLGENERATEMIPMAPPROC glad_glGenerateMipmap;
 #define glGenerateMipmap glad_glGenerateMipmap
@@ -3771,15 +3771,15 @@ typedef void(APIENTRYP PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC)(
     GLsizei instancecount, GLuint baseinstance);
 GLAPI PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC
     glad_glDrawElementsInstancedBaseInstance;
-#define glDrawElementsInstancedBaseInstance \
-    glad_glDrawElementsInstancedBaseInstance
+#define glDrawElementsInstancedBaseInstance                                    \
+  glad_glDrawElementsInstancedBaseInstance
 typedef void(APIENTRYP PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC)(
     GLenum mode, GLsizei count, GLenum type, const void *indices,
     GLsizei instancecount, GLint basevertex, GLuint baseinstance);
 GLAPI PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC
     glad_glDrawElementsInstancedBaseVertexBaseInstance;
-#define glDrawElementsInstancedBaseVertexBaseInstance \
-    glad_glDrawElementsInstancedBaseVertexBaseInstance
+#define glDrawElementsInstancedBaseVertexBaseInstance                          \
+  glad_glDrawElementsInstancedBaseVertexBaseInstance
 typedef void(APIENTRYP PFNGLGETINTERNALFORMATIVPROC)(GLenum target,
                                                      GLenum internalformat,
                                                      GLenum pname,
@@ -3827,8 +3827,8 @@ typedef void(APIENTRYP PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC)(
     GLenum mode, GLuint id, GLuint stream, GLsizei instancecount);
 GLAPI PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC
     glad_glDrawTransformFeedbackStreamInstanced;
-#define glDrawTransformFeedbackStreamInstanced \
-    glad_glDrawTransformFeedbackStreamInstanced
+#define glDrawTransformFeedbackStreamInstanced                                 \
+  glad_glDrawTransformFeedbackStreamInstanced
 #endif
 #ifndef GL_VERSION_4_3
 #define GL_VERSION_4_3 1
@@ -4267,8 +4267,8 @@ typedef void(APIENTRYP PFNGLINVALIDATENAMEDFRAMEBUFFERSUBDATAPROC)(
     GLint x, GLint y, GLsizei width, GLsizei height);
 GLAPI PFNGLINVALIDATENAMEDFRAMEBUFFERSUBDATAPROC
     glad_glInvalidateNamedFramebufferSubData;
-#define glInvalidateNamedFramebufferSubData \
-    glad_glInvalidateNamedFramebufferSubData
+#define glInvalidateNamedFramebufferSubData                                    \
+  glad_glInvalidateNamedFramebufferSubData
 typedef void(APIENTRYP PFNGLCLEARNAMEDFRAMEBUFFERIVPROC)(GLuint framebuffer,
                                                          GLenum buffer,
                                                          GLint drawbuffer,
@@ -4313,8 +4313,8 @@ typedef void(APIENTRYP PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVPROC)(
     GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params);
 GLAPI PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVPROC
     glad_glGetNamedFramebufferAttachmentParameteriv;
-#define glGetNamedFramebufferAttachmentParameteriv \
-    glad_glGetNamedFramebufferAttachmentParameteriv
+#define glGetNamedFramebufferAttachmentParameteriv                             \
+  glad_glGetNamedFramebufferAttachmentParameteriv
 typedef void(APIENTRYP PFNGLCREATERENDERBUFFERSPROC)(GLsizei n,
                                                      GLuint *renderbuffers);
 GLAPI PFNGLCREATERENDERBUFFERSPROC glad_glCreateRenderbuffers;
@@ -4330,8 +4330,8 @@ typedef void(APIENTRYP PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC)(
     GLsizei height);
 GLAPI PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC
     glad_glNamedRenderbufferStorageMultisample;
-#define glNamedRenderbufferStorageMultisample \
-    glad_glNamedRenderbufferStorageMultisample
+#define glNamedRenderbufferStorageMultisample                                  \
+  glad_glNamedRenderbufferStorageMultisample
 typedef void(APIENTRYP PFNGLGETNAMEDRENDERBUFFERPARAMETERIVPROC)(
     GLuint renderbuffer, GLenum pname, GLint *params);
 GLAPI PFNGLGETNAMEDRENDERBUFFERPARAMETERIVPROC
