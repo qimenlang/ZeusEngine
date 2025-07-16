@@ -1,0 +1,6 @@
+set(TOOL_NAME tool)
+
+file(GLOB_RECURSE HEADER_FILES *.h)
+file(GLOB_RECURSE SOURCE_FILES *.cpp)
+
+add_executable(${TOOL_NAME} ${SOURCE_FILES})

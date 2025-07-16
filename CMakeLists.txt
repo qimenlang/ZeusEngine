@@ -13,3 +13,5 @@ add_subdirectory("utils")
 add_subdirectory ("engine")
 
 add_subdirectory("bestPractice")
+
+add_subdirectory("tool")
