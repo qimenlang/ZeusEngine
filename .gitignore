@@ -13,4 +13,9 @@ out/
 *.a             # 静态库
 *.so            # 动态库
 *.dll           # Windows 动态库
+# format
+.clang-format
+
 test/testGDB/testGDB
+
+
