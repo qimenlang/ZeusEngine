@@ -1,0 +1,4 @@
+set(TARGET_NAME design)
+file(GLOB_RECURSE HEADER_FILES *.h)
+file(GLOB_RECURSE SOURCE_FILES *.cpp)
+add_executable(${TARGET_NAME} ${HEADER_FILES} ${SOURCE_FILES})
