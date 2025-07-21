@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-#include "Shader.h"
+#include "function/render/Shader.h"
 
 Scene::Scene() {
     // 初始化场景

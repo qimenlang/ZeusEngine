@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-#include "Shader.h"
 #include "component.h"
+#include "function/render/Shader.h"
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -47,6 +47,7 @@ enum class PrimitiveType {
 struct Primitive {
     Geometry geometry;
     PrimitiveType type;
+
     // for submesh
     uint32_t indexOffset = 0;
     uint32_t indexCount = 0;

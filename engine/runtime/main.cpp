@@ -11,8 +11,9 @@
 #include "CubeScene.h"
 #include "Engine.h"
 #include "ModelScene.h"
-#include "Shader.h"
 #include "function/framework/object/object.h"
+#include "function/render/Shader.h"
+
 
 using namespace std;
 
