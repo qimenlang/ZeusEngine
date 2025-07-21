@@ -5,7 +5,6 @@
 
 // #include "Engine.h"
 // #include "function/framework/object/object.h"
-// #include "function/render/Shader.h"
 
 // void DepthScene::init() {
 //     std::string vs_path =

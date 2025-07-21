@@ -5,7 +5,6 @@
 
 #include "Engine.h"
 #include "function/framework/object/object.h"
-#include "function/render/Shader.h"
 
 ModelScene::ModelScene() : Scene() {
     // 初始化立方体场景

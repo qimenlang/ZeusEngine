@@ -8,8 +8,6 @@
 #include <vector>
 
 #include "function/framework/component/mesh_component.h"
-#include "function/render/Shader.h"
-
 
 struct Geometry;
 struct Texture;

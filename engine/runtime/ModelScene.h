@@ -1,7 +1,6 @@
 #pragma once
 #include "Scene.h"
 #include "function/framework/object/object.h"
-#include "function/render/Shader.h"
 
 class ModelScene : public Scene {
    private:

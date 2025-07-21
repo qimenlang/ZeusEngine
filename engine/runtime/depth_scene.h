@@ -1,6 +1,5 @@
 // #pragma once
 // #include "Scene.h"
-// #include "function/render/Shader.h"
 
 // class Object;
 
