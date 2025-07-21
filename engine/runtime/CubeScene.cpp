@@ -23,52 +23,50 @@ void CubeScene::init() {
         std::string(ZEUS_ROOT_DIR).append("/shader/default.vs");
     std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
 
-    m_lightShader = std::make_shared<Shader>(vs_path.c_str(), ls_path.c_str());
-
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-    m_lightCube = std::make_unique<Object>(lightCubePath.c_str());
+    m_lightCube = std::make_unique<Object>(lightCubePath.c_str(),
+                                           vs_path.c_str(), ls_path.c_str());
     m_lightCube->onTick.add([](Object *thiz) {
         thiz->transform()->setPosition(glm::vec3{
             20 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
         thiz->transform()->setRotation(glm::vec3(1.f, 0.0f, 0.0f), 0.f);
         thiz->transform()->setScale(glm::vec3(0.04f));
     });
-    m_lightCube->setShader(m_lightShader);
 
     std::string phong_sample_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/phongSampleColor.fs");
 
-    m_phongSampleShader =
-        std::make_shared<Shader>(vs_path.c_str(), phong_sample_path.c_str());
-
     std::string cubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cubeWithNormal.obj");
-    auto createCube =
-        [this](const std::string &path) -> std::unique_ptr<Object> {
-        auto cube = std::make_unique<Object>(path.c_str());
-        cube->setShader(m_phongSampleShader);
+    auto createCube = [&]() -> std::unique_ptr<Object> {
+        auto cube = std::make_unique<Object>(cubePath.c_str(), vs_path.c_str(),
+                                             phong_sample_path.c_str());
         cube->transform()->setScale(glm::vec3{0.48});
         return std::move(cube);
     };
 
-    m_cube = createCube(cubePath);
+    m_cube = createCube();
     m_cube->transform()->setPosition(glm::vec3{-2, 0, 0});
-    m_cube1 = createCube(cubePath);
+    m_cube1 = createCube();
     m_cube1->transform()->setPosition(glm::vec3{-1, 0, 0});
-    m_cube2 = createCube(cubePath);
+    m_cube2 = createCube();
     m_cube2->transform()->setPosition(glm::vec3{0, 0, 0});
-    m_cube3 = createCube(cubePath);
+    m_cube3 = createCube();
     m_cube3->transform()->setPosition(glm::vec3{1, 0, 0});
-    m_cube4 = createCube(cubePath);
+    m_cube4 = createCube();
     m_cube4->transform()->setPosition(glm::vec3{2, 0, 0});
 }
 
 void CubeScene::update() {
     auto lightColor = glm::vec3{1.0};
+    auto &m_lightShader = m_lightCube->mesh_component()->primitives()[0].shader;
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
     m_lightCube->tick();
+
+    auto &m_phongSampleShader =
+        m_cube->mesh_component()->primitives()[0].shader;
 
     m_phongSampleShader->use();
     m_phongSampleShader->setVec3("viewPos",

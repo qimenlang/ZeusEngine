@@ -7,10 +7,8 @@ class Object;
 class CubeScene : public Scene {
    private:
     /* data */
-    std::shared_ptr<Shader> m_lightShader;
     std::unique_ptr<Object> m_lightCube;
 
-    std::shared_ptr<Shader> m_phongSampleShader;
     std::unique_ptr<Object> m_cube;
     std::unique_ptr<Object> m_cube1;
     std::unique_ptr<Object> m_cube2;

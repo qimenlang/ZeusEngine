@@ -10,10 +10,10 @@
 #include <vector>
 
 #include "Engine.h"
-#include "function/render/Shader.h"
 #include "core/event.h"
 #include "function/framework/component/mesh_component.h"
 #include "function/framework/component/transform_component.h"
+#include "function/render/Shader.h"
 
 struct Texture;
 
@@ -31,25 +31,24 @@ class Object {
     std::weak_ptr<Shader> m_shader;
 
    public:
-    Object(const char *path) {
+    Object(const char *path, const char *vs, const char *fs) {
         m_transform = std::make_unique<TransformComponent>();
-        m_mesh_component = std::make_unique<MeshComponent>();
         m_res_path = *path;
         auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &geometry : geometrys)
-            m_mesh_component->addGeometry(geometry);
+
+        auto shader = std::make_shared<Shader>(vs, fs);
+        m_shader = shader;
+
+        PrimitiveList primitives;
+        for (const auto &geometry : geometrys) {
+            Primitive primitive{geometry, shader};
+            primitives.emplace_back(primitive);
+        }
+        m_mesh_component = std::make_unique<MeshComponent>(primitives);
     }
-    Object(char *path) {
-        m_transform = std::make_unique<TransformComponent>();
-        m_mesh_component = std::make_unique<MeshComponent>();
-        m_res_path = *path;
-        auto geometrys =
-            Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &geometry : geometrys)
-            m_mesh_component->addGeometry(geometry);
-    }
-    ~Object(){};
+
+    ~Object() {};
 
     size_t getId() const { return m_id; }
 
@@ -57,13 +56,9 @@ class Object {
     const std::string &getName() const { return m_name; }
 
     TransformComponent *transform() { return m_transform.get(); };
+    MeshComponent *mesh_component() { return m_mesh_component.get(); };
 
     void tick();
 
     Event<void(Object *thiz)> onTick;
-
-    void setShader(std::shared_ptr<Shader> shader) {
-        m_shader = shader;
-        m_mesh_component->setShader(shader);
-    }
 };

@@ -6,10 +6,8 @@
 class ModelScene : public Scene {
    private:
     /* data */
-    std::shared_ptr<Shader> m_lightShader;
     std::unique_ptr<Object> m_lightCube;
 
-    std::shared_ptr<Shader> m_phongShader;
     std::unique_ptr<Object> m_dragon;
 
    public:

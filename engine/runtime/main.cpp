@@ -14,7 +14,6 @@
 #include "function/framework/object/object.h"
 #include "function/render/Shader.h"
 
-
 using namespace std;
 
 #define PRINTAPI(x) std::cout << #x << std::endl;
