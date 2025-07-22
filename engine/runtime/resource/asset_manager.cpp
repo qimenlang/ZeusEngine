@@ -50,7 +50,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory,
 }
 
 std::vector<Geometry> AssetManager::loadModel(std::string path) {
-    std::vector<Geometry> m_primitives;
+    std::vector<Geometry> geometrys;
     Assimp::Importer importer;
 
     const aiScene *scene =
@@ -61,9 +61,9 @@ std::vector<Geometry> AssetManager::loadModel(std::string path) {
         std::cout << importer.GetErrorString() << std::endl;
     } else {
         directory = path.substr(0, path.find_last_of("/"));
-        processNode(scene->mRootNode, scene, m_primitives);
+        processNode(scene->mRootNode, scene, geometrys);
     }
-    return m_primitives;
+    return geometrys;
 }
 
 void AssetManager::processNode(aiNode *node, const aiScene *scene,
