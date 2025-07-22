@@ -23,7 +23,6 @@ void Object::removeComponent(Component* componentIn) {
 
 void Object::tick() {
     if (onTick) onTick.invoke(this);
-    m_transform->tick(0);
 
     if (m_shader.expired()) {
         std::cerr << "Object shader is expired!" << std::endl;
@@ -35,5 +34,7 @@ void Object::tick() {
         "view", Zeus::Engine::getInstance().camera().GetViewMatrix());
     m_shader.lock()->setMat4("projection", Zeus::projection);
 
-    m_mesh_component->tick(0);
+    for (auto& component : m_components) {
+        component->tick(0);
+    }
 }
