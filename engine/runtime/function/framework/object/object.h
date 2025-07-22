@@ -10,10 +10,10 @@
 #include <vector>
 
 #include "Engine.h"
-#include "Shader.h"
 #include "core/event.h"
 #include "function/framework/component/mesh_component.h"
 #include "function/framework/component/transform_component.h"
+#include "function/render/Shader.h"
 
 struct Texture;
 
@@ -25,45 +25,64 @@ class Object {
 
     std::vector<Texture> textures_loaded;
 
-    std::unique_ptr<MeshComponent> m_mesh_component;
-    std::unique_ptr<TransformComponent> m_transform;
+    TransformComponent *m_transform;
+    std::vector<std::unique_ptr<Component>> m_components;
 
     std::weak_ptr<Shader> m_shader;
 
    public:
-    Object(const char *path) {
-        m_transform = std::make_unique<TransformComponent>();
-        m_mesh_component = std::make_unique<MeshComponent>();
+    Object(const char *path, const char *vs, const char *fs) : Object() {
         m_res_path = *path;
         auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &geometry : geometrys)
-            m_mesh_component->addGeometry(geometry);
+
+        auto shader = std::make_shared<Shader>(vs, fs);
+        m_shader = shader;
+
+        PrimitiveList primitives;
+        for (const auto &geometry : geometrys) {
+            Primitive primitive{geometry, shader};
+            primitives.emplace_back(primitive);
+        }
+        auto mesh_component = std::make_unique<MeshComponent>(primitives);
+        addComponent(std::move(mesh_component));
     }
-    Object(char *path) {
-        m_transform = std::make_unique<TransformComponent>();
-        m_mesh_component = std::make_unique<MeshComponent>();
-        m_res_path = *path;
-        auto geometrys =
-            Zeus::Engine::getInstance().assetManager().loadModel(path);
-        for (const auto &geometry : geometrys)
-            m_mesh_component->addGeometry(geometry);
+
+    Object() {
+        auto transform = std::make_unique<TransformComponent>();
+        m_transform = transform.get();
+        addComponent(std::move(transform));
     }
-    ~Object(){};
+    ~Object() = default;
 
     size_t getId() const { return m_id; }
 
     void setName(std::string name) { m_name = name; }
     const std::string &getName() const { return m_name; }
 
-    TransformComponent *transform() { return m_transform.get(); };
+    TransformComponent *transform() { return m_transform; };
+
+    Component *addComponent(std::unique_ptr<Component> &&component);
+    void removeComponent(Component *);
+
+    template <typename T>
+    T *getComponent() {
+        for (auto &component : m_components) {
+            if (dynamic_cast<T *>(component.get()))
+                return dynamic_cast<T *>(component.get());
+        }
+        return nullptr;
+    };
+
+    std::vector<Component *> getAllComponents() {
+        std::vector<Component *> results;
+        for (auto &comp : m_components) {
+            results.push_back(comp.get());
+        }
+        return results;
+    }
 
     void tick();
 
     Event<void(Object *thiz)> onTick;
-
-    void setShader(std::shared_ptr<Shader> shader) {
-        m_shader = shader;
-        m_mesh_component->setShader(shader);
-    }
 };

@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 
-#include "Shader.h"
 #include "function/framework/component/mesh_component.h"
 
 struct Geometry;

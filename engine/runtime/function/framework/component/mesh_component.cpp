@@ -1,6 +1,7 @@
 #include "mesh_component.h"
 
-void Primitive::setup() {
+Primitive::Primitive(const Geometry &geometry, std::shared_ptr<Shader> shader)
+    : geometry(geometry), shader(shader) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -46,7 +47,7 @@ void Primitive::setup() {
     glBindVertexArray(0);
 }
 
-void Primitive::Draw(unsigned int shaderID) {
+void Primitive::Draw() {
     // bind appropriate textures
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
@@ -69,7 +70,8 @@ void Primitive::Draw(unsigned int shaderID) {
             number = std::to_string(heightNr++);
 
         // now set the sampler to the correct texture unit
-        glUniform1i(glGetUniformLocation(shaderID, (name + number).c_str()), i);
+        glUniform1i(glGetUniformLocation(shader->ID, (name + number).c_str()),
+                    i);
 
         // std::cout << "Draw texture id:" << shader.ID
         //           << ",name: " << (name + number).c_str() << ",index:" << i
@@ -89,19 +91,12 @@ void Primitive::Draw(unsigned int shaderID) {
     glActiveTexture(GL_TEXTURE0);
 }
 
-void MeshComponent::addGeometry(const Geometry &geometry) {
-    Primitive primitive{geometry};
-    primitive.setup();
-    m_primitives.push_back(primitive);
-}
-
-void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
-    Component::postLoadResource(parent_object);
-}
+// void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
+//     Component::postLoadResource(parent_object);
+// }
 
 void MeshComponent::tick(float delta_time) {
-    if (m_shader.expired()) return;
     for (auto &sub_mesh : m_primitives) {
-        sub_mesh.Draw(m_shader.lock()->ID);
+        sub_mesh.Draw();
     }
 }

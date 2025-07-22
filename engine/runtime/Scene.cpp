@@ -1,7 +1,5 @@
 #include "Scene.h"
 
-#include "Shader.h"
-
 Scene::Scene() {
     // 初始化场景
 }

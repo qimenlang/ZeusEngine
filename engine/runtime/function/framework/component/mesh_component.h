@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-#include "Shader.h"
 #include "component.h"
+#include "function/render/Shader.h"
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -46,28 +46,34 @@ enum class PrimitiveType {
 
 struct Primitive {
     Geometry geometry;
+    // todo:material instance
+    std::shared_ptr<Shader> shader;
     PrimitiveType type;
+
     // for submesh
     uint32_t indexOffset = 0;
     uint32_t indexCount = 0;
 
     unsigned int VAO, VBO, EBO;
-    void setup();
-    void Draw(unsigned int shaderID);
+    Primitive(const Geometry& geometry, std::shared_ptr<Shader> shader);
+    void Draw();
 };
+
+using PrimitiveList = std::vector<Primitive>;
 
 class MeshComponent : public Component {
    public:
-    MeshComponent() {};
-    ~MeshComponent() {};
+    MeshComponent(const PrimitiveList& primitives)
+        : m_primitives(primitives) {};
+    MeshComponent() = default;
+    ~MeshComponent() = default;
 
-    virtual void postLoadResource(std::weak_ptr<Object> parent_object) override;
+    // virtual void postLoadResource(std::weak_ptr<Object> parent_object)
+    // override;
     void tick(float delta_time) override;
-    void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
-    void addGeometry(const Geometry& geometry);
+
+    PrimitiveList& primitives() { return m_primitives; };
 
    private:
-    std::vector<Primitive> m_primitives;
-    void setup();
-    std::weak_ptr<Shader> m_shader;
+    PrimitiveList m_primitives;
 };
