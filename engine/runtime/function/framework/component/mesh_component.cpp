@@ -91,9 +91,9 @@ void Primitive::Draw() {
     glActiveTexture(GL_TEXTURE0);
 }
 
-void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
-    Component::postLoadResource(parent_object);
-}
+// void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
+//     Component::postLoadResource(parent_object);
+// }
 
 void MeshComponent::tick(float delta_time) {
     for (auto &sub_mesh : m_primitives) {

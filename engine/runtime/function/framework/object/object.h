@@ -25,14 +25,13 @@ class Object {
 
     std::vector<Texture> textures_loaded;
 
-    std::unique_ptr<MeshComponent> m_mesh_component;
-    std::unique_ptr<TransformComponent> m_transform;
+    TransformComponent *m_transform;
+    std::vector<std::unique_ptr<Component>> m_components;
 
     std::weak_ptr<Shader> m_shader;
 
    public:
-    Object(const char *path, const char *vs, const char *fs) {
-        m_transform = std::make_unique<TransformComponent>();
+    Object(const char *path, const char *vs, const char *fs) : Object() {
         m_res_path = *path;
         auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
@@ -45,18 +44,43 @@ class Object {
             Primitive primitive{geometry, shader};
             primitives.emplace_back(primitive);
         }
-        m_mesh_component = std::make_unique<MeshComponent>(primitives);
+        auto mesh_component = std::make_unique<MeshComponent>(primitives);
+        addComponent(std::move(mesh_component));
     }
 
-    ~Object() {};
+    Object() {
+        auto transform = std::make_unique<TransformComponent>();
+        m_transform = transform.get();
+        addComponent(std::move(transform));
+    }
+    ~Object() = default;
 
     size_t getId() const { return m_id; }
 
     void setName(std::string name) { m_name = name; }
     const std::string &getName() const { return m_name; }
 
-    TransformComponent *transform() { return m_transform.get(); };
-    MeshComponent *mesh_component() { return m_mesh_component.get(); };
+    TransformComponent *transform() { return m_transform; };
+
+    Component *addComponent(std::unique_ptr<Component> &&component);
+    void removeComponent(Component *);
+
+    template <typename T>
+    T *getComponent() {
+        for (auto &component : m_components) {
+            if (dynamic_cast<T *>(component.get()))
+                return dynamic_cast<T *>(component.get());
+        }
+        return nullptr;
+    };
+
+    std::vector<Component *> getAllComponents() {
+        std::vector<Component *> results;
+        for (auto &comp : m_components) {
+            results.push_back(comp.get());
+        }
+        return results;
+    }
 
     void tick();
 

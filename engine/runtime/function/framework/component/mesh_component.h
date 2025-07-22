@@ -65,8 +65,11 @@ class MeshComponent : public Component {
    public:
     MeshComponent(const PrimitiveList& primitives)
         : m_primitives(primitives) {};
+    MeshComponent() = default;
+    ~MeshComponent() = default;
 
-    virtual void postLoadResource(std::weak_ptr<Object> parent_object) override;
+    // virtual void postLoadResource(std::weak_ptr<Object> parent_object)
+    // override;
     void tick(float delta_time) override;
 
     PrimitiveList& primitives() { return m_primitives; };
