@@ -8,10 +8,11 @@
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
-#include "CubeScene.h"
 #include "Engine.h"
-#include "ModelScene.h"
 #include "function/framework/object/object.h"
+#include "samples/CubeScene.h"
+#include "samples/ModelScene.h"
+#include "samples/depth_scene.h"
 
 using namespace std;
 
@@ -122,10 +123,12 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    CubeScene cubeScene;
-    cubeScene.init();
+    // CubeScene cubeScene;
+    // cubeScene.init();
     // ModelScene modelScene;
     // modelScene.init();
+    DepthScene depthScene;
+    depthScene.init();
 
     glEnable(GL_DEPTH_TEST);
     // render loop
@@ -138,8 +141,9 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        cubeScene.update();
+        // cubeScene.update();
         // modelScene.update();
+        depthScene.update();
 
         // check poll events & swap buffer
         glfwPollEvents();
