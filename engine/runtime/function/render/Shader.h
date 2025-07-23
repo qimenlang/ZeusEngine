@@ -8,7 +8,6 @@
 #include <sstream>
 #include <string>
 
-
 class Shader {
    public:
     // the program ID

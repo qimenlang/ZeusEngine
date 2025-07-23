@@ -122,10 +122,10 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // CubeScene cubeScene;
-    // cubeScene.init();
-    ModelScene modelScene;
-    modelScene.init();
+    CubeScene cubeScene;
+    cubeScene.init();
+    // ModelScene modelScene;
+    // modelScene.init();
 
     glEnable(GL_DEPTH_TEST);
     // render loop
@@ -138,8 +138,8 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // cubeScene.update();
-        modelScene.update();
+        cubeScene.update();
+        // modelScene.update();
 
         // check poll events & swap buffer
         glfwPollEvents();

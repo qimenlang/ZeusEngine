@@ -4,6 +4,7 @@
 
 #include "Engine.h"
 #include "function/framework/object/object.h"
+#include "function/render/material.h"
 
 CubeScene::CubeScene() : Scene() {
     // 初始化立方体场景
@@ -22,10 +23,11 @@ void CubeScene::init() {
         std::string(ZEUS_ROOT_DIR).append("/shader/default.vs");
     std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
 
+    auto light_mat = Material::create(vs_path.c_str(), ls_path.c_str());
+
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-    m_lightCube = std::make_unique<Object>(lightCubePath.c_str(),
-                                           vs_path.c_str(), ls_path.c_str());
+    m_lightCube = std::make_unique<Object>(lightCubePath.c_str(), light_mat);
     m_lightCube->onTick.add([](Object *thiz) {
         thiz->transform()->setPosition(glm::vec3{
             20 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
@@ -38,9 +40,11 @@ void CubeScene::init() {
 
     std::string cubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cubeWithNormal.obj");
+    auto cube_mat =
+        Material::create(vs_path.c_str(), phong_sample_path.c_str());
+
     auto createCube = [&]() -> std::unique_ptr<Object> {
-        auto cube = std::make_unique<Object>(cubePath.c_str(), vs_path.c_str(),
-                                             phong_sample_path.c_str());
+        auto cube = std::make_unique<Object>(cubePath.c_str(), cube_mat);
         cube->transform()->setScale(glm::vec3{0.48});
         return std::move(cube);
     };
@@ -60,13 +64,13 @@ void CubeScene::init() {
 void CubeScene::update() {
     auto lightColor = glm::vec3{1.0};
     auto &m_lightShader =
-        m_lightCube->getComponent<MeshComponent>()->primitives()[0].shader;
+        m_lightCube->getComponent<MeshComponent>()->primitives()[0].material;
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
     m_lightCube->tick();
 
     auto &m_phongSampleShader =
-        m_cube->getComponent<MeshComponent>()->primitives()[0].shader;
+        m_cube->getComponent<MeshComponent>()->primitives()[0].material;
 
     m_phongSampleShader->use();
     m_phongSampleShader->setVec3("viewPos",

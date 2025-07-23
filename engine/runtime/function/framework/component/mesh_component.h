@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "component.h"
-#include "function/render/Shader.h"
+#include "function/render/material.h"
 
 #define MAX_BONE_INFLUENCE 4
 
@@ -32,6 +32,7 @@ struct Geometry {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
+    // material index
 };
 
 enum class PrimitiveType {
@@ -47,7 +48,7 @@ enum class PrimitiveType {
 struct Primitive {
     Geometry geometry;
     // todo:material instance
-    std::shared_ptr<Shader> shader;
+    std::shared_ptr<materialInstance> material;
     PrimitiveType type;
 
     // for submesh
@@ -55,7 +56,8 @@ struct Primitive {
     uint32_t indexCount = 0;
 
     unsigned int VAO, VBO, EBO;
-    Primitive(const Geometry& geometry, std::shared_ptr<Shader> shader);
+    Primitive(const Geometry& geometry,
+              std::shared_ptr<materialInstance> material);
     void Draw();
 };
 

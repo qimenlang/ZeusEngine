@@ -22,11 +22,11 @@ void ModelScene::init() {
     std::string vs_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/default.vs");
     std::string ls_path = std::string(ZEUS_ROOT_DIR).append("/shader/light.fs");
+    auto light_mat = Material::create(vs_path.c_str(), ls_path.c_str());
 
     std::string lightCubePath =
         std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
-    m_lightCube = std::make_unique<Object>(lightCubePath.c_str(),
-                                           vs_path.c_str(), ls_path.c_str());
+    m_lightCube = std::make_unique<Object>(lightCubePath.c_str(), light_mat);
     m_lightCube->onTick.add([](Object *thiz) {
         thiz->transform()->setPosition(glm::vec3{
             2 * sin(Zeus::Engine::getInstance().currentTime()), 0.0, 2.0});
@@ -38,22 +38,23 @@ void ModelScene::init() {
         std::string(ZEUS_ROOT_DIR).append("/shader/phong.fs");
     std::string DragonPath =
         std::string(ZEUS_ROOT_DIR).append("/model/dragon/Dragon 2.5_fbx.fbx");
-    m_dragon = std::make_unique<Object>(DragonPath.c_str(), vs_path.c_str(),
-                                        phong_path.c_str());
+    auto dragon_mat = Material::create(vs_path.c_str(), phong_path.c_str());
+
+    m_dragon = std::make_unique<Object>(DragonPath.c_str(), dragon_mat);
     std::cout << "Object Load :" << DragonPath << std::endl;
 }
 
 void ModelScene::update() {
     auto lightColor = glm::vec3{1.0};
     auto &lightShader =
-        m_lightCube->getComponent<MeshComponent>()->primitives()[0].shader;
+        m_lightCube->getComponent<MeshComponent>()->primitives()[0].material;
     lightShader->use();
     lightShader->setVec3("lightColor", lightColor);
     m_lightCube->tick();
 
     // be sure to activate the m_phongShader
     auto &m_phongShader =
-        m_dragon->getComponent<MeshComponent>()->primitives()[0].shader;
+        m_dragon->getComponent<MeshComponent>()->primitives()[0].material;
     m_phongShader->use();
     m_phongShader->setVec3("viewPos",
                            Zeus::Engine::getInstance().camera().Position);

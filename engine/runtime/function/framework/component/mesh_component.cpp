@@ -1,7 +1,8 @@
 #include "mesh_component.h"
 
-Primitive::Primitive(const Geometry &geometry, std::shared_ptr<Shader> shader)
-    : geometry(geometry), shader(shader) {
+Primitive::Primitive(const Geometry &geometry,
+                     std::shared_ptr<materialInstance> material)
+    : geometry(geometry), material(material) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -70,8 +71,9 @@ void Primitive::Draw() {
             number = std::to_string(heightNr++);
 
         // now set the sampler to the correct texture unit
-        glUniform1i(glGetUniformLocation(shader->ID, (name + number).c_str()),
-                    i);
+        glUniform1i(
+            glGetUniformLocation(material->shaderID(), (name + number).c_str()),
+            i);
 
         // std::cout << "Draw texture id:" << shader.ID
         //           << ",name: " << (name + number).c_str() << ",index:" << i

@@ -13,7 +13,7 @@
 #include "core/event.h"
 #include "function/framework/component/mesh_component.h"
 #include "function/framework/component/transform_component.h"
-#include "function/render/Shader.h"
+#include "function/render/material.h"
 
 struct Texture;
 
@@ -28,20 +28,19 @@ class Object {
     TransformComponent *m_transform;
     std::vector<std::unique_ptr<Component>> m_components;
 
-    std::weak_ptr<Shader> m_shader;
+    std::shared_ptr<Material> m_material;
 
    public:
-    Object(const char *path, const char *vs, const char *fs) : Object() {
+    Object(const char *path, std::shared_ptr<Material> mat) : Object() {
         m_res_path = *path;
         auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
 
-        auto shader = std::make_shared<Shader>(vs, fs);
-        m_shader = shader;
+        m_material = mat;
 
         PrimitiveList primitives;
         for (const auto &geometry : geometrys) {
-            Primitive primitive{geometry, shader};
+            Primitive primitive{geometry, mat->defaultInstance()->duplicate()};
             primitives.emplace_back(primitive);
         }
         auto mesh_component = std::make_unique<MeshComponent>(primitives);
