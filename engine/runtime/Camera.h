@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -40,6 +39,8 @@ class Camera {
     // constructor with scalar values
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ,
            float yaw, float pitch);
+
+    void setWorldPosition(glm::vec3 worldPos) { Position = worldPos; };
     // returns the view matrix calculated using Euler Angles and the LookAt
     // Matrix
     glm::mat4 GetViewMatrix() {

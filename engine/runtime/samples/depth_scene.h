@@ -8,6 +8,7 @@ class DepthScene : public Scene {
     /* data */
     std::unique_ptr<Object> m_cube1;
     std::unique_ptr<Object> m_cube2;
+    std::unique_ptr<Object> m_cube3;
     std::unique_ptr<Object> m_floor;
 
    public:

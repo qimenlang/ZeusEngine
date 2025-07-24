@@ -22,7 +22,7 @@ enum class PrimitiveType {
 struct Primitive {
     Geometry geometry;
     // todo:material instance
-    std::shared_ptr<materialInstance> material;
+    std::shared_ptr<materialInstance> matInstance;
     PrimitiveType type;
 
     // for submesh

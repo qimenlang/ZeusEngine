@@ -130,7 +130,9 @@ int main() {
     DepthScene depthScene;
     depthScene.init();
 
+    // 深度测试
     glEnable(GL_DEPTH_TEST);
+
     // render loop
     while (!glfwWindowShouldClose(window)) {
         // logic

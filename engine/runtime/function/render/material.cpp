@@ -1,5 +1,9 @@
 #include "material.h"
 
+#include "include/glad/glad.h"
+
+// glad.h must before glfw3.h
+#include <GLFW/glfw3.h>
 std::shared_ptr<Material> Material::create(const char *vertexPath,
                                            const char *fragmentPath) {
     // 不能使用make_shared, make_shared不能访问private 构造函数
@@ -41,3 +45,11 @@ void materialInstance::setMat4(const std::string &name, glm::mat4 mat) {
 void materialInstance::setVec3(const std::string &name, glm::vec3 vec) {
     m_material->m_shader->setVec3(name, vec);
 }
+
+void materialInstance::setDepthTest(bool enable) { m_depthTest = enable; }
+
+bool materialInstance::depthTest() const { return m_depthTest; }
+
+void materialInstance::setDepthWirte(bool enable) { m_depthWirte = enable; }
+
+bool materialInstance::depthWrite() const { return m_depthWirte; }

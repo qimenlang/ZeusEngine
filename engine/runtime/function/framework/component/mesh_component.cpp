@@ -2,7 +2,7 @@
 
 Primitive::Primitive(const Geometry &geometry,
                      std::shared_ptr<materialInstance> material)
-    : geometry(geometry), material(material) {
+    : geometry(geometry), matInstance(material) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -49,6 +49,13 @@ Primitive::Primitive(const Geometry &geometry,
 }
 
 void Primitive::Draw() {
+    {
+        matInstance->depthTest() ? glEnable(GL_DEPTH_TEST)
+                                 : glDisable(GL_DEPTH_TEST);
+        matInstance->depthWrite() ? glDepthMask(GL_TRUE)
+                                  : glDepthMask(GL_FALSE);
+    }
+
     // bind appropriate textures
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
@@ -71,9 +78,9 @@ void Primitive::Draw() {
             number = std::to_string(heightNr++);
 
         // now set the sampler to the correct texture unit
-        glUniform1i(
-            glGetUniformLocation(material->shaderID(), (name + number).c_str()),
-            i);
+        glUniform1i(glGetUniformLocation(matInstance->shaderID(),
+                                         (name + number).c_str()),
+                    i);
 
         // std::cout << "Draw texture id:" << shader.ID
         //           << ",name: " << (name + number).c_str() << ",index:" << i

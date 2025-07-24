@@ -29,6 +29,9 @@ class materialInstance {
     friend class Material;
     materialInstance(Material *mat) { m_material = mat; }
 
+    bool m_depthTest = true;
+    bool m_depthWirte = true;
+
    public:
     std::shared_ptr<materialInstance> duplicate();
 
@@ -44,4 +47,9 @@ class materialInstance {
     void setFloat(const std::string &name, float value);
     void setMat4(const std::string &name, glm::mat4 mat);
     void setVec3(const std::string &name, glm::vec3 vec);
+
+    void setDepthTest(bool enable);
+    bool depthTest() const;
+    void setDepthWirte(bool enable);
+    bool depthWrite() const;
 };

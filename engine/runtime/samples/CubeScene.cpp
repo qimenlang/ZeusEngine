@@ -64,13 +64,13 @@ void CubeScene::init() {
 void CubeScene::update() {
     auto lightColor = glm::vec3{1.0};
     auto &m_lightShader =
-        m_lightCube->getComponent<MeshComponent>()->primitives()[0].material;
+        m_lightCube->getComponent<MeshComponent>()->primitives()[0].matInstance;
     m_lightShader->use();
     m_lightShader->setVec3("lightColor", lightColor);
     m_lightCube->tick();
 
     auto &m_phongSampleShader =
-        m_cube->getComponent<MeshComponent>()->primitives()[0].material;
+        m_cube->getComponent<MeshComponent>()->primitives()[0].matInstance;
 
     m_phongSampleShader->use();
     m_phongSampleShader->setVec3("viewPos",

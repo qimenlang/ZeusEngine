@@ -47,14 +47,14 @@ void ModelScene::init() {
 void ModelScene::update() {
     auto lightColor = glm::vec3{1.0};
     auto &lightShader =
-        m_lightCube->getComponent<MeshComponent>()->primitives()[0].material;
+        m_lightCube->getComponent<MeshComponent>()->primitives()[0].matInstance;
     lightShader->use();
     lightShader->setVec3("lightColor", lightColor);
     m_lightCube->tick();
 
     // be sure to activate the m_phongShader
     auto &m_phongShader =
-        m_dragon->getComponent<MeshComponent>()->primitives()[0].material;
+        m_dragon->getComponent<MeshComponent>()->primitives()[0].matInstance;
     m_phongShader->use();
     m_phongShader->setVec3("viewPos",
                            Zeus::Engine::getInstance().camera().Position);
