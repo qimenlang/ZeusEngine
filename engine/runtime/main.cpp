@@ -13,6 +13,7 @@
 #include "samples/CubeScene.h"
 #include "samples/ModelScene.h"
 #include "samples/depth_scene.h"
+#include "samples/stencil_scene.h"
 
 using namespace std;
 
@@ -127,8 +128,10 @@ int main() {
     // cubeScene.init();
     // ModelScene modelScene;
     // modelScene.init();
-    DepthScene depthScene;
-    depthScene.init();
+    // DepthScene depthScene;
+    // depthScene.init();
+    StencilScene stencilScene;
+    stencilScene.init();
 
     // 深度测试
     glEnable(GL_DEPTH_TEST);
@@ -141,11 +144,13 @@ int main() {
         processInput(window);
         // rendering
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
+                GL_STENCIL_BUFFER_BIT);
 
         // cubeScene.update();
         // modelScene.update();
-        depthScene.update();
+        // depthScene.update();
+        stencilScene.update();
 
         // check poll events & swap buffer
         glfwPollEvents();
