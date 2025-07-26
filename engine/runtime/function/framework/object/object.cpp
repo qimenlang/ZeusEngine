@@ -1,10 +1,10 @@
-﻿#include "function/framework/object/object.h"
+﻿#include "function/framework/object/Object.h"
 
 #include <memory>
 
 #include "Engine.h"
-#include "object.h"
-#include "resource/asset_manager.h"
+#include "Object.h"
+#include "resource/AssetManager.h"
 
 Component* Object::addComponent(std::unique_ptr<Component>&& component) {
     auto ptr = component.get();

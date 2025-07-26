@@ -1,24 +1,26 @@
-#include "mesh_component.h"
+#include "MeshComponent.h"
 
 Primitive::Primitive(const Geometry &geometry,
-                     std::shared_ptr<materialInstance> material)
+                     std::shared_ptr<MaterialInstance> material)
     : geometry(geometry), matInstance(material) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
     auto &vertices = geometry.vertices;
-    auto &indices = geometry.indices;
-
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                  &vertices[0], GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
-                 &indices[0], GL_STATIC_DRAW);
+    auto &indices = geometry.indices;
+    if (indices.size()) {
+        glGenBuffers(1, &EBO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                     indices.size() * sizeof(unsigned int), &indices[0],
+                     GL_STATIC_DRAW);
+    }
 
     // 顶点位置
     glEnableVertexAttribArray(0);
@@ -92,18 +94,19 @@ void Primitive::Draw() {
                                          (name + number).c_str()),
                     i);
 
-        // std::cout << "Draw texture id:" << shader.ID
-        //           << ",name: " << (name + number).c_str() << ",index:" << i
-        //           << "texturesId:" << textures[i].id << std::endl;
-        // and finally bind the texture
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
-    auto indices = geometry.indices;
 
     // draw mesh
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()),
-                   GL_UNSIGNED_INT, 0);
+    auto indices = geometry.indices;
+    if (indices.size())
+        glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()),
+                       GL_UNSIGNED_INT, 0);
+    else
+        glDrawArrays(GL_TRIANGLES, 0,
+                     static_cast<unsigned int>(geometry.vertices.size()));
+
     glBindVertexArray(0);
 
     // always good practice to set everything back to defaults once configured.

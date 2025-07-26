@@ -3,14 +3,14 @@
 
 #include "Shader.h"
 
-class materialInstance;
+class MaterialInstance;
 class Material {
    public:
-    friend class materialInstance;
+    friend class MaterialInstance;
     static std::shared_ptr<Material> create(const char *vertexPath,
                                             const char *fragmentPath);
     void use() { m_shader->use(); }
-    std::shared_ptr<materialInstance> defaultInstance();
+    std::shared_ptr<MaterialInstance> defaultInstance();
 
     unsigned int shaderID() { return m_shader->ID; }
 
@@ -19,21 +19,21 @@ class Material {
    private:
     Material(const char *vertexPath, const char *fragmentPath);
     std::unique_ptr<Shader> m_shader;
-    std::shared_ptr<materialInstance> m_defaultInstance;
+    std::shared_ptr<MaterialInstance> m_defaultInstance;
 };
 
-class materialInstance {
+class MaterialInstance {
    private:
     Material *m_material;
 
     friend class Material;
-    materialInstance(Material *mat) { m_material = mat; }
+    MaterialInstance(Material *mat) { m_material = mat; }
 
     bool m_depthTest = true;
     bool m_depthWirte = true;
 
    public:
-    std::shared_ptr<materialInstance> duplicate();
+    std::shared_ptr<MaterialInstance> duplicate();
 
     unsigned int shaderID() { return m_material->shaderID(); }
 

@@ -9,11 +9,12 @@
 #include <iostream>
 
 #include "Engine.h"
-#include "function/framework/object/object.h"
+#include "function/framework/object/Object.h"
+#include "samples/BlendScene.h"
 #include "samples/CubeScene.h"
+#include "samples/DepthScene.h"
 #include "samples/ModelScene.h"
-#include "samples/depth_scene.h"
-#include "samples/stencil_scene.h"
+#include "samples/StencilScene.h"
 
 using namespace std;
 
@@ -126,12 +127,14 @@ int main() {
 
     // CubeScene cubeScene;
     // cubeScene.init();
-    // ModelScene modelScene;
-    // modelScene.init();
+    ModelScene modelScene;
+    modelScene.init();
     // DepthScene depthScene;
     // depthScene.init();
-    StencilScene stencilScene;
-    stencilScene.init();
+    // StencilScene stencilScene;
+    // stencilScene.init();
+    BlendScene blendScene;
+    blendScene.init();
 
     // 深度测试
     glEnable(GL_DEPTH_TEST);
@@ -150,7 +153,8 @@ int main() {
         // cubeScene.update();
         // modelScene.update();
         // depthScene.update();
-        stencilScene.update();
+        // stencilScene.update();
+        blendScene.update();
 
         // check poll events & swap buffer
         glfwPollEvents();

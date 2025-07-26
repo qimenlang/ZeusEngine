@@ -7,13 +7,10 @@
 #include <string>
 #include <vector>
 
-#include "function/framework/component/mesh_component.h"
+#include "function/framework/component/MeshComponent.h"
 
 struct Geometry;
 struct Texture;
-
-unsigned int TextureFromFile(const char *path, const std::string &directory,
-                             bool gamma = false);
 
 class AssetManager {
    public:

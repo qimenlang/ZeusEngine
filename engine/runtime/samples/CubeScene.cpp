@@ -3,8 +3,8 @@
 #include <memory>
 
 #include "Engine.h"
-#include "function/framework/object/object.h"
-#include "function/render/material.h"
+#include "function/framework/object/Object.h"
+#include "function/render/Material.h"
 
 CubeScene::CubeScene() : Scene() {
     // 初始化立方体场景

@@ -1,5 +1,5 @@
-#include <function/framework/component/mesh_component.h>
-#include <function/framework/component/transform_component.h>
+#include <function/framework/component/MeshComponent.h>
+#include <function/framework/component/TransformComponent.h>
 #include <function/framework/object/object.h>
 
 #include <catch2/catch_test_macros.hpp>

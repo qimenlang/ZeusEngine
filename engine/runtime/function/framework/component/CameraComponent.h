@@ -1,5 +1,5 @@
 #pragma once
-#include "component.h"
+#include "Component.h"
 
 class CameraComponent : public Component {
    public:

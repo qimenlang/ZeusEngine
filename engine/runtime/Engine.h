@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "Camera.h"
-#include "resource/asset_manager.h"
+#include "resource/AssetManager.h"
 
 namespace Zeus {
 // settings

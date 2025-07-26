@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+#include "resource/textures/Texture.h"
+
+
 #define MAX_BONE_INFLUENCE 4
 
 struct Vertex {
@@ -15,12 +18,6 @@ struct Vertex {
     glm::vec3 Bitangent;
     int m_BoneIDs[MAX_BONE_INFLUENCE];
     float m_Weights[MAX_BONE_INFLUENCE];
-};
-
-struct Texture {
-    unsigned int id;
-    std::string type;
-    std::string path;
 };
 
 struct Geometry {

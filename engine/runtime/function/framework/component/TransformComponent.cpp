@@ -1,4 +1,4 @@
-#include "transform_component.h"
+#include "TransformComponent.h"
 
 void TransformComponent::tick(float delta_time) {}
 

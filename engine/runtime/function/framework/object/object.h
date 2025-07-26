@@ -11,9 +11,9 @@
 
 #include "Engine.h"
 #include "core/event.h"
-#include "function/framework/component/mesh_component.h"
-#include "function/framework/component/transform_component.h"
-#include "function/render/material.h"
+#include "function/framework/component/MeshComponent.h"
+#include "function/framework/component/TransformComponent.h"
+#include "function/render/Material.h"
 
 struct Texture;
 
@@ -28,15 +28,14 @@ class Object {
     TransformComponent *m_transform;
     std::vector<std::unique_ptr<Component>> m_components;
 
+    // TODO：不应该在object中保存，移到渲染模块
     std::shared_ptr<Material> m_material;
 
    public:
-    Object(const char *path, std::shared_ptr<Material> mat) : Object() {
+    Object(const char *path, std::shared_ptr<Material> mat) : Object(mat) {
         m_res_path = *path;
         auto geometrys =
             Zeus::Engine::getInstance().assetManager().loadModel(path);
-
-        m_material = mat;
 
         PrimitiveList primitives;
         for (const auto &geometry : geometrys) {
@@ -47,7 +46,7 @@ class Object {
         addComponent(std::move(mesh_component));
     }
 
-    Object() {
+    Object(std::shared_ptr<Material> mat = nullptr) : m_material(mat) {
         auto transform = std::make_unique<TransformComponent>();
         m_transform = transform.get();
         addComponent(std::move(transform));
@@ -60,6 +59,8 @@ class Object {
     const std::string &getName() const { return m_name; }
 
     TransformComponent *transform() { return m_transform; };
+
+    // todo:增加通用AddComponet方法
 
     Component *addComponent(std::unique_ptr<Component> &&component);
     void removeComponent(Component *);
