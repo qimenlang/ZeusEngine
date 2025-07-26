@@ -127,8 +127,8 @@ int main() {
 
     // CubeScene cubeScene;
     // cubeScene.init();
-    ModelScene modelScene;
-    modelScene.init();
+    // ModelScene modelScene;
+    // modelScene.init();
     // DepthScene depthScene;
     // depthScene.init();
     // StencilScene stencilScene;

@@ -4,10 +4,8 @@
 
 #include <iostream>
 
-#include "resource/textures/Texture.h"
-
 #include "function/framework/component/MeshComponent.h"
-
+#include "resource/textures/Texture.h"
 
 std::vector<Geometry> AssetManager::loadModel(std::string path) {
     std::vector<Geometry> geometrys;
@@ -124,7 +122,8 @@ std::vector<Texture> AssetManager::loadMaterialTextures(aiMaterial *mat,
 
         if (!skip) {
             Texture texture;
-            texture.id = TextureFromFile(relativePath.c_str(), directory);
+            std::string filename = directory + '/' + relativePath;
+            texture.id = TextureFromFile(filename);
             texture.type = typeName;
             // 材质路径是相对于模型文件的本地路径
             texture.path = relativePath.c_str();

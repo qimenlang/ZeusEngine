@@ -7,8 +7,9 @@
 
 #include "resource/textures/Texture.h"
 
-
 #define MAX_BONE_INFLUENCE 4
+
+struct GeometryDescriptor {};
 
 struct Vertex {
     glm::vec3 Position;
@@ -23,6 +24,7 @@ struct Vertex {
 struct Geometry {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
+
+    // TODO : 需要放在材质里，assimp加载模型时，创建材质
     std::vector<Texture> textures;
-    // material index
 };

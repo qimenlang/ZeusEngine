@@ -7,6 +7,7 @@ class BlendScene : public Scene {
    private:
     /* data */
     std::unique_ptr<Object> m_cube1;
+    std::unique_ptr<Object> m_grass;
     std::unique_ptr<Object> m_floor;
 
    public:
