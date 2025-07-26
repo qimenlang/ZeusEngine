@@ -1,7 +1,7 @@
 #include "mesh_component.h"
 
 Primitive::Primitive(const Geometry &geometry,
-                     std::shared_ptr<materialInstance> material)
+                     std::shared_ptr<MaterialInstance> material)
     : geometry(geometry), matInstance(material) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -48,6 +48,29 @@ Primitive::Primitive(const Geometry &geometry,
     glBindVertexArray(0);
 }
 
+void Primitive::updateStencilState(StencilState stencilState) {
+    return;
+    if (stencilState.stencilFail == StencilOperation::KEEP &&
+        stencilState.depthFail == StencilOperation::KEEP &&
+        stencilState.stencilDepthSucc == StencilOperation::KEEP) {
+        glDisable(GL_STENCIL_TEST);
+    } else {
+        glEnable(GL_STENCIL_TEST);
+    }
+
+    glStencilFunc(static_cast<GLenum>(stencilState.compareFunc),
+                  stencilState.ref, stencilState.readMask);
+
+    if (stencilState.stencilWrite) {
+        glStencilMask(stencilState.writeMask);
+        glStencilOp(static_cast<GLenum>(stencilState.stencilFail),
+                    static_cast<GLenum>(stencilState.depthFail),
+                    static_cast<GLenum>(stencilState.stencilDepthSucc));
+    } else {
+        glStencilMask(0x00);
+    }
+}
+
 void Primitive::Draw() {
     {
         /*
@@ -64,6 +87,8 @@ void Primitive::Draw() {
         // opengl 开关深度写入接口,名字是mask，但功能仅仅是开关
         matInstance->depthWrite() ? glDepthMask(GL_TRUE)
                                   : glDepthMask(GL_FALSE);
+
+        updateStencilState(matInstance->getStencillState());
     }
 
     // bind appropriate textures
@@ -108,6 +133,8 @@ void Primitive::Draw() {
 
     // always good practice to set everything back to defaults once configured.
     glActiveTexture(GL_TEXTURE0);
+
+    updateStencilState(StencilState());
 }
 
 // void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
