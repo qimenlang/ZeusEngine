@@ -1,5 +1,7 @@
 #include "MeshComponent.h"
 
+#include "backend/GLUtils.h"
+
 Primitive::Primitive(const Geometry &geometry,
                      std::shared_ptr<MaterialInstance> material)
     : geometry(geometry), matInstance(material) {
@@ -66,6 +68,15 @@ void Primitive::Draw() {
         // opengl 开关深度写入接口,名字是mask，但功能仅仅是开关
         matInstance->depthWrite() ? glDepthMask(GL_TRUE)
                                   : glDepthMask(GL_FALSE);
+
+        // set Culling State
+        auto cullingMode = matInstance->cullingMode();
+        if (cullingMode == CullingMode::NONE) {
+            glDisable(GL_CULL_FACE);
+        } else {
+            glEnable(GL_CULL_FACE);
+            glCullFace(getCullingMode(cullingMode));
+        }
     }
 
     // bind appropriate textures

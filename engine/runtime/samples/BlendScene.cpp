@@ -23,7 +23,7 @@ void BlendScene::init() {
 
     m_cube1 = std::make_unique<Object>(cube_mat);
     m_cube1->setName("m_cube1");
-    m_cube1->transform()->setPosition({-0.5, 0.5, 0});
+    m_cube1->transform()->setPosition({0, 0.5, 0});
 
     Texture cube_texture;
     std::string cube_tex_path =
@@ -46,7 +46,7 @@ void BlendScene::init() {
     // TODO:共用了同一个材质，待重构
     m_grass = std::make_unique<Object>(cube_mat);
     m_grass->setName("m_grass");
-    m_grass->transform()->setPosition({0.5, 0.5, 0});
+    m_grass->transform()->setPosition({0.1, 0.5, 0.8});
 
     auto grassGeo = QuadGeometry::getDefault();
     grassGeo.textures.push_back(grass_texture);
@@ -54,6 +54,9 @@ void BlendScene::init() {
                              cube_mat->defaultInstance()->duplicate()};
     m_grass->addComponent(std::move(
         std::make_unique<MeshComponent>(PrimitiveList{grassPrimitive})));
+    auto grassMat =
+        m_grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    grassMat->setCullingMode(CullingMode::NONE);
 
     std::string cubePath = std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
     m_floor = std::make_unique<Object>(cubePath.c_str(), default_mat);
@@ -67,6 +70,9 @@ void BlendScene::update() {
     cube1Mat->use();
     m_cube1->tick();
 
+    auto grassMat =
+        m_grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    grassMat->use();
     m_grass->tick();
 
     auto floorColor = glm::vec3{0.2, 0.2, 0.2};

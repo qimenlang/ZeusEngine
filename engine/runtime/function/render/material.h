@@ -2,6 +2,7 @@
 #include <memory>
 
 #include "Shader.h"
+#include "backend/GLEnums.h"
 
 class MaterialInstance;
 class Material {
@@ -32,6 +33,8 @@ class MaterialInstance {
     bool m_depthTest = true;
     bool m_depthWirte = true;
 
+    CullingMode m_cullingMode = CullingMode::BACK;
+
    public:
     std::shared_ptr<MaterialInstance> duplicate();
 
@@ -52,4 +55,8 @@ class MaterialInstance {
     bool depthTest() const;
     void setDepthWirte(bool enable);
     bool depthWrite() const;
+
+    CullingMode cullingMode() const { return m_cullingMode; }
+
+    void setCullingMode(CullingMode mode) { m_cullingMode = mode; }
 };
