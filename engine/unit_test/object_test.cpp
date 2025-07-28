@@ -1,6 +1,6 @@
 #include <function/framework/component/MeshComponent.h>
 #include <function/framework/component/TransformComponent.h>
-#include <function/framework/object/object.h>
+#include <function/framework/object/Object.h>
 
 #include <catch2/catch_test_macros.hpp>
 #include <cstdint>
