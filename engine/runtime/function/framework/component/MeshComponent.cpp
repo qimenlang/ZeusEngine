@@ -55,8 +55,9 @@ Primitive::Primitive(const Geometry &geometry,
 void Primitive::Draw() {
     {
         // 设置深度测试、深度写入状态
-        if (matInstance->depthFunc() == SamplerCompareFunc::A &&
-            !matInstance->depthWrite()) {
+        if ((matInstance->depthFunc() == SamplerCompareFunc::A &&
+             !matInstance->depthWrite()) ||
+            !matInstance->depthTest()) {
             glDisable(GL_DEPTH_TEST);
         } else {
             glEnable(GL_DEPTH_TEST);
