@@ -32,6 +32,8 @@ class MaterialInstance {
 
     bool m_depthTest = true;
     bool m_depthWirte = true;
+    using DepthFunc = SamplerCompareFunc;
+    DepthFunc m_depthFunc = DepthFunc::L;
 
     CullingMode m_cullingMode = CullingMode::BACK;
 
@@ -55,6 +57,9 @@ class MaterialInstance {
     bool depthTest() const;
     void setDepthWirte(bool enable);
     bool depthWrite() const;
+
+    DepthFunc depthFunc() const { return m_depthFunc; }
+    void setDepthFunc(DepthFunc func) { m_depthFunc = func; }
 
     CullingMode cullingMode() const { return m_cullingMode; }
 

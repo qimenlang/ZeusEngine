@@ -54,20 +54,16 @@ Primitive::Primitive(const Geometry &geometry,
 
 void Primitive::Draw() {
     {
-        /*
-        if (rs.depthFunc == RasterState::DepthFunc::A && !rs.depthWrite) {
-            gl.disable(GL_DEPTH_TEST);
+        // 设置深度测试、深度写入状态
+        if (matInstance->depthFunc() == SamplerCompareFunc::A &&
+            !matInstance->depthWrite()) {
+            glDisable(GL_DEPTH_TEST);
         } else {
-            gl.enable(GL_DEPTH_TEST);
-            gl.depthFunc(getDepthFunc(rs.depthFunc));
-            gl.depthMask(GLboolean(rs.depthWrite));
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(getCompareFunc(matInstance->depthFunc()));
+            // opengl 开关深度写入接口,名字是mask，但功能仅仅是开关
+            glDepthMask(GLboolean(matInstance->depthWrite()));
         }
-        */
-        matInstance->depthTest() ? glEnable(GL_DEPTH_TEST)
-                                 : glDisable(GL_DEPTH_TEST);
-        // opengl 开关深度写入接口,名字是mask，但功能仅仅是开关
-        matInstance->depthWrite() ? glDepthMask(GL_TRUE)
-                                  : glDepthMask(GL_FALSE);
 
         // set Culling State
         auto cullingMode = matInstance->cullingMode();

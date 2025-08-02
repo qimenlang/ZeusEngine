@@ -28,7 +28,7 @@ void BlendScene::init() {
 
     m_cube1 = std::make_unique<Object>(sample_diffuse_mat);
     m_cube1->setName("m_cube1");
-    m_cube1->transform()->setPosition({0, 0.5, 0});
+    m_cube1->transform()->setPosition({0, 0.5, -2.0});
 
     Texture cube_texture;
     std::string cube_tex_path =
@@ -42,6 +42,8 @@ void BlendScene::init() {
                             sample_diffuse_mat->defaultInstance()->duplicate()};
     m_cube1->addComponent(std::move(
         std::make_unique<MeshComponent>(PrimitiveList{cubePrimitive})));
+    auto &cube1Mat =
+        m_cube1->getComponent<MeshComponent>()->primitives()[0].matInstance;
 
     Texture grass_texture;
     std::string grass_tex_path =
@@ -62,6 +64,7 @@ void BlendScene::init() {
         auto grassMat =
             grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
         grassMat->setCullingMode(CullingMode::NONE);
+
         return grass;
     };
 
@@ -92,9 +95,9 @@ void BlendScene::init() {
     auto cameraPos = Zeus::Engine::getInstance().camera().worldPosition();
 
     std::vector<glm::vec3> grassPositions = {
-        {-0.3, 0.5, 0.6}, {0.3, 0.5, 0.6}, {0.1, 0.5, 0.7}};
+        {-0.3, 0.5, -0.7}, {0.3, 0.5, -1.0}, {0.1, 0.5, -1.3}};
     std::vector<glm::vec3> windowPositions = {
-        {0.7, 0.5, 1.5}, {0.3, 0.5, 1.0}, {-0.7, 0.5, 0.8}, {-0.9, 0.5, 0.1}};
+        {0.7, 0.5, -1.2}, {0.5, 0.5, -0.9}, {0.3, 0.5, -0.6}, {0.1, 0.5, -0.3}};
     for (auto pos : grassPositions) {
         m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addGrass(pos));
     }
@@ -124,8 +127,8 @@ void BlendScene::update() {
     floorMat->setVec3("MatColor", floorColor);
     m_floor->tick();
 
+    // 最后按照到相机距离渲染所有透明物体
     for (auto itr = m_ts_obj_map.rbegin(); itr != m_ts_obj_map.rend(); itr++) {
-        std::cout << "distance:" << itr->first << std::endl;
         auto &obj = itr->second;
         auto mat =
             obj->getComponent<MeshComponent>()->primitives()[0].matInstance;
