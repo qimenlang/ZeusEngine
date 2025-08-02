@@ -16,6 +16,10 @@ void BlendScene::init() {
         std::string(ZEUS_ROOT_DIR).append("/shader/default.fs");
     auto default_mat = Material::create(vs_path.c_str(), fs_path.c_str());
 
+    std::string ts_fs_path =
+        std::string(ZEUS_ROOT_DIR).append("/shader/transparent.fs");
+    auto default_ts_mat = Material::create(vs_path.c_str(), ts_fs_path.c_str());
+
     std::string sample_diffuse_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/sampleDiffuse.fs");
     auto sample_diffuse_mat =
@@ -105,6 +109,14 @@ void BlendScene::init() {
         m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addWindow(pos));
     }
 
+    std::string handPath = std::string(ZEUS_ROOT_DIR).append("/model/hand.obj");
+    m_hand = std::make_unique<Object>(handPath.c_str(), default_ts_mat);
+    m_hand->transform()->setPosition({0, 1.3, -0.5});
+    m_hand->transform()->setScale(glm::vec3{0.01});
+    auto &handMat =
+        m_hand->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    handMat->setDepthFunc(SamplerCompareFunc::A);
+
     std::string cubePath = std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
     m_floor = std::make_unique<Object>(cubePath.c_str(), default_mat);
     m_floor->transform()->setScale(glm::vec3{10, 0.0, 10});
@@ -126,6 +138,14 @@ void BlendScene::update() {
     floorMat->use();
     floorMat->setVec3("MatColor", floorColor);
     m_floor->tick();
+
+    auto handColor = glm::vec3{0.8};
+    auto &handMat =
+        m_hand->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    handMat->use();
+    handMat->setVec3("MatColor", handColor);
+    handMat->setFloat("alpha", 0.5);
+    m_hand->tick();
 
     // 最后按照到相机距离渲染所有透明物体
     for (auto itr = m_ts_obj_map.rbegin(); itr != m_ts_obj_map.rend(); itr++) {
