@@ -18,10 +18,15 @@ void BlendScene::init() {
 
     std::string sample_diffuse_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/sampleDiffuse.fs");
-    auto cube_mat =
+    auto sample_diffuse_mat =
         Material::create(vs_path.c_str(), sample_diffuse_path.c_str());
 
-    m_cube1 = std::make_unique<Object>(cube_mat);
+    std::string blend_discard_path =
+        std::string(ZEUS_ROOT_DIR).append("/shader/blendDiscard.fs");
+    auto grass_mat =
+        Material::create(vs_path.c_str(), blend_discard_path.c_str());
+
+    m_cube1 = std::make_unique<Object>(sample_diffuse_mat);
     m_cube1->setName("m_cube1");
     m_cube1->transform()->setPosition({0, 0.5, 0});
 
@@ -33,7 +38,8 @@ void BlendScene::init() {
 
     auto cubeGeo = CubeGeometry::getDefault();
     cubeGeo.textures.push_back(cube_texture);
-    Primitive cubePrimitive{cubeGeo, cube_mat->defaultInstance()->duplicate()};
+    Primitive cubePrimitive{cubeGeo,
+                            sample_diffuse_mat->defaultInstance()->duplicate()};
     m_cube1->addComponent(std::move(
         std::make_unique<MeshComponent>(PrimitiveList{cubePrimitive})));
 
@@ -42,25 +48,66 @@ void BlendScene::init() {
         std::string(ZEUS_ROOT_DIR).append("/texture/grass.png");
     grass_texture.id = TextureFromFile(grass_tex_path);
     grass_texture.type = "texture_diffuse";
+    auto addGrass = [&](glm::vec3 pos) -> std::unique_ptr<Object> {
+        auto grass = std::make_unique<Object>(grass_mat);
+        grass->setName("grass");
+        grass->transform()->setPosition(pos);
 
-    // TODO:共用了同一个材质，待重构
-    m_grass = std::make_unique<Object>(cube_mat);
-    m_grass->setName("m_grass");
-    m_grass->transform()->setPosition({0.1, 0.5, 0.8});
+        auto grassGeo = QuadGeometry::getDefault();
+        grassGeo.textures.push_back(grass_texture);
+        Primitive grassPrimitive{grassGeo,
+                                 grass_mat->defaultInstance()->duplicate()};
+        grass->addComponent(std::move(
+            std::make_unique<MeshComponent>(PrimitiveList{grassPrimitive})));
+        auto grassMat =
+            grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
+        grassMat->setCullingMode(CullingMode::NONE);
+        return grass;
+    };
 
-    auto grassGeo = QuadGeometry::getDefault();
-    grassGeo.textures.push_back(grass_texture);
-    Primitive grassPrimitive{grassGeo,
-                             cube_mat->defaultInstance()->duplicate()};
-    m_grass->addComponent(std::move(
-        std::make_unique<MeshComponent>(PrimitiveList{grassPrimitive})));
-    auto grassMat =
-        m_grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
-    grassMat->setCullingMode(CullingMode::NONE);
+    Texture window_texture;
+    std::string window_tex_path =
+        std::string(ZEUS_ROOT_DIR)
+            .append("/texture/blending_transparent_window.png");
+    window_texture.id = TextureFromFile(window_tex_path);
+    window_texture.type = "texture_diffuse";
+
+    auto addWindow = [&](glm::vec3 pos) -> std::unique_ptr<Object> {
+        auto window = std::make_unique<Object>(sample_diffuse_mat);
+        window->setName("window");
+        window->transform()->setPosition(pos);
+
+        auto windowGeo = QuadGeometry::getDefault();
+        windowGeo.textures.push_back(window_texture);
+        Primitive windowPrimitive{
+            windowGeo, sample_diffuse_mat->defaultInstance()->duplicate()};
+        window->addComponent(std::move(
+            std::make_unique<MeshComponent>(PrimitiveList{windowPrimitive})));
+        auto windowMat =
+            window->getComponent<MeshComponent>()->primitives()[0].matInstance;
+        windowMat->setCullingMode(CullingMode::NONE);
+        return window;
+    };
+
+    auto cameraPos = Zeus::Engine::getInstance().camera().worldPosition();
+
+    std::vector<glm::vec3> grassPositions = {
+        {-0.3, 0.5, 0.6}, {0.3, 0.5, 0.6}, {0.1, 0.5, 0.7}};
+    std::vector<glm::vec3> windowPositions = {
+        {0.7, 0.5, 1.5}, {0.3, 0.5, 1.0}, {-0.7, 0.5, 0.8}, {-0.9, 0.5, 0.1}};
+    for (auto pos : grassPositions) {
+        m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addGrass(pos));
+    }
+    for (auto pos : windowPositions) {
+        m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addWindow(pos));
+    }
 
     std::string cubePath = std::string(ZEUS_ROOT_DIR).append("/model/cube.obj");
     m_floor = std::make_unique<Object>(cubePath.c_str(), default_mat);
     m_floor->transform()->setScale(glm::vec3{10, 0.0, 10});
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void BlendScene::update() {
@@ -70,15 +117,19 @@ void BlendScene::update() {
     cube1Mat->use();
     m_cube1->tick();
 
-    auto grassMat =
-        m_grass->getComponent<MeshComponent>()->primitives()[0].matInstance;
-    grassMat->use();
-    m_grass->tick();
-
     auto floorColor = glm::vec3{0.2, 0.2, 0.2};
     auto &floorMat =
         m_floor->getComponent<MeshComponent>()->primitives()[0].matInstance;
     floorMat->use();
     floorMat->setVec3("MatColor", floorColor);
     m_floor->tick();
+
+    for (auto itr = m_ts_obj_map.rbegin(); itr != m_ts_obj_map.rend(); itr++) {
+        std::cout << "distance:" << itr->first << std::endl;
+        auto &obj = itr->second;
+        auto mat =
+            obj->getComponent<MeshComponent>()->primitives()[0].matInstance;
+        mat->use();
+        obj->tick();
+    }
 }

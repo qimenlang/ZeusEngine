@@ -125,16 +125,12 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // CubeScene cubeScene;
-    // cubeScene.init();
-    // ModelScene modelScene;
-    // modelScene.init();
-    // DepthScene depthScene;
-    // depthScene.init();
-    // StencilScene stencilScene;
-    // stencilScene.init();
-    BlendScene blendScene;
-    blendScene.init();
+    // auto scene = std::make_shared<CubeScene>();
+    // auto scene = std::make_shared<ModelScene>();
+    // auto scene = std::make_shared<DepthScene>();
+    // auto scene = std::make_shared<StencilScene>();
+    auto scene = std::make_shared<BlendScene>();
+    scene->init();
 
     // 深度测试
     glEnable(GL_DEPTH_TEST);
@@ -150,11 +146,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
                 GL_STENCIL_BUFFER_BIT);
 
-        // cubeScene.update();
-        // modelScene.update();
-        // depthScene.update();
-        // stencilScene.update();
-        blendScene.update();
+        scene->update();
 
         // check poll events & swap buffer
         glfwPollEvents();

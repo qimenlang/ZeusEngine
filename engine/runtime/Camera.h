@@ -41,6 +41,8 @@ class Camera {
            float yaw, float pitch);
 
     void setWorldPosition(glm::vec3 worldPos) { Position = worldPos; };
+    glm::vec3 worldPosition() const { return Position; };
+
     // returns the view matrix calculated using Euler Angles and the LookAt
     // Matrix
     glm::mat4 GetViewMatrix() {
