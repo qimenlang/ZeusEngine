@@ -103,10 +103,10 @@ void BlendScene::init() {
     std::vector<glm::vec3> windowPositions = {
         {0.7, 0.5, -1.2}, {0.5, 0.5, -0.9}, {0.3, 0.5, -0.6}, {0.1, 0.5, -0.3}};
     for (auto pos : grassPositions) {
-        m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addGrass(pos));
+        m_ts_objs.emplace_back(std::move(addGrass(pos)));
     }
     for (auto pos : windowPositions) {
-        m_ts_obj_map[glm::distance(cameraPos, pos)] = std::move(addWindow(pos));
+        m_ts_objs.emplace_back(std::move(addWindow(pos)));
     }
 
     std::string handPath = std::string(ZEUS_ROOT_DIR).append("/model/hand.obj");
@@ -147,9 +147,21 @@ void BlendScene::update() {
     handMat->setFloat("alpha", 0.5);
     m_hand->tick();
 
+    auto sortByDistance = [](std::unique_ptr<Object> &obj1,
+                             std::unique_ptr<Object> &obj2) -> bool {
+        auto cameraPos = Zeus::Engine::getInstance().camera().worldPosition();
+        float distance1 =
+            glm::distance(cameraPos, obj1->transform()->position());
+        float distance2 =
+            glm::distance(cameraPos, obj2->transform()->position());
+        return distance1 > distance2;
+    };
+
+    std::sort(m_ts_objs.begin(), m_ts_objs.end(), sortByDistance);
+
     // 最后按照到相机距离渲染所有透明物体
-    for (auto itr = m_ts_obj_map.rbegin(); itr != m_ts_obj_map.rend(); itr++) {
-        auto &obj = itr->second;
+    for (auto itr = m_ts_objs.begin(); itr != m_ts_objs.end(); itr++) {
+        auto &obj = *itr;
         auto mat =
             obj->getComponent<MeshComponent>()->primitives()[0].matInstance;
         mat->use();

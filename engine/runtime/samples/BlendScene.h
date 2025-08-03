@@ -11,8 +11,7 @@ class BlendScene : public Scene {
     std::unique_ptr<Object> m_cube1;
     std::unique_ptr<Object> m_hand;
     std::unique_ptr<Object> m_floor;
-
-    std::map<float, std::unique_ptr<Object>> m_ts_obj_map;
+    std::vector<std::unique_ptr<Object>> m_ts_objs;
 
    public:
     BlendScene(/* args */) {};
