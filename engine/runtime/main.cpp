@@ -14,6 +14,7 @@
 #include "samples/CubeScene.h"
 #include "samples/DepthScene.h"
 #include "samples/ModelScene.h"
+#include "samples/PBRScene.h"
 #include "samples/StencilScene.h"
 
 using namespace std;
@@ -129,7 +130,9 @@ int main() {
     // auto scene = std::make_shared<ModelScene>();
     // auto scene = std::make_shared<DepthScene>();
     // auto scene = std::make_shared<StencilScene>();
-    auto scene = std::make_shared<BlendScene>();
+    // auto scene = std::make_shared<BlendScene>();
+    auto scene = std::make_shared<PBRScene>();
+
     scene->init();
 
     // 深度测试
