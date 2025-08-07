@@ -7,8 +7,8 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
     const unsigned int X_SEGMENTS = 64;
     const unsigned int Y_SEGMENTS = 64;
     const float PI = 3.14159265359f;
-    for (unsigned int x = 0; x <= X_SEGMENTS; ++x) {
-        for (unsigned int y = 0; y <= Y_SEGMENTS; ++y) {
+    for (unsigned int y = 0; y <= Y_SEGMENTS; ++y) {
+        for (unsigned int x = 0; x <= X_SEGMENTS; ++x) {
             float xSegment = (float)x / (float)X_SEGMENTS;
             float ySegment = (float)y / (float)Y_SEGMENTS;
             float xPos =
@@ -22,20 +22,16 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
             vert.TexCoords = glm::vec2(xSegment, ySegment);
             vert.Normal = glm::vec3(xPos, yPos, zPos);
             sphere.vertices.emplace_back(vert);
-        }
-    }
 
-    for (unsigned int y = 0; y < Y_SEGMENTS; ++y) {
-        for (unsigned int x = 0; x <= X_SEGMENTS; ++x) {
             sphere.indices.push_back(y * (X_SEGMENTS + 1) + x);
             sphere.indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
             sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
-        }
-        for (unsigned int x = 0; x <= X_SEGMENTS; ++x) {
+
             sphere.indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
             sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x + 1);
             sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
         }
     }
+
     return sphere;
 }

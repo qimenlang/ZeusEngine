@@ -6,7 +6,7 @@ class Object;
 class PBRScene : public Scene {
    private:
     /* data */
-    std::unique_ptr<Object> m_lightCube;
+    std::vector<std::unique_ptr<Object>> m_lights;
     std::vector<std::unique_ptr<Object>> m_spheres;
 
    public:
