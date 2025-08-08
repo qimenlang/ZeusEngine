@@ -39,16 +39,18 @@ void PBRScene::init() {
     std::string pbr_fs_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/pbr.fs");
 
-    auto sphere_mat = Material::create(vs_path.c_str(), pbr_fs_path.c_str());
-    sphere_mat->shader()->use();
-    sphere_mat->shader()->setVec3("mat.albedo", glm::vec3(0.5f, 0.0f, 0.0f));
-    sphere_mat->shader()->setFloat("mat.ao", 1.0f);
+    auto pbr_sphere_mat =
+        Material::create(vs_path.c_str(), pbr_fs_path.c_str());
+    pbr_sphere_mat->shader()->use();
+    pbr_sphere_mat->shader()->setVec3("mat.albedo",
+                                      glm::vec3(0.5f, 0.0f, 0.0f));
+    pbr_sphere_mat->shader()->setFloat("mat.ao", 1.0f);
 
     auto createSphere = [&]() -> std::unique_ptr<Object> {
-        auto sphere = std::make_unique<Object>(sphere_mat);
+        auto sphere = std::make_unique<Object>(pbr_sphere_mat);
         auto sphereGeo = SphereGeometry::create(0.48);
         Primitive spherePrimitive = {
-            sphereGeo, sphere_mat->defaultInstance()->duplicate()};
+            sphereGeo, pbr_sphere_mat->defaultInstance()->duplicate()};
         sphere->addComponent(std::move(
             std::make_unique<MeshComponent>(PrimitiveList{spherePrimitive})));
         return std::move(sphere);

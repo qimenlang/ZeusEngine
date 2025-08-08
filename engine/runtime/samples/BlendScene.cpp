@@ -38,7 +38,7 @@ void BlendScene::init() {
     std::string cube_tex_path =
         std::string(ZEUS_ROOT_DIR).append("/texture/metal.png");
     cube_texture.id = TextureFromFile(cube_tex_path);
-    cube_texture.type = "texture_diffuse";
+    cube_texture.type = "diffuse";
 
     auto cubeGeo = CubeGeometry::getDefault();
     cubeGeo.textures.push_back(cube_texture);
@@ -53,7 +53,7 @@ void BlendScene::init() {
     std::string grass_tex_path =
         std::string(ZEUS_ROOT_DIR).append("/texture/grass.png");
     grass_texture.id = TextureFromFile(grass_tex_path);
-    grass_texture.type = "texture_diffuse";
+    grass_texture.type = "diffuse";
     auto addGrass = [&](glm::vec3 pos) -> std::unique_ptr<Object> {
         auto grass = std::make_unique<Object>(grass_mat);
         grass->setName("grass");
@@ -77,7 +77,7 @@ void BlendScene::init() {
         std::string(ZEUS_ROOT_DIR)
             .append("/texture/blending_transparent_window.png");
     window_texture.id = TextureFromFile(window_tex_path);
-    window_texture.type = "texture_diffuse";
+    window_texture.type = "diffuse";
 
     auto addWindow = [&](glm::vec3 pos) -> std::unique_ptr<Object> {
         auto window = std::make_unique<Object>(sample_diffuse_mat);

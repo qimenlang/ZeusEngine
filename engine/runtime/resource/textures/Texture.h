@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 unsigned int TextureFromFile(const std::string &filename, bool gamma = false);
 
 struct Texture {

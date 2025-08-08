@@ -4,8 +4,8 @@ in vec3 fragPos;
 in vec3 normal;
 in vec2 texCoord;
 
-uniform sampler2D texture_diffuse1;
-uniform sampler2D texture_normal1;
+uniform sampler2D diffuse1;
+uniform sampler2D normal1;
 uniform vec3 viewPos;
 
 struct Material {
@@ -24,12 +24,12 @@ uniform Light light;
 
 void main()
 {
-    vec3 sampleDiffuse = vec3(texture(texture_diffuse1, texCoord));
+    vec3 sampleDiffuse = vec3(texture(diffuse1, texCoord));
 
     vec3 ambient = sampleDiffuse * light.ambient;
 
     vec3 norm = normalize(normal);
-    // vec3 norm = normalize(vec3(texture(texture_normal1,texCoord)));
+    // vec3 norm = normalize(vec3(texture(normal1,texCoord)));
     vec3 lightDir = normalize(light.position - fragPos);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse= diff * sampleDiffuse * light.diffuse;

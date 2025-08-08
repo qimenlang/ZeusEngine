@@ -81,6 +81,11 @@ void Primitive::Draw() {
     unsigned int specularNr = 1;
     unsigned int normalNr = 1;
     unsigned int heightNr = 1;
+    unsigned int albedoNr = 1;
+    unsigned int aoNr = 1;
+    unsigned int roughnessNr = 1;
+    unsigned int metallicNr = 1;
+
     auto &textures = geometry.textures;
     for (unsigned int i = 0; i < textures.size(); i++) {
         // active proper texture unit before binding
@@ -88,14 +93,22 @@ void Primitive::Draw() {
         // retrieve texture number (the N in diffuse_textureN)
         std::string number;
         std::string name = textures[i].type;
-        if (name == "texture_diffuse")
+        if (name == "diffuse")
             number = std::to_string(diffuseNr++);
-        else if (name == "texture_specular")
+        else if (name == "specular")
             number = std::to_string(specularNr++);
-        else if (name == "texture_normal")
+        else if (name == "normal")
             number = std::to_string(normalNr++);
-        else if (name == "texture_height")
+        else if (name == "height")
             number = std::to_string(heightNr++);
+        else if (name == "albedo")
+            number = std::to_string(albedoNr++);
+        else if (name == "ao")
+            number = std::to_string(aoNr++);
+        else if (name == "roughness")
+            number = std::to_string(roughnessNr++);
+        else if (name == "metallic")
+            number = std::to_string(metallicNr++);
 
         // now set the sampler to the correct texture unit
         glUniform1i(glGetUniformLocation(matInstance->shaderID(),

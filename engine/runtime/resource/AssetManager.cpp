@@ -78,18 +78,18 @@ Geometry AssetManager::processMesh(aiMesh *mesh, const aiScene *scene) {
 
     if (mesh->mMaterialIndex >= 0) {
         auto material = scene->mMaterials[mesh->mMaterialIndex];
-        std::vector<Texture> diffuseMaps = loadMaterialTextures(
-            material, aiTextureType_DIFFUSE, "texture_diffuse");
+        std::vector<Texture> diffuseMaps =
+            loadMaterialTextures(material, m_textureMap["diffuse"], "diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
         std::vector<Texture> specularMaps = loadMaterialTextures(
-            material, aiTextureType_SPECULAR, "texture_specular");
+            material, m_textureMap["specular"], "specular");
         textures.insert(textures.end(), specularMaps.begin(),
                         specularMaps.end());
-        std::vector<Texture> normalMaps = loadMaterialTextures(
-            material, aiTextureType_NORMALS, "texture_normal");
+        std::vector<Texture> normalMaps =
+            loadMaterialTextures(material, m_textureMap["normals"], "normals");
         textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-        std::vector<Texture> heightMaps = loadMaterialTextures(
-            material, aiTextureType_HEIGHT, "texture_height");
+        std::vector<Texture> heightMaps =
+            loadMaterialTextures(material, m_textureMap["height"], "height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
     }
 

@@ -15,6 +15,7 @@
 #include "samples/DepthScene.h"
 #include "samples/ModelScene.h"
 #include "samples/PBRScene.h"
+#include "samples/PBRTextureScene.h"
 #include "samples/StencilScene.h"
 
 using namespace std;
@@ -131,7 +132,8 @@ int main() {
     // auto scene = std::make_shared<DepthScene>();
     // auto scene = std::make_shared<StencilScene>();
     // auto scene = std::make_shared<BlendScene>();
-    auto scene = std::make_shared<PBRScene>();
+    // auto scene = std::make_shared<PBRScene>();
+    auto scene = std::make_shared<PBRTextureScene>();
 
     scene->init();
 
