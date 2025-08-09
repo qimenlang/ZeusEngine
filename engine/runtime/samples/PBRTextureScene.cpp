@@ -33,10 +33,7 @@ void PBRTextureScene::init() {
         return std::move(light);
     };
 
-    m_lights.emplace_back(addLight({-1.0, -1.0, 2.0}));
-    m_lights.emplace_back(addLight({-1.0, 1.0, 2.0}));
-    m_lights.emplace_back(addLight({1.0, -1.0, 2.0}));
-    m_lights.emplace_back(addLight({1.0, 1.0, 2.0}));
+    m_lights.emplace_back(addLight({0, 0, 2.0}));
 
     std::string pbr_fs_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/pbrWithTextures.fs");
@@ -67,7 +64,7 @@ void PBRTextureScene::init() {
         TextureFromFile(std::string(ZEUS_ROOT_DIR)
                             .append("/texture/pbr/rusted_iron/normal.png")
                             .c_str());
-    Texture tex_normal = {normalID, "normals"};
+    Texture tex_normal = {normalID, "normal"};
     auto roughnessID =
         TextureFromFile(std::string(ZEUS_ROOT_DIR)
                             .append("/texture/pbr/rusted_iron/roughness.png")
@@ -86,17 +83,17 @@ void PBRTextureScene::init() {
         return std::move(sphere);
     };
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 7; j++) {
             auto sphere = createSphere();
-            sphere->transform()->setPosition({i - 5, j - 5, -10});
+            sphere->transform()->setPosition({i - 3.5, j - 3.5, -5});
             m_spheres.emplace_back(std::move(sphere));
         }
     }
 }
 
 void PBRTextureScene::update() {
-    auto lightColor = glm::vec3(300.0f);
+    auto lightColor = glm::vec3(150.0f);
     auto &lightShader =
         m_lights[0]->getComponent<MeshComponent>()->primitives()[0].matInstance;
     lightShader->use();
@@ -119,11 +116,11 @@ void PBRTextureScene::update() {
                            lightColor);
     }
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            auto &sphere = m_spheres[i * 10 + j];
-            pbrShader->setFloat("mat.roughness", float(i) / 10.0);
-            pbrShader->setFloat("mat.metallic", float(j) / 10.0);
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 7; j++) {
+            auto &sphere = m_spheres[i * 7 + j];
+            pbrShader->setFloat("mat.roughness", float(i) / 7.0);
+            pbrShader->setFloat("mat.metallic", float(j) / 7.0);
             sphere->tick();
         }
     }

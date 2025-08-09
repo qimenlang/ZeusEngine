@@ -91,9 +91,7 @@ void main()
         vec3 H = normalize(L+V);
         float distance = length(lights[i].pos - fragPos);
         float attenuation = 1.0/(distance*distance);
-        // scale light by cosTheta
-        float cosTheta  = max(dot(N, L), 0.0);
-        vec3 radiance = lights[i].color * attenuation * cosTheta;
+        vec3 radiance = lights[i].color * attenuation;
 
         // Cook-Torrance BRDF
         float NDF = DistributionGGX(N,H,mat.roughness);
@@ -111,8 +109,10 @@ void main()
         vec3 kD = vec3(1.0)-F;
         // pure metals have no diffuse light
         kD *= 1.0 - mat.metallic;
+        // scale light by cosTheta
+        float cosTheta  = max(dot(N, L), 0.0);
         // add to outgoing radiance Lo
-        Lo += (kD * mat.albedo / PI + specular) * radiance ; 
+        Lo += (kD * mat.albedo / PI + specular) * radiance * cosTheta; 
     }
 
     vec3 ambient = vec3(0.03)*mat.albedo*mat.ao;

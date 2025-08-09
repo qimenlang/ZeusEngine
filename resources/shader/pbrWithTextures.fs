@@ -97,7 +97,6 @@ vec3 getNormalFromMap()
 
 void main()
 {	
-    // vec3 N = normalize(normal);
     vec3 N = getNormalFromMap();
     vec3 V = normalize(camPos-fragPos);
 
@@ -151,6 +150,5 @@ void main()
     // gama correction
     color = pow(color,vec3(1.0/2.2));
 
-    // color = N;
     FragColor = vec4(color,1.0);
 }

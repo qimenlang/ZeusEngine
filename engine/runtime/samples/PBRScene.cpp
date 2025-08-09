@@ -56,10 +56,10 @@ void PBRScene::init() {
         return std::move(sphere);
     };
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 7; j++) {
             auto sphere = createSphere();
-            sphere->transform()->setPosition({i - 5, j - 5, -10});
+            sphere->transform()->setPosition({i - 3.5, j - 3.5, -5});
             m_spheres.emplace_back(std::move(sphere));
         }
     }
@@ -89,11 +89,13 @@ void PBRScene::update() {
                            lightColor);
     }
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            auto &sphere = m_spheres[i * 10 + j];
-            pbrShader->setFloat("mat.roughness", float(i) / 10.0);
-            pbrShader->setFloat("mat.metallic", float(j) / 10.0);
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 7; j++) {
+            auto &sphere = m_spheres[i * 7 + j];
+            // clamp to 0.05-1.0; 0粗糙度绝对光滑，看起来不太自然
+            pbrShader->setFloat("mat.roughness",
+                                glm::clamp(float(i) / 7.f, 0.05f, 1.0f));
+            pbrShader->setFloat("mat.metallic", float(j) / 7.f);
             sphere->tick();
         }
     }
