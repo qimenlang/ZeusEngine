@@ -1,10 +1,10 @@
+#include "StencilScene.h"
+
 #include <glm/gtx/string_cast.hpp>
 #include <memory>
 
 #include "Engine.h"
-#include "StencilScene.h"
 #include "function/framework/object/Object.h"
-
 
 void StencilScene::init() {
     Zeus::Engine::getInstance().camera().setWorldPosition(glm::vec3{0, 1, 3});
@@ -22,6 +22,10 @@ void StencilScene::init() {
     m_cube2 = std::make_unique<Object>(cubePath.c_str(), default_mat);
     m_cube2->setName("m_cube2");
     m_cube2->transform()->setPosition({-0.5, 0.5, 0});
+
+    m_cube3 = std::make_unique<Object>(cubePath.c_str(), default_mat);
+    m_cube3->setName("m_cube1");
+    m_cube3->transform()->setPosition({-0.5, 0.5, -3.0});
 
     m_floor = std::make_unique<Object>(cubePath.c_str(), default_mat);
     m_floor->transform()->setScale(glm::vec3{10, 0.0, 10});
@@ -64,9 +68,19 @@ void StencilScene::update() {
         m_cube2->getComponent<MeshComponent>()->primitives()[0].matInstance;
     cube2Mat->use();
     cube2Mat->setVec3("MatColor", edgeColor);
-    cube2Mat->setDepthTest(false);
     m_cube2->transform()->setScale(glm::vec3{1.1});
     m_cube2->tick();
+
+    // 模仿传送门效果
+    glStencilMask(0x00);
+    glStencilFunc(GL_EQUAL, 1, 0xFF);
+    auto &cube3Mat =
+        m_cube3->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    auto greenCubeColor = glm::vec3{0.2, 0.8, 0.2};
+    cube3Mat->use();
+    cube3Mat->setDepthTest(false);
+    cube3Mat->setVec3("MatColor", greenCubeColor);
+    m_cube3->tick();
 
     glStencilMask(0xFF);
     glStencilFunc(GL_ALWAYS, 0, 0xFF);

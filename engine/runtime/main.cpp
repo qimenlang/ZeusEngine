@@ -130,9 +130,9 @@ int main() {
     // auto scene = std::make_shared<CubeScene>();
     // auto scene = std::make_shared<ModelScene>();
     // auto scene = std::make_shared<DepthScene>();
-    // auto scene = std::make_shared<StencilScene>();
+    auto scene = std::make_shared<StencilScene>();
     // auto scene = std::make_shared<BlendScene>();
-    auto scene = std::make_shared<PBRScene>();
+    // auto scene = std::make_shared<PBRScene>();
     // auto scene = std::make_shared<PBRTextureScene>();
 
     scene->init();
