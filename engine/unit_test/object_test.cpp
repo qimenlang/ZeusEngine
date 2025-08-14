@@ -19,6 +19,18 @@ TEST_CASE("add & remove components", "[Object]") {
         object.addComponent(std::move(component));
         REQUIRE(object.getAllComponents().size() == 2);
     }
+    SECTION("add components 2") {
+        PrimitiveList primitiveList;
+        std::unique_ptr<MeshComponent> component =
+            std::make_unique<MeshComponent>(primitiveList);
+        object.addComponent(std::move(component));
+        REQUIRE(object.getAllComponents().size() == 2);
+    }
+    SECTION("add components 3") {
+        PrimitiveList primitiveList;
+        object.addComponent<MeshComponent>(primitiveList);
+        REQUIRE(object.getAllComponents().size() == 2);
+    }
     SECTION("remove components") {
         std::unique_ptr<MeshComponent> component =
             std::make_unique<MeshComponent>();

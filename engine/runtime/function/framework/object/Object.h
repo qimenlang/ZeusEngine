@@ -63,10 +63,14 @@ class Object {
 
     TransformComponent *transform() { return m_transform; };
 
-    // todo:增加通用AddComponet方法
-
     Component *addComponent(std::unique_ptr<Component> &&component);
     void removeComponent(Component *);
+
+    template <typename T, typename... Args>
+    T *addComponent(Args &&...args) {
+        auto component = T::create(*this, std::forward<Args>(args)...);
+        return dynamic_cast<T *>(component);
+    }
 
     template <typename T>
     T *getComponent() {

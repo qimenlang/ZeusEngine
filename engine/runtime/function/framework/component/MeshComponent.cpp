@@ -1,6 +1,7 @@
 #include "MeshComponent.h"
 
 #include "backend/GLUtils.h"
+#include "function/framework/object/Object.h"
 
 Primitive::Primitive(const Geometry &geometry,
                      std::shared_ptr<MaterialInstance> material)
@@ -142,4 +143,12 @@ void MeshComponent::tick(float delta_time) {
     for (auto &sub_mesh : m_primitives) {
         sub_mesh.Draw();
     }
+}
+
+MeshComponent *MeshComponent::create(Object &obj,
+                                     const PrimitiveList &primitives) {
+    auto mesh_component = std::make_unique<MeshComponent>(primitives);
+    auto ptr = mesh_component.get();
+    addToObject(obj, std::move(mesh_component));
+    return ptr;
 }

@@ -48,6 +48,8 @@ class MeshComponent : public Component {
     // override;
     void tick(float delta_time) override;
 
+    static MeshComponent* create(Object& obj, const PrimitiveList& primitives);
+
     PrimitiveList& primitives() { return m_primitives; };
 
    private:

@@ -15,7 +15,10 @@ class Component {
 
     virtual void tick(float delta_time) = 0;
 
-    void doAdd( Object* object) { m_parent_object = object; }
+    void doAdd(Object* object) { m_parent_object = object; }
+
+    static void addToObject(Object& obj,
+                            std::unique_ptr<Component>&& component);
 
    private:
     Object* m_parent_object;

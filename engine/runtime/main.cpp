@@ -11,6 +11,7 @@
 #include "Engine.h"
 #include "function/framework/object/Object.h"
 #include "samples/BlendScene.h"
+#include "samples/CubeFBOScene.h"
 #include "samples/CubeScene.h"
 #include "samples/DepthScene.h"
 #include "samples/ModelScene.h"
@@ -127,10 +128,11 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // auto scene = std::make_shared<CubeScene>();
+    // auto sczene = std::make_shared<CubeScene>();
+    auto scene = std::make_shared<CubeFBOScene>();
     // auto scene = std::make_shared<ModelScene>();
     // auto scene = std::make_shared<DepthScene>();
-    auto scene = std::make_shared<StencilScene>();
+    // auto scene = std::make_shared<StencilScene>();
     // auto scene = std::make_shared<BlendScene>();
     // auto scene = std::make_shared<PBRScene>();
     // auto scene = std::make_shared<PBRTextureScene>();
