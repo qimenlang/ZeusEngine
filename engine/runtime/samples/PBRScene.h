@@ -1,5 +1,5 @@
 #pragma once
-#include "Scene.h"
+#include "function/framework/scene/Scene.h"
 
 class Object;
 

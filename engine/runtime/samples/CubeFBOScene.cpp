@@ -59,55 +59,12 @@ void CubeFBOScene::init() {
     floor->transform()->setScale(glm::vec3{5, 0.01, 5});
     m_objects.emplace_back(std::move(floor));
 
-    std::string quad_vs_path =
-        std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.vs");
-    std::string quad_fs_path =
-        std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.fs");
-
-    // auto quad_mat =
-    //     Material::create(quad_vs_path.c_str(), quad_fs_path.c_str());
-    // quad_mat->shader()->setInt("screenTexture", 0);
-
-    // auto quadGeo = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
-    // quadGeo.textures.push_back(cube_texture);
-    // m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
-
-    m_screenShader = Shader(quad_vs_path.c_str(), quad_fs_path.c_str());
-    m_screenShader.use();
-    m_screenShader.setInt("screenTexture", 0);
-    // clang-format off
-        float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
-        // positions   // texCoords
-        -1.0f,  1.0f,  0.0f, 1.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f/2, -1.0f,  1.0f, 0.0f,
-
-        -1.0f,  1.0f,  0.0f, 1.0f,
-         1.0f/2, -1.0f,  1.0f, 0.0f,
-         1.0f/2,  1.0f,  1.0f, 1.0f
-    };
-
-    // clang-format on
-
-    // screen quad VAO
-    glGenVertexArrays(1, &quadVAO);
-    glGenBuffers(1, &quadVBO);
-    glBindVertexArray(quadVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices,
-                 GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
-                          (void *)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
-                          (void *)(2 * sizeof(float)));
-
     // init fbo
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     // color attachment texture
     // 创建一个纹理来存储颜色缓冲区
+    unsigned int textureColorbuffer;
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT, 0,
@@ -130,6 +87,21 @@ void CubeFBOScene::init() {
                   << std::endl;
     // 解绑帧缓冲区
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    std::string quad_vs_path =
+        std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.vs");
+    std::string quad_fs_path =
+        std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.fs");
+
+    auto quad_mat =
+        Material::create(quad_vs_path.c_str(), quad_fs_path.c_str());
+    quad_mat->shader()->setInt("screenTexture", 0);
+
+    Texture screenTexture;
+    screenTexture.id = textureColorbuffer;
+    auto quadGeo = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
+    quadGeo.textures.push_back(screenTexture);
+    m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
 }
 
 void CubeFBOScene::update() {
@@ -163,17 +135,8 @@ void CubeFBOScene::update() {
     // since we won't be able to see behind the quad anyways)
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // auto &m_quadShader =
-    //     m_quad->getComponent<MeshComponent>()->primitives()[0].matInstance;
-    // m_quadShader->use();
-    // // glBindTexture(GL_TEXTURE_2D,
-    // //               textureColorbuffer);
-    // m_quad->tick();
-
-    m_screenShader.use();
-    glBindVertexArray(quadVAO);
-    glBindTexture(GL_TEXTURE_2D,
-                  textureColorbuffer);  // use the color attachment texture as
-                                        // the texture of the quad plane
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    auto &m_quadShader =
+        m_quad->getComponent<MeshComponent>()->primitives()[0].matInstance;
+    m_quadShader->use();
+    m_quad->tick();
 }

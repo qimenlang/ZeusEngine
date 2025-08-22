@@ -1,5 +1,5 @@
 #pragma once
-#include "Scene.h"
+#include "function/framework/scene/Scene.h"
 
 class Object;
 
@@ -11,10 +11,6 @@ class CubeFBOScene : public Scene {
     std::unique_ptr<Object> m_quad;
 
     unsigned int fbo;
-    unsigned int textureColorbuffer;
-
-    Shader m_screenShader;
-    unsigned int quadVAO, quadVBO;
 
    public:
     CubeFBOScene(/* args */);

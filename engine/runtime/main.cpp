@@ -10,6 +10,8 @@
 
 #include "Engine.h"
 #include "function/framework/object/Object.h"
+#include "function/render/Renderer.h"
+#include "function/render/View.h"
 #include "samples/BlendScene.h"
 #include "samples/CubeFBOScene.h"
 #include "samples/CubeScene.h"
@@ -128,19 +130,19 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // auto sczene = std::make_shared<CubeScene>();
-    auto scene = std::make_shared<CubeFBOScene>();
-    // auto scene = std::make_shared<ModelScene>();
-    // auto scene = std::make_shared<DepthScene>();
-    // auto scene = std::make_shared<StencilScene>();
-    // auto scene = std::make_shared<BlendScene>();
-    // auto scene = std::make_shared<PBRScene>();
-    // auto scene = std::make_shared<PBRTextureScene>();
+    // auto sczene = std::make_unique<CubeScene>();
+    auto scene = std::make_unique<CubeFBOScene>();
+    // auto scene = std::make_unique<ModelScene>();
+    // auto scene = std::make_unique<DepthScene>();
+    // auto scene = std::make_unique<StencilScene>();
+    // auto scene = std::make_unique<BlendScene>();
+    // auto scene = std::make_unique<PBRScene>();
+    // auto scene = std::make_unique<PBRTextureScene>();
 
     scene->init();
-
-    // 深度测试
-    glEnable(GL_DEPTH_TEST);
+    std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();
+    std::unique_ptr<View> view = std::make_unique<View>();
+    view->setScene(std::move(scene));
 
     // render loop
     while (!glfwWindowShouldClose(window)) {
@@ -148,12 +150,9 @@ int main() {
         engine.update();
         // inputd
         processInput(window);
-        // rendering
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
-                GL_STENCIL_BUFFER_BIT);
 
-        scene->update();
+        renderer->prerender();
+        renderer->render(view.get());
 
         // check poll events & swap buffer
         glfwPollEvents();

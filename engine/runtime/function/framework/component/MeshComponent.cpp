@@ -112,6 +112,7 @@ void Primitive::Draw() {
             number = std::to_string(metallicNr++);
 
         // now set the sampler to the correct texture unit
+        // TODO: 这里无效，存在bug,需要综合测试fs种采样多种贴图的效果
         glUniform1i(glGetUniformLocation(matInstance->shaderID(),
                                          (name + number).c_str()),
                     i);
