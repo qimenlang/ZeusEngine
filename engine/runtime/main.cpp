@@ -13,9 +13,9 @@
 #include "function/render/Renderer.h"
 #include "function/render/View.h"
 #include "samples/BlendScene.h"
-#include "samples/CubeFBOScene.h"
 #include "samples/CubeScene.h"
 #include "samples/DepthScene.h"
+#include "samples/FBOScene.h"
 #include "samples/ModelScene.h"
 #include "samples/PBRScene.h"
 #include "samples/PBRTextureScene.h"
@@ -131,7 +131,7 @@ int main() {
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
     // auto sczene = std::make_unique<CubeScene>();
-    auto scene = std::make_unique<CubeFBOScene>();
+    auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<ModelScene>();
     // auto scene = std::make_unique<DepthScene>();
     // auto scene = std::make_unique<StencilScene>();

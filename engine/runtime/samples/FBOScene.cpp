@@ -1,4 +1,4 @@
-#include "CubeFBOScene.h"
+#include "FBOScene.h"
 
 #include <resource/geometries/CubeGeometry.h>
 #include <resource/geometries/QuadGeometry.h>
@@ -9,17 +9,17 @@
 #include "function/framework/object/Object.h"
 #include "function/render/Material.h"
 
-CubeFBOScene::CubeFBOScene() : Scene() {
+FBOScene::FBOScene() : Scene() {
     // 初始化立方体场景
-    std::cout << "CubeFBOScene initialized." << std::endl;
+    std::cout << "FBOScene initialized." << std::endl;
 }
-CubeFBOScene::~CubeFBOScene() {
+FBOScene::~FBOScene() {
     // 清理立方体场景
-    std::cout << "CubeFBOScene destroyed." << std::endl;
+    std::cout << "FBOScene destroyed." << std::endl;
 }
-void CubeFBOScene::init() {
+void FBOScene::init() {
     // 初始化立方体场景中的模型和着色器
-    std::cout << "CubeFBOScene init called." << std::endl;
+    std::cout << "FBOScene init called." << std::endl;
     // 可以在这里添加模型、着色器等初始化代码
 
     std::string vs_path =
@@ -71,6 +71,9 @@ void CubeFBOScene::init() {
                  GL_RGB, GL_UNSIGNED_BYTE, nullptr);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
                            textureColorbuffer, 0);
     // 创建深度模板缓冲区
@@ -95,7 +98,10 @@ void CubeFBOScene::init() {
 
     auto quad_mat =
         Material::create(quad_vs_path.c_str(), quad_fs_path.c_str());
+    quad_mat->shader()->use();
     quad_mat->shader()->setInt("screenTexture", 0);
+    quad_mat->shader()->setVec2("resolution",
+                                glm::vec2(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT));
 
     Texture screenTexture;
     screenTexture.id = textureColorbuffer;
@@ -104,7 +110,7 @@ void CubeFBOScene::init() {
     m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
 }
 
-void CubeFBOScene::update() {
+void FBOScene::update() {
     // bind to framebuffer and draw scene as we normally would to color
     // texture
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);

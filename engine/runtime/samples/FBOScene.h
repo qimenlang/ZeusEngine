@@ -3,7 +3,7 @@
 
 class Object;
 
-class CubeFBOScene : public Scene {
+class FBOScene : public Scene {
    private:
     /* data */
     std::vector<std::unique_ptr<Object>> m_objects;
@@ -13,8 +13,8 @@ class CubeFBOScene : public Scene {
     unsigned int fbo;
 
    public:
-    CubeFBOScene(/* args */);
-    ~CubeFBOScene();
+    FBOScene(/* args */);
+    ~FBOScene();
     void init() override;
     void update() override;
 };

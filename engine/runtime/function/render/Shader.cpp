@@ -1,6 +1,8 @@
-#include "function/render/Shader.h"
+
+#include "Shader.h"
 
 #include "include/glad/glad.h"  // include glad to get all the required OpenGL headers
+
 
 Shader::Shader(const char *vertexPath, const char *fragmentPath) {
     // 1. retrieve the vertex/fragment source code from filePath
@@ -80,6 +82,10 @@ void Shader::setVec3(const std::string &name, glm::vec3 vec) const {
                  glm::value_ptr(vec));
 }
 
+void Shader::setVec2(const std::string &name, glm::vec2 vec) const {
+    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1,
+                 glm::value_ptr(vec));
+}
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {
     int success;
     char infoLog[1024];

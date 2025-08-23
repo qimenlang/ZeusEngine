@@ -106,7 +106,7 @@ void main()
         // kS is equal to Fresnel
         vec3 kS = F;
         // energy conservation diffuse+specular=1.0f
-        vec3 kD = vec3(1.0)-F;
+        vec3 kD = vec3(1.0)-kS;
         // pure metals have no diffuse light
         kD *= 1.0 - mat.metallic;
         // scale light by cosTheta
