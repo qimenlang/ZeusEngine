@@ -78,7 +78,7 @@ void FBOScene::init() {
                            textureColorbuffer, 0);
     // 创建深度模板缓冲区
     unsigned int rbo;
-    glGenFramebuffers(1, &rbo);
+    glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, Zeus::SCR_WIDTH,
                           Zeus::SCR_HEIGHT);
