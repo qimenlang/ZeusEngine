@@ -16,6 +16,7 @@
 #include "samples/CubeScene.h"
 #include "samples/DepthScene.h"
 #include "samples/FBOScene.h"
+#include "samples/InstancingScene.h"
 #include "samples/ModelScene.h"
 #include "samples/PBRScene.h"
 #include "samples/PBRTextureScene.h"
@@ -99,8 +100,8 @@ int main() {
     // init glfw
     std::cout << "Zeus Engine Start" << std::endl;
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // create window
@@ -111,6 +112,7 @@ int main() {
         glfwTerminate();
         return -1;
     }
+
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
@@ -118,8 +120,16 @@ int main() {
     //  glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
+        glfwTerminate();
         return -1;
     }
+    const char *versionStr = (const char *)glGetString(GL_VERSION);
+    std::cout << "OpenGL版本: " << glGetString(GL_VERSION) << std::endl;
+    std::cout << "显卡供应商: " << glGetString(GL_VENDOR) << std::endl;
+    std::cout << "渲染器: " << glGetString(GL_RENDERER) << std::endl;
+    std::cout << "GLSL版本: " << glGetString(GL_SHADING_LANGUAGE_VERSION)
+              << std::endl;
+
     // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -131,13 +141,14 @@ int main() {
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
     // auto sczene = std::make_unique<CubeScene>();
-    auto scene = std::make_unique<FBOScene>();
+    // auto sczene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<ModelScene>();
     // auto scene = std::make_unique<DepthScene>();
     // auto scene = std::make_unique<StencilScene>();
     // auto scene = std::make_unique<BlendScene>();
     // auto scene = std::make_unique<PBRScene>();
     // auto scene = std::make_unique<PBRTextureScene>();
+    auto scene = std::make_unique<InstancingScene>();
 
     scene->init();
     std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();
