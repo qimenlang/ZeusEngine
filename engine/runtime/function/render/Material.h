@@ -8,6 +8,8 @@ class MaterialInstance;
 class Material {
    public:
     friend class MaterialInstance;
+    static std::shared_ptr<Material> create(const std::string vertexPath,
+                                            const std::string fragmentPath);
     static std::shared_ptr<Material> create(const char *vertexPath,
                                             const char *fragmentPath);
     void use() { m_shader->use(); }

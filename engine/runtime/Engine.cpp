@@ -23,6 +23,7 @@ void Engine::update() {
     m_currentTime = glfwGetTime();
     m_deltaTime = m_currentTime - m_lastFrame;
     m_lastFrame = m_currentTime;
-    // std::cout << "Engine updated. Delta Time: " << deltaTime << std::endl;
+    // std::cout << "Engine updated. Delta Time: " << m_deltaTime << std::endl;
+    std::cout << "Engine updated. FPS: " << 1.0 / m_deltaTime << std::endl;
 }
 }  // namespace Zeus

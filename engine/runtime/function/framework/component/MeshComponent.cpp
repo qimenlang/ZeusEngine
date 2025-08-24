@@ -123,12 +123,24 @@ void Primitive::Draw() {
     // draw mesh
     glBindVertexArray(VAO);
     auto indices = geometry.indices;
-    if (indices.size())
-        glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()),
-                       GL_UNSIGNED_INT, 0);
-    else
-        glDrawArrays(GL_TRIANGLES, 0,
-                     static_cast<unsigned int>(geometry.vertices.size()));
+
+    if (indices.size()) {
+        instancing
+            ? glDrawElementsInstanced(GL_TRIANGLES,
+                                      static_cast<unsigned int>(indices.size()),
+                                      GL_UNSIGNED_INT, 0, instance_count)
+            : glDrawElements(GL_TRIANGLES,
+                             static_cast<unsigned int>(indices.size()),
+                             GL_UNSIGNED_INT, 0);
+    } else {
+        instancing
+            ? glDrawArraysInstanced(
+                  GL_TRIANGLES, 0,
+                  static_cast<unsigned int>(geometry.vertices.size()),
+                  instance_count)
+            : glDrawArrays(GL_TRIANGLES, 0,
+                           static_cast<unsigned int>(geometry.vertices.size()));
+    }
 
     glBindVertexArray(0);
 

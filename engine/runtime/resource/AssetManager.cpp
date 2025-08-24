@@ -107,7 +107,7 @@ std::vector<Texture> AssetManager::loadMaterialTextures(aiMaterial *mat,
         std::string relativePath = str.C_Str();
         // 替换反斜杠为正斜杠
         std::replace(relativePath.begin(), relativePath.end(), '\\', '/');
-        std::cout << "typet:" << type << " ,i: " << i
+        std::cout << "type:" << type << " ,i: " << i
                   << "path:" << relativePath.c_str() << std::endl;
 
         bool skip = false;

@@ -4,6 +4,10 @@
 
 // glad.h must before glfw3.h
 #include <GLFW/glfw3.h>
+std::shared_ptr<Material> Material::create(const std::string vertexPath,
+                                           const std::string fragmentPath) {
+    return create(vertexPath.c_str(), fragmentPath.c_str());
+}
 std::shared_ptr<Material> Material::create(const char *vertexPath,
                                            const char *fragmentPath) {
     // 不能使用make_shared, make_shared不能访问private 构造函数

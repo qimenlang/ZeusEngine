@@ -54,6 +54,10 @@ class Object {
         m_transform = transform.get();
         addComponent(std::move(transform));
     }
+    Object() {
+        auto transform = std::make_unique<TransformComponent>();
+        m_transform = transform.get();
+    };
     ~Object() = default;
 
     size_t getId() const { return m_id; }

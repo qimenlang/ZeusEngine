@@ -17,6 +17,7 @@
 #include "samples/DepthScene.h"
 #include "samples/FBOScene.h"
 #include "samples/InstancingScene.h"
+#include "samples/InstancingStarScene.h"
 #include "samples/ModelScene.h"
 #include "samples/PBRScene.h"
 #include "samples/PBRTextureScene.h"
@@ -148,7 +149,8 @@ int main() {
     // auto scene = std::make_unique<BlendScene>();
     // auto scene = std::make_unique<PBRScene>();
     // auto scene = std::make_unique<PBRTextureScene>();
-    auto scene = std::make_unique<InstancingScene>();
+    // auto scene = std::make_unique<InstancingScene>();
+    auto scene = std::make_unique<InstancingStarScene>();
 
     scene->init();
     std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();
