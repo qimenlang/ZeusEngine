@@ -49,14 +49,12 @@ class Object {
     Object(std::string path, std::shared_ptr<Material> mat)
         : Object(path.c_str(), mat) {}
 
-    Object(std::shared_ptr<Material> mat = nullptr) : m_material(mat) {
-        auto transform = std::make_unique<TransformComponent>();
-        m_transform = transform.get();
-        addComponent(std::move(transform));
-    }
+    Object(std::shared_ptr<Material> mat) : Object() { m_material = mat; }
+
     Object() {
         auto transform = std::make_unique<TransformComponent>();
         m_transform = transform.get();
+        addComponent(std::move(transform));
     };
     ~Object() = default;
 

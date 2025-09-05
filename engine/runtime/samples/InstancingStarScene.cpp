@@ -5,6 +5,7 @@
 #include "function/render/Material.h"
 
 void InstancingStarScene::init() {
+    glm::vec3 planet_pos = {0, -20, -70};
     std::string planet_vs_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/default.vs");
     std::string planet_fs_path =
@@ -16,16 +17,16 @@ void InstancingStarScene::init() {
     auto planet =
         std::make_unique<Object>(planet_model_path.c_str(), planet_mat);
     auto transform = planet->getComponent<TransformComponent>();
-    transform->setPosition({0, 0, -100});
-    transform->setScale(glm::vec3{7.f});
+    transform->setPosition(planet_pos);
+    transform->setScale(glm::vec3{5.f});
     m_objects.emplace_back(std::move(planet));
 
     const int amount = 10000;
 
     std::array<glm::mat4, amount> modelMatrices;
     // srand();  // initialize random seed
-    float radius = 100.0;
-    float offset = 25.0f;
+    float radius = 50.0;
+    float offset = 10.0f;
     for (unsigned int i = 0; i < amount; i++) {
         glm::mat4 model = glm::mat4(1.0f);
         // 1. translation: displace along circle with 'radius' in range
@@ -39,7 +40,7 @@ void InstancingStarScene::init() {
                                         // compared to width of x and z
         displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
         float z = cos(angle) * radius + displacement;
-        model = glm::translate(model, glm::vec3(x, y, z));
+        model = glm::translate(model, planet_pos + glm::vec3(x, y, z));
 
         // 2. scale: Scale between 0.05 and 0.25f
         float scale = static_cast<float>((rand() % 20) / 100.0 + 0.05);

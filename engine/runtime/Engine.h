@@ -12,7 +12,7 @@ namespace Zeus {
 const unsigned int SCR_WIDTH = 1920;
 const unsigned int SCR_HEIGHT = 1080;
 inline glm::mat4 projection = glm::perspective(
-    glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 500.0f);
 
 class Engine : public Singleton<Engine> {
     friend class Singleton<Engine>;  // 允许访问私有成员函数

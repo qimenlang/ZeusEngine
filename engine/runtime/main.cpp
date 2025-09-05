@@ -157,6 +157,26 @@ int main() {
     std::unique_ptr<View> view = std::make_unique<View>();
     view->setScene(std::move(scene));
 
+    int count[3];
+    int invocations;
+    int size[3];
+    // work group count
+    // 一次Dispatch调用（一次计算调度）中,在每个维度上最多定义多少工作组;
+    // work group size 三个维度上invocation的最大值;
+    // size.x*size.y*size.z <= invocations;
+    for (int i = 0; i < 3; i++) {
+        glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, i, &count[i]);
+        glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, i, &size[i]);
+    }
+    std::cout << "limits Work Group Count : x " << count[0] << ",y:" << count[1]
+              << ",z:" << count[2] << std::endl;
+    std::cout << "limits Work Group size : x " << size[0] << ",y:" << size[1]
+              << ",z:" << size[2] << std::endl;
+    // 每个work group中invocation的数量限制;
+    // 即使每个维度的限制很高，但三者乘法的总和也不能超过 invocations;
+    glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &invocations);
+    std::cout << "limits Work Group invoations : " << invocations << std::endl;
+
     // render loop
     while (!glfwWindowShouldClose(window)) {
         // logic
