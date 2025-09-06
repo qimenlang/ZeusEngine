@@ -15,6 +15,7 @@ class Shader {
     Shader() {};
     // constructor reads and builds the shader
     Shader(const char *vertexPath, const char *fragmentPath);
+    ~Shader();
     // use/activate the shader
     void use();
     // utility uniform functions
@@ -25,6 +26,6 @@ class Shader {
     void setVec3(const std::string &name, glm::vec3 vec) const;
     void setVec2(const std::string &name, glm::vec2 vec) const;
 
-   private:
+   protected:
     void checkCompileErrors(unsigned int shader, std::string type);
 };

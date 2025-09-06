@@ -4,15 +4,20 @@
 
 // glad.h must before glfw3.h
 #include <GLFW/glfw3.h>
+std::unordered_map<Material *, std::shared_ptr<Material>>
+    Material::s_materialMap = {};
+
 std::shared_ptr<Material> Material::create(const std::string vertexPath,
                                            const std::string fragmentPath) {
     return create(vertexPath.c_str(), fragmentPath.c_str());
 }
 std::shared_ptr<Material> Material::create(const char *vertexPath,
                                            const char *fragmentPath) {
-    // 不能使用make_shared, make_shared不能访问private 构造函数
-    auto material =
-        std::shared_ptr<Material>(new Material(vertexPath, fragmentPath));
+    // 不能使用make_shared,
+    // make_shared不是成员函数，不能访问private权限的构造函数
+    auto rawMaterial = new Material(vertexPath, fragmentPath);
+    auto material = std::shared_ptr<Material>(rawMaterial);
+    s_materialMap[rawMaterial] = material;
     return material;
 }
 

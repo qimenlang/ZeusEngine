@@ -3,7 +3,6 @@
 
 #include "include/glad/glad.h"  // include glad to get all the required OpenGL headers
 
-
 Shader::Shader(const char *vertexPath, const char *fragmentPath) {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -56,6 +55,8 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) {
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }
+
+Shader::~Shader() { std::cout << "Shader::~Shader ID :" << ID << std::endl; }
 
 void Shader::use() { glUseProgram(ID); }
 // utility uniform functions

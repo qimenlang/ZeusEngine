@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <unordered_map>
 
 #include "Shader.h"
 #include "backend/GLEnums.h"
@@ -19,6 +20,9 @@ class Material {
 
     Shader *shader() { return m_shader.get(); }
 
+    static std::unordered_map<Material *, std::shared_ptr<Material>>
+        s_materialMap;
+
    private:
     Material(const char *vertexPath, const char *fragmentPath);
     std::unique_ptr<Shader> m_shader;
@@ -32,6 +36,7 @@ class MaterialInstance {
     friend class Material;
     MaterialInstance(Material *mat) { m_material = mat; }
 
+    // 保存渲染状态
     bool m_depthTest = true;
     bool m_depthWirte = true;
     using DepthFunc = SamplerCompareFunc;
