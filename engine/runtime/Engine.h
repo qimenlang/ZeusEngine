@@ -20,7 +20,9 @@ class Engine : public Singleton<Engine> {
     float m_deltaTime = 0.0f;    // 当前帧与上一帧的时间差
     float m_currentTime = 0.0f;  // 当前帧时间
     float m_lastFrame = 0.0f;    // 上一帧的时间
-    /* data */
+
+    float m_lastFPSUpdateTime = 0.0f;  // FPS 更新频率
+    float m_fps;
 
     Camera m_camera;
     std::unique_ptr<AssetManager> m_assetManager;
@@ -33,6 +35,7 @@ class Engine : public Singleton<Engine> {
 
     float deltaTime() const { return m_deltaTime; }
     float currentTime() const { return m_currentTime; }
+    float fps() const { return m_fps; }
 
     Camera& camera() { return m_camera; }
     AssetManager& assetManager() { return *m_assetManager; }

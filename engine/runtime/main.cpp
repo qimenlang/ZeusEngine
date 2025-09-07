@@ -107,8 +107,8 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // create window
-    GLFWwindow *window = glfwCreateWindow(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT,
-                                          "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window =
+        glfwCreateWindow(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT, "Zeus", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -163,7 +163,10 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         // logic
         engine.update();
-        // inputd
+        auto title = "FPS:" + std::to_string(engine.fps());
+        glfwSetWindowTitle(window, title.c_str());
+
+        // input
         processInput(window);
 
         renderer->prerender();

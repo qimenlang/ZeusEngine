@@ -23,6 +23,12 @@ void Engine::update() {
     m_currentTime = glfwGetTime();
     m_deltaTime = m_currentTime - m_lastFrame;
     m_lastFrame = m_currentTime;
+    // 更新帧率信息
+    if (m_currentTime - m_lastFPSUpdateTime > 1.0f) {
+        m_fps = 1.0 / m_deltaTime;
+        m_lastFPSUpdateTime = m_currentTime;
+    }
+
     // std::cout << "Engine updated. Delta Time: " << m_deltaTime << std::endl;
     // std::cout << "Engine updated. FPS: " << 1.0 / m_deltaTime << std::endl;
 }

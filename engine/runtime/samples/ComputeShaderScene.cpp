@@ -80,14 +80,6 @@ void ComputerShaderScene::init() {
 
 void ComputerShaderScene::update() {
     float currentFrame = Zeus::Engine::getInstance().currentTime();
-    float deltaTime = Zeus::Engine::getInstance().deltaTime();
-    if (m_counter > 500) {
-        std::cout << "FPS: " << 1 / deltaTime << std::endl;
-        m_counter = 0;
-    } else {
-        m_counter++;
-    }
-
     m_computeShader->use();
     m_computeShader->setFloat("t", currentFrame);
 
