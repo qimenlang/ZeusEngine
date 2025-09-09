@@ -116,7 +116,6 @@ void Primitive::Draw() {
         glUniform1i(glGetUniformLocation(matInstance->shaderID(),
                                          (name + number).c_str()),
                     i);
-
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
 

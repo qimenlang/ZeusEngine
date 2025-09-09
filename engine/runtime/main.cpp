@@ -22,6 +22,7 @@
 #include "samples/ModelScene.h"
 #include "samples/PBRScene.h"
 #include "samples/PBRTextureScene.h"
+#include "samples/ShadowScene.h"
 #include "samples/StencilScene.h"
 
 using namespace std;
@@ -142,8 +143,8 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // auto sczene = std::make_unique<CubeScene>();
-    // auto sczene = std::make_unique<FBOScene>();
+    // auto scene = std::make_unique<CubeScene>();
+    // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<ModelScene>();
     // auto scene = std::make_unique<DepthScene>();
     // auto scene = std::make_unique<StencilScene>();
@@ -152,7 +153,8 @@ int main() {
     // auto scene = std::make_unique<PBRTextureScene>();
     // auto scene = std::make_unique<InstancingScene>();
     // auto scene = std::make_unique<InstancingStarScene>();
-    auto scene = std::make_unique<ComputerShaderScene>();
+    // auto scene = std::make_unique<ComputerShaderScene>();
+    auto scene = std::make_unique<ShadowScene>();
 
     scene->init();
     std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();

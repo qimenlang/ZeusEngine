@@ -24,6 +24,14 @@ class Camera {
     glm::vec3 Up;
     glm::vec3 Right;
     glm::vec3 WorldUp;
+
+    struct ProjectionParams {
+        float FOV = 45.0f;
+        float AspectRatio = 16.0f / 9.0f;
+        float Near = 0.1f;
+        float Far = 500.0f;
+    };
+    glm::mat4 projection;
     // euler Angles
     float Yaw;
     float Pitch;

@@ -22,17 +22,12 @@ void Object::removeComponent(Component* componentIn) {
 };
 
 void Object::tick() {
-    if (onTick) onTick.invoke(this);
-
     if (!m_material) {
         std::cerr << "Object material is expired!" << std::endl;
         return;
     }
-    m_material->use();
-    m_material->shader()->setMat4("model", m_transform->GetModelMatrix());
-    m_material->shader()->setMat4(
-        "view", Zeus::Engine::getInstance().camera().GetViewMatrix());
-    m_material->shader()->setMat4("projection", Zeus::projection);
+
+    if (onTick) onTick.invoke(this);
 
     for (auto& component : m_components) {
         component->tick(0);
