@@ -13,3 +13,6 @@
 [submodule "thirdparty/rttr"]
 	path = thirdparty/rttr
 	url = git@github.com:rttrorg/rttr.git
+[submodule "thirdparty/Vulkan-Headers"]
+	path = thirdparty/Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git

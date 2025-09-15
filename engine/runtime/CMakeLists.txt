@@ -25,3 +25,12 @@ target_link_libraries(${ZEUS_ENGINE_NAME} ${ZEUS_RUNTIME_NAME})
 
 target_include_directories(${ZEUS_ENGINE_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
+# 添加 Vulkan 头文件路径
+# 假设你的 submodule 在 external/Vulkan-Headers
+include_directories(external/Vulkan-Headers/include)
+
+# 查找系统上安装的 Vulkan 库
+find_package(Vulkan REQUIRED)
+
+add_executable(VulkanStart vulkanStart.cpp)
+target_link_libraries(VulkanStart glfw stb glm assimp utils Vulkan::Vulkan)
