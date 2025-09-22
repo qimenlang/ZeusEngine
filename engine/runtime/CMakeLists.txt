@@ -33,4 +33,5 @@ include_directories(external/Vulkan-Headers/include)
 find_package(Vulkan REQUIRED)
 
 add_executable(VulkanStart vulkanStart.cpp)
+target_compile_definitions(VulkanStart PRIVATE ZEUS_ROOT_DIR=\"${CMAKE_SOURCE_DIR}/resources\")
 target_link_libraries(VulkanStart glfw stb glm assimp utils Vulkan::Vulkan)

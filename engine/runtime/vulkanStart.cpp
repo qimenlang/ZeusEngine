@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
+#include <fstream>
 #include <iostream>
 #include <optional>
 #include <set>
@@ -58,6 +59,23 @@ void DestroyDebugUtilsMessengerEXT(VkInstance instance,
     }
 }
 
+static std::vector<char> readFile(const std::string& filename) {
+    std::ifstream file(filename, std::ios::ate | std::ios::binary);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("failed to open file!");
+    }
+
+    size_t fileSize = (size_t)file.tellg();
+    std::vector<char> buffer(fileSize);
+
+    file.seekg(0);
+    file.read(buffer.data(), fileSize);
+
+    file.close();
+    return buffer;
+}
+
 struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;
     std::optional<uint32_t> presentFamily;
@@ -100,6 +118,9 @@ class HelloTriangleApplication {
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
     std::vector<VkImageView> swapChainImageViews;
+    VkRenderPass renderPass;
+    VkPipelineLayout pipelineLayout;
+    VkPipeline graphicsPipeline;
 
     void initWindow() {
         glfwInit();
@@ -121,6 +142,8 @@ class HelloTriangleApplication {
         createLogicalDevice();
         createSwapchain();
         createImageViews();
+        createRenderPass();
+        createGraphicsPipeline();
     }
 
     void mainLoop() {
@@ -130,9 +153,14 @@ class HelloTriangleApplication {
     }
 
     void cleanup() {
+        vkDestroyPipeline(device, graphicsPipeline, nullptr);
+        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        vkDestroyRenderPass(device, renderPass, nullptr);
+
         for (const auto& imageView : swapChainImageViews) {
             vkDestroyImageView(device, imageView, nullptr);
         }
+
         vkDestroySwapchainKHR(device, swapChain, nullptr);
         vkDestroyDevice(device, nullptr);
 
@@ -558,6 +586,229 @@ class HelloTriangleApplication {
                 throw std::runtime_error("failed to create image views!");
             }
         }
+    }
+
+    void createGraphicsPipeline() {
+        auto vertShaderCode =
+            readFile(std::string(ZEUS_ROOT_DIR)
+                         .append("/shader/vulkan/triangle.vert.spv"));
+        auto fragShaderCode =
+            readFile(std::string(ZEUS_ROOT_DIR)
+                         .append("/shader/vulkan/triangle.frag.spv"));
+        VkShaderModule vertShaderModel = createShaderModule(vertShaderCode);
+        VkShaderModule fragShaderModel = createShaderModule(fragShaderCode);
+
+        VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+        vertShaderStageInfo.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+        vertShaderStageInfo.module = vertShaderModel;
+        vertShaderStageInfo.pName = "main";
+
+        VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+        fragShaderStageInfo.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+        fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+        fragShaderStageInfo.module = fragShaderModel;
+        fragShaderStageInfo.pName = "main";
+
+        VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo,
+                                                          fragShaderStageInfo};
+
+        // 配置顶点输入
+        VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+        vertexInputInfo.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+        // 顶点的绑定和属性信息为空
+        vertexInputInfo.vertexBindingDescriptionCount = 0;
+        vertexInputInfo.pVertexBindingDescriptions = nullptr;
+        vertexInputInfo.vertexAttributeDescriptionCount = 0;
+        vertexInputInfo.pVertexAttributeDescriptions = nullptr;
+
+        // 配置输入装配
+        VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+        inputAssembly.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+        inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+        inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+        // 配置视口和裁剪
+        VkViewport viewport{};
+        viewport.x = 0.0f;  // xy定义左上角坐标
+        viewport.y = 0.0f;
+        viewport.width = (float)swapChainExtent.width;
+        viewport.height = (float)swapChainExtent.height;
+        viewport.minDepth = 0.0f;
+        viewport.maxDepth = 1.0f;
+
+        // 裁剪矩形：位于裁剪矩形之外的片段会被丢弃，不会进入片段着色、混合等阶段
+        VkRect2D scissor{};
+        scissor.offset = {0, 0};  // offset 定义与左上角坐标的偏移量
+        scissor.extent = swapChainExtent;
+
+        // 对视口和裁剪进行组合
+        VkPipelineViewportStateCreateInfo viewportState{};
+        viewportState.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+        viewportState.viewportCount = 1;
+        viewportState.pViewports = &viewport;
+        viewportState.scissorCount = 1;
+        viewportState.pScissors = &scissor;
+
+        // 配置光栅化
+        VkPipelineRasterizationStateCreateInfo rasterizer{};
+        rasterizer.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+        rasterizer.depthClampEnable = VK_FALSE;  // 深度夹取：近远平面的裁剪
+        rasterizer.rasterizerDiscardEnable = VK_FALSE;   // 光栅化丢弃
+        rasterizer.polygonMode = VK_POLYGON_MODE_FILL;   // 多边形填充模式
+        rasterizer.lineWidth = 1.0f;                     // 线宽
+        rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;     // 面剔除:剔除背面
+        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;  // 顺时针为正面
+        rasterizer.depthBiasEnable = VK_FALSE;           // 深度偏移
+        rasterizer.depthBiasConstantFactor = 0.0f;       // Optional
+        rasterizer.depthBiasClamp = 0.0f;                // Optional
+        rasterizer.depthBiasSlopeFactor = 0.0f;          // Optional
+
+        // 配置多重采样
+        VkPipelineMultisampleStateCreateInfo multisampling{};
+        multisampling.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+        multisampling.sampleShadingEnable = VK_FALSE;
+        multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+        multisampling.minSampleShading = 1.0f;           // Optional
+        multisampling.pSampleMask = nullptr;             // Optional
+        multisampling.alphaToCoverageEnable = VK_FALSE;  // Optional
+        multisampling.alphaToOneEnable = VK_FALSE;       // Optional
+
+        // 配置深度测试、模板测试
+
+        // 配置帧缓冲颜色混合
+        VkPipelineColorBlendAttachmentState colorBlendAttachment{};
+        colorBlendAttachment.colorWriteMask =
+            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT |
+            VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+        colorBlendAttachment.blendEnable = VK_FALSE;  // 不进行混合
+        // 正常配置颜色混合 factor和op
+        colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
+        colorBlendAttachment.dstColorBlendFactor =
+            VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+        colorBlendAttachment.colorBlendOp = VK_BLEND_OP_ADD;  // Optional
+        colorBlendAttachment.srcAlphaBlendFactor =
+            VK_BLEND_FACTOR_ONE;  // Optional
+        colorBlendAttachment.dstAlphaBlendFactor =
+            VK_BLEND_FACTOR_ZERO;                             // Optional
+        colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;  // Optional
+
+        // 全局颜色混合设置
+        VkPipelineColorBlendStateCreateInfo colorBlending{};
+        colorBlending.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+        colorBlending.logicOpEnable = VK_FALSE;    // 启用位运算混合颜色
+        colorBlending.logicOp = VK_LOGIC_OP_COPY;  // 位运算算子
+        colorBlending.attachmentCount = 1;
+        colorBlending.pAttachments = &colorBlendAttachment;
+        colorBlending.blendConstants[0] = 0.0f;  // Optional
+        colorBlending.blendConstants[1] = 0.0f;  // Optional
+        colorBlending.blendConstants[2] = 0.0f;  // Optional
+        colorBlending.blendConstants[3] = 0.0f;  // Optional
+
+        // 管线布局 : 在创建管线时定义着色器中uniform变量
+        VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
+        pipelineLayoutInfo.sType =
+            VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipelineLayoutInfo.setLayoutCount = 0;             // Optional
+        pipelineLayoutInfo.pSetLayouts = nullptr;          // Optional
+        pipelineLayoutInfo.pushConstantRangeCount = 0;     // Optional
+        pipelineLayoutInfo.pPushConstantRanges = nullptr;  // Optional
+
+        if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr,
+                                   &pipelineLayout) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create pipeline layout!");
+        }
+
+        VkGraphicsPipelineCreateInfo pipelineInfo{};
+        pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+        pipelineInfo.stageCount = 2;
+        pipelineInfo.pStages = shaderStages;
+        pipelineInfo.pVertexInputState = &vertexInputInfo;
+        pipelineInfo.pInputAssemblyState = &inputAssembly;
+        pipelineInfo.pViewportState = &viewportState;
+        pipelineInfo.pRasterizationState = &rasterizer;
+        pipelineInfo.pMultisampleState = &multisampling;
+        pipelineInfo.pDepthStencilState = nullptr;  // Optional
+        pipelineInfo.pColorBlendState = &colorBlending;
+        pipelineInfo.pDynamicState = nullptr;  // Optional
+        pipelineInfo.layout = pipelineLayout;
+        pipelineInfo.renderPass = renderPass;
+        pipelineInfo.subpass = 0;
+        pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;  // 从其他管线继承
+        pipelineInfo.basePipelineIndex = -1;               // 管线继承索引
+
+        if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo,
+                                      nullptr,
+                                      &graphicsPipeline) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create graphics pipeline!");
+        }
+
+        vkDestroyShaderModule(device, fragShaderModel, nullptr);
+        vkDestroyShaderModule(device, vertShaderModel, nullptr);
+    }
+
+    void createRenderPass() {
+        // 配置颜色缓冲附着
+        VkAttachmentDescription colorAttachment{};
+        colorAttachment.format = swapChainImageFormat;
+        colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
+        // loadOp/storeOp 指定在渲染开始和结束时对附着的操作，对颜色和深度起作用
+        colorAttachment.loadOp =
+            VK_ATTACHMENT_LOAD_OP_CLEAR;  // 渲染之前，清楚附着内容
+        colorAttachment.storeOp =
+            VK_ATTACHMENT_STORE_OP_STORE;  // 渲染之后，保存附着内容
+        colorAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+        colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+        // 布局是状态标签，它明确规定了附着当前正在被用作什么用途以及内容是如何组织的
+        colorAttachment.initialLayout =
+            VK_IMAGE_LAYOUT_UNDEFINED;  // 渲染之前的布局：未定义，将被覆盖
+        colorAttachment.finalLayout =
+            VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;  // 渲染之后的布局，图像在交换链中呈现
+
+        // 配置子流程和附着引用
+        VkAttachmentReference colorAttachmentRef{};
+        colorAttachmentRef.attachment = 0;
+        colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+        VkSubpassDescription subpass{};
+        subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+        subpass.colorAttachmentCount = 1;
+        subpass.pColorAttachments = &colorAttachmentRef;
+
+        // 创建渲染流程
+        VkRenderPassCreateInfo renderPassInfo{};
+        renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+        renderPassInfo.attachmentCount = 1;
+        renderPassInfo.pAttachments = &colorAttachment;
+        renderPassInfo.subpassCount = 1;
+        renderPassInfo.pSubpasses = &subpass;
+
+        if (vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass) !=
+            VK_SUCCESS) {
+            throw std::runtime_error("failed to create render pass!");
+        }
+    }
+
+    VkShaderModule createShaderModule(const std::vector<char>& code) {
+        VkShaderModuleCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+        createInfo.codeSize = code.size();
+        createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+        VkShaderModule shaderModule;
+        if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) !=
+            VK_SUCCESS) {
+            throw std::runtime_error("failed to create shader module!");
+        }
+        return shaderModule;
     }
 };
 
