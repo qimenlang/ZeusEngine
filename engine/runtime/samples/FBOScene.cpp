@@ -63,7 +63,7 @@ void FBOScene::init() {
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     // color attachment texture
-    // 创建一个纹理来存储颜色缓冲区
+    // 创建颜色纹理
     unsigned int textureColorbuffer;
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
@@ -94,12 +94,11 @@ void FBOScene::init() {
     std::string quad_vs_path =
         std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.vs");
     std::string quad_fs_path =
-        std::string(ZEUS_ROOT_DIR).append("/shader/screen/fb_screen.fs");
+        std::string(ZEUS_ROOT_DIR).append("/shader/screen/sobelTest.fs");
 
     auto quad_mat =
         Material::create(quad_vs_path.c_str(), quad_fs_path.c_str());
     quad_mat->shader()->use();
-    quad_mat->shader()->setInt("screenTexture", 0);
     quad_mat->shader()->setVec2("resolution",
                                 glm::vec2(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT));
 

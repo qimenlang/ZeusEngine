@@ -86,6 +86,7 @@ void Primitive::Draw() {
     unsigned int aoNr = 1;
     unsigned int roughnessNr = 1;
     unsigned int metallicNr = 1;
+    unsigned int shadowMapNr = 1;
 
     auto &textures = geometry.textures;
     for (unsigned int i = 0; i < textures.size(); i++) {
@@ -110,6 +111,8 @@ void Primitive::Draw() {
             number = std::to_string(roughnessNr++);
         else if (name == "metallic")
             number = std::to_string(metallicNr++);
+        else if (name == "shadowMap")
+            number = std::to_string(shadowMapNr++);
 
         // now set the sampler to the correct texture unit
         // TODO: 这里无效，存在bug,需要综合测试fs种采样多种贴图的效果

@@ -38,6 +38,29 @@ bool firstMouse = true;
 
 auto &engine = Zeus::Engine::getInstance();
 
+static int savedWidth, savedHeight, savedX, savedY;
+static bool isFullscreen = false;
+void toggleFullscreen(GLFWwindow *window) {
+    std::cout << "toggleFullscreen : " << isFullscreen << std::endl;
+    if (!isFullscreen) {
+        // 获取显示器信息
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+        // 切换到全屏
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height,
+                             mode->refreshRate);
+        isFullscreen = true;
+    } else {
+        // 切换回窗口模式
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+        glfwSetWindowMonitor(window, NULL, savedX, savedY, savedWidth,
+                             savedHeight, 0);
+        isFullscreen = false;
+    }
+}
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
               << std::endl;
@@ -66,12 +89,18 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
     Zeus::Engine::getInstance().camera().ProcessMouseScroll(yoffset);
 }
 
-void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        std::cout << "processInput " << GLFW_KEY_ESCAPE << std::endl;
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods) {
+    if (key == GLFW_KEY_F11 && action == GLFW_PRESS) {
+        toggleFullscreen(window);
+    }
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
+}
 
+// 持续事件在轮训中处理
+void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         std::cout << "deltaTime: " << engine.deltaTime() << std::endl;
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
@@ -97,6 +126,9 @@ void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
             Camera_Movement::DOWN, engine.deltaTime());
+    // if (glfwGetKey(window, GLFW_KEY_F11) == GLFW_) {
+    //     toggleFullscreen(window);
+    // }
 }
 
 int main() {
@@ -115,11 +147,17 @@ int main() {
         glfwTerminate();
         return -1;
     }
+    glfwGetWindowPos(window, &savedX, &savedY);
+    glfwGetWindowSize(window, &savedWidth, &savedHeight);
+    std::cout << "window Pos:{" << savedX << ", " << savedY
+              << "}; w:" << savedWidth << ",h:" << savedHeight << std::endl;
 
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    // 瞬时事件在回调中处理
+    glfwSetKeyCallback(window, key_callback);
     //  glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -144,13 +182,13 @@ int main() {
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
     // auto scene = std::make_unique<CubeScene>();
-    // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<ModelScene>();
     // auto scene = std::make_unique<DepthScene>();
     // auto scene = std::make_unique<StencilScene>();
     // auto scene = std::make_unique<BlendScene>();
     // auto scene = std::make_unique<PBRScene>();
     // auto scene = std::make_unique<PBRTextureScene>();
+    // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<InstancingScene>();
     // auto scene = std::make_unique<InstancingStarScene>();
     // auto scene = std::make_unique<ComputerShaderScene>();
