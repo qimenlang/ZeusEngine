@@ -37,32 +37,48 @@ void PBRScene::init() {
     m_lights.emplace_back(addLight({1.0, 1.0, 2.0}));
 
     std::string pbr_fs_path =
-        std::string(ZEUS_ROOT_DIR).append("/shader/pbr.fs");
+        std::string(ZEUS_ROOT_DIR).append("/shader/brdf.fs");
 
-    auto pbr_sphere_mat =
-        Material::create(vs_path.c_str(), pbr_fs_path.c_str());
-    pbr_sphere_mat->shader()->use();
-    pbr_sphere_mat->shader()->setVec3("mat.albedo",
-                                      glm::vec3(0.5f, 0.0f, 0.0f));
-    pbr_sphere_mat->shader()->setFloat("mat.ao", 1.0f);
+    auto brdfMat = Material::create(vs_path.c_str(), pbr_fs_path.c_str());
+    brdfMat->shader()->use();
+    brdfMat->shader()->setVec3("mat.albedo", glm::vec3(0.5f, 0.0f, 0.0f));
+    brdfMat->shader()->setFloat("mat.ao", 1.0f);
 
-    auto createSphere = [&]() -> std::unique_ptr<Object> {
-        auto sphere = std::make_unique<Object>(pbr_sphere_mat);
+    auto createSphere =
+        [&](std::shared_ptr<Material> mat) -> std::unique_ptr<Object> {
+        auto sphere = std::make_unique<Object>(mat);
         auto sphereGeo = SphereGeometry::create(0.48);
-        Primitive spherePrimitive = {
-            sphereGeo, pbr_sphere_mat->defaultInstance()->duplicate()};
+        Primitive spherePrimitive = {sphereGeo,
+                                     mat->defaultInstance()->duplicate()};
         sphere->addComponent(std::move(
             std::make_unique<MeshComponent>(PrimitiveList{spherePrimitive})));
         return std::move(sphere);
     };
 
+    // for PBR Test
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 7; j++) {
-            auto sphere = createSphere();
+            auto sphere = createSphere(brdfMat);
+            sphere->setEnabled(false);
             sphere->transform()->setPosition({i - 3.5, j - 3.5, -5});
-            m_spheres.emplace_back(std::move(sphere));
+            m_PBRSpheres.emplace_back(std::move(sphere));
         }
     }
+
+    std::string bsdf_fs_path =
+        std::string(ZEUS_ROOT_DIR).append("/shader/bsdf.fs");
+
+    auto bsdfMat = Material::create(vs_path.c_str(), bsdf_fs_path.c_str());
+    bsdfMat->shader()->use();
+    bsdfMat->shader()->setVec3("mat.albedo", glm::vec3(0.0f, 0.5f, 0.0f));
+    bsdfMat->shader()->setFloat("mat.ao", 1.0f);
+    bsdfMat->shader()->setVec3("subsurface.color", glm::vec3(0.8f, 0.0f, 0.0f));
+    bsdfMat->shader()->setFloat("subsurface.power", 10.0f);
+    bsdfMat->shader()->setFloat("subsurface.thickness", 0.5f);
+
+    // for SSS Test
+    auto sphere = createSphere(bsdfMat);
+    m_SSSSpheres.emplace_back(std::move(sphere));
 }
 
 void PBRScene::update() {
@@ -75,7 +91,7 @@ void PBRScene::update() {
         light->tick();
     }
 
-    auto &pbrShader = m_spheres[0]
+    auto &pbrShader = m_PBRSpheres[0]
                           ->getComponent<MeshComponent>()
                           ->primitives()[0]
                           .matInstance;
@@ -91,12 +107,34 @@ void PBRScene::update() {
 
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 7; j++) {
-            auto &sphere = m_spheres[i * 7 + j];
+            auto &sphere = m_PBRSpheres[i * 7 + j];
             // clamp to 0.05-1.0; 0粗糙度绝对光滑，看起来不太自然
             pbrShader->setFloat("mat.roughness",
                                 glm::clamp(float(i) / 7.f, 0.05f, 1.0f));
             pbrShader->setFloat("mat.metallic", float(j) / 7.f);
             sphere->tick();
         }
+    }
+
+    auto &sssShader = m_SSSSpheres[0]
+                          ->getComponent<MeshComponent>()
+                          ->primitives()[0]
+                          .matInstance;
+    sssShader->use();
+    sssShader->setVec3("camPos", Zeus::Engine::getInstance().camera().Position);
+    for (int i = 0; i < m_lights.size(); i++) {
+        sssShader->setVec3("lights[" + std::to_string(i) + "].pos",
+                           m_lights[i]->transform()->position());
+        sssShader->setVec3("lights[" + std::to_string(i) + "].color",
+                           lightColor);
+    }
+
+    for (auto &sphere : m_SSSSpheres) {
+        sssShader->setFloat("mat.roughness", 0.5f);
+        sssShader->setFloat("mat.metallic", 0.5f);
+        sssShader->setFloat(
+            "subsurface.thickness",
+            std::abs(sin(Zeus::Engine::getInstance().currentTime())));
+        sphere->tick();
     }
 }

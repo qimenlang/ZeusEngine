@@ -22,8 +22,10 @@ void Object::removeComponent(Component* componentIn) {
 };
 
 void Object::tick() {
+    if (!m_enabled) return;
     if (!m_material) {
-        std::cerr << "Object material is expired!" << std::endl;
+        std::cerr << "Object:" << m_name << ", material is expired!"
+                  << std::endl;
         return;
     }
 

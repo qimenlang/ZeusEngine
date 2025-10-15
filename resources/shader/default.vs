@@ -18,6 +18,7 @@ void main()
 {
     fragPos  = vec3(model*vec4(aPos,1.0));
     lightSpaceFragPos = lightSpaceMatrix*vec4(fragPos,1.0);
+    //将法线从模型空间正确地变换到世界空间，同时保证法线在变换后仍然垂直于表面
     normal = mat3(transpose(inverse(model))) * aNormal;
     texCoord = aTexCoord;
     gl_Position = projection*view*model*vec4(aPos,1.0);

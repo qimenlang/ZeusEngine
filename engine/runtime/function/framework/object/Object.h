@@ -31,6 +31,8 @@ class Object {
     // TODO：不应该在object中保存，移到渲染模块
     std::shared_ptr<Material> m_material;
 
+    bool m_enabled = true;
+
    public:
     Object(const char *path, std::shared_ptr<Material> mat) : Object(mat) {
         m_res_path = *path;
@@ -103,4 +105,7 @@ class Object {
     void tick();
 
     Event<void(Object *thiz)> onTick;
+
+    void setEnabled(bool enabled) { m_enabled = enabled; }
+    bool isEnabled() const { return m_enabled; }
 };
