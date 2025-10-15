@@ -3,7 +3,6 @@
 #include <resource/geometries/CubeGeometry.h>
 #include <resource/geometries/QuadGeometry.h>
 
-#include <glm/gtx/string_cast.hpp>
 #include <memory>
 
 #include "Engine.h"

@@ -5,7 +5,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
 #include "Engine.h"
@@ -105,11 +104,11 @@ void processInput(GLFWwindow *window) {
         std::cout << "deltaTime: " << engine.deltaTime() << std::endl;
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
             Camera_Movement::FORWARD, engine.deltaTime());
-        std::cout << "Camera Position: "
-                  << glm::to_string(
-                         Zeus::Engine::getInstance().camera().Position)
-                  << " ,camera :" << &Zeus::Engine::getInstance().camera()
-                  << std::endl;
+        // std::cout << "Camera Position: "
+        //           << glm::to_string(
+        //                  Zeus::Engine::getInstance().camera().Position)
+        //           << " ,camera :" << &Zeus::Engine::getInstance().camera()
+        //           << std::endl;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         Zeus::Engine::getInstance().camera().ProcessKeyboard(

@@ -1,6 +1,5 @@
 #include "BlendScene.h"
 
-#include <glm/gtx/string_cast.hpp>
 #include <memory>
 
 #include "Engine.h"
