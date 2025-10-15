@@ -5,14 +5,24 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
-#include "CubeScene.h"
 #include "Engine.h"
-#include "ModelScene.h"
-#include "Shader.h"
-#include "function/framework/object/object.h"
+#include "function/framework/object/Object.h"
+#include "function/render/Renderer.h"
+#include "function/render/View.h"
+#include "samples/BlendScene.h"
+#include "samples/ComputeShaderScene.h"
+#include "samples/CubeScene.h"
+#include "samples/DepthScene.h"
+#include "samples/FBOScene.h"
+#include "samples/InstancingScene.h"
+#include "samples/InstancingStarScene.h"
+#include "samples/ModelScene.h"
+#include "samples/PBRScene.h"
+#include "samples/PBRTextureScene.h"
+#include "samples/ShadowScene.h"
+#include "samples/StencilScene.h"
 
 using namespace std;
 
@@ -26,6 +36,29 @@ float lastY = Zeus::SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 auto &engine = Zeus::Engine::getInstance();
+
+static int savedWidth, savedHeight, savedX, savedY;
+static bool isFullscreen = false;
+void toggleFullscreen(GLFWwindow *window) {
+    std::cout << "toggleFullscreen : " << isFullscreen << std::endl;
+    if (!isFullscreen) {
+        // 获取显示器信息
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+        // 切换到全屏
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height,
+                             mode->refreshRate);
+        isFullscreen = true;
+    } else {
+        // 切换回窗口模式
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+        glfwSetWindowMonitor(window, NULL, savedX, savedY, savedWidth,
+                             savedHeight, 0);
+        isFullscreen = false;
+    }
+}
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     std::cout << "framebuffer_size_callback [" << width << "," << height << "]"
@@ -55,21 +88,27 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
     Zeus::Engine::getInstance().camera().ProcessMouseScroll(yoffset);
 }
 
-void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        std::cout << "processInput " << GLFW_KEY_ESCAPE << std::endl;
+void key_callback(GLFWwindow *window, int key, int scancode, int action,
+                  int mods) {
+    if (key == GLFW_KEY_F11 && action == GLFW_PRESS) {
+        toggleFullscreen(window);
+    }
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
+}
 
+// 持续事件在轮训中处理
+void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         std::cout << "deltaTime: " << engine.deltaTime() << std::endl;
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
             Camera_Movement::FORWARD, engine.deltaTime());
-        std::cout << "Camera Position: "
-                  << glm::to_string(
-                         Zeus::Engine::getInstance().camera().Position)
-                  << " ,camera :" << &Zeus::Engine::getInstance().camera()
-                  << std::endl;
+        // std::cout << "Camera Position: "
+        //           << glm::to_string(
+        //                  Zeus::Engine::getInstance().camera().Position)
+        //           << " ,camera :" << &Zeus::Engine::getInstance().camera()
+        //           << std::endl;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
@@ -86,33 +125,51 @@ void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
         Zeus::Engine::getInstance().camera().ProcessKeyboard(
             Camera_Movement::DOWN, engine.deltaTime());
+    // if (glfwGetKey(window, GLFW_KEY_F11) == GLFW_) {
+    //     toggleFullscreen(window);
+    // }
 }
 
 int main() {
     // init glfw
     std::cout << "Zeus Engine Start" << std::endl;
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // create window
-    GLFWwindow *window = glfwCreateWindow(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT,
-                                          "LearnOpenGL", NULL, NULL);
+    GLFWwindow *window =
+        glfwCreateWindow(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT, "Zeus", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
+    glfwGetWindowPos(window, &savedX, &savedY);
+    glfwGetWindowSize(window, &savedWidth, &savedHeight);
+    std::cout << "window Pos:{" << savedX << ", " << savedY
+              << "}; w:" << savedWidth << ",h:" << savedHeight << std::endl;
+
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    // 瞬时事件在回调中处理
+    glfwSetKeyCallback(window, key_callback);
     //  glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
+        glfwTerminate();
         return -1;
     }
+    const char *versionStr = (const char *)glGetString(GL_VERSION);
+    std::cout << "OpenGL版本: " << glGetString(GL_VERSION) << std::endl;
+    std::cout << "显卡供应商: " << glGetString(GL_VENDOR) << std::endl;
+    std::cout << "渲染器: " << glGetString(GL_RENDERER) << std::endl;
+    std::cout << "GLSL版本: " << glGetString(GL_SHADING_LANGUAGE_VERSION)
+              << std::endl;
+
     // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -123,24 +180,36 @@ int main() {
 
     Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
-    // CubeScene cubeScene;
-    // cubeScene.init();
-    ModelScene modelScene;
-    modelScene.init();
+    // auto scene = std::make_unique<CubeScene>();
+    // auto scene = std::make_unique<ModelScene>();
+    // auto scene = std::make_unique<DepthScene>();
+    // auto scene = std::make_unique<StencilScene>();
+    // auto scene = std::make_unique<BlendScene>();
+    auto scene = std::make_unique<PBRScene>();
+    // auto scene = std::make_unique<PBRTextureScene>();
+    // auto scene = std::make_unique<FBOScene>();
+    // auto scene = std::make_unique<InstancingScene>();
+    // auto scene = std::make_unique<InstancingStarScene>();
+    // auto scene = std::make_unique<ComputerShaderScene>();
+    // auto scene = std::make_unique<ShadowScene>();
 
-    glEnable(GL_DEPTH_TEST);
+    scene->init();
+    std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();
+    std::unique_ptr<View> view = std::make_unique<View>();
+    view->setScene(std::move(scene));
+
     // render loop
     while (!glfwWindowShouldClose(window)) {
         // logic
         engine.update();
-        // inputd
-        processInput(window);
-        // rendering
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        auto title = "FPS:" + std::to_string(engine.fps());
+        glfwSetWindowTitle(window, title.c_str());
 
-        // cubeScene.update();
-        modelScene.update();
+        // input
+        processInput(window);
+
+        renderer->prerender();
+        renderer->render(view.get());
 
         // check poll events & swap buffer
         glfwPollEvents();

@@ -36,8 +36,10 @@ In memory of being dismissed during the probation period of xiaohongshu
    - 前向渲染
    - 延迟渲染
    - Cluster-Based渲染管线
-3. 基于物理的渲染
-   - PBR
+3. AAA Rendering
+   - LightMap + LightProbe
+   - PBR + IBL
+   - Cascade Shadow + CSSM
 4. 
 
 

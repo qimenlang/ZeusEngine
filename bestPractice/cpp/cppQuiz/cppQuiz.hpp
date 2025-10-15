@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <iostream>
+#include <type_traits>
 
 // Quiz1
 // 主模板，可以放在头文件中定义
@@ -117,3 +118,24 @@ int h116(T &&t) {
 int j116(int &&t);
 
 void cppQuiz116();
+
+// cppQuiz338  constexpr
+template <typename T>
+int f338() {
+    // c++17引入了if constexpr，允许在模板编译时进行条件判断,
+    // 满足条件的分支会被编译，其他分支会被忽略
+    // is_same_v<T, int> = is_same<T, int>::value
+    if constexpr (std::is_same_v<T, int>) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+// constexpr主要目的是在编译时计算值或表达式
+static int count338 = 0;
+constexpr uint64_t factorial(uint64_t number) {
+    return number <= 1 ? number : factorial(number - 1) * number;
+}
+constexpr double pi = 3.1415926535;  // 替代宏定义
+
+void cppQuiz338();

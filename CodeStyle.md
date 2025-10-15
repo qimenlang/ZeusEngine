@@ -7,7 +7,7 @@ clang-format配置：
     # IndentWidth Set to 4(唯一改动)
 
 
-类名 class FileReader  
+类名 class FileReader  首字母大写
 
 类方法 processData()  非google风格
 
@@ -23,4 +23,4 @@ clang-format配置：
 
 枚举值  kNotFound, kInternalError  
 
-文件名  url_parser.cpp
+文件名  FileReader.cpp  同类名

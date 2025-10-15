@@ -15,6 +15,12 @@ void Engine::init() {
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     m_camera = Camera(cameraPos, cameraUp);
 
+    Camera::ProjectionParams pjtPara = {
+        45.f, float(SCR_WIDTH) / float(SCR_HEIGHT), 0.1f, 500.0f};
+    m_camera.projection =
+        glm::perspective(glm::radians(pjtPara.FOV), pjtPara.AspectRatio,
+                         pjtPara.Near, pjtPara.Far);
+
     m_assetManager = std::make_unique<AssetManager>();
 }
 
@@ -23,6 +29,13 @@ void Engine::update() {
     m_currentTime = glfwGetTime();
     m_deltaTime = m_currentTime - m_lastFrame;
     m_lastFrame = m_currentTime;
-    // std::cout << "Engine updated. Delta Time: " << deltaTime << std::endl;
+    // 更新帧率信息
+    if (m_currentTime - m_lastFPSUpdateTime > 1.0f) {
+        m_fps = 1.0 / m_deltaTime;
+        m_lastFPSUpdateTime = m_currentTime;
+    }
+
+    // std::cout << "Engine updated. Delta Time: " << m_deltaTime << std::endl;
+    // std::cout << "Engine updated. FPS: " << 1.0 / m_deltaTime << std::endl;
 }
 }  // namespace Zeus

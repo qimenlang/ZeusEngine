@@ -100,7 +100,7 @@ void testConditionVariable2() {
 
 void testasync() {
     auto getResult = []() -> int {
-        std::cout << "id:" << std::this_thread::get_id() << std::endl;
+        std::cout << "aync id:" << std::this_thread::get_id() << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
         return 100;
     };
@@ -113,11 +113,17 @@ void testasync() {
     // 2.async:强制创建新线程执行任务,不保证立即执行
     // 3.deferred:延迟到调用get()时运行,不创建新线程，在调用get的线程中运行
     std::cout << "id:" << std::this_thread::get_id() << std::endl;
+
     std::future<int> result = std::async(getResult);
-    // std::future<int> result = std::async(std::launch::async, getResult);
-    // std::future<int> result = std::async(std::launch::deferred, getResult);
+    std::future<int> result_async = std::async(std::launch::async, getResult);
+    std::future<int> result_defered =
+        std::async(std::launch::deferred, getResult);
     // result.wait();
     std::cout << "testasync result get: " << result.get() << std::endl;
+    std::cout << "testasync result_async get: " << result_async.get()
+              << std::endl;
+    std::cout << "testasync result_defered get: " << result_defered.get()
+              << std::endl;
     std::cout << "testasync End" << std::endl;
 }
 

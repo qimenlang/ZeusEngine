@@ -32,7 +32,7 @@ void swapWithoutDeakLock(threadsafeStack<U> &left, threadsafeStack<U> &right) {
 template <typename U>
 void swapWithScopeLock(threadsafeStack<U> &left, threadsafeStack<U> &right) {
     if (&left == &right) return;
-    std::scoped_lock(left.m_mutex, right.m_mutex);
+    std::scoped_lock scopLock(left.m_mutex, right.m_mutex);
     left.m_stack.swap(right.m_stack);
 }
 

@@ -1,0 +1,169 @@
+#include "MeshComponent.h"
+
+#include "backend/GLUtils.h"
+#include "function/framework/object/Object.h"
+
+Primitive::Primitive(const Geometry &geometry,
+                     std::shared_ptr<MaterialInstance> material)
+    : geometry(geometry), matInstance(material) {
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    auto &vertices = geometry.vertices;
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
+                 &vertices[0], GL_STATIC_DRAW);
+
+    auto &indices = geometry.indices;
+    if (indices.size()) {
+        glGenBuffers(1, &EBO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                     indices.size() * sizeof(unsigned int), &indices[0],
+                     GL_STATIC_DRAW);
+    }
+
+    // 顶点位置
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+    // 顶点法线
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                          (void *)offsetof(Vertex, Normal));
+    // 顶点纹理坐标
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                          (void *)offsetof(Vertex, TexCoords));
+
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                          (void *)offsetof(Vertex, Tangent));
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                          (void *)offsetof(Vertex, Bitangent));
+    glEnableVertexAttribArray(5);
+    glVertexAttribPointer(5, MAX_BONE_INFLUENCE, GL_INT, GL_FALSE,
+                          sizeof(Vertex), (void *)offsetof(Vertex, m_BoneIDs));
+    glEnableVertexAttribArray(6);
+    glVertexAttribPointer(6, MAX_BONE_INFLUENCE, GL_FLOAT, GL_FALSE,
+                          sizeof(Vertex), (void *)offsetof(Vertex, m_Weights));
+
+    glBindVertexArray(0);
+}
+
+void Primitive::Draw() {
+    {
+        // 设置深度测试、深度写入状态
+        if ((matInstance->depthFunc() == SamplerCompareFunc::A &&
+             !matInstance->depthWrite()) ||
+            !matInstance->depthTest()) {
+            glDisable(GL_DEPTH_TEST);
+        } else {
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(getCompareFunc(matInstance->depthFunc()));
+            // opengl 开关深度写入接口,名字是mask，但功能仅仅是开关
+            glDepthMask(GLboolean(matInstance->depthWrite()));
+        }
+
+        // set Culling State
+        auto cullingMode = matInstance->cullingMode();
+        if (cullingMode == CullingMode::NONE) {
+            glDisable(GL_CULL_FACE);
+        } else {
+            glEnable(GL_CULL_FACE);
+            glCullFace(getCullingMode(cullingMode));
+        }
+    }
+
+    // bind appropriate textures
+    unsigned int diffuseNr = 1;
+    unsigned int specularNr = 1;
+    unsigned int normalNr = 1;
+    unsigned int heightNr = 1;
+    unsigned int albedoNr = 1;
+    unsigned int aoNr = 1;
+    unsigned int roughnessNr = 1;
+    unsigned int metallicNr = 1;
+    unsigned int shadowMapNr = 1;
+
+    auto &textures = geometry.textures;
+    for (unsigned int i = 0; i < textures.size(); i++) {
+        // active proper texture unit before binding
+        glActiveTexture(GL_TEXTURE0 + i);
+        // retrieve texture number (the N in diffuse_textureN)
+        std::string number;
+        std::string name = textures[i].type;
+        if (name == "diffuse")
+            number = std::to_string(diffuseNr++);
+        else if (name == "specular")
+            number = std::to_string(specularNr++);
+        else if (name == "normal")
+            number = std::to_string(normalNr++);
+        else if (name == "height")
+            number = std::to_string(heightNr++);
+        else if (name == "albedo")
+            number = std::to_string(albedoNr++);
+        else if (name == "ao")
+            number = std::to_string(aoNr++);
+        else if (name == "roughness")
+            number = std::to_string(roughnessNr++);
+        else if (name == "metallic")
+            number = std::to_string(metallicNr++);
+        else if (name == "shadowMap")
+            number = std::to_string(shadowMapNr++);
+
+        // now set the sampler to the correct texture unit
+        // TODO: 这里无效，存在bug,需要综合测试fs种采样多种贴图的效果
+        glUniform1i(glGetUniformLocation(matInstance->shaderID(),
+                                         (name + number).c_str()),
+                    i);
+        glBindTexture(GL_TEXTURE_2D, textures[i].id);
+    }
+
+    // draw mesh
+    glBindVertexArray(VAO);
+    auto indices = geometry.indices;
+
+    if (indices.size()) {
+        instancing
+            ? glDrawElementsInstanced(GL_TRIANGLES,
+                                      static_cast<unsigned int>(indices.size()),
+                                      GL_UNSIGNED_INT, 0, instance_count)
+            : glDrawElements(GL_TRIANGLES,
+                             static_cast<unsigned int>(indices.size()),
+                             GL_UNSIGNED_INT, 0);
+    } else {
+        instancing
+            ? glDrawArraysInstanced(
+                  GL_TRIANGLES, 0,
+                  static_cast<unsigned int>(geometry.vertices.size()),
+                  instance_count)
+            : glDrawArrays(GL_TRIANGLES, 0,
+                           static_cast<unsigned int>(geometry.vertices.size()));
+    }
+
+    glBindVertexArray(0);
+
+    // always good practice to set everything back to defaults once configured.
+    glActiveTexture(GL_TEXTURE0);
+}
+
+// void MeshComponent::postLoadResource(std::weak_ptr<Object> parent_object) {
+//     Component::postLoadResource(parent_object);
+// }
+
+void MeshComponent::tick(float delta_time) {
+    for (auto &sub_mesh : m_primitives) {
+        sub_mesh.Draw();
+    }
+}
+
+MeshComponent *MeshComponent::create(Object &obj,
+                                     const PrimitiveList &primitives) {
+    auto mesh_component = std::make_unique<MeshComponent>(primitives);
+    auto ptr = mesh_component.get();
+    addToObject(obj, std::move(mesh_component));
+    return ptr;
+}

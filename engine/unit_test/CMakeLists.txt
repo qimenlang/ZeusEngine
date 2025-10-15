@@ -11,8 +11,5 @@ add_executable (${TARGET_NAME} ${TEST_SOURCES})
 target_link_libraries(${TARGET_NAME} PUBLIC Catch2::Catch2WithMain RTTR::Core_Lib ZeusRuntime)
 
 #CTest
-add_executable (testExample ${TEST_SOURCES}) 
-target_link_libraries(testExample PUBLIC Catch2::Catch2WithMain RTTR::Core_Lib ZeusRuntime)
-# 注册测试
-add_test(NAME testExample COMMAND testExample -s --verbosity high )
+add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} -s --verbosity high )
 

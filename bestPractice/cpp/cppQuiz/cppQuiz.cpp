@@ -130,6 +130,16 @@ void cppQuiz116() {
     std::cout << j116(1) << std::endl;             // 输出12
 }
 
+void cppQuiz338() {
+    PRINT_FUNC_NAME();
+    std::cout << f338<int>() << std::endl;          // 输出0
+    std::cout << f338<std::string>() << std::endl;  // 输出空字符串
+
+    std::cout << "Factorial count" << std::endl;
+    constexpr uint64_t value = factorial(10);  //编译时计算
+    std::cout << "Factorial of 10 is: " << value << std::endl;  // 输出3628800
+}
+
 int main() {
     cppQuiz1();
     cppQuiz2();
@@ -139,5 +149,6 @@ int main() {
     cppQuiz42();
     cppQuiz109();
     cppQuiz116();
+    cppQuiz338();
     return 0;
 }
