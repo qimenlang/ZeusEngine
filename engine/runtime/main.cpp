@@ -1,6 +1,9 @@
 ﻿#include "include/glad/glad.h"
 // glad.h must before glfw3.h
 #include <GLFW/glfw3.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -23,6 +26,7 @@
 #include "samples/PBRTextureScene.h"
 #include "samples/ShadowScene.h"
 #include "samples/StencilScene.h"
+
 
 using namespace std;
 
@@ -139,8 +143,12 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // create window
-    GLFWwindow *window =
-        glfwCreateWindow(Zeus::SCR_WIDTH, Zeus::SCR_HEIGHT, "Zeus", NULL, NULL);
+    float main_scale = ImGui_ImplGlfw_GetContentScaleForMonitor(
+        glfwGetPrimaryMonitor());  // Valid on GLFW 3.3+ only
+
+    GLFWwindow *window = glfwCreateWindow((int)(Zeus::SCR_WIDTH * main_scale),
+                                          (int)(Zeus::SCR_HEIGHT * main_scale),
+                                          "Zeus", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -164,14 +172,15 @@ int main() {
         return -1;
     }
     const char *versionStr = (const char *)glGetString(GL_VERSION);
+    const char *glslVersionStr =
+        (const char *)glGetString(GL_SHADING_LANGUAGE_VERSION);
     std::cout << "OpenGL版本: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "显卡供应商: " << glGetString(GL_VENDOR) << std::endl;
     std::cout << "渲染器: " << glGetString(GL_RENDERER) << std::endl;
-    std::cout << "GLSL版本: " << glGetString(GL_SHADING_LANGUAGE_VERSION)
-              << std::endl;
+    std::cout << "GLSL版本: " << glslVersionStr << std::endl;
 
     // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_CAPTURED);
 
 #ifdef ZEUS_ROOT_DIR
     PRINTAPI(ZEUS_ROOT_DIR);
@@ -198,8 +207,32 @@ int main() {
     std::unique_ptr<View> view = std::make_unique<View>();
     view->setScene(std::move(scene));
 
+    bool show_demo_window = true;
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
+    io.ConfigFlags |=
+        ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+    io.ConfigFlags |=
+        ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+
+    // Setup Platform/Renderer backends
+    ImGui_ImplGlfw_InitForOpenGL(
+        window, true);  // Second param install_callback=true will install
+                        // GLFW callbacks and chain to existing ones.
+    ImGui_ImplOpenGL3_Init("#version 460");
+
     // render loop
     while (!glfwWindowShouldClose(window)) {
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::ShowDemoWindow();  // Show demo window! :)
         // logic
         engine.update();
         auto title = "FPS:" + std::to_string(engine.fps());
@@ -213,9 +246,17 @@ int main() {
 
         // check poll events & swap buffer
         glfwPollEvents();
+        // Rendering
+        // (Your code clears your framebuffer, renders your other stuff etc.)
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         glfwSwapBuffers(window);
     }
 
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();
     return 0;
