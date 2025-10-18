@@ -1,5 +1,7 @@
 #include "PBRScene.h"
 
+#include <imgui.h>
+
 #include <memory>
 
 #include "Engine.h"
@@ -7,6 +9,12 @@
 #include "function/framework/object/Object.h"
 #include "function/render/Material.h"
 #include "resource/geometries/SphereGeometry.h"
+
+struct subsurfaceParams {
+    glm::vec3 color = glm::vec3(0.8f, 0.0f, 0.0f);
+    float power = 10.0f;
+    float thickness = 0.5f;
+} subsurfacePara;
 
 PBRScene::PBRScene() : Scene() {
     std::cout << "PBRScene initialized." << std::endl;
@@ -81,7 +89,17 @@ void PBRScene::init() {
     m_SSSSpheres.emplace_back(std::move(sphere));
 }
 
+static void gui() {
+    ImGui::Begin("Subsurface Controls");
+    ImGui::SliderFloat("Thickness", &subsurfacePara.thickness, 0.0f, 1.0f);
+    ImGui::SliderFloat("Subsurface power", &subsurfacePara.power, 1.0f, 24.0f);
+    ImGui::ColorEdit3("Subsurface color", &subsurfacePara.color[0]);
+    ImGui::End();
+}
+
 void PBRScene::update() {
+    gui();
+
     auto lightColor = glm::vec3(300.0f);
     auto &lightShader =
         m_lights[0]->getComponent<MeshComponent>()->primitives()[0].matInstance;
@@ -132,9 +150,10 @@ void PBRScene::update() {
     for (auto &sphere : m_SSSSpheres) {
         sssShader->setFloat("mat.roughness", 0.5f);
         sssShader->setFloat("mat.metallic", 0.5f);
-        sssShader->setFloat(
-            "subsurface.thickness",
-            std::abs(sin(Zeus::Engine::getInstance().currentTime())));
+        sssShader->setFloat("subsurface.thickness", subsurfacePara.thickness);
+        sssShader->setFloat("subsurface.power", subsurfacePara.power);
+        sssShader->setVec3("subsurface.color", subsurfacePara.color);
+
         sphere->tick();
     }
 }

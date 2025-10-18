@@ -27,7 +27,6 @@
 #include "samples/ShadowScene.h"
 #include "samples/StencilScene.h"
 
-
 using namespace std;
 
 #define PRINTAPI(x) std::cout << #x << std::endl;
@@ -228,11 +227,13 @@ int main() {
 
     // render loop
     while (!glfwWindowShouldClose(window)) {
+        // poll events
+        glfwPollEvents();
+
         // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        ImGui::ShowDemoWindow();  // Show demo window! :)
         // logic
         engine.update();
         auto title = "FPS:" + std::to_string(engine.fps());
@@ -244,13 +245,12 @@ int main() {
         renderer->prerender();
         renderer->render(view.get());
 
-        // check poll events & swap buffer
-        glfwPollEvents();
-        // Rendering
+        // Gui Rendering
         // (Your code clears your framebuffer, renders your other stuff etc.)
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+        // check swap buffer
         glfwSwapBuffers(window);
     }
 
