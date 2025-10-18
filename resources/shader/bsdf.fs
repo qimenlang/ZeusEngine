@@ -6,16 +6,16 @@ in vec2 texCoord;
 
 out vec4 FragColor;
 
-#define saturate(x)                 clamp(x, 0.0, 1.0)
+#define saturate(x) clamp(x, 0.0, 1.0)
 
 // PBR Mat
-struct Material {
+struct Brdf {
     vec3 albedo;
     float roughness;
     float metallic;
     float ao;
 }; 
-uniform Material mat;
+uniform Brdf brdf;
 
 // lights
 struct Light{
@@ -29,6 +29,8 @@ struct Subsurface{
     float thickness;
     vec3 color;
     float power;
+    float scale;
+    float distortion;
 };
 
 uniform Subsurface subsurface;
@@ -84,6 +86,24 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
     return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
 }
 
+vec3 SubsurfaceScattering(vec3 N, vec3 L, vec3 V, float thickness, vec3 color, float power, float scale, float distortion)
+{
+    vec3 distortedLightDir = L + N * distortion;  // 光线扭曲
+    float H = dot(V, -distortedLightDir);           // 半角向量计算
+    float scattering = pow(saturate(-H), power) * scale * thickness;
+    return scattering * color;
+}
+
+vec3 filamentSubsurfaceScattering(vec3 N, vec3 L, vec3 V, float thickness, vec3 color, float power, float scale)
+{
+    float NoL = saturate(dot(N, L));
+    float scatterVoH = saturate(dot(V, -L));  
+    float forwardScatter = exp2(scatterVoH *power - power);
+    float backScatter = saturate(NoL * thickness + (1.0 - thickness)) * 0.5;
+    float ss = mix(backScatter, 1.0, forwardScatter) * (1.0 - thickness);
+    return color * (ss / PI ) * scale;
+}
+
 void main()
 {	
     vec3 N = normalize(normal);
@@ -92,7 +112,7 @@ void main()
     // metal F0 should be 0.04
     vec3 F0 = vec3(0.04);
     // metallic workflow : use albedo as F0 
-    F0 =mix(F0,mat.albedo,mat.metallic);
+    F0 =mix(F0,brdf.albedo,brdf.metallic);
 
     // rendering equation
     vec3 Lo = vec3(0.0);
@@ -105,8 +125,8 @@ void main()
         vec3 radiance = lights[i].color * attenuation;
 
         // Cook-Torrance BRDF
-        float NDF = DistributionGGX(N,H,mat.roughness);
-        float G = GeometrySmith(N,V,L,mat.roughness);
+        float NDF = DistributionGGX(N,H,brdf.roughness);
+        float G = GeometrySmith(N,V,L,brdf.roughness);
         vec3 F = fresnelSchlick(clamp(dot(H,V),0.0,1.0),F0);
 
         vec3 numerator = NDF * G * F; 
@@ -119,24 +139,18 @@ void main()
         // energy conservation diffuse+specular=1.0f
         vec3 kD = vec3(1.0)-kS;
         // pure metals have no diffuse light
-        kD *= 1.0 - mat.metallic;
+        kD *= 1.0 - brdf.metallic;
         // scale light by cosTheta
         float cosTheta  = max(dot(N, L), 0.0);
         // add to outgoing radiance Lo
-        Lo += (kD * mat.albedo / PI + specular) * radiance * cosTheta; 
-       
-       
-        // subsurface scattering
-        float NoL = saturate(dot(N, L));
+        Lo += (kD * brdf.albedo / PI + specular) * radiance * cosTheta; 
 
-        float scatterVoH = saturate(dot(V, -L)); //为什么是-L
-        float forwardScatter = exp2(scatterVoH *subsurface.power - subsurface.power);
-        float backScatter = saturate(NoL * subsurface.thickness + (1.0 - subsurface.thickness)) * 0.5;
-        float ss = mix(backScatter, 1.0, forwardScatter) * (1.0 - subsurface.thickness);
-        Lo += subsurface.color * (ss / PI ) / 4.0;
+        // subsurface scattering
+        // Lo += SubsurfaceScattering(N, L, V, subsurface.thickness, subsurface.color, subsurface.power, subsurface.scale, subsurface.distortion)/4.0;
+        Lo += filamentSubsurfaceScattering(N, L, V, subsurface.thickness, subsurface.color, subsurface.power, subsurface.scale)/4.0;
     }
 
-    vec3 ambient = vec3(0.03)*mat.albedo*mat.ao;
+    vec3 ambient = vec3(0.03)*brdf.albedo*brdf.ao;
     
     vec3 color = ambient + Lo;
     // tone mapping : form HDR to LDR

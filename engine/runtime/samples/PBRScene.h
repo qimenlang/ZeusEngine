@@ -10,8 +10,8 @@ class PBRScene : public Scene {
    private:
     /* data */
     std::vector<std::unique_ptr<Object>> m_lights;
-    std::vector<std::unique_ptr<Object>> m_PBRSpheres;
-    std::vector<std::unique_ptr<Object>> m_SSSSpheres;
+    std::vector<std::unique_ptr<Object>> m_spheres;
+    std::vector<std::unique_ptr<Object>> m_models;
 
    public:
     PBRScene(/* args */);

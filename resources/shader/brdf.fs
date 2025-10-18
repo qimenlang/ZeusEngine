@@ -7,13 +7,13 @@ in vec2 texCoord;
 out vec4 FragColor;
 
 // PBR Mat
-struct Material {
+struct Brdf {
     vec3 albedo;
     float roughness;
     float metallic;
     float ao;
 }; 
-uniform Material mat;
+uniform Brdf brdf;
 
 // lights
 struct Light{
@@ -81,7 +81,7 @@ void main()
     // metal F0 should be 0.04
     vec3 F0 = vec3(0.04);
     // metallic workflow : use albedo as F0 
-    F0 =mix(F0,mat.albedo,mat.metallic);
+    F0 =mix(F0,brdf.albedo,brdf.metallic);
 
     // rendering equation
     vec3 Lo = vec3(0.0);
@@ -94,8 +94,8 @@ void main()
         vec3 radiance = lights[i].color * attenuation;
 
         // Cook-Torrance BRDF
-        float NDF = DistributionGGX(N,H,mat.roughness);
-        float G = GeometrySmith(N,V,L,mat.roughness);
+        float NDF = DistributionGGX(N,H,brdf.roughness);
+        float G = GeometrySmith(N,V,L,brdf.roughness);
         vec3 F = fresnelSchlick(clamp(dot(H,V),0.0,1.0),F0);
 
         vec3 numerator = NDF * G * F; 
@@ -108,14 +108,14 @@ void main()
         // energy conservation diffuse+specular=1.0f
         vec3 kD = vec3(1.0)-kS;
         // pure metals have no diffuse light
-        kD *= 1.0 - mat.metallic;
+        kD *= 1.0 - brdf.metallic;
         // scale light by cosTheta
         float cosTheta  = max(dot(N, L), 0.0);
         // add to outgoing radiance Lo
-        Lo += (kD * mat.albedo / PI + specular) * radiance * cosTheta; 
+        Lo += (kD * brdf.albedo / PI + specular) * radiance * cosTheta; 
     }
 
-    vec3 ambient = vec3(0.03)*mat.albedo*mat.ao;
+    vec3 ambient = vec3(0.03)*brdf.albedo*brdf.ao;
     
     vec3 color = ambient + Lo;
     
