@@ -25,14 +25,25 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY,
     updateCameraVectors();
 }
 
-void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime) {
+void Camera::ProcessMovement(Camera_Movement direction, float deltaTime) {
     float velocity = MovementSpeed * deltaTime;
-    if (direction == FORWARD) Position += Front * velocity;
-    if (direction == BACKWARD) Position -= Front * velocity;
-    if (direction == LEFT) Position -= Right * velocity;
-    if (direction == RIGHT) Position += Right * velocity;
-    if (direction == UP) Position += Up * velocity;
-    if (direction == DOWN) Position -= Up * velocity;
+    if (direction == Camera_Movement::FORWARD) Position += Front * velocity;
+    if (direction == Camera_Movement::BACKWARD) Position -= Front * velocity;
+    if (direction == Camera_Movement::LEFT) Position -= Right * velocity;
+    if (direction == Camera_Movement::RIGHT) Position += Right * velocity;
+    if (direction == Camera_Movement::UP) Position += Up * velocity;
+    if (direction == Camera_Movement::DOWN) Position -= Up * velocity;
+}
+
+void Camera::ProcessRotation(Camera_Rotation direction, float deltaTime) {
+    float yawOffset = deltaTime * 10.0f;  // scale factor
+    if (direction == Camera_Rotation::LEFT)
+        Yaw -= yawOffset;
+    else if (direction == Camera_Rotation::RIGHT)
+        Yaw += yawOffset;
+
+    // update Front, Right and Up Vectors using the updated Euler angles
+    updateCameraVectors();
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset,

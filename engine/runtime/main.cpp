@@ -36,7 +36,6 @@ using namespace std;
 
 float lastX = Zeus::SCR_WIDTH / 2.0f;
 float lastY = Zeus::SCR_HEIGHT / 2.0f;
-bool firstMouse = true;
 
 auto &engine = Zeus::Engine::getInstance();
 
@@ -71,11 +70,6 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
 
 void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
     std::cout << "mouse(" << xpos << " , " << ypos << " )" << std::endl;
-    if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
 
     float xoffset = xpos - lastX;
     float yoffset =
@@ -84,7 +78,20 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
+    if (!Zeus::Engine::getInstance().camera().isRotationMode) return;
     Zeus::Engine::getInstance().camera().ProcessMouseMovement(xoffset, yoffset);
+}
+
+void mouse_button_callback(GLFWwindow *window, int button, int action,
+                           int mods) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+        if (action == GLFW_PRESS) {
+            Zeus::Engine::getInstance().camera().isRotationMode = true;
+        }
+        if (action == GLFW_RELEASE) {
+            Zeus::Engine::getInstance().camera().isRotationMode = false;
+        }
+    }
 }
 
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
@@ -103,30 +110,23 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action,
 
 // 持续事件在轮训中处理
 void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        std::cout << "deltaTime: " << engine.deltaTime() << std::endl;
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::FORWARD, engine.deltaTime());
-        // std::cout << "Camera Position: "
-        //           << glm::to_string(
-        //                  Zeus::Engine::getInstance().camera().Position)
-        //           << " ,camera :" << &Zeus::Engine::getInstance().camera()
-        //           << std::endl;
-    }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::BACKWARD, engine.deltaTime());
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::LEFT, engine.deltaTime());
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::RIGHT, engine.deltaTime());
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::UP, engine.deltaTime());
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-        Zeus::Engine::getInstance().camera().ProcessKeyboard(
+        Zeus::Engine::getInstance().camera().ProcessMovement(
             Camera_Movement::DOWN, engine.deltaTime());
     // if (glfwGetKey(window, GLFW_KEY_F11) == GLFW_) {
     //     toggleFullscreen(window);
@@ -161,6 +161,7 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetScrollCallback(window, scroll_callback);
     // 瞬时事件在回调中处理
     glfwSetKeyCallback(window, key_callback);
@@ -179,14 +180,12 @@ int main() {
     std::cout << "GLSL版本: " << glslVersionStr << std::endl;
 
     // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_CAPTURED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 #ifdef ZEUS_ROOT_DIR
     PRINTAPI(ZEUS_ROOT_DIR);
     std::cout << ZEUS_ROOT_DIR << std::endl;
 #endif
-
-    Zeus::Engine::getInstance().camera().MouseSensitivity = 0.01f;
 
     // auto scene = std::make_unique<CubeScene>();
     // auto scene = std::make_unique<ModelScene>();
