@@ -9,6 +9,7 @@ file(GLOB TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_executable (${TARGET_NAME} ${TEST_SOURCES}) 
 target_link_libraries(${TARGET_NAME} PUBLIC Catch2::Catch2WithMain RTTR::Core_Lib ZeusRuntime)
+target_compile_definitions(${TARGET_NAME} PRIVATE ZEUS_ROOT_DIR=\"${CMAKE_SOURCE_DIR}/resources\")
 
 #CTest
 add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} -s --verbosity high )
