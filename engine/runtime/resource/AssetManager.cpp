@@ -44,27 +44,27 @@ Geometry AssetManager::processMesh(aiMesh *mesh, const aiScene *scene) {
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
         Vertex vertex;
         // 强制转换为glm::vec3,防止mVertices实际是double类型,导致类型不兼容
-        vertex.Position = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y,
-                                    mesh->mVertices[i].z);
+        vertex.Position = glm::vec4(mesh->mVertices[i].x, mesh->mVertices[i].y,
+                                    mesh->mVertices[i].z, 0);
         if (mesh->HasNormals()) {
-            vertex.Normal = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y,
-                                      mesh->mNormals[i].z);
+            vertex.Normal = glm::vec4(mesh->mNormals[i].x, mesh->mNormals[i].y,
+                                      mesh->mNormals[i].z, 0);
         }
 
         // 网格是否有纹理坐标？
         if (mesh->mTextureCoords[0]) {
-            vertex.TexCoords = glm::vec2(mesh->mTextureCoords[0][i].x,
-                                         mesh->mTextureCoords[0][i].y);
+            vertex.TexCoords = glm::vec4(mesh->mTextureCoords[0][i].x,
+                                         mesh->mTextureCoords[0][i].y, 0, 0);
         } else
-            vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+            vertex.TexCoords = glm::vec4(0.0f);
 
         if (mesh->HasTangentsAndBitangents()) {
             vertex.Tangent =
-                glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y,
-                          mesh->mTangents[i].z);
+                glm::vec4(mesh->mTangents[i].x, mesh->mTangents[i].y,
+                          mesh->mTangents[i].z, 0);
             vertex.Bitangent =
-                glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y,
-                          mesh->mBitangents[i].z);
+                glm::vec4(mesh->mBitangents[i].x, mesh->mBitangents[i].y,
+                          mesh->mBitangents[i].z, 0);
         }
 
         vertices.push_back(vertex);

@@ -139,7 +139,7 @@ void ShadowScene::init() {
     auto quadGeo = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
     quadGeo.textures.push_back(shadow_texture);
     for (auto &vertex : quadGeo.vertices) {
-        vertex.Position = vertex.Position * 0.2f + glm::vec3{0.8f};
+        vertex.Position = vertex.Position * 0.2f + glm::vec4{0.8f};
     }
     m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
 }

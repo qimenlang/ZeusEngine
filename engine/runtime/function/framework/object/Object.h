@@ -58,6 +58,7 @@ class Object {
         m_transform = transform.get();
         addComponent(std::move(transform));
         onTick.add([this](Object *thiz) {
+            if (m_material == nullptr) return;
             m_material->use();
             m_material->shader()->setMat4("model",
                                           m_transform->GetModelMatrix());

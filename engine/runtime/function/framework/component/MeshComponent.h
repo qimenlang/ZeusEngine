@@ -33,7 +33,7 @@ struct Primitive {
     bool instancing = false;
     unsigned int instance_count = 0;
     Primitive(const Geometry& geometry,
-              std::shared_ptr<MaterialInstance> material);
+              std::shared_ptr<MaterialInstance> material = nullptr);
     void Draw();
 };
 

@@ -66,12 +66,12 @@ Geometry CubeGeometry::getDefault() {
         Vertex vertex;
         vertex.Position = {cubeVertices[i * stride + 0],
                            cubeVertices[i * stride + 1],
-                           cubeVertices[i * stride + 2]};
+                           cubeVertices[i * stride + 2], 0};
         vertex.Normal = {cubeVertices[i * stride + 3],
                          cubeVertices[i * stride + 4],
-                         cubeVertices[i * stride + 5]};
+                         cubeVertices[i * stride + 5], 0};
         vertex.TexCoords = {cubeVertices[i * stride + 6],
-                            cubeVertices[i * stride + 7]};
+                            cubeVertices[i * stride + 7], 0, 0};
         cube.vertices.emplace_back(vertex);
     }
     std::cout << "CubeGeometry create" << std::endl;
