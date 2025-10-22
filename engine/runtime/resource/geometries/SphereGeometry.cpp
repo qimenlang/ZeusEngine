@@ -18,9 +18,9 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
                 std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
 
             Vertex vert;
-            vert.Position = glm::vec3(xPos, yPos, zPos) * radius;
-            vert.TexCoords = glm::vec2(xSegment, ySegment);
-            vert.Normal = glm::vec3(xPos, yPos, zPos);
+            vert.Position = glm::vec4(xPos, yPos, zPos, 0) * radius;
+            vert.TexCoords = glm::vec4(xSegment, ySegment, 0, 0);
+            vert.Normal = glm::vec4(xPos, yPos, zPos, 0);
             sphere.vertices.emplace_back(vert);
 
             sphere.indices.push_back(y * (X_SEGMENTS + 1) + x);

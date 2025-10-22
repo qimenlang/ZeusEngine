@@ -11,12 +11,13 @@
 
 struct GeometryDescriptor {};
 
+// 为保证与GPU端数据对齐，使用vec4存储位置、法线、纹理坐标等属性
 struct Vertex {
-    glm::vec3 Position;
-    glm::vec3 Normal;
-    glm::vec2 TexCoords;
-    glm::vec3 Tangent;
-    glm::vec3 Bitangent;
+    glm::vec4 Position;
+    glm::vec4 Normal;
+    glm::vec4 TexCoords;
+    glm::vec4 Tangent;
+    glm::vec4 Bitangent;
     int m_BoneIDs[MAX_BONE_INFLUENCE];
     float m_Weights[MAX_BONE_INFLUENCE];
 };

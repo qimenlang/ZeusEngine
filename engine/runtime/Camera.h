@@ -21,7 +21,7 @@ const float ZOOM = 45.0f;
 // An abstract camera class that processes input and calculates the
 // corresponding Euler Angles, Vectors and Matrices for use in OpenGL
 class Camera {
-   public:
+   private:
     // camera Attributes
     glm::vec3 Position;
     glm::vec3 Front;
@@ -35,7 +35,6 @@ class Camera {
         float Near = 0.1f;
         float Far = 500.0f;
     };
-    glm::mat4 projection;
     // euler Angles
     float Yaw;
     float Pitch;
@@ -43,9 +42,10 @@ class Camera {
     float MovementSpeed;
     float MouseSensitivity;
     float Zoom;
+    glm::mat4 projection;
 
+   public:
     bool isRotationMode = false;
-
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
            glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW,
@@ -62,6 +62,10 @@ class Camera {
     glm::mat4 GetViewMatrix() {
         return glm::lookAt(Position, Position + Front, Up);
     }
+
+    glm::mat4 GetProjectionMatrix() { return projection; }
+
+    glm::vec3 position() const { return Position; }
 
     // processes input received from any keyboard-like input system. Accepts
     // input parameter in the form of camera defined ENUM (to abstract it from

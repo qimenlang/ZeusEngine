@@ -138,7 +138,8 @@ void PBRScene::update() {
                           .matInstance;
 
     pbrShader->use();
-    pbrShader->setVec3("camPos", Zeus::Engine::getInstance().camera().Position);
+    pbrShader->setVec3("camPos",
+                       Zeus::Engine::getInstance().camera().position());
     for (int i = 0; i < m_lights.size(); i++) {
         pbrShader->setVec3("lights[" + std::to_string(i) + "].pos",
                            m_lights[i]->transform()->position());
@@ -160,7 +161,8 @@ void PBRScene::update() {
     auto &sssShader =
         m_models[0]->getComponent<MeshComponent>()->primitives()[0].matInstance;
     sssShader->use();
-    sssShader->setVec3("camPos", Zeus::Engine::getInstance().camera().Position);
+    sssShader->setVec3("camPos",
+                       Zeus::Engine::getInstance().camera().position());
     for (int i = 0; i < m_lights.size(); i++) {
         sssShader->setVec3("lights[" + std::to_string(i) + "].pos",
                            m_lights[i]->transform()->position());

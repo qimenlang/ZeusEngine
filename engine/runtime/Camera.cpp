@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include "config.h"
+
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
     : Front(glm::vec3(0.0f, 0.0f, -1.0f)),
       MovementSpeed(SPEED),
@@ -10,6 +12,12 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
     Yaw = yaw;
     Pitch = pitch;
     updateCameraVectors();
+
+    ProjectionParams pjtPara;
+    pjtPara.AspectRatio = Zeus::SCR_WIDTH / float(Zeus::SCR_HEIGHT);
+    projection =
+        glm::perspective(glm::radians(pjtPara.FOV), pjtPara.AspectRatio,
+                         pjtPara.Near, pjtPara.Far);
 }
 
 Camera::Camera(float posX, float posY, float posZ, float upX, float upY,
@@ -23,6 +31,12 @@ Camera::Camera(float posX, float posY, float posZ, float upX, float upY,
     Yaw = yaw;
     Pitch = pitch;
     updateCameraVectors();
+
+    ProjectionParams pjtPara;
+    pjtPara.AspectRatio = Zeus::SCR_WIDTH / float(Zeus::SCR_HEIGHT);
+    projection =
+        glm::perspective(glm::radians(pjtPara.FOV), pjtPara.AspectRatio,
+                         pjtPara.Near, pjtPara.Far);
 }
 
 void Camera::ProcessMovement(Camera_Movement direction, float deltaTime) {
