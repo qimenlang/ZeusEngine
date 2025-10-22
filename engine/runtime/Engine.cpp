@@ -14,13 +14,6 @@ void Engine::init() {
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     m_camera = Camera(cameraPos, cameraUp);
-
-    Camera::ProjectionParams pjtPara = {
-        45.f, float(SCR_WIDTH) / float(SCR_HEIGHT), 0.1f, 500.0f};
-    m_camera.projection =
-        glm::perspective(glm::radians(pjtPara.FOV), pjtPara.AspectRatio,
-                         pjtPara.Near, pjtPara.Far);
-
     m_assetManager = std::make_unique<AssetManager>();
 }
 

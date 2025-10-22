@@ -20,13 +20,17 @@
 
 float quadVertices[] = {
     // positions          // texture Coords
-    0.4f,  0.4f,  0.0f,  0.0f,  0.0f,
-    0.6f, 0.4f,  0.0f,  0.0f,  1.0f,
-    0.4f, 0.6f,  0.0f,  1.0f,  1.0f,
+    0.25f,  0.25f,  0.0f,  0.0f,  0.0f,
+    0.75f, 0.25f,  0.0f,  0.0f,  1.0f,
+    0.25f, 0.75f,  0.0f,  1.0f,  1.0f,
 
-    0.6f,  0.4f,  0.0f,  0.0f,  0.0f,
-    0.55f, 0.55f,  0.0f,  1.0f,  1.0f,
-    0.4f,  0.6f,  0.0f,  1.0f,  0.0f
+    0.75f,  0.25f,  0.0f,  0.0f,  0.0f,
+    0.75f, 0.75f,  0.0f,  1.0f,  1.0f,
+    0.25f,  0.75f,  0.0f,  1.0f,  0.0f,
+
+    0.25f,  0.25f,  0.0f,  0.0f,  0.0f,
+    0.75f, 0.25f,  0.0f,  0.0f,  1.0f,
+    0.5f,  0.5f,  0.0f,  1.0f,  0.0f
 };
 
 float screenQuadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.

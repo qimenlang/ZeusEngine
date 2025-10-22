@@ -177,7 +177,7 @@ void ShadowScene::update() {
         phongShader->use();
         phongShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
         phongShader->setVec3("viewPos",
-                             Zeus::Engine::getInstance().camera().Position);
+                             Zeus::Engine::getInstance().camera().position());
         phongShader->setVec3("light.position",
                              m_lightCube->transform()->position());
         object->tick();

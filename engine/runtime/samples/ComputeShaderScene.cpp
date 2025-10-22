@@ -162,7 +162,6 @@ void ComputerShaderScene::update() {
     m_computeShader->setFloat("t", currentFrame);
 
     glDispatchCompute(Zeus::SCR_WIDTH / 8, Zeus::SCR_HEIGHT / 8, 1);
-
     // 内存屏障，确保computeshader中Image相关计算结果全部写入内存,
     // 及读取debug信息
     glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT |
@@ -172,11 +171,10 @@ void ComputerShaderScene::update() {
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_debug_ssbo);
     int* countPtr = (int*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
     int debugSize = countPtr[0];
-    // std::cout << "debug data size:" << debugSize << std::endl;
-    // for (int i = 0; i < m_debug_data.size(); i++) {
-    //     std::cout << "std430 layout " << i << "offset:" << m_debug_data[i]
-    //               << std::endl;
-    // }
+    std::cout << "debug data size:" << debugSize << std::endl;
+    for (int i = 0; i < m_debug_data.size(); i++) {
+        std::cout << "debug " << i << "data:" << countPtr[i] << std::endl;
+    }
     glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

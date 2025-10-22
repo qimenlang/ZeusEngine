@@ -108,7 +108,8 @@ void PBRTextureScene::update() {
                           .matInstance;
 
     pbrShader->use();
-    pbrShader->setVec3("camPos", Zeus::Engine::getInstance().camera().Position);
+    pbrShader->setVec3("camPos",
+                       Zeus::Engine::getInstance().camera().position());
     for (int i = 0; i < m_lights.size(); i++) {
         pbrShader->setVec3("lights[" + std::to_string(i) + "].pos",
                            m_lights[i]->transform()->position());

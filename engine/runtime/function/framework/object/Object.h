@@ -65,7 +65,8 @@ class Object {
             m_material->shader()->setMat4(
                 "view", Zeus::Engine::getInstance().camera().GetViewMatrix());
             m_material->shader()->setMat4(
-                "projection", Zeus::Engine::getInstance().camera().projection);
+                "projection",
+                Zeus::Engine::getInstance().camera().GetProjectionMatrix());
         });
     };
     ~Object() = default;

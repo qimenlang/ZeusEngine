@@ -56,7 +56,7 @@ void ModelScene::update() {
         m_dragon->getComponent<MeshComponent>()->primitives()[0].matInstance;
     m_phongShader->use();
     m_phongShader->setVec3("viewPos",
-                           Zeus::Engine::getInstance().camera().Position);
+                           Zeus::Engine::getInstance().camera().position());
     m_phongShader->setVec3("light.position",
                            m_lightCube->transform()->position());
     m_phongShader->setVec3("light.ambient", glm::vec3{0.2f});
