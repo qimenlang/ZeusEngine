@@ -21,7 +21,7 @@ class ComputerShaderScene : public Scene {
 
     GLuint m_debug_ssbo;
 
-    std::vector<int> m_debug_data = {0, 0, 0, 0, 0, 0, 0, 0};
+    std::vector<float> m_debug_data = {0, 0, 0, 0, 0, 0, 0, 0};
 
    public:
     ComputerShaderScene(/* args */) {};

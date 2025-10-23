@@ -28,12 +28,15 @@ struct HitRecord {
 };
 
 struct Camera {
-	vec3 origin;
-	vec3 direction;
-	vec3 up;
+	vec3 world_position;
+	vec3 world_front;
+	vec3 world_right;
+	vec3 world_up;
 	float v_fov;
 	float aspect_ratio;
 };
+uniform Camera camera;
+
 
 // 该layout直接定义了每个工作组的xyz维度的invocation数量
 layout (local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
@@ -49,7 +52,7 @@ layout(std430, binding = 1) buffer VertexBuffer {
 	Vertex vertices[];
 };
 layout(std430, binding = 2) buffer DebugOutput {
-    int debug_data[];
+    float debug_data[];
 };
 
 layout (location = 0) uniform float t;                 /** Time */
@@ -66,6 +69,7 @@ vec4 green = vec4(0.0, 1.0, 0.0, 1.0); // YES
 vec4 blue = vec4(0.0, 0.0, 1.0, 1.0); //
 vec4 black = vec4(0.0, 0.0, 0.0, 1.0); // 
 vec4 white = vec4(1.0,1.0,1.0, 1.0); // 
+
 
 // Moller-Trumbore 光线求交 
 bool intersectTest(Ray ray,vec3 v0, vec3 v1, vec3 v2) {
@@ -104,15 +108,23 @@ bool intersectTriangle(Ray ray) {
 
 
 Ray generateRay(Camera camera, ivec2 texelCoord) {
-	Ray ray;
 	ivec2 screenSize = ivec2(gl_NumWorkGroups.x * gl_WorkGroupSize.x, gl_NumWorkGroups.y * gl_WorkGroupSize.y);
-	ray.origin = camera.origin;
+	vec2 uv;
+	uv.xy = vec2((float(texelCoord.x)+0.5)/screenSize.x,(float(texelCoord.y)+0.5)/screenSize.y);
+	uv.xy = uv.xy * 2.0 - 1.0;// 转换到[-1,1]
 
-	vec3 offset;
-	offset.xy = vec2((float(texelCoord.x)+0.5)/screenSize.x,(float(texelCoord.y)+0.5)/screenSize.y) * 2.0 - 1.0;
+	float aspect_ratio = camera.aspect_ratio;
+	float tan_half_fov = tan(radians(camera.v_fov) * 0.5);
+	// 右手坐标系中，相机默认朝向 -Z 轴，外部传入的camera world_front已经默认-z了
+	// 这里是相机的局部坐标系，z轴fornt是正方向，不需要再次-z
+	vec3 camera_space_dir = normalize(vec3(uv.x * aspect_ratio * tan_half_fov,
+		 uv.y * tan_half_fov, 1.0));
 	
-	offset.z = -1.0f;
-	ray.direction = normalize(offset);
+	// 转换到世界坐标系
+    mat3 camera_to_world = mat3(camera.world_right, camera.world_up, camera.world_front);
+	Ray ray;
+	ray.origin = camera.world_position;
+	ray.direction = normalize(camera_to_world*camera_space_dir);
 	return ray;
 }
 
@@ -127,19 +139,20 @@ void main() {
 	ivec2 screenSize = ivec2(gl_NumWorkGroups.x * gl_WorkGroupSize.x, gl_NumWorkGroups.y * gl_WorkGroupSize.y);
 	//gl_GlobalInvocationID :当前线程在全局所有线程中的唯一ID
 	ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
+	if (texelCoord.x >= screenSize.x || texelCoord.y >= screenSize.y) 
+        return;
 
 	// camera config 
-	Camera camera;
-	camera.origin = vec3(0.0, 0.0, 1.0);
-	camera.direction = vec3(0.0, 0.0, -1.0);
-	camera.up = vec3(0.0, 1.0, 0.0);
-	camera.v_fov = 45.0;
-	camera.aspect_ratio = screenSize.x / float(screenSize.y);
+	
+	// camera.v_fov = 45.0;
+	// camera.aspect_ratio = screenSize.x / float(screenSize.y);
 	
 	// debug info 
-	debug_data[0] = vertices.length();
-	debug_data[1] = screenSize.x;
-	debug_data[2] = screenSize.y;
+	debug_data[0] = float(vertices.length());
+	debug_data[1] = float(screenSize.x);
+	debug_data[2] = float(screenSize.y);
+	debug_data[3] = float(camera.world_position.x);
+	debug_data[4] = float(camera.world_front.x);
 
 	vec4 value = vec4(0.0, 0.0, 0.0, 1.0);
 	float speed = 100;

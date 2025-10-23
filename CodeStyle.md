@@ -9,7 +9,7 @@ clang-format配置：
 
 类名 class FileReader  首字母大写
 
-类方法 processData()  非google风格
+类方法 processData()  非google风格 // 构造函数怎么写？
 
 成员变量  size_t m_entry_count; 非google风格
 

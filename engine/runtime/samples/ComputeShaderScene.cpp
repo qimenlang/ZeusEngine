@@ -160,6 +160,19 @@ void ComputerShaderScene::update() {
     float currentFrame = Zeus::Engine::getInstance().currentTime();
     m_computeShader->use();
     m_computeShader->setFloat("t", currentFrame);
+    m_computeShader->setVec3("camera.world_position",
+                             Zeus::Engine::getInstance().camera().position());
+    m_computeShader->setVec3("camera.world_front",
+                             Zeus::Engine::getInstance().camera().front());
+    m_computeShader->setVec3("camera.world_up",
+                             Zeus::Engine::getInstance().camera().up());
+    m_computeShader->setVec3("camera.world_right",
+                             Zeus::Engine::getInstance().camera().right());
+    m_computeShader->setFloat(
+        "camera.v_fov", Zeus::Engine::getInstance().camera().pjt_para().FOV);
+    m_computeShader->setFloat(
+        "camera.aspect_ratio",
+        Zeus::Engine::getInstance().camera().pjt_para().AspectRatio);
 
     glDispatchCompute(Zeus::SCR_WIDTH / 8, Zeus::SCR_HEIGHT / 8, 1);
     // 内存屏障，确保computeshader中Image相关计算结果全部写入内存,
@@ -169,8 +182,9 @@ void ComputerShaderScene::update() {
                     GL_BUFFER_UPDATE_BARRIER_BIT);
     // 读取CS调试数据
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_debug_ssbo);
-    int* countPtr = (int*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-    int debugSize = countPtr[0];
+    float* countPtr =
+        (float*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
+    float debugSize = countPtr[0];
     std::cout << "debug data size:" << debugSize << std::endl;
     for (int i = 0; i < m_debug_data.size(); i++) {
         std::cout << "debug " << i << "data:" << countPtr[i] << std::endl;
