@@ -97,12 +97,14 @@ void ComputerShaderScene::init() {
                        GL_RGBA32F);
 
     // objects
-    // auto sphere = SphereGeometry::create(0.1f);
+    auto sphere = SphereGeometry::create(0.5f);
     // auto sphere = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
-    auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
+    // auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
 
     auto& vertices = sphere.vertices;
+    auto& indices = sphere.indices;
     std::cout << vertices.size() << std::endl;
+    std::cout << indices.size() << std::endl;
     std::cout << "Position :" << offsetof(Vertex, Position) << std::endl;
     std::cout << "Normal :" << offsetof(Vertex, Normal) << std::endl;
     std::cout << "TexCoords :" << offsetof(Vertex, TexCoords) << std::endl;
@@ -118,11 +120,18 @@ void ComputerShaderScene::init() {
                  vertices.data(), GL_STATIC_DRAW);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, m_vertex_ssbo);
 
+    glGenBuffers(1, &m_indices_ssbo);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_indices_ssbo);
+    glBufferData(GL_SHADER_STORAGE_BUFFER,
+                 indices.size() * sizeof(unsigned int), indices.data(),
+                 GL_STATIC_DRAW);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, m_indices_ssbo);
+
     glGenBuffers(1, &m_debug_ssbo);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_debug_ssbo);
     glBufferData(GL_SHADER_STORAGE_BUFFER, m_debug_data.size() * sizeof(int),
                  m_debug_data.data(), GL_DYNAMIC_COPY);
-    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, m_debug_ssbo);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, m_debug_ssbo);
 
     // screen quad
     m_screen_quad = std::make_unique<Object>(quad_mat);

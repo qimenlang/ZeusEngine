@@ -17,6 +17,7 @@ class ComputerShaderScene : public Scene {
     int m_counter = 0;
 
     GLuint m_vertex_ssbo;
+    GLuint m_indices_ssbo;
     std::vector<Geometry> m_render_geometries;
 
     GLuint m_debug_ssbo;

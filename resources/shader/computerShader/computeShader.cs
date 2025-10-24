@@ -51,7 +51,10 @@ layout(rgba32f, binding = 0) uniform image2D imgOutput;
 layout(std430, binding = 1) buffer VertexBuffer {
 	Vertex vertices[];
 };
-layout(std430, binding = 2) buffer DebugOutput {
+layout(std430, binding = 2) buffer IndexBuffer {
+	uint indices[];
+};
+layout(std430, binding = 3) buffer DebugOutput {
     float debug_data[];
 };
 
@@ -96,10 +99,13 @@ bool intersectTest(Ray ray,vec3 v0, vec3 v1, vec3 v2) {
 }
 
 bool intersectTriangle(Ray ray) {
-	for(int i=0;i<vertices.length();i+=3){
-		vec3 v0 = vertices[i].position;
-		vec3 v1 = vertices[i+1].position;
-		vec3 v2 = vertices[i+2].position;
+	for(int i=0;i<indices.length();i+=3){
+		uint idx0 = indices[i];
+		uint idx1 = indices[i+1];
+		uint idx2 = indices[i+2];
+		vec3 v0 = vertices[idx0].position;
+		vec3 v1 = vertices[idx1].position;
+		vec3 v2 = vertices[idx2].position;
 		if(intersectTest(ray,v0,v1,v2))
 			return true;
 	}
