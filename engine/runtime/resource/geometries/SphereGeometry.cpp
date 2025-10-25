@@ -3,7 +3,9 @@
 #include <numbers>
 
 Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
-    Geometry sphere;
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
+
     const unsigned int X_SEGMENTS = 64;
     const unsigned int Y_SEGMENTS = 64;
     const float PI = 3.14159265359f;
@@ -21,17 +23,17 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
             vert.Position = glm::vec4(xPos, yPos, zPos, 0) * radius;
             vert.TexCoords = glm::vec4(xSegment, ySegment, 0, 0);
             vert.Normal = glm::vec4(xPos, yPos, zPos, 0);
-            sphere.vertices.emplace_back(vert);
+            vertices.emplace_back(vert);
 
-            sphere.indices.push_back(y * (X_SEGMENTS + 1) + x);
-            sphere.indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
-            sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
+            indices.push_back(y * (X_SEGMENTS + 1) + x);
+            indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
+            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
 
-            sphere.indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
-            sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x + 1);
-            sphere.indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
+            indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
+            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x + 1);
+            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
         }
     }
 
-    return sphere;
+    return {vertices, indices};
 }

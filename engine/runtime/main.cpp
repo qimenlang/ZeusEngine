@@ -204,14 +204,14 @@ int main() {
     // auto scene = std::make_unique<CubeScene>();
     // auto scene = std::make_unique<ModelScene>();
     // auto scene = std::make_unique<DepthScene>();
-    // auto scene = std::make_unique<StencilScene>();
+    auto scene = std::make_unique<StencilScene>();
     // auto scene = std::make_unique<BlendScene>();
     // auto scene = std::make_unique<PBRScene>();
     // auto scene = std::make_unique<PBRTextureScene>();
     // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<InstancingScene>();
     // auto scene = std::make_unique<InstancingStarScene>();
-    auto scene = std::make_unique<ComputerShaderScene>();
+    // auto scene = std::make_unique<ComputerShaderScene>();
     // auto scene = std::make_unique<ShadowScene>();
 
     scene->init();

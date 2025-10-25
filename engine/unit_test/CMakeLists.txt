@@ -8,7 +8,7 @@ set(TARGET_NAME UnitTest)
 file(GLOB TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_executable (${TARGET_NAME} ${TEST_SOURCES}) 
-target_link_libraries(${TARGET_NAME} PUBLIC Catch2::Catch2WithMain RTTR::Core_Lib ZeusRuntime)
+target_link_libraries(${TARGET_NAME} PUBLIC Catch2::Catch2WithMain RTTR::Core_Lib ZeusRuntime glm)
 
 #CTest
 add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} -s --verbosity high )

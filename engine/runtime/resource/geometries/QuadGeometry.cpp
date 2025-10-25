@@ -46,7 +46,7 @@ float screenQuadVertices[] = { // vertex attributes for a quad that fills the en
 // clang-format on
 
 Geometry QuadGeometry::getDefault(QuadGeometryType type) {
-    Geometry cube;
+    std::vector<Vertex> vertices;
 
     auto createNormalQuad = [&]() {
         const int stride = 5;
@@ -59,7 +59,7 @@ Geometry QuadGeometry::getDefault(QuadGeometryType type) {
                                quadVertices[i * stride + 2], 0};
             vertex.TexCoords = {quadVertices[i * stride + 3],
                                 quadVertices[i * stride + 4], 0, 0};
-            cube.vertices.emplace_back(vertex);
+            vertices.emplace_back(vertex);
         }
         std::cout << "QuadGeometry create" << std::endl;
     };
@@ -75,7 +75,7 @@ Geometry QuadGeometry::getDefault(QuadGeometryType type) {
                                screenQuadVertices[i * stride + 1], 0.f, 0.f};
             vertex.TexCoords = {screenQuadVertices[i * stride + 2],
                                 screenQuadVertices[i * stride + 3], 0, 0};
-            cube.vertices.emplace_back(vertex);
+            vertices.emplace_back(vertex);
         }
         std::cout << "ScreenQuadGeometry create" << std::endl;
     };
@@ -91,5 +91,5 @@ Geometry QuadGeometry::getDefault(QuadGeometryType type) {
         default:
             break;
     }
-    return cube;
+    return {vertices};
 }

@@ -112,6 +112,27 @@ bool intersectTriangle(Ray ray) {
 	return false;
 }
 
+// 光线-AABB 相交检测,非常高效
+bool intersectRayAABB(vec3 rayOrigin, vec3 rayDirection, vec3 aabbMin, vec3 aabbMax, out float tEnter, out float tExit) {
+    // 分别处理 x, y, z 轴
+	for (int i = 0; i < 3; ++i) {  
+		// t0,t1分别为射线到达最小最大点的时间
+        float t0 = (aabbMin[i] - rayOrigin[i]) / rayDirection[i];
+        float t1 = (aabbMax[i] - rayOrigin[i]) / rayDirection[i];
+        // 确保t0是近交点，t1是远交点，注意上面除以了direction在轴上的分量
+        // if (invD < 0.0f) t0, t1);
+		float tnear = min(t0,t1);
+		float tfar = max(t0,t1);
+        
+		// 取三个轴近交点的最大值，远交点的最小值
+        tEnter = max(tnear, tEnter);
+        tExit = min(tfar, tExit);
+        // 远交点比近交点还近，说明没有有效相交
+        if (tExit <= tEnter) return false;
+    }
+    return true;
+}
+
 
 Ray generateRay(Camera camera, ivec2 texelCoord) {
 	ivec2 screenSize = ivec2(gl_NumWorkGroups.x * gl_WorkGroupSize.x, gl_NumWorkGroups.y * gl_WorkGroupSize.y);

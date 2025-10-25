@@ -101,8 +101,8 @@ void ComputerShaderScene::init() {
     // auto sphere = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
     // auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
 
-    auto& vertices = sphere.vertices;
-    auto& indices = sphere.indices;
+    auto& vertices = sphere.vertices();
+    auto& indices = sphere.indices();
     std::cout << vertices.size() << std::endl;
     std::cout << indices.size() << std::endl;
     std::cout << "Position :" << offsetof(Vertex, Position) << std::endl;
