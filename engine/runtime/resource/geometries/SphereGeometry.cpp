@@ -20,7 +20,8 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
                 std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
 
             Vertex vert;
-            vert.Position = glm::vec4(xPos, yPos, zPos, 0) * radius;
+            vert.Position =
+                glm::vec4(glm::vec3{xPos, yPos, zPos} * radius, 1.f);
             vert.TexCoords = glm::vec4(xSegment, ySegment, 0, 0);
             vert.Normal = glm::vec4(xPos, yPos, zPos, 0);
             vertices.emplace_back(vert);

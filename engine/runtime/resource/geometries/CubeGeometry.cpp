@@ -65,7 +65,7 @@ Geometry CubeGeometry::getDefault() {
         Vertex vertex;
         vertex.Position = {cubeVertices[i * stride + 0],
                            cubeVertices[i * stride + 1],
-                           cubeVertices[i * stride + 2], 0};
+                           cubeVertices[i * stride + 2], 1.f};
         vertex.Normal = {cubeVertices[i * stride + 3],
                          cubeVertices[i * stride + 4],
                          cubeVertices[i * stride + 5], 0};

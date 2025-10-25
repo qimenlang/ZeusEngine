@@ -56,7 +56,7 @@ Geometry QuadGeometry::getDefault(QuadGeometryType type) {
             Vertex vertex;
             vertex.Position = {quadVertices[i * stride + 0],
                                quadVertices[i * stride + 1],
-                               quadVertices[i * stride + 2], 0};
+                               quadVertices[i * stride + 2], 1.f};
             vertex.TexCoords = {quadVertices[i * stride + 3],
                                 quadVertices[i * stride + 4], 0, 0};
             vertices.emplace_back(vertex);
@@ -72,7 +72,7 @@ Geometry QuadGeometry::getDefault(QuadGeometryType type) {
         for (int i = 0; i < cubeVertexSize; i++) {
             Vertex vertex;
             vertex.Position = {screenQuadVertices[i * stride + 0],
-                               screenQuadVertices[i * stride + 1], 0.f, 0.f};
+                               screenQuadVertices[i * stride + 1], 0.f, 1.f};
             vertex.TexCoords = {screenQuadVertices[i * stride + 2],
                                 screenQuadVertices[i * stride + 3], 0, 0};
             vertices.emplace_back(vertex);
