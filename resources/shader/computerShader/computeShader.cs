@@ -18,6 +18,11 @@ struct Ray {
     float t_max;
 };
 
+struct AABB{
+	vec3 min;
+	vec3 max;
+};
+
 struct HitRecord {
     float t;
     vec3 position;
@@ -36,6 +41,9 @@ struct Camera {
 	float aspect_ratio;
 };
 uniform Camera camera;
+uniform AABB aabb;
+
+const float intersect_epsilon = 0.000001f;
 
 
 // 该layout直接定义了每个工作组的xyz维度的invocation数量
@@ -82,7 +90,7 @@ bool intersectTest(Ray ray,vec3 v0, vec3 v1, vec3 v2) {
 	vec3 h = cross(ray.direction, edge2);
 	float a = dot(edge1, h);
 
-	if (abs(a) < 0.0001) return false; // This ray is parallel to this triangle.
+	if (abs(a) < intersect_epsilon) return false; // This ray is parallel to this triangle.
 	
 	vec2 uv;
 	float f = 1.0 / a;
@@ -95,7 +103,7 @@ bool intersectTest(Ray ray,vec3 v0, vec3 v1, vec3 v2) {
 	if (uv.y < 0.0 || uv.x + uv.y > 1.0) return false;
 	
 	float t = f * dot(edge2, q);
-	return t > 0.0001;
+	return t > intersect_epsilon;
 }
 
 bool intersectTriangle(Ray ray) {
@@ -112,15 +120,14 @@ bool intersectTriangle(Ray ray) {
 	return false;
 }
 
-// 光线-AABB 相交检测,非常高效
-bool intersectRayAABB(vec3 rayOrigin, vec3 rayDirection, vec3 aabbMin, vec3 aabbMax, out float tEnter, out float tExit) {
+// 光线-AABB 通过分离三个轴进行相交检测,速度快,所以选用AABB包围盒,而不是OBB包围盒
+bool intersectRayAABB(Ray ray, AABB aabb, out float tEnter, out float tExit) {
     // 分别处理 x, y, z 轴
 	for (int i = 0; i < 3; ++i) {  
 		// t0,t1分别为射线到达最小最大点的时间
-        float t0 = (aabbMin[i] - rayOrigin[i]) / rayDirection[i];
-        float t1 = (aabbMax[i] - rayOrigin[i]) / rayDirection[i];
+        float t0 = (aabb.min[i] - ray.origin[i]) / ray.direction[i];
+        float t1 = (aabb.max[i] - ray.origin[i]) / ray.direction[i];
         // 确保t0是近交点，t1是远交点，注意上面除以了direction在轴上的分量
-        // if (invD < 0.0f) t0, t1);
 		float tnear = min(t0,t1);
 		float tfar = max(t0,t1);
         
@@ -169,17 +176,14 @@ void main() {
 	if (texelCoord.x >= screenSize.x || texelCoord.y >= screenSize.y) 
         return;
 
-	// camera config 
-	
-	// camera.v_fov = 45.0;
-	// camera.aspect_ratio = screenSize.x / float(screenSize.y);
-	
 	// debug info 
 	debug_data[0] = float(vertices.length());
 	debug_data[1] = float(screenSize.x);
 	debug_data[2] = float(screenSize.y);
 	debug_data[3] = float(camera.world_position.x);
 	debug_data[4] = float(camera.world_front.x);
+	debug_data[5] = float(aabb.min.x);
+	debug_data[6] = float(aabb.max.x);
 
 	vec4 value = vec4(0.0, 0.0, 0.0, 1.0);
 	float speed = 100;
@@ -194,8 +198,6 @@ void main() {
 
 	value.x = float(texelCoord.x)/(screenSize.x);
 	value.y = float(texelCoord.y)/(screenSize.y);
-	// value.x = 0.0;
-	// value.y = 0.0;
 
 	// sphere sdf
 	// if(pow(value.x-0.0,2)+pow(value.y-0.0,2)<0.1 ){
@@ -225,13 +227,14 @@ void main() {
 	// 	}
 	// }
 
-	Ray ray =  generateRay(camera, texelCoord);
+	Ray ray = generateRay(camera, texelCoord);
 	// imageStore(imgOutput, texelCoord, vec4(ray.direction.xy,0,1.0));
+	float enter = -1.0/0.f;
+	float exit = 1.0/0.f;
 
-	if(intersectTriangle(ray))
-		imageStore(imgOutput, texelCoord, green);
-	else
-		imageStore(imgOutput, texelCoord, black);
+	bool draw = intersectRayAABB(ray,aabb,enter,exit)&&intersectTriangle(ray);
+	vec4 color = mix(black,green,float(draw));
+	imageStore(imgOutput, texelCoord, color);
 	
 	// if(intersect(ray)){
 	// 	// imageStore(imgOutput, texelCoord, green);

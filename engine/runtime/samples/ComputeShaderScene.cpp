@@ -3,6 +3,10 @@
 #include <resource/geometries/QuadGeometry.h>
 #include <resource/geometries/SphereGeometry.h>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <chrono>
+#include <glm/gtx/string_cast.hpp>
+
 #include "Engine.h"
 
 const unsigned int TEXTURE_zWIDTH = 1000;
@@ -97,12 +101,40 @@ void ComputerShaderScene::init() {
                        GL_RGBA32F);
 
     // objects
-    auto sphere = SphereGeometry::create(0.5f);
+    auto sphereGeo = SphereGeometry::create(0.5f);
+
     // auto sphere = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
     // auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
+    auto sphere = Object();
+    sphere.addComponent<MeshComponent>(PrimitiveList{sphereGeo});
+    // sphere.transform()->setPosition({0.3, 0.4, -11.0});
 
-    auto& vertices = sphere.vertices();
-    auto& indices = sphere.indices();
+    // 静态物体，顶点位置进行预处理
+    auto now = std::chrono::steady_clock().now();
+    auto vertices = sphereGeo.vertices();
+    for (auto& vertex : vertices) {
+        vertex.Position =
+            sphere.transform()->GetModelMatrix() * vertex.Position;
+    };
+    auto endConvert = std::chrono::steady_clock().now();
+    auto spend =
+        std::chrono::duration_cast<std::chrono::milliseconds>(endConvert - now);
+    std::cout << "convert takes : " << spend << " \n";
+
+    BoundingBox aabb;
+    aabb.max = glm::vec(sphere.transform()->GetModelMatrix() *
+                        glm::vec4(sphereGeo.boundingBox().max, 1.0));
+    aabb.min = glm::vec(sphere.transform()->GetModelMatrix() *
+                        glm::vec4(sphereGeo.boundingBox().min, 1.0));
+
+    std::cout << glm::to_string(aabb.min).c_str() << std::endl;
+    std::cout << glm::to_string(aabb.max).c_str() << std::endl;
+
+    m_computeShader->use();
+    m_computeShader->setVec3("aabb.min", aabb.min);
+    m_computeShader->setVec3("aabb.max", aabb.max);
+
+    auto& indices = sphereGeo.indices();
     std::cout << vertices.size() << std::endl;
     std::cout << indices.size() << std::endl;
     std::cout << "Position :" << offsetof(Vertex, Position) << std::endl;
