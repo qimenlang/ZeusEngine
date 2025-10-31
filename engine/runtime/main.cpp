@@ -4,6 +4,7 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include <utils/DebugHelper.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -140,6 +141,8 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    // 请求调试输出上下文
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
     // create window
     float main_scale = ImGui_ImplGlfw_GetContentScaleForMonitor(
@@ -182,6 +185,21 @@ int main() {
     // 捕捉光标，并隐藏，光标不显示，且不会离开窗口
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
+    // 检查调试输出上下文
+    GLint flags;
+    glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+    if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
+        // 初始化调试输出
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback((GLDEBUGPROC)glDebugOutput, nullptr);
+        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0,
+                              nullptr, GL_TRUE);
+        glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_ERROR,
+                             0, GL_DEBUG_SEVERITY_MEDIUM, -1,
+                             "Zeus Opengl error message here");
+    }
+
 #ifdef ZEUS_ROOT_DIR
     PRINTAPI(ZEUS_ROOT_DIR);
     std::cout << ZEUS_ROOT_DIR << std::endl;
@@ -197,8 +215,8 @@ int main() {
     // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<InstancingScene>();
     // auto scene = std::make_unique<InstancingStarScene>();
-    auto scene = std::make_unique<ComputerShaderScene>();
-    // auto scene = std::make_unique<ShadowScene>();
+    // auto scene = std::make_unique<ComputerShaderScene>();
+    auto scene = std::make_unique<ShadowScene>();
 
     scene->init();
     std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();
@@ -243,6 +261,7 @@ int main() {
 
         renderer->prerender();
         renderer->render(view.get());
+        glCheckError();
 
         // Gui Rendering
         // (Your code clears your framebuffer, renders your other stuff etc.)
