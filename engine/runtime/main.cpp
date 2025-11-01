@@ -79,7 +79,7 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
     lastX = xpos;
     lastY = ypos;
 
-    if (!Zeus::Engine::getInstance().camera().isRotationMode) return;
+    if (!Zeus::Engine::getInstance().camera().m_is_rotation_mode) return;
     Zeus::Engine::getInstance().camera().ProcessMouseMovement(xoffset, yoffset);
 }
 
@@ -87,10 +87,10 @@ void mouse_button_callback(GLFWwindow *window, int button, int action,
                            int mods) {
     if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         if (action == GLFW_PRESS) {
-            Zeus::Engine::getInstance().camera().isRotationMode = true;
+            Zeus::Engine::getInstance().camera().m_is_rotation_mode = true;
         }
         if (action == GLFW_RELEASE) {
-            Zeus::Engine::getInstance().camera().isRotationMode = false;
+            Zeus::Engine::getInstance().camera().m_is_rotation_mode = false;
         }
     }
 }
@@ -132,6 +132,20 @@ void processInput(GLFWwindow *window) {
     // if (glfwGetKey(window, GLFW_KEY_F11) == GLFW_) {
     //     toggleFullscreen(window);
     // }
+}
+
+static void gui() {
+    ImGui::Begin("Camera Info");
+    if (ImGui::CollapsingHeader("Camera Position")) {
+        ImGui::Indent();
+        ImGui::Text("Position: (%.3f, %.3f, %.3f)",
+                    engine.camera().position().x, engine.camera().position().y,
+                    engine.camera().position().z);
+        ImGui::Text("Front: (%.3f, %.3f, %.3f)", engine.camera().front().x,
+                    engine.camera().front().y, engine.camera().front().z);
+        ImGui::Unindent();
+    }
+    ImGui::End();
 }
 
 int main() {
@@ -251,6 +265,7 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        gui();
         // logic
         engine.update();
         auto title = "FPS:" + std::to_string(engine.fps());

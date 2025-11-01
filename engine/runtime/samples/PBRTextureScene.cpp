@@ -74,8 +74,8 @@ void PBRTextureScene::init() {
     auto createSphere = [&]() -> std::unique_ptr<Object> {
         auto sphere = std::make_unique<Object>(pbr_sphere_mat);
         auto sphereGeo = SphereGeometry::create(0.48);
-        sphereGeo.textures = {tex_albedo, tex_ao, tex_metallic, tex_normal,
-                              tex_roughness};
+        sphereGeo.setTextures(
+            {tex_albedo, tex_ao, tex_metallic, tex_normal, tex_roughness});
         Primitive spherePrimitive = {
             sphereGeo, pbr_sphere_mat->defaultInstance()->duplicate()};
         sphere->addComponent(std::move(

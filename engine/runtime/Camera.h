@@ -23,11 +23,11 @@ const float ZOOM = 45.0f;
 class Camera {
    private:
     // camera Attributes
-    glm::vec3 Position;
-    glm::vec3 Front;
-    glm::vec3 Up;
-    glm::vec3 Right;
-    glm::vec3 WorldUp;
+    glm::vec3 m_position;
+    glm::vec3 m_front;
+    glm::vec3 m_up;
+    glm::vec3 m_right;
+    glm::vec3 m_world_up;
 
     struct ProjectionParams {
         float FOV = 45.0f;
@@ -36,36 +36,46 @@ class Camera {
         float Far = 500.0f;
     };
     // euler Angles
-    float Yaw;
-    float Pitch;
+    float m_yaw;
+    float m_pitch;
     // camera options
-    float MovementSpeed;
-    float MouseSensitivity;
-    float Zoom;
-    glm::mat4 projection;
+    float m_movement_speed;
+    float m_mouse_sensitivity;
+    float m_zoom;
+
+    ProjectionParams m_pjt_para;
+    glm::mat4 m_projection;
 
    public:
-    bool isRotationMode = false;
+    bool m_is_rotation_mode = false;
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
-           glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW,
+           glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW,
            float pitch = PITCH);
     // constructor with scalar values
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ,
            float yaw, float pitch);
 
-    void setWorldPosition(glm::vec3 worldPos) { Position = worldPos; };
-    glm::vec3 worldPosition() const { return Position; };
+    void setWorldPosition(glm::vec3 worldPos) { m_position = worldPos; };
+    glm::vec3 worldPosition() const { return m_position; };
 
     // returns the view matrix calculated using Euler Angles and the LookAt
     // Matrix
     glm::mat4 GetViewMatrix() {
-        return glm::lookAt(Position, Position + Front, Up);
+        return glm::lookAt(m_position, m_position + m_front, m_up);
     }
 
-    glm::mat4 GetProjectionMatrix() { return projection; }
+    glm::mat4 GetProjectionMatrix() { return m_projection; }
 
-    glm::vec3 position() const { return Position; }
+    glm::vec3 position() const { return m_position; }
+
+    glm::vec3 front() const { return m_front; }
+
+    glm::vec3 up() const { return m_up; }
+
+    glm::vec3 right() const { return m_right; }
+
+    ProjectionParams pjt_para() const { return m_pjt_para; }
 
     // processes input received from any keyboard-like input system. Accepts
     // input parameter in the form of camera defined ENUM (to abstract it from

@@ -98,8 +98,7 @@ void ShadowScene::init() {
     };
 
     auto cubeGeo = CubeGeometry::getDefault();
-    cubeGeo.textures.push_back(cube_texture);
-    cubeGeo.textures.push_back(shadow_texture);
+    cubeGeo.setTextures({cube_texture, shadow_texture});
     auto phong_mat =
         Material::create(vs_path.c_str(), sample_diffuse_fs_path.c_str());
     phong_mat->use();
@@ -117,7 +116,7 @@ void ShadowScene::init() {
     };
 
     auto floorGeo = CubeGeometry::getDefault();
-    floorGeo.textures.push_back(floor_texture);
+    floorGeo.setTextures({floor_texture});
     auto shadow_floor = createObj(floorGeo, shadow_mat, glm::vec3{0, -0.26, 0});
     shadow_floor->transform()->setScale(glm::vec3{30, 0.01, 30});
     auto floor = createObj(floorGeo, phong_mat, glm::vec3{0, -0.26, 0});
@@ -137,10 +136,12 @@ void ShadowScene::init() {
     quad_mat->shader()->setFloat("far_plane", far_plane);
 
     auto quadGeo = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
-    quadGeo.textures.push_back(shadow_texture);
-    for (auto &vertex : quadGeo.vertices) {
+    quadGeo.setTextures({shadow_texture});
+    auto deformedQuadVertices = quadGeo.vertices();
+    for (auto &vertex : deformedQuadVertices) {
         vertex.Position = vertex.Position * 0.2f + glm::vec4{0.8f};
     }
+    quadGeo.setVertices(deformedQuadVertices);
     m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
 }
 

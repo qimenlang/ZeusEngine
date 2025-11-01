@@ -45,7 +45,7 @@ void FBOScene::init() {
     };
 
     auto cubeGeo = CubeGeometry::getDefault();
-    cubeGeo.textures.push_back(cube_texture);
+    cubeGeo.setTextures({cube_texture});
 
     vector<glm::vec3> positions{
         {-2, 0, -1}, {-1, 2, 0}, {0, 1, -0.5}, {1, 1.5, -1}, {2, 0.5, 0.5}};
@@ -54,7 +54,7 @@ void FBOScene::init() {
     };
 
     auto floorGeo = CubeGeometry::getDefault();
-    floorGeo.textures.push_back(floor_texture);
+    floorGeo.setTextures({floor_texture});
     auto floor = createObj(floorGeo, cube_mat, glm::vec3{0, -0.51, 0});
     floor->transform()->setScale(glm::vec3{5, 0.01, 5});
     m_objects.emplace_back(std::move(floor));
@@ -105,7 +105,7 @@ void FBOScene::init() {
     Texture screenTexture;
     screenTexture.id = textureColorbuffer;
     auto quadGeo = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
-    quadGeo.textures.push_back(screenTexture);
+    quadGeo.setTextures({screenTexture});
     m_quad = createObj(quadGeo, quad_mat, glm::vec3{0, 0, -1});
 }
 

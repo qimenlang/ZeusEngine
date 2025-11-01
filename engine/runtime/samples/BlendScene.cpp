@@ -40,7 +40,7 @@ void BlendScene::init() {
     cube_texture.type = "diffuse";
 
     auto cubeGeo = CubeGeometry::getDefault();
-    cubeGeo.textures.push_back(cube_texture);
+    cubeGeo.setTextures({cube_texture});
     Primitive cubePrimitive{cubeGeo,
                             sample_diffuse_mat->defaultInstance()->duplicate()};
     m_cube1->addComponent(std::move(
@@ -59,7 +59,7 @@ void BlendScene::init() {
         grass->transform()->setPosition(pos);
 
         auto grassGeo = QuadGeometry::getDefault();
-        grassGeo.textures.push_back(grass_texture);
+        grassGeo.setTextures({grass_texture});
         Primitive grassPrimitive{grassGeo,
                                  grass_mat->defaultInstance()->duplicate()};
         grass->addComponent(std::move(
@@ -84,7 +84,7 @@ void BlendScene::init() {
         window->transform()->setPosition(pos);
 
         auto windowGeo = QuadGeometry::getDefault();
-        windowGeo.textures.push_back(window_texture);
+        windowGeo.setTextures({window_texture});
         Primitive windowPrimitive{
             windowGeo, sample_diffuse_mat->defaultInstance()->duplicate()};
         window->addComponent(std::move(

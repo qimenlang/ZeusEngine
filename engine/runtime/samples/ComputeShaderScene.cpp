@@ -3,6 +3,10 @@
 #include <resource/geometries/QuadGeometry.h>
 #include <resource/geometries/SphereGeometry.h>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <chrono>
+#include <glm/gtx/string_cast.hpp>
+
 #include "Engine.h"
 
 const unsigned int TEXTURE_zWIDTH = 1000;
@@ -97,12 +101,42 @@ void ComputerShaderScene::init() {
                        GL_RGBA32F);
 
     // objects
-    // auto sphere = SphereGeometry::create(0.1f);
-    // auto sphere = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
-    auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
+    auto sphereGeo = SphereGeometry::create(0.5f);
 
-    auto& vertices = sphere.vertices;
+    // auto sphere = QuadGeometry::getDefault(QuadGeometryType::ScreenQuad);
+    // auto sphere = QuadGeometry::getDefault(QuadGeometryType::NormalQuad);
+    auto sphere = Object();
+    sphere.addComponent<MeshComponent>(PrimitiveList{sphereGeo});
+    // sphere.transform()->setPosition({0.3, 0.4, -11.0});
+
+    // 静态物体，顶点位置进行预处理
+    auto now = std::chrono::steady_clock().now();
+    auto vertices = sphereGeo.vertices();
+    for (auto& vertex : vertices) {
+        vertex.Position =
+            sphere.transform()->GetModelMatrix() * vertex.Position;
+    };
+    auto endConvert = std::chrono::steady_clock().now();
+    auto spend =
+        std::chrono::duration_cast<std::chrono::milliseconds>(endConvert - now);
+    std::cout << "convert takes : " << spend << " \n";
+
+    BoundingBox aabb;
+    aabb.max = glm::vec(sphere.transform()->GetModelMatrix() *
+                        glm::vec4(sphereGeo.boundingBox().max, 1.0));
+    aabb.min = glm::vec(sphere.transform()->GetModelMatrix() *
+                        glm::vec4(sphereGeo.boundingBox().min, 1.0));
+
+    std::cout << glm::to_string(aabb.min).c_str() << std::endl;
+    std::cout << glm::to_string(aabb.max).c_str() << std::endl;
+
+    m_computeShader->use();
+    m_computeShader->setVec3("aabb.min", aabb.min);
+    m_computeShader->setVec3("aabb.max", aabb.max);
+
+    auto& indices = sphereGeo.indices();
     std::cout << vertices.size() << std::endl;
+    std::cout << indices.size() << std::endl;
     std::cout << "Position :" << offsetof(Vertex, Position) << std::endl;
     std::cout << "Normal :" << offsetof(Vertex, Normal) << std::endl;
     std::cout << "TexCoords :" << offsetof(Vertex, TexCoords) << std::endl;
@@ -118,11 +152,18 @@ void ComputerShaderScene::init() {
                  vertices.data(), GL_STATIC_DRAW);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, m_vertex_ssbo);
 
+    glGenBuffers(1, &m_indices_ssbo);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_indices_ssbo);
+    glBufferData(GL_SHADER_STORAGE_BUFFER,
+                 indices.size() * sizeof(unsigned int), indices.data(),
+                 GL_STATIC_DRAW);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, m_indices_ssbo);
+
     glGenBuffers(1, &m_debug_ssbo);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_debug_ssbo);
     glBufferData(GL_SHADER_STORAGE_BUFFER, m_debug_data.size() * sizeof(int),
                  m_debug_data.data(), GL_DYNAMIC_COPY);
-    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, m_debug_ssbo);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, m_debug_ssbo);
 
     // screen quad
     m_screen_quad = std::make_unique<Object>(quad_mat);
@@ -160,6 +201,19 @@ void ComputerShaderScene::update() {
     float currentFrame = Zeus::Engine::getInstance().currentTime();
     m_computeShader->use();
     m_computeShader->setFloat("t", currentFrame);
+    m_computeShader->setVec3("camera.world_position",
+                             Zeus::Engine::getInstance().camera().position());
+    m_computeShader->setVec3("camera.world_front",
+                             Zeus::Engine::getInstance().camera().front());
+    m_computeShader->setVec3("camera.world_up",
+                             Zeus::Engine::getInstance().camera().up());
+    m_computeShader->setVec3("camera.world_right",
+                             Zeus::Engine::getInstance().camera().right());
+    m_computeShader->setFloat(
+        "camera.v_fov", Zeus::Engine::getInstance().camera().pjt_para().FOV);
+    m_computeShader->setFloat(
+        "camera.aspect_ratio",
+        Zeus::Engine::getInstance().camera().pjt_para().AspectRatio);
 
     glDispatchCompute(Zeus::SCR_WIDTH / 8, Zeus::SCR_HEIGHT / 8, 1);
     // 内存屏障，确保computeshader中Image相关计算结果全部写入内存,
@@ -169,8 +223,9 @@ void ComputerShaderScene::update() {
                     GL_BUFFER_UPDATE_BARRIER_BIT);
     // 读取CS调试数据
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_debug_ssbo);
-    int* countPtr = (int*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
-    int debugSize = countPtr[0];
+    float* countPtr =
+        (float*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_READ_ONLY);
+    float debugSize = countPtr[0];
     std::cout << "debug data size:" << debugSize << std::endl;
     for (int i = 0; i < m_debug_data.size(); i++) {
         std::cout << "debug " << i << "data:" << countPtr[i] << std::endl;

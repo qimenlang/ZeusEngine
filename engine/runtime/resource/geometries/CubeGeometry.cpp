@@ -58,22 +58,21 @@ float cubeVertices[] = {
 // clang-format on
 
 Geometry CubeGeometry::getDefault() {
-    Geometry cube;
     const int stride = 8;
     int cubeVertexSize = sizeof(cubeVertices) / sizeof(float) / stride;
-
+    std::vector<Vertex> vertices;
     for (int i = 0; i < cubeVertexSize; i++) {
         Vertex vertex;
         vertex.Position = {cubeVertices[i * stride + 0],
                            cubeVertices[i * stride + 1],
-                           cubeVertices[i * stride + 2], 0};
+                           cubeVertices[i * stride + 2], 1.f};
         vertex.Normal = {cubeVertices[i * stride + 3],
                          cubeVertices[i * stride + 4],
                          cubeVertices[i * stride + 5], 0};
         vertex.TexCoords = {cubeVertices[i * stride + 6],
                             cubeVertices[i * stride + 7], 0, 0};
-        cube.vertices.emplace_back(vertex);
+        vertices.emplace_back(vertex);
     }
     std::cout << "CubeGeometry create" << std::endl;
-    return cube;
+    return {vertices};
 }

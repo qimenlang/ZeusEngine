@@ -12,11 +12,11 @@ Primitive::Primitive(const Geometry &geometry,
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    auto &vertices = geometry.vertices;
+    auto &vertices = geometry.vertices();
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                  &vertices[0], GL_STATIC_DRAW);
 
-    auto &indices = geometry.indices;
+    auto &indices = geometry.indices();
     if (indices.size()) {
         glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -88,7 +88,7 @@ void Primitive::Draw() {
     unsigned int metallicNr = 1;
     unsigned int shadowMapNr = 1;
 
-    auto &textures = geometry.textures;
+    auto &textures = geometry.textures();
     for (unsigned int i = 0; i < textures.size(); i++) {
         // active proper texture unit before binding
         glActiveTexture(GL_TEXTURE0 + i);
@@ -124,7 +124,7 @@ void Primitive::Draw() {
 
     // draw mesh
     glBindVertexArray(VAO);
-    auto indices = geometry.indices;
+    auto indices = geometry.indices();
 
     if (indices.size()) {
         instancing
@@ -135,13 +135,13 @@ void Primitive::Draw() {
                              static_cast<unsigned int>(indices.size()),
                              GL_UNSIGNED_INT, 0);
     } else {
-        instancing
-            ? glDrawArraysInstanced(
-                  GL_TRIANGLES, 0,
-                  static_cast<unsigned int>(geometry.vertices.size()),
-                  instance_count)
-            : glDrawArrays(GL_TRIANGLES, 0,
-                           static_cast<unsigned int>(geometry.vertices.size()));
+        instancing ? glDrawArraysInstanced(
+                         GL_TRIANGLES, 0,
+                         static_cast<unsigned int>(geometry.vertices().size()),
+                         instance_count)
+                   : glDrawArrays(
+                         GL_TRIANGLES, 0,
+                         static_cast<unsigned int>(geometry.vertices().size()));
     }
 
     glBindVertexArray(0);
