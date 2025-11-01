@@ -78,4 +78,5 @@ class Geometry {
     }
 
     const BoundingBox& boundingBox() const { return m_boundingBox; }
+    bool checkValidation();
 };

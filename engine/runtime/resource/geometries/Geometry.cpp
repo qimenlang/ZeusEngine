@@ -2,6 +2,8 @@
 #pragma once
 #include "Geometry.h"
 
+#include <iostream>
+
 void Geometry::updateBoundingBox() {
     if (m_vertices.size() == 0) {
         m_boundingBox.min = glm::vec3(0.0f);
@@ -20,4 +22,19 @@ void Geometry::updateBoundingBox() {
 
     m_boundingBox.min = min;
     m_boundingBox.max = max;
+}
+
+bool Geometry::checkValidation() {
+    bool isIndexInRange = true;
+    for (int i = 0; i < indices().size(); i++) {
+        auto index = indices()[i];
+        if (index > vertices().size()) {
+            isIndexInRange = false;
+        }
+    }
+    if (!isIndexInRange) {
+        std::cout << "Geometry Indices Invalid" << std::endl;
+        // std::abort();
+    }
+    return isIndexInRange;
 }

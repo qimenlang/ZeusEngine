@@ -26,13 +26,15 @@ Geometry SphereGeometry::create(float radius, GeometryDescriptor desc) {
             vert.Normal = glm::vec4(xPos, yPos, zPos, 0);
             vertices.emplace_back(vert);
 
-            indices.push_back(y * (X_SEGMENTS + 1) + x);
-            indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
-            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
+            if (y >= 1) {
+                indices.push_back((y - 1) * (X_SEGMENTS + 1) + x);
+                indices.push_back((y - 1) * (X_SEGMENTS + 1) + x + 1);
+                indices.push_back(y * (X_SEGMENTS + 1) + x);
 
-            indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
-            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x + 1);
-            indices.push_back((y + 1) * (X_SEGMENTS + 1) + x);
+                indices.push_back((y - 1) * (X_SEGMENTS + 1) + x + 1);
+                indices.push_back(y * (X_SEGMENTS + 1) + x + 1);
+                indices.push_back(y * (X_SEGMENTS + 1) + x);
+            }
         }
     }
 
