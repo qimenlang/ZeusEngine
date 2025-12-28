@@ -2,16 +2,27 @@
     "version": 8,
     "configurePresets": [
         {
-            "name": "zeusEngine",
-            "displayName": "GCC 9.4.0 x86_64-linux-gnu",
-            "description": "使用编译器: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "name": "Visual Studio Enterprise 2022 Release - amd64",
+            "displayName": "Visual Studio Enterprise 2022 Release - amd64",
+            "description": "将编译器用于 Visual Studio 17 2022 (x64 体系结构)",
+            "generator": "Visual Studio 17 2022",
+            "toolset": "host=x64",
+            "architecture": "x64",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-                "CMAKE_C_COMPILER": "/usr/bin/gcc",
-                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "ASSIMP_BUILD_ASSIMP_VIEW": "OFF"
             }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Visual Studio Enterprise 2022 Release - amd64-debug",
+            "displayName": "Visual Studio Enterprise 2022 Release - amd64 - Debug",
+            "configurePreset": "Visual Studio Enterprise 2022 Release - amd64",
+            "configuration": "Debug"
         }
     ]
 }
