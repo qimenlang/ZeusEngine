@@ -228,9 +228,9 @@ int main() {
     // auto scene = std::make_unique<PBRTextureScene>();
     // auto scene = std::make_unique<FBOScene>();
     // auto scene = std::make_unique<InstancingScene>();
-    // auto scene = std::make_unique<InstancingStarScene>();
+    auto scene = std::make_unique<InstancingStarScene>();
     // auto scene = std::make_unique<ComputerShaderScene>();
-    auto scene = std::make_unique<ShadowScene>();
+    // auto scene = std::make_unique<ShadowScene>();
 
     scene->init();
     std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>();

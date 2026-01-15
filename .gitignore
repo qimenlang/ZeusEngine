@@ -3,7 +3,6 @@ build/
 .vs/
 out/
 .cache/
-thirdparty/
 
 #可执行程序
 *.[Ee][Xx][Ee]  # Windows 的 .exe 文件

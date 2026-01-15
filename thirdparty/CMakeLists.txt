@@ -11,6 +11,7 @@ add_subdirectory("Catch2")
 add_subdirectory("assimp")
 set(ENABLE_OPT OFF)
 add_subdirectory("glslang")
+add_subdirectory("osg")
 
 message("###Compiler:" ${CMAKE_CXX_COMPILER_ID})
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
