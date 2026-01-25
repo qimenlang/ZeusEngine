@@ -2,10 +2,10 @@
     "version": 8,
     "configurePresets": [
         {
-            "name": "vs2022",
-            "displayName": "vs2022",
-            "description": "将编译器用于 Visual Studio 17 2022 (x64 体系结构)",
-            "generator": "Visual Studio 17 2022",
+            "name": "vs2026",
+            "displayName": "vs2026",
+            "description": "将编译器用于 Visual Studio 18 2026 (x64 体系结构),存在msb 1011错误时请使用ninja-msvc",
+            "generator": "Visual Studio 18 2026",
             "toolset": "host=x64",
             "architecture": "x64",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
@@ -13,16 +13,39 @@
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
                 "CMAKE_C_COMPILER": "cl.exe",
                 "CMAKE_CXX_COMPILER": "cl.exe",
-                "ASSIMP_BUILD_ASSIMP_VIEW": "OFF"
+                "ASSIMP_BUILD_ASSIMP_VIEW": "OFF",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_SUPPRESS_REGENERATION": "ON"
+            }
+        },
+        {
+            "name": "ninja-msvc",
+            "displayName": "ninja-msvc",
+            "description": "将编译器用于 Visual Studio 18 2026 (x64 体系结构)，使用 Ninja 生成器, 需要cmake tools 禁用kit自动扫描",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "ASSIMP_BUILD_ASSIMP_VIEW": "OFF",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_STANDARD": "23",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON"
             }
         }
     ],
     "buildPresets": [
         {
-            "name": "vs2022-debug",
-            "displayName": "vs2022-debug",
-            "configurePreset": "vs2022",
-            "configuration": "Debug"
+            "name": "vs2026",
+            "displayName": "vs2026",
+            "configurePreset": "vs2026",
+            "jobs": 0
+        },
+        {
+            "name": "ninja-msvc-debug",
+            "displayName": "ninja-msvc-debug",
+            "configurePreset": "ninja-msvc",
+            "configuration": "Debug",
+            "jobs": 0
         }
     ]
 }
