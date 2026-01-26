@@ -1,15 +1,21 @@
-cmake_minimum_required (VERSION 3.15)
+cmake_minimum_required(VERSION 3.15)
 
-project ("ZeusEngine")
+project("ZeusEngine")
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(MSVC)
+    add_compile_options(/MP) # 启用多处理器编译
+endif()
+
 # 包含子项目。
-add_subdirectory ("thirdparty")
+add_subdirectory("thirdparty")
+
 # 启用测试
 enable_testing()
 add_subdirectory("utils")
-add_subdirectory ("engine")
+add_subdirectory("engine")
+add_subdirectory("osgEngine")
 
 add_subdirectory("bestPractice")
