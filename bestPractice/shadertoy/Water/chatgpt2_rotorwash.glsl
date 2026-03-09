@@ -30,15 +30,47 @@ float noise(vec2 p)
 }
 
 //--------------------------------
+// turbulence
+//--------------------------------
+
+float turbulence(vec2 p)
+{
+    float t=noise(p*12.0+iTime*4.0);
+    t-=0.5;
+
+    float r=length(p);
+
+    float mask=exp(-r*3.0);
+
+    return t*0.04*mask;
+}
+
+
+
+//--------------------------------
 // gerstner wave
 //--------------------------------
 
-float gerstner(vec2 p, vec2 dir, float amp, float len, float speed)
+float gerstner(vec2 uv, vec2 dir, float amp, float len, float speed)
 {
+    float r = length(uv); 
+    // 扭曲uv坐标，改变波形形状
+    vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
+    float bTwist = step(0.01, r);
+    // uv += warp * 0.02*bTwist;
+
     float k=2.0*PI/len;
     float w=k*speed;
 
-    float phase=k*dot(p,dir)-w*iTime;
+    float phase=k*dot(uv,dir)-w*iTime;
+
+    // 随距离衰减
+    float decl = exp(-r*5.0);
+    amp *= decl; 
+
+    // avoid singularity at center
+    // float mask = smoothstep(0.01,0.1,r);
+    // amp *= mask;
 
     return amp*sin(phase);
 }
@@ -55,7 +87,7 @@ float kelvinWake(vec2 p)
 
     float wake=sin(r*30.0-iTime*6.0);
 
-    wake*=exp(-r*2.0);
+    wake*=exp(-r*15.0);
 
     wake*=cos(angle*3.0);
 
@@ -66,32 +98,69 @@ float kelvinWake(vec2 p)
 // rotor vortex ring
 //--------------------------------
 
-float vortexRing(vec2 p)
+float sinWave(vec2 uv)
 {
-    float r=length(p);
+    // 距离中心
+    float r = length(uv);
 
-    float ring=sin(r*45.0-iTime*10.0);
+    // 波参数
+    float frequency = 50.0;
+    float speed = 2.0;
+    float amplitude = 0.05;
 
-    ring*=exp(-r*5.0);
+    // 单一sin波
+    float wave = sin(r * frequency - iTime * speed);
 
-    return ring*0.05;
+    // 随距离衰减
+    // wave*=exp(-r*5.0);
+
+    return wave*amplitude;
 }
 
-//--------------------------------
-// turbulence
-//--------------------------------
+float vortexRing(vec2 uv){
 
-float turbulence(vec2 p)
-{
-    float t=noise(p*12.0+iTime*4.0);
-    t-=0.5;
 
-    float r=length(p);
+    // float ring = sinWave(uv);
+    // 振幅、波长、速度
+    float amp = 0.05;
+    // float len = clamp(0.05*r,0.02,0.05);
+    float len = 0.03;
+    float speed = 0.05;
+    vec2 uv0 = uv-vec2(0.0,-0.1);
+    vec2 dir = normalize(uv0);
 
-    float mask=exp(-r*3.0);
+    // 扭曲uv坐标，改变波形形状
+    // vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
+    // uv0 += warp * 0.03;
+    // 噪声调整波长，增加自然感
+    // len = len * (0.7 + 0.3*noise(uv0*2.0));
+    // 扰动传播方向
+    // float angle = noise(uv0*1.5) * 2.0 * PI;
+    // vec2 dirWarp = normalize(
+    //     uv0+
+    //     vec2(cos(angle), sin(angle))*0.03
+    // );
 
-    return t*0.04*mask;
+
+
+    float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8);
+    float offset = 0.25;
+    vec2 uv1 = uv-vec2(offset,offset);
+    ring+=  gerstner(uv1, normalize(uv1), amp, len*0.8, speed);
+    vec2 uv2 = uv-vec2(-offset,offset);
+    ring+=  gerstner(uv2, normalize(uv2),  amp, len, speed*1.111);
+
+    ring /= 3.0;
+
+    float r = length(uv);
+    float decl = exp(-r*5.0);
+    ring *= decl; // 随距离衰减
+
+    // uv-=0.1; 
+    // float ring=  gerstner(uv, normalize(uv), 0.1, 0.1, 0.2);
+    return ring;
 }
+
 
 //--------------------------------
 // ocean height
@@ -102,14 +171,14 @@ float oceanHeight(vec2 p)
     float h=0.0;
 
     // base ocean
-    h+=gerstner(p,normalize(vec2(1.0,0.4)),0.05,0.5,1.2);
-    h+=gerstner(p,normalize(vec2(-0.7,1.0)),0.03,0.35,1.4);
-    h+=gerstner(p,normalize(vec2(0.6,-0.3)),0.02,0.25,1.8);
+    // h+=gerstner(p-vec2(0.5,0.7),normalize(vec2(1.0,0.4)),0.05,0.5,0.2);
+    // h+=gerstner(p,normalize(vec2(-0.7,1.0)),0.03,0.35,0.4);
+    // h+=gerstner(p,normalize(vec2(0.6,-0.3)),0.02,0.25,0.6);
 
     // helicopter disturbances
     h+=vortexRing(p);
-    h+=kelvinWake(p);
-    h+=turbulence(p);
+    // h+=kelvinWake(p); 
+    // h+=turbulence(p);
 
     return h;
 }
@@ -163,6 +232,7 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
 {
     vec2 uv=fragCoord/iResolution.xy;
 
+    //uv+=vec2(sin(uv.x))*0.2;// 尝试修改形状
     uv-=0.5;
     uv.x*=iResolution.x/iResolution.y;
 
@@ -170,7 +240,7 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
 
     vec3 n=getNormal(uv);
 
-    vec3 viewDir=normalize(vec3(0.0,1.2,1.0));
+    vec3 viewDir=normalize(vec3(0.0,1,0.0));
 
     vec3 lightDir=normalize(vec3(0.4,1.0,0.3));
 
@@ -217,11 +287,15 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
 
     color+=spec*vec3(1.0);
 
-    color=mix(color,vec3(1.0),foam*0.6);
+    // color=mix(color,vec3(1.0),foam*0.6);
 
-    color+=mist*vec3(1.0);
+    // color+=mist*vec3(1.0);
 
     color+=F*vec3(0.4,0.6,0.8);
+
+    //debug
+    // color = vec3(length(uv),0,0);
+    // color = vec3(uv+0.5,0);
 
     fragColor=vec4(color,1.0);
 }
