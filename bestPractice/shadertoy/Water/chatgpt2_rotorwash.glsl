@@ -51,13 +51,25 @@ float turbulence(vec2 p)
 // gerstner wave
 //--------------------------------
 
-float gerstner(vec2 uv, vec2 dir, float amp, float len, float speed)
+float gerstner(vec2 uv, vec2 dir, float amp, float len, float speed,float declRatio,vec2 maskXY)
 {
     float r = length(uv); 
     // 扭曲uv坐标，改变波形形状
+    // vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
+    // uv0 += warp * 0.03;
+    // 噪声调整波长，增加自然感
+    // len = len * (0.7 + 0.3*noise(uv0*2.0));
+    // 扰动传播方向
+    // float angle = noise(uv0*1.5) * 2.0 * PI;
+    // vec2 dirWarp = normalize(
+    //     uv0+
+    //     vec2(cos(angle), sin(angle))*0.03
+    // );
+
+    // 扭曲uv坐标，改变波形形状
     vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
     float bTwist = step(0.01, r);
-    // uv += warp * 0.02*bTwist;
+    uv += warp * 0.02*bTwist;
 
     float k=2.0*PI/len;
     float w=k*speed;
@@ -65,12 +77,14 @@ float gerstner(vec2 uv, vec2 dir, float amp, float len, float speed)
     float phase=k*dot(uv,dir)-w*iTime;
 
     // 随距离衰减
-    float decl = exp(-r*5.0);
+    
+    float decl = exp(-r*declRatio);
     amp *= decl; 
+    
 
     // avoid singularity at center
-    // float mask = smoothstep(0.01,0.1,r);
-    // amp *= mask;
+    float mask = smoothstep(maskXY.x,maskXY.y,r);
+    amp *= mask;
 
     return amp*sin(phase);
 }
@@ -119,46 +133,45 @@ float sinWave(vec2 uv)
 
 float vortexRing(vec2 uv){
 
+    float r = length(uv); 
 
+    // 1. 简单的同心圆波纹
     // float ring = sinWave(uv);
+
+    // 2. 叠加多个偏移的波纹，模拟旋翼下的复杂涡流
     // 振幅、波长、速度
     float amp = 0.05;
-    // float len = clamp(0.05*r,0.02,0.05);
-    float len = 0.03;
+    float len = 0.02;
     float speed = 0.05;
     vec2 uv0 = uv-vec2(0.0,-0.1);
     vec2 dir = normalize(uv0);
+    float declRatio = 10.0; // 衰减速率
 
-    // 扭曲uv坐标，改变波形形状
-    // vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
-    // uv0 += warp * 0.03;
-    // 噪声调整波长，增加自然感
-    // len = len * (0.7 + 0.3*noise(uv0*2.0));
-    // 扰动传播方向
-    // float angle = noise(uv0*1.5) * 2.0 * PI;
-    // vec2 dirWarp = normalize(
-    //     uv0+
-    //     vec2(cos(angle), sin(angle))*0.03
-    // );
-
-
-
-    float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8);
+    vec2 maskXY = vec2(0.008,0.1);
+    float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8,declRatio,maskXY);
     float offset = 0.25;
     vec2 uv1 = uv-vec2(offset,offset);
-    ring+=  gerstner(uv1, normalize(uv1), amp, len*0.8, speed);
+    ring+=  gerstner(uv1, normalize(uv1), amp, len*0.8, speed,declRatio,maskXY);
     vec2 uv2 = uv-vec2(-offset,offset);
-    ring+=  gerstner(uv2, normalize(uv2),  amp, len, speed*1.111);
-
+    ring+=  gerstner(uv2, normalize(uv2),  amp, len, speed*1.2,declRatio,maskXY);
     ring /= 3.0;
+    // ring = 0.0;
 
-    float r = length(uv);
-    float decl = exp(-r*5.0);
-    ring *= decl; // 随距离衰减
+    // float r = length(uv);
+    // float decl = exp(-r*5.0);
+    // ring *= decl; // 随距离衰减
 
-    // uv-=0.1; 
-    // float ring=  gerstner(uv, normalize(uv), 0.1, 0.1, 0.2);
-    return ring;
+
+    // 3. 外圈的同心圆gerstner波，模拟旋翼下外围波纹
+    float declRatio_out =3.0;
+    vec2 mask_out = vec2(0.4,0.7);
+    float ring_out=  gerstner(uv, normalize(uv), 0.07, 0.1, 0.05,declRatio_out,mask_out);
+    // ring_out = 0.0;
+    float ring_result = mix(ring,ring_out, r/length(vec2(0.5)));
+    // ring_result = ring;
+    // ring_result = ring_out;
+
+    return ring_result;
 }
 
 
