@@ -1,6 +1,4 @@
-﻿// Helicopter Downwash Ocean (advanced)
-// ShaderToy Image shader
-
+﻿// shadertoy: channel0: rotorwash_single_ring.glsl
 #define PI 3.1415926
 
 //--------------------------------
@@ -50,42 +48,11 @@ float turbulence(vec2 p)
 //--------------------------------
 // gerstner wave
 //--------------------------------
-
-float gerstner(vec2 uv, vec2 dir, float amp, float len, float speed,float declRatio,vec2 maskXY)
+float gerstner(vec2 p, vec2 dir, float amp, float waveLen, float speed)
 {
-    float r = length(uv); 
-    // 扭曲uv坐标，改变波形形状
-    float twistRatio = 5.0;
-    vec2 warp = vec2(sin(uv.x*twistRatio),cos(uv.y*twistRatio  + 10.0));
-    float bTwist = step(0.01, r);
-    // uv += warp * 0.2*bTwist;
-
-    float k=2.0*PI/len;
-    float w=k*speed;
-
-    vec2 delta = uv - vec2(0.0,0.0);
-
-    float angle = atan(delta.y, delta.x); // 方位角，范围 [-PI, PI]    
-    // 扰动相位，增加八重对称的旋转效果
-    // 八重对称方向因子：在八个方向上为1，其余方向小于1
-    // cos(8*angle) 在 angle = 0°,45°,90°,135°,180°,225°,270°,315° 时等于1
-    float phaseTwist = 0.5 + 0.5 * sin(8.0 * angle);
-
-    float phase=k*dot(uv,dir)-w*iTime+ phaseTwist * 1.0;
-
-    // 两种衰减叠加
-    float decl = exp(-r*declRatio);
-    // 随距离衰减,0.2处最强；0.0-0.4范围内衰减
-    decl = clamp(1.0-  pow(r - 0.2,2.0)/pow(0.2,2.0), 0.0, 1.0);
-    // 随距离衰减
-    // decl *= exp(-r*declRatio);
-    amp *= decl; 
-    
-
-    // avoid singularity at center
-    // float mask = smoothstep(maskXY.x,maskXY.y,r);
-    // amp *= mask;
-
+    float k = 2.0*PI/waveLen;
+    float w = speed*k;
+    float phase = k*dot(dir,p)-w*iTime;
     return amp*sin(phase);
 }
 
@@ -99,62 +66,18 @@ float kelvinWake(vec2 p)
 
     float angle=atan(p.y,p.x);
 
-    float wake=sin(r*30.0-iTime*6.0);
-
-    wake*=exp(-r*15.0);
-
-    wake*=cos(angle*3.0);
-
-    return wake*0.03;
-}
-
-float kelvinWake2(vec2 uv)
-{
-    float r=length(uv);
-
-    vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
-    float bTwist = step(0.1, r);
-    // uv += warp * 0.1*bTwist;
-
-    float angle=atan(uv.y,uv.x);
-
-    float lenRatio = 100.0;
+    float lenRatio = 50.0;
     float speed = 5.0;
     float density = 30.0;
     float decl = 0.0;
-    float amp = 0.3;
 
     float wake=sin(r*lenRatio-iTime*speed);
 
-    // 开尔文臂
     wake*=cos(angle*density);
     wake*=exp(-r*decl);
 
-    return wake*amp;
+    return wake*0.3;
 }
-
-float rotorWave(vec2 uv)
-{
-    float r = length(uv);
-    float a = atan(uv.y, uv.x);
-
-    float t = iTime;
-
-    float noise =
-        sin(a * 24.0 + t * 2.0) *
-        sin(a * 13.0 - t * 1.5);
-
-    float radial =
-        sin(r * 80.0 - t * 6.0);
-
-    float distort =
-        sin(a * 12.0 + r * 20.0 + t * 3.0);
-
-    float falloff = exp(-r * 4.0);
-
-    return falloff * (0.6 * radial + 0.4 * noise * distort);
-}
-
 
 //--------------------------------
 // rotor vortex ring
@@ -189,36 +112,27 @@ float vortexRing(vec2 uv){
     // 2. 叠加多个偏移的波纹，模拟旋翼下的复杂涡流
     // 振幅、波长、速度
     float amp = 0.05;
-    float len = 0.02;
+    float len = 0.05;
     float speed = 0.05;
-    vec2 uv0 = uv-vec2(0.0,-0.0);
+    vec2 uv0 = uv-vec2(0.0,-0.1);
     vec2 dir = normalize(uv0);
-    float declRatio = 10.0; // 衰减速率
 
-    vec2 maskXY = vec2(0.08,0.1);
-    float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8,declRatio,maskXY);
-    
-    // ring = gerstnerIrregular(uv0, vec2(0.0,0.0), amp*0.8, len*0.8, 0.5);
-    // float offset = 0.25;
-    // vec2 uv1 = uv-vec2(offset,offset);
-    // ring+=  gerstner(uv1, normalize(uv1), amp, len*0.8, speed,declRatio,maskXY);
-    // vec2 uv2 = uv-vec2(-offset,offset);
-    // ring+=  gerstner(uv2, normalize(uv2),  amp, len, speed*1.2,declRatio,maskXY);
-    // ring /= 3.0;
-    // ring = 0.0;
-
+    // 扭曲uv坐标，改变波形形状
+    // vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
+    // uv0 += warp * 0.03;
+    float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8);
     // float r = length(uv);
     // float decl = exp(-r*5.0);
     // ring *= decl; // 随距离衰减
 
 
     // 3. 外圈的同心圆gerstner波，模拟旋翼下外围波纹
-    float declRatio_out =3.0;
-    vec2 mask_out = vec2(0.4,0.7);
-    float ring_out=  gerstner(uv, normalize(uv), 0.07, 0.1, 0.05,declRatio_out,mask_out);
-    // ring_out = 0.0;
-    float ring_result = mix(ring,ring_out, r/length(vec2(0.5)));
-    ring_result = ring;
+    // float declRatio_out =3.0;
+    // vec2 mask_out = vec2(0.4,0.7);
+    // float ring_out=  gerstner(uv, normalize(uv), 0.07, 0.1, 0.05,declRatio_out,mask_out);
+    // // ring_out = 0.0;
+    // float ring_result = mix(ring,ring_out, r/length(vec2(0.5)));
+    float ring_result = ring;
     // ring_result = ring_out;
 
     return ring_result;
@@ -240,9 +154,7 @@ float oceanHeight(vec2 p)
 
     // helicopter disturbances
     // h+=vortexRing(p);
-    // h+=kelvinWake(p); 
-    // h+=kelvinWake2(p); 
-    h+=rotorWave(p);
+    h+=kelvinWake(p); 
     // h+=turbulence(p);
 
     return h;
@@ -305,13 +217,9 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
 
     vec3 n=getNormal(uv);
 
-    vec3 camerePos = vec3(0.0,1.0,0.0);
+    vec3 viewDir=normalize(vec3(0.0,1,0.0));
 
-    vec3 fragPos = vec3(uv.x, 0.0, uv.y);
-
-    vec3 viewDir=normalize(camerePos - fragPos);
-
-    vec3 lightDir=normalize(vec3(0.5,1.0,0.5));
+    vec3 lightDir=normalize(vec3(0.4,1.0,0.3));
 
     //--------------------------------
     // lighting
@@ -354,7 +262,7 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
 
     vec3 color=water;
 
-    color+=spec*vec3(1.0);
+    // color+=spec*vec3(1.0);
 
     // color=mix(color,vec3(1.0),foam*0.6);
 
