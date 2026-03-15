@@ -7,7 +7,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec3 cam;
 
     if(iFrame == 0)
-        cam = vec3(0.0, 10.0, 0.0);
+        cam = vec3(0.0, 50.0, 100.0);
     else
          cam = texture2D(iChannel0, vec2(0.5)).xyz;
 

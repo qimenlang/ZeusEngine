@@ -57,14 +57,19 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 
     if(t < 0.0)
     {
+<<<<<<< HEAD
         vec3 color = texture2D(iChannel1, vec2(0.5,0.5)).rgb;
         fragColor = vec4(0,0,0.7,0.0);
         fragColor = vec4(color,1.0);
+=======
+        fragColor = vec4(0,0,0.7,0.0);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
         return;
     }
 
     vec3 pos = camPos + t * rayDir;
 
+<<<<<<< HEAD
     vec2 atlasSize = iChannelResolution[0].xy;
     vec2 frameSize = atlasSize / vec2(cols, rows);
     float frameIndex = floor(mod(iTime * 10.0, totalFrames)); // 10 fps 示例
@@ -102,6 +107,20 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     vec3 viewDir=normalize(camPos);
 
     vec3 lightDir=normalize(vec3(0.4,1.0,0.3));
+=======
+    vec3 color = vec3(0.0);
+
+    // quad size
+    float oceanSize = 50.0;
+    vec2 oceanUV = (pos.xz / oceanSize) * 0.5 + 0.5;
+
+    vec3 n = texture2D(iChannel0, oceanUV).rgb;
+    
+    vec3 viewDir=normalize(camPos - pos);
+
+    vec3 lightDir=normalize(vec3(0.4,1.0,0.3));
+    lightDir=normalize(vec3(0.0,1.0,0.0));
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 
     //--------------------------------
     // lighting
@@ -119,8 +138,16 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     // base water
     //--------------------------------
 
+<<<<<<< HEAD
     vec3 deep=vec3(0.0,0.25,0.45);
     vec3 shallow=vec3(0.0,0.45,0.75);
+=======
+    vec3 deep=vec3(0.0,0.15,0.35);
+    vec3 shallow=vec3(0.0,0.55,0.85);
+
+    // vec3 deep=vec3(0.0,0.0,1.0);
+    // vec3 shallow=vec3(1.0,0.0,0.0);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 
     vec3 water=mix(deep,shallow,diff);
 
@@ -130,9 +157,15 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 
     color=water;
 
+<<<<<<< HEAD
     color+=spec*vec3(1.0);
 
     color+=F*vec3(0.4,0.6,0.8);
+=======
+    // color+=spec*vec3(1.0);
+
+    // color+=F*vec3(0.4,0.6,0.8);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 
     fragColor = vec4(color,1.0);
 }

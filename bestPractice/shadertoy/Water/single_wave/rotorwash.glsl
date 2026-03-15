@@ -23,10 +23,15 @@ float noise(vec2 p)
     float d=hash(i+vec2(1,1));
 
     vec2 u=f*f*(3.0-2.0*f);
+<<<<<<< HEAD
 
     return mix(a,b,u.x)
          +(c-a)*u.y*(1.0-u.x)
          +(d-b)*u.x*u.y;
+=======
+    // 双线性插值
+    return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 }
 
 //--------------------------------
@@ -152,25 +157,135 @@ float sinWave(vec2 uv)
     return wave*amplitude;
 }
 
+<<<<<<< HEAD
+=======
+float SprayWave(vec2 uv)
+{
+    float r = length(uv);
+    float a = atan(uv.y, uv.x);
+
+    float t = iTime;
+
+    float noise =
+        sin(a * 24.0 + t * 2.0) *
+        sin(a * 13.0 - t * 1.5);
+
+    float radial =
+        sin(r * 80.0 - t * 6.0);
+
+    float distort =
+        sin(a * 12.0 + r * 20.0 + t * 3.0);
+
+    // 随距离衰减,0.1处最强；0.0-0.2范围内衰减
+    float highpoint = 0.2;
+    float decl = clamp(1.0-  pow(r - highpoint,2.0)/pow(highpoint,2.0), 0.0, 1.0);
+    // 随距离衰减
+    // decl *= exp(-r*declRatio);
+ 
+    // decl = step(r, 0.2);
+
+    float height = decl * (0.6 * radial + 0.4 * noise * distort);
+
+    height = decl * (0.6 * radial + 0.4 * noise);
+
+    
+    height =  (0.6 * radial + 0.4 * noise);
+
+    // height += hash(uv)*0.01;
+
+    // height = decl * radial;
+
+    // height = decl * noise;
+
+    // height = noise;
+
+    return height;
+}
+//--------------------------------
+// gerstner wave
+//--------------------------------
+
+float gerstnerIrregular(vec2 uv, vec2 dir, float amp, float len, float speed,float declRatio,vec2 maskXY)
+{
+    float r = length(uv); 
+    // 扭曲uv坐标，改变波形形状
+    float twistRatio = 5.0;
+    vec2 warp = vec2(sin(uv.x*twistRatio),cos(uv.y*twistRatio  + 10.0));
+    float bTwist = step(0.01, r);
+    // uv += warp * 0.2*bTwist;
+
+    float k=2.0*PI/len;
+    float w=k*speed;
+
+    vec2 delta = uv - vec2(0.0,0.0);
+
+    float angle = atan(delta.y, delta.x); // 方位角，范围 [-PI, PI]    
+    // 扰动相位，增加八重对称的旋转效果
+    // 八重对称方向因子：在八个方向上为1，其余方向小于1
+    // cos(8*angle) 在 angle = 0°,45°,90°,135°,180°,225°,270°,315° 时等于1
+    float phaseTwist = 0.5 + 0.5 * sin(7.0 * angle);
+
+    float phase=k*dot(uv,dir)-w*iTime+ phaseTwist *r* 20.0;
+
+    // 两种衰减叠加
+    float decl = exp(-r*declRatio);
+    // 随距离衰减,0.2处最强；0.0-0.4范围内衰减
+    decl = clamp(1.0-  pow(r - 0.2,2.0)/pow(0.2,2.0), 0.0, 1.0);
+    // 随距离衰减
+    // decl *= exp(-r*declRatio);
+    amp *= decl; 
+    
+
+    // avoid singularity at center
+    // float mask = smoothstep(maskXY.x,maskXY.y,r);
+    // amp *= mask;
+
+    return amp*sin(phase);
+}
+
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 float vortexRing(vec2 uv){
 
     float r = length(uv); 
 
+<<<<<<< HEAD
     // 1. 简单的同心圆波纹
     // float ring = sinWave(uv);
+=======
+    float ring = 0.0;
+    // 1. 简单的同心圆波纹
+
+    // ring = sinWave(uv);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 
     // 2. 叠加多个偏移的波纹，模拟旋翼下的复杂涡流
     // 振幅、波长、速度
     float amp = 0.05;
+<<<<<<< HEAD
     float len = 0.05;
     float speed = 0.05;
     vec2 uv0 = uv-vec2(0.0,-0.1);
     vec2 dir = normalize(uv0);
+=======
+    float len = 0.02;
+    float speed = 0.05;
+    vec2 uv0 = uv-vec2(0.0,-0.0);
+    vec2 dir = normalize(uv0);
+    float declRatio = 10.0; // 衰减速率
+    vec2 maskXY = vec2(0.08,0.1);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 
     // 扭曲uv坐标，改变波形形状
     // vec2 warp = vec2(noise(uv*3.0 + iTime),noise(uv*3.0 + iTime + 10.0));
     // uv0 += warp * 0.03;
+<<<<<<< HEAD
     float ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8);
+=======
+    // ring =  gerstner(uv0, normalize(uv0), amp, len, speed*0.8);
+    ring =  gerstnerIrregular(uv0, normalize(uv0), amp, len, speed*0.8,declRatio,maskXY);
+    
+
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
     // float r = length(uv);
     // float decl = exp(-r*5.0);
     // ring *= decl; // 随距离衰减
@@ -202,8 +317,14 @@ float oceanHeight(vec2 p)
     // h+=gerstner(p,normalize(vec2(0.6,-0.3)),0.02,0.25,0.6);
 
     // helicopter disturbances
+<<<<<<< HEAD
     h+=vortexRing(p);
     h+=kelvinWake(p); 
+=======
+    // h+=vortexRing(p);
+    // h+=kelvinWake(p);
+    h+=SprayWave(p); 
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
     // h+=turbulence(p);
 
     return h;
@@ -323,5 +444,10 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord)
     // color = vec3(length(uv),0,0);
     // color = vec3(uv+0.5,0);
 
+<<<<<<< HEAD
     fragColor=vec4(n,1.0);
+=======
+    // color = n;
+    fragColor=vec4(color,1.0);
+>>>>>>> 54fdfee94e4780b34afb3209e6e254c06847e895
 }

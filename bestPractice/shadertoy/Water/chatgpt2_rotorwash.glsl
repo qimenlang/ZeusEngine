@@ -133,7 +133,7 @@ float kelvinWake2(vec2 uv)
     return wake*amp;
 }
 
-float rotorWave(vec2 uv)
+float SprayWave(vec2 uv)
 {
     float r = length(uv);
     float a = atan(uv.y, uv.x);
@@ -150,9 +150,14 @@ float rotorWave(vec2 uv)
     float distort =
         sin(a * 12.0 + r * 20.0 + t * 3.0);
 
-    float falloff = exp(-r * 4.0);
+    // 随距离衰减,0.1处最强；0.0-0.2范围内衰减
+    float decl = clamp(1.0-  pow(r - 0.1,2.0)/pow(0.1,2.0), 0.0, 1.0);
+    // 随距离衰减
+    // decl *= exp(-r*declRatio);
 
-    return falloff * (0.6 * radial + 0.4 * noise * distort);
+    // decl = step(r, 0.2);
+
+    return decl * (0.6 * radial + 0.4 * noise * distort);
 }
 
 
@@ -242,7 +247,7 @@ float oceanHeight(vec2 p)
     // h+=vortexRing(p);
     // h+=kelvinWake(p); 
     // h+=kelvinWake2(p); 
-    h+=rotorWave(p);
+    h+=SprayWave(p);
     // h+=turbulence(p);
 
     return h;
