@@ -1,0 +1,14 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.2/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CPack.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CPackComponent.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckCXXSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/WriteBasicConfigVersionFile.cmake
+C:/Program Files/CMake/share/cmake-4.2/Templates/CPackConfig.cmake.in
+D:/repos/engines/ZeusEngine/build-test/CMakeFiles/cmake.verify_globs
+D:/repos/engines/ZeusEngine/thirdparty/rttr/CMake/3rd_party_libs.cmake
+D:/repos/engines/ZeusEngine/thirdparty/rttr/CMake/config.cmake
+D:/repos/engines/ZeusEngine/thirdparty/rttr/CMake/installer.cmake
+D:/repos/engines/ZeusEngine/thirdparty/rttr/CMake/utility.cmake
+D:/repos/engines/ZeusEngine/thirdparty/rttr/CMakeLists.txt

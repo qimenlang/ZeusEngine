@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\CompareDump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\ImageExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\WriteDump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\Info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\Export.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\repos\engines\ZeusEngine\thirdparty\assimp\tools\assimp_cmd\assimp_cmd.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E3600C47-A9F5-361D-B026-7D00D53CC616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3223A4EB-08E0-3C61-9A64-4909D5BFE9C2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

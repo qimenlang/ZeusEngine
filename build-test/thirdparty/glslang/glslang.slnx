@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Folder Name="/CMakePredefinedTargets/">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="7475bc9e-8f4a-34a0-a77e-e0263293cfb4" DefaultStartup="true">
+			<BuildDependency Project="glslang/GenericCodeGen.vcxproj"/>
+			<BuildDependency Project="glslang/MachineIndependent.vcxproj"/>
+			<BuildDependency Project="glslang/OSDependent/Windows/OSDependent.vcxproj"/>
+			<BuildDependency Project="SPIRV/SPIRV.vcxproj"/>
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="glslang/glslang.vcxproj"/>
+			<BuildDependency Project="glslang/glslang-default-resource-limits.vcxproj"/>
+			<BuildDependency Project="StandAlone/glslang-standalone.vcxproj"/>
+		</Project>
+		<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c60004ed-e75f-3462-9dc1-a587248cd21f">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="PACKAGE.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="de639443-ce64-3b01-ab20-73cad2848fd5">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3e3486be-eba9-36c8-8552-019585e2fc9b">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="../../ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5b6c5133-fadc-330a-b71c-498f619f14a0"/>
+	</Folder>
+	<Folder Name="/glslang/">
+		<Project Path="glslang/GenericCodeGen.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2691721a-8dc4-3dac-bfc5-4cab35b4694a">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="glslang/MachineIndependent.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="744ae68a-18a9-30a0-9c51-312cc6f7f519">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="glslang/OSDependent/Windows/OSDependent.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5c4156c2-723c-33b9-a44f-160533a90dcb">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="SPIRV/SPIRV.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="30cd2f46-8f2a-3dcb-92f6-158e8d73f16f">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="glslang/glslang.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2379780e-5051-3e6e-906d-d0f25c25c1e4">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="glslang/glslang-default-resource-limits.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1d5633c5-cfeb-38ed-b86f-7fe74e2e50c6">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		</Project>
+	</Folder>
+	<Folder Name="/tools/">
+		<Project Path="StandAlone/glslang-standalone.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="160d8664-a683-368a-9cba-fd4dfa25ba64">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="glslang/glslang.vcxproj"/>
+			<BuildDependency Project="glslang/glslang-default-resource-limits.vcxproj"/>
+		</Project>
+	</Folder>
+</Solution>

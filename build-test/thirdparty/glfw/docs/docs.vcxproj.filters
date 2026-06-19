@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glfw\docs\Doxyfile" />
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\build-test\CMakeFiles\2e33194a596a3b28832773bba6456804\docs.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\main.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\news.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\quick.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\moving.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\compile.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\build.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\intro.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\context.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\monitor.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\window.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\input.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\vulkan.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\compat.md" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glfw\docs\internal.md" />
+    <None Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glfw\docs\CMakeFiles\docs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B86C85A8-30F9-337F-90E0-F2C41D86926C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

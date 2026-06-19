@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\CInterface\glslang_c_interface.cpp">
+      <Filter>CInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\GenericCodeGen\CodeGen.cpp">
+      <Filter>GenericCodeGen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\GenericCodeGen\Link.cpp">
+      <Filter>GenericCodeGen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\OSDependent\Windows\ossource.cpp">
+      <Filter>OSDependent\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang_tab.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\attribute.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Constant.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\iomapper.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\InfoSink.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Initialize.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\IntermTraverse.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Intermediate.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseContextBase.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseHelper.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\PoolAlloc.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\RemoveTree.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Scan.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ShaderLang.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SpirvIntrinsics.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SymbolTable.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Versions.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\intermOut.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\limits.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\linkValidate.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\parseConst.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\reflection.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\Pp.cpp">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpAtom.cpp">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpContext.cpp">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpScanner.cpp">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpTokens.cpp">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\propagateNoContraction.cpp">
+      <Filter>MachineIndependent</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslAttributes.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseHelper.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslScanContext.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslOpMap.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokenStream.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslGrammar.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseables.cpp">
+      <Filter>HLSL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GlslangToSpv.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\InReadableOrder.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\Logger.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvBuilder.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvPostProcess.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\doc.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvTools.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\disassemble.cpp">
+      <Filter>SPIRV</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\CInterface\spirv_c_interface.cpp">
+      <Filter>SPIRV\CInterface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Public\ShaderLang.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\arrays.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\BaseTypes.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\Common.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ConstantUnion.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\glslang_c_interface.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\glslang_c_shader_types.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\InfoSink.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\InitializeGlobals.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\intermediate.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\PoolAlloc.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ResourceLimits.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ShHandle.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\SpirvIntrinsics.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\Types.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\visibility.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\OSDependent\osinclude.h">
+      <Filter>OSDependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\attribute.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang_tab.cpp.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\gl_types.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Initialize.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\iomapper.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\LiveTraverser.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\localintermediate.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseHelper.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\reflection.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\RemoveTree.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Scan.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ScanContext.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SymbolTable.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Versions.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\parseVersions.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\propagateNoContraction.h">
+      <Filter>MachineIndependent</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpContext.h">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpTokens.h">
+      <Filter>MachineIndependent\Preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslAttributes.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseHelper.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokens.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslScanContext.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslOpMap.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokenStream.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslGrammar.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseables.h">
+      <Filter>HLSL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\bitutils.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.std.450.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.EXT.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.KHR.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GlslangToSpv.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\hex_float.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\Logger.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvBuilder.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spvIR.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spvUtil.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\doc.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvTools.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\disassemble.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.AMD.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.NV.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.ARM.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.QCOM.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\NonSemanticDebugPrintf.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\NonSemanticShaderDebugInfo100.h">
+      <Filter>SPIRV</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang.y">
+      <Filter>MachineIndependent</Filter>
+    </None>
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spirv.hpp11">
+      <Filter>SPIRV</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CInterface">
+      <UniqueIdentifier>{8025EE6A-371C-3AE7-999B-661329E302EA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GenericCodeGen">
+      <UniqueIdentifier>{74E126C2-EB47-3012-BA3E-B43DBE175027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{DD6DCE10-0358-34D5-B344-B75C13CE5985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{6276D10E-30EE-3392-BDF1-AE7516361C07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MachineIndependent">
+      <UniqueIdentifier>{CBF47F47-9796-3E32-ADE7-4268BC8199E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MachineIndependent\Preprocessor">
+      <UniqueIdentifier>{1E80227E-AF39-3805-ACE9-BE676D6F845F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OSDependent">
+      <UniqueIdentifier>{7471023D-09D7-3A87-A280-549B94E41057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OSDependent\Windows">
+      <UniqueIdentifier>{5719317F-C0F1-305E-9233-3C1CE1F2BB69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{2D53693D-7891-30EF-85AF-E8D6515BC302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public">
+      <UniqueIdentifier>{F7866227-AFD2-3053-AA86-44A53F000C38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SPIRV">
+      <UniqueIdentifier>{9278F8D9-0CDE-3D3E-9496-871FDCB6DCA4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SPIRV\CInterface">
+      <UniqueIdentifier>{19AF327F-A0AC-3E35-ADC4-CB373A7E1AF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3223A4EB-08E0-3C61-9A64-4909D5BFE9C2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

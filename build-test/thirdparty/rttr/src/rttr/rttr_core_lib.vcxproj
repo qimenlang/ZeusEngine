@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6841CAFD-9277-3013-BC9D-6DB602E30CAF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>rttr_core_lib</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\lib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">rttr_core_lib.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">librttr_core_d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">rttr_core_lib.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">librttr_core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\lib\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">rttr_core_lib.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">librttr_core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\lib\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">rttr_core_lib.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">librttr_core</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;EBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;EBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\..;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/rttr/src/rttr/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.h.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.rc.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/rttr/src/rttr/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.h.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.rc.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/rttr/src/rttr/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.h.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.rc.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/rttr/src/rttr/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.h.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\version.rc.in;D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\constructor.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\destructor.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\enumeration.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\library.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\method.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\parameter_info.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\policy.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\property.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\registration.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\type.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant_associative_view.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant_sequential_view.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\visitor.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_equal.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_less.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\standard_types.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\conversion\std_conversion_functions.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\constructor\constructor_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\destructor\destructor_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enumeration_helper.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enumeration_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\library\library_win.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\library\library_unix.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\method\method_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_info_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_base.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_executer.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_state_saver.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_data.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_register.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_compare.cpp" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\detail\base\version.h" />
+    <ResourceCompile Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\rttr\src\rttr\detail\base\version.rc" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\access_levels.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\argument.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\array_range.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\associative_mapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\constructor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\destructor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\enumeration.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\enum_flags.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\filter_item.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\instance.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\library.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\method.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\policy.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\property.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\parameter_info.h" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\registration">
+    </None>
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\registration_friend">
+    </None>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\registration.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\registration_friend.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\sequential_mapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\string_view.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr_cast.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\rttr_enable.h" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\type">
+    </None>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\type.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\type_list.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant_associative_view.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\variant_sequential_view.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\visitor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\wrapper_mapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\base\core_prerequisites.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\comparable_types.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_array_less.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_array_less_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_array_equal.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_array_equal_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_equal.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_equal_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_less.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\comparison\compare_less_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\constructor\constructor_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\constructor\constructor_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\constructor\constructor_wrapper_defaults.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\constructor\constructor_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\conversion\std_conversion_functions.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\conversion\number_conversion.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\default_arguments\default_arguments.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\default_arguments\invoke_with_defaults.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\destructor\destructor_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\destructor\destructor_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enumeration_helper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enumeration_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enumeration_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\enumeration\enum_data.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\filter\filter_item_funcs.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\argument_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\array_range_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\associative_mapper_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\enum_flags_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\instance_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\rttr_cast_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\sequential_mapper_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\string_view_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\impl\wrapper_mapper_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\library\library_p.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\metadata\metadata.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\metadata\metadata_handler.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\method\method_accessor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\method\method_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\method\method_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\method\method_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\argument_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\argument_extractor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\class_item_mapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\data_address_container.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\flat_map.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\flat_multimap.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\function_traits.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\iterator_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\misc_type_traits.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\register_wrapper_mapper_conversion.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\sequential_container_type_traits.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\std_type_traits.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\template_type_trait.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\template_type_trait_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\misc\utility.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_infos.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_infos_compare.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_names.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_info_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\parameter_info\parameter_info_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\policies\prop_policies.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\policies\meth_policies.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\policies\ctor_policies.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_accessor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_base.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_func.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_member_func.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_member_object.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\property\property_wrapper_object.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\bind_types.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\bind_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\register_base_class_from_accessor.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_executer.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_manager.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\registration\registration_state_saver.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\accessor_type.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\base_classes.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\get_create_variant_func.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\get_derived_info_func.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_converter.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_comparator.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_data.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_register.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_name.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_register_p.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\type\type_string_utils.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_compare.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_data.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_data_converter.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_data_policy.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant\variant_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_associative_view\variant_associative_view_private.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_associative_view\variant_associative_view_creator.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_associative_view\variant_associative_view_creator_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_sequential_view\variant_sequential_view_private.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_sequential_view\variant_sequential_view_creator_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\variant_sequential_view\variant_sequential_view_creator.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\visitor_iterator.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\create_type_visitor_func.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\create_type_visitor_func_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\method_visitor_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\constructor_visitor_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\property_visitor_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\visitor_impl.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\type_visitor_invoker.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\rttr\src\rttr\detail\visitor\visitor_registration.h" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\ZERO_CHECK.vcxproj">
+      <Project>{5B6C5133-FADC-330A-B71C-498F619F14A0}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

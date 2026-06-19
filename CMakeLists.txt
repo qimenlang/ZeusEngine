@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+﻿cmake_minimum_required(VERSION 3.15)
 
 project("ZeusEngine")
 
@@ -16,6 +16,5 @@ add_subdirectory("thirdparty")
 enable_testing()
 add_subdirectory("utils")
 add_subdirectory("engine")
-add_subdirectory("osgEngine")
 
 add_subdirectory("bestPractice")

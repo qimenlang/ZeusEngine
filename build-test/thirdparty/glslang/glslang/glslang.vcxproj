@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2379780E-5051-3E6E-906D-D0F25C25C1E4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>glslang</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glslang.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glslangd</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glslang.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">glslang</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glslang.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">glslang</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glslang.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">glslang</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/Release//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/MinSizeRel//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/RelWithDebInfo//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;ENABLE_SPIRV;ENABLE_HLSL;GLSLANG_OSINCLUDE_WIN32;ENABLE_OPT=0;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\..;D:\repos\engines\ZeusEngine\build-test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\cmake_pch.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/Debug//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/Release//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/MinSizeRel//cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/glslang.dir/RelWithDebInfo//cmake_pch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\CInterface\glslang_c_interface.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Public\ShaderLang.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\arrays.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\BaseTypes.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\Common.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ConstantUnion.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\glslang_c_interface.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\glslang_c_shader_types.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\InfoSink.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\InitializeGlobals.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\intermediate.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\PoolAlloc.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ResourceLimits.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\ShHandle.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\SpirvIntrinsics.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\Types.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\Include\visibility.h" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\GenericCodeGen\CodeGen.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\GenericCodeGen\Link.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\OSDependent\Windows\ossource.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\OSDependent\osinclude.h" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang.y">
+    </None>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang_tab.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\attribute.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Constant.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\iomapper.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\InfoSink.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Initialize.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\IntermTraverse.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Intermediate.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseContextBase.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseHelper.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\PoolAlloc.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\RemoveTree.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Scan.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ShaderLang.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SpirvIntrinsics.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SymbolTable.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Versions.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\intermOut.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\limits.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\linkValidate.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\parseConst.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\reflection.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\Pp.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpAtom.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpContext.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpScanner.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpTokens.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\propagateNoContraction.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslAttributes.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseHelper.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslScanContext.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslOpMap.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokenStream.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslGrammar.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseables.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\attribute.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\glslang_tab.cpp.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\gl_types.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Initialize.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\iomapper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\LiveTraverser.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\localintermediate.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ParseHelper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\reflection.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\RemoveTree.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Scan.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\ScanContext.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\SymbolTable.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\Versions.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\parseVersions.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\propagateNoContraction.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpContext.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\MachineIndependent\preprocessor\PpTokens.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslAttributes.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseHelper.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokens.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslScanContext.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslOpMap.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslTokenStream.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslGrammar.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\glslang\HLSL\hlslParseables.h" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GlslangToSpv.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\InReadableOrder.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\Logger.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvBuilder.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvPostProcess.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\doc.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvTools.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\disassemble.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\CInterface\spirv_c_interface.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/glslang/CMakeFiles/glslang.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\bitutils.h" />
+    <None Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spirv.hpp11">
+    </None>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.std.450.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.EXT.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.KHR.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GlslangToSpv.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\hex_float.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\Logger.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvBuilder.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spvIR.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\spvUtil.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\doc.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\SpvTools.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\disassemble.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.AMD.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.NV.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.ARM.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\GLSL.ext.QCOM.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\NonSemanticDebugPrintf.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\SPIRV\NonSemanticShaderDebugInfo100.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\Debug\cmake_pch.hxx" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\Release\cmake_pch.hxx" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\MinSizeRel\cmake_pch.hxx" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\CMakeFiles\glslang.dir\RelWithDebInfo\cmake_pch.hxx" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\ZERO_CHECK.vcxproj">
+      <Project>{5B6C5133-FADC-330A-B71C-498F619F14A0}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

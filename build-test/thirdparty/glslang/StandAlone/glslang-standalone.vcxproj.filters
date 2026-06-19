@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\StandAlone\StandAlone.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\StandAlone\DirStackFileIncluder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\build-test\include\glslang\glsl_intrinsic_header.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\build-test\CMakeFiles\80de33ee806d970b61d446dcc5349d06\glsl_intrinsic_header.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\StandAlone\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B86C85A8-30F9-337F-90E0-F2C41D86926C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{93991735-4F47-37CA-9B51-FBDDD5DA7561}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

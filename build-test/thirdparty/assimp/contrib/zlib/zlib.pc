@@ -1,0 +1,13 @@
+prefix=C:/Program Files (x86)/ZeusEngine
+exec_prefix=C:/Program Files (x86)/ZeusEngine
+libdir=
+sharedlibdir=
+includedir=
+
+Name: zlib
+Description: zlib compression library
+Version: 
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

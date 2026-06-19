@@ -1,4 +1,4 @@
-set(BUILD_UNIT_TESTS OFF CACHE BOOL "Disable unit tests of rttr" FORCE)
+﻿set(BUILD_UNIT_TESTS OFF CACHE BOOL "Disable unit tests of rttr" FORCE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "Disable examples of rttr" FORCE)
 set(BUILD_DOCUMENTATION OFF CACHE BOOL "Disable docs of rttr" FORCE)
 set(BUILD_RTTR_DYNAMIC OFF CACHE BOOL "Disable Build Dynamic Lib of rttr" FORCE)
@@ -11,7 +11,6 @@ add_subdirectory("Catch2")
 add_subdirectory("assimp")
 set(ENABLE_OPT OFF)
 add_subdirectory("glslang")
-add_subdirectory("osg")
 
 add_subdirectory("rttr")
 # post fix : disable -Werror for rttr targets when using clang

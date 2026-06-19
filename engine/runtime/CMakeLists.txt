@@ -13,7 +13,7 @@ file(GLOB_RECURSE SOURCE_FILES *.c *.cpp)
 add_library(${ZEUS_RUNTIME_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 target_compile_definitions(${ZEUS_RUNTIME_NAME} PRIVATE ZEUS_ROOT_DIR=\"${CMAKE_SOURCE_DIR}/resources\")
 
-target_link_libraries(${ZEUS_RUNTIME_NAME} glfw stb glm assimp utils imgui Vulkan::Vulkan osg)
+target_link_libraries(${ZEUS_RUNTIME_NAME} glfw stb glm assimp utils imgui Vulkan::Vulkan)
 target_include_directories(${ZEUS_RUNTIME_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(${ZEUS_ENGINE_NAME} main.cpp)

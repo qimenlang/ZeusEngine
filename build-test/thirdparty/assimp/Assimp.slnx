@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="UpdateAssimpLibsDebugSymbolsAndDLLs.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="9284251d-dc0f-3e67-ba57-7dda8521bcf8">
+		<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="code/assimp.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="013e2e7f-0343-34ca-bac4-68682842e439">
+		<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="tools/assimp_cmd/assimp_cmd.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3cc9ea97-fe97-32db-acca-7dcfadcf5065">
+		<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="code/assimp.vcxproj"/>
+		<BuildDependency Project="contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="test/unit.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0dbd9302-0e13-3da0-8f67-43140a6fef83">
+		<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="code/assimp.vcxproj"/>
+		<BuildDependency Project="contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="contrib/zlib/zlibstatic.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="df88bb77-39f1-3378-a02e-9156ddc03575">
+		<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Folder Name="/CMakePredefinedTargets/">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="7475bc9e-8f4a-34a0-a77e-e0263293cfb4" DefaultStartup="true">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="code/assimp.vcxproj"/>
+			<BuildDependency Project="tools/assimp_cmd/assimp_cmd.vcxproj"/>
+			<BuildDependency Project="test/unit.vcxproj"/>
+			<BuildDependency Project="contrib/zlib/zlibstatic.vcxproj"/>
+		</Project>
+		<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c60004ed-e75f-3462-9dc1-a587248cd21f">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="PACKAGE.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="de639443-ce64-3b01-ab20-73cad2848fd5">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3e3486be-eba9-36c8-8552-019585e2fc9b">
+			<BuildDependency Project="../../ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="../../ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5b6c5133-fadc-330a-b71c-498f619f14a0"/>
+	</Folder>
+</Solution>

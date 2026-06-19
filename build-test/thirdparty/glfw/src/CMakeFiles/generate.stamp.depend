@@ -1,0 +1,4 @@
+# CMake generation dependency list for this directory.
+D:/repos/engines/ZeusEngine/build-test/CMakeFiles/cmake.verify_globs
+D:/repos/engines/ZeusEngine/thirdparty/glfw/CMake/glfw3.pc.in
+D:/repos/engines/ZeusEngine/thirdparty/glfw/src/CMakeLists.txt

@@ -1,4 +1,4 @@
-[submodule "thirdparty/glfw"]
+﻿[submodule "thirdparty/glfw"]
 	path = thirdparty/glfw
 	url = git@github.com:glfw/glfw.git
 [submodule "thirdparty/glm"]
@@ -22,6 +22,3 @@
 [submodule "thirdparty/glslang"]
 	path = thirdparty/glslang
 	url = https://github.com/KhronosGroup/glslang.git
-[submodule "thirdparty/osg"]
-	path = thirdparty/osg
-	url = git@github.com:openscenegraph/OpenSceneGraph.git

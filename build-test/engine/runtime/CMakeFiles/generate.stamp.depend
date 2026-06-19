@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake
+D:/repos/engines/ZeusEngine/build-test/CMakeFiles/cmake.verify_globs
+D:/repos/engines/ZeusEngine/engine/runtime/CMakeLists.txt

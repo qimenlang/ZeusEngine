@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7475BC9E-8F4A-34A0-A77E-E0263293CFB4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\thirdparty\glslang\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\glslang\CHANGES.md;D:\repos\engines\ZeusEngine\thirdparty\glslang\build_info.h.tmpl;D:\repos\engines\ZeusEngine\thirdparty\glslang\parse_version.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\glslang\CHANGES.md;D:\repos\engines\ZeusEngine\thirdparty\glslang\build_info.h.tmpl;D:\repos\engines\ZeusEngine\thirdparty\glslang\parse_version.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\glslang\CHANGES.md;D:\repos\engines\ZeusEngine\thirdparty\glslang\build_info.h.tmpl;D:\repos\engines\ZeusEngine\thirdparty\glslang\parse_version.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/thirdparty/glslang/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/thirdparty/glslang/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\WriteBasicConfigVersionFile.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;D:\repos\engines\ZeusEngine\thirdparty\glslang\CHANGES.md;D:\repos\engines\ZeusEngine\thirdparty\glslang\build_info.h.tmpl;D:\repos\engines\ZeusEngine\thirdparty\glslang\parse_version.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\ZERO_CHECK.vcxproj">
+      <Project>{5B6C5133-FADC-330A-B71C-498F619F14A0}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\GenericCodeGen.vcxproj">
+      <Project>{2691721A-8DC4-3DAC-BFC5-4CAB35B4694A}</Project>
+      <Name>GenericCodeGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\MachineIndependent.vcxproj">
+      <Project>{744AE68A-18A9-30A0-9C51-312CC6F7F519}</Project>
+      <Name>MachineIndependent</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\OSDependent\Windows\OSDependent.vcxproj">
+      <Project>{5C4156C2-723C-33B9-A44F-160533A90DCB}</Project>
+      <Name>OSDependent</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\SPIRV\SPIRV.vcxproj">
+      <Project>{30CD2F46-8F2A-3DCB-92F6-158E8D73F16F}</Project>
+      <Name>SPIRV</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\glslang.vcxproj">
+      <Project>{2379780E-5051-3E6E-906D-D0F25C25C1E4}</Project>
+      <Name>glslang</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\glslang\glslang-default-resource-limits.vcxproj">
+      <Project>{1D5633C5-CFEB-38ED-B86F-7FE74E2E50C6}</Project>
+      <Name>glslang-default-resource-limits</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glslang\StandAlone\glslang-standalone.vcxproj">
+      <Project>{160D8664-A683-368A-9CBA-FD4DFA25BA64}</Project>
+      <Name>glslang-standalone</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

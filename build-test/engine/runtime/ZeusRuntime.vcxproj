@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F15FBDE6-72EF-377D-AEF5-9E1EA996E622}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ZeusRuntime</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ZeusRuntime.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ZeusRuntimed</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ZeusRuntime.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ZeusRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ZeusRuntime.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ZeusRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ZeusRuntime.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ZeusRuntime</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/VulkanSDK/1.4.321.1/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;ZEUS_ROOT_DIR="D:/repos/engines/ZeusEngine/resources";CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;ZEUS_ROOT_DIR=\"D:/repos/engines/ZeusEngine/resources\";CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/VulkanSDK/1.4.321.1/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR="D:/repos/engines/ZeusEngine/resources";CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR=\"D:/repos/engines/ZeusEngine/resources\";CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/VulkanSDK/1.4.321.1/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR="D:/repos/engines/ZeusEngine/resources";CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR=\"D:/repos/engines/ZeusEngine/resources\";CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/VulkanSDK/1.4.321.1/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR="D:/repos/engines/ZeusEngine/resources";CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ZEUS_ROOT_DIR=\"D:/repos/engines/ZeusEngine/resources\";CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repos\engines\ZeusEngine\engine\runtime;D:\repos\engines\ZeusEngine\thirdparty\glfw\include;D:\repos\engines\ZeusEngine\thirdparty\stb\.;D:\repos\engines\ZeusEngine\thirdparty\glm;D:\repos\engines\ZeusEngine\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\..\include;D:\repos\engines\ZeusEngine\utils;D:\repos\engines\ZeusEngine\thirdparty\imgui;D:\repos\engines\ZeusEngine\thirdparty\imgui\backends;D:\VulkanSDK\1.4.321.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\engine\runtime\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/engine/runtime/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/engine/runtime/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindVulkan.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/engine/runtime/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/engine/runtime/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindVulkan.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/engine/runtime/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/engine/runtime/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindVulkan.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/repos/engines/ZeusEngine/engine/runtime/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/repos/engines/ZeusEngine -BD:/repos/engines/ZeusEngine/build-test --check-stamp-file D:/repos/engines/ZeusEngine/build-test/engine/runtime/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindVulkan.cmake;D:\repos\engines\ZeusEngine\build-test\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\repos\engines\ZeusEngine\build-test\engine\runtime\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\Camera.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\Engine.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\backend\GLEnums.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\backend\GLUtils.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\config.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\core\event.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\CameraComponent.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\Component.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\MeshComponent.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\TransformComponent.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\object\Object.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\scene\Scene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\world\world_manager.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\ComputeShader.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Material.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Renderer.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Shader.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\View.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\include\KHR\khrplatform.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\include\glad\glad.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\AssetManager.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\CubeGeometry.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometries.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometry.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\QuadGeometry.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\SphereGeometry.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\textures\Texture.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\BlendScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ComputeShaderScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\CubeScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\DepthScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\FBOScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingStarScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ModelScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRTextureScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ShadowScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\StencilScene.h" />
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\utils\DebugHelper.h" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\Camera.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\Engine.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\CameraComponent.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\Component.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\MeshComponent.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\TransformComponent.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\object\Object.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\scene\Scene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\ComputeShader.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Material.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Renderer.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Shader.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\View.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\glad.c" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\main.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\AssetManager.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\CubeGeometry.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometry.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\QuadGeometry.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\SphereGeometry.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\textures\Texture.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\BlendScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ComputeShaderScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\CubeScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\DepthScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\FBOScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingStarScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ModelScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRTextureScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ShadowScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\StencilScene.cpp" />
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\vulkanStart.cpp" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\ZERO_CHECK.vcxproj">
+      <Project>{5B6C5133-FADC-330A-B71C-498F619F14A0}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\code\assimp.vcxproj">
+      <Project>{013E2E7F-0343-34CA-BAC4-68682842E439}</Project>
+      <Name>assimp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glfw\src\glfw.vcxproj">
+      <Project>{17960A95-7A19-374D-8D69-619240B1A5A0}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\glm\glm\glm.vcxproj">
+      <Project>{90444B13-2C4C-3E98-ABBA-7990AE3F7B1D}</Project>
+      <Name>glm</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\imgui.vcxproj">
+      <Project>{74F9D812-AEA7-3BE1-8B39-D5A01C097A7E}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repos\engines\ZeusEngine\build-test\thirdparty\assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{DF88BB77-39F1-3378-A02E-9156DDC03575}</Project>
+      <Name>zlibstatic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

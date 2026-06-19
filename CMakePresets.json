@@ -1,4 +1,4 @@
-{
+﻿{
     "version": 8,
     "configurePresets": [
         {
@@ -38,11 +38,6 @@
                 "CMAKE_C_COMPILER": "cl.exe",
                 "CMAKE_CXX_COMPILER": "cl.exe",
                 "ASSIMP_BUILD_ASSIMP_VIEW": "OFF",
-                "DYNAMIC_OPENSCENEGRAPH":"OFF",
-                "DYNAMIC_OPENTHREADS":"OFF",
-                "BUILD_OSG_PLUGINS_BY_DEFAULT": "OFF",
-                "BUILD_OSG_APPLICATIONS": "OFF",
-                "BUILD_OSG_EXAMPLES": "OFF",
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_SUPPRESS_REGENERATION": "ON"
             }
@@ -60,11 +55,6 @@
                 "ASSIMP_WARNINGS_AS_ERRORS": "OFF",
                 "ASSIMP_BUILD_ASSIMP_TOOLS": "OFF",
                 "ASSIMP_BUILD_TESTS": "OFF",
-                "DYNAMIC_OPENSCENEGRAPH":"OFF",
-                "DYNAMIC_OPENTHREADS":"OFF",
-                "BUILD_OSG_PLUGINS_BY_DEFAULT": "OFF",
-                "BUILD_OSG_APPLICATIONS": "OFF",
-                "BUILD_OSG_EXAMPLES": "OFF",
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_STANDARD": "23",
                 "CMAKE_CXX_STANDARD_REQUIRED": "ON",

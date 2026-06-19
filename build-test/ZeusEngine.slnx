@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="thirdparty/Catch2/src/Catch2.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8d538cbe-01bf-4a2e-a98a-6c368fdf13d7">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/Catch2/src/Catch2WithMain.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8bd3552a-2cfb-4a59-ab15-2031b97ada1e">
+		<BuildDependency Project="thirdparty/Catch2/src/Catch2.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="engine/unit_test/UnitTest.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="9323e66b-c20f-3577-985d-c45b8299a414">
+		<BuildDependency Project="thirdparty/Catch2/src/Catch2.vcxproj"/>
+		<BuildDependency Project="thirdparty/Catch2/src/Catch2WithMain.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="engine/runtime/ZeusRuntime.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+		<BuildDependency Project="thirdparty/glm/glm/glm.vcxproj"/>
+		<BuildDependency Project="thirdparty/imgui.vcxproj"/>
+		<BuildDependency Project="thirdparty/rttr/src/rttr/rttr_core_lib.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/assimp/UpdateAssimpLibsDebugSymbolsAndDLLs.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="9284251d-dc0f-3e67-ba57-7dda8521bcf8">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="engine/runtime/VulkanStart.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="a453cbe5-eda2-344d-831e-78256cde74aa">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+		<BuildDependency Project="thirdparty/glm/glm/glm.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="engine/runtime/ZeusEngine.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="32328e48-3ef3-3756-a86c-4f8ee712ff42">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="engine/runtime/ZeusRuntime.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+		<BuildDependency Project="thirdparty/glm/glm/glm.vcxproj"/>
+		<BuildDependency Project="thirdparty/imgui.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="engine/runtime/ZeusRuntime.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f15fbde6-72ef-377d-aef5-9e1ea996e622">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+		<BuildDependency Project="thirdparty/glm/glm/glm.vcxproj"/>
+		<BuildDependency Project="thirdparty/imgui.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/assimp/code/assimp.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="013e2e7f-0343-34ca-bac4-68682842e439">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/assimp/tools/assimp_cmd/assimp_cmd.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3cc9ea97-fe97-32db-acca-7dcfadcf5065">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/cpp/features/cppFeature.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1f221c70-0ee5-35cc-b9a0-9b1230cabffb">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/cpp/cppQuiz/cppQuiz.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1bd00c87-b142-3204-a1b1-8b40dea8ecbc">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/design/design.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0b6a8a40-399d-3400-be97-dceea11f6e69">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/glm/glm/glm.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="90444b13-2c4c-3e98-abba-7990ae3f7b1d">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/imgui.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="74f9d812-aea7-3be1-8b39-d5a01c097a7e">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/cpp/IPC/ipc_reader.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e503c83a-9d91-3d85-ba8b-30c1969b290b">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/cpp/IPC/ipc_writer.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3e1afafd-33ec-3b9d-b7df-cf6bb904c66f">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="bestPractice/cpp/multiThread/multiThread.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="29e7e775-88a0-3589-9194-26adf73872b1">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/rttr/src/rttr/rttr_core_lib.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6841cafd-9277-3013-bc9d-6db602e30caf">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/assimp/test/unit.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0dbd9302-0e13-3da0-8f67-43140a6fef83">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+		<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+	</Project>
+	<Project Path="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="df88bb77-39f1-3378-a02e-9156ddc03575">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Folder Name="/CMakePredefinedTargets/">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="7475bc9e-8f4a-34a0-a77e-e0263293cfb4" DefaultStartup="true">
+			<BuildDependency Project="thirdparty/Catch2/src/Catch2.vcxproj"/>
+			<BuildDependency Project="thirdparty/Catch2/src/Catch2WithMain.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/GenericCodeGen.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/MachineIndependent.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/OSDependent/Windows/OSDependent.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/SPIRV/SPIRV.vcxproj"/>
+			<BuildDependency Project="engine/unit_test/UnitTest.vcxproj"/>
+			<BuildDependency Project="engine/runtime/VulkanStart.vcxproj"/>
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="engine/runtime/ZeusEngine.vcxproj"/>
+			<BuildDependency Project="engine/runtime/ZeusRuntime.vcxproj"/>
+			<BuildDependency Project="thirdparty/assimp/code/assimp.vcxproj"/>
+			<BuildDependency Project="thirdparty/assimp/tools/assimp_cmd/assimp_cmd.vcxproj"/>
+			<BuildDependency Project="bestPractice/cpp/features/cppFeature.vcxproj"/>
+			<BuildDependency Project="bestPractice/cpp/cppQuiz/cppQuiz.vcxproj"/>
+			<BuildDependency Project="bestPractice/design/design.vcxproj"/>
+			<BuildDependency Project="thirdparty/glfw/docs/docs.vcxproj"/>
+			<BuildDependency Project="thirdparty/glfw/src/glfw.vcxproj"/>
+			<BuildDependency Project="thirdparty/glm/glm/glm.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/glslang.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/glslang-default-resource-limits.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/StandAlone/glslang-standalone.vcxproj"/>
+			<BuildDependency Project="thirdparty/imgui.vcxproj"/>
+			<BuildDependency Project="bestPractice/cpp/IPC/ipc_reader.vcxproj"/>
+			<BuildDependency Project="bestPractice/cpp/IPC/ipc_writer.vcxproj"/>
+			<BuildDependency Project="bestPractice/cpp/multiThread/multiThread.vcxproj"/>
+			<BuildDependency Project="thirdparty/rttr/src/rttr/rttr_core_lib.vcxproj"/>
+			<BuildDependency Project="thirdparty/assimp/test/unit.vcxproj"/>
+			<BuildDependency Project="thirdparty/assimp/contrib/zlib/zlibstatic.vcxproj"/>
+		</Project>
+		<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c60004ed-e75f-3462-9dc1-a587248cd21f">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="PACKAGE.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="de639443-ce64-3b01-ab20-73cad2848fd5">
+			<BuildDependency Project="ALL_BUILD.vcxproj"/>
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3e3486be-eba9-36c8-8552-019585e2fc9b">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5b6c5133-fadc-330a-b71c-498f619f14a0"/>
+	</Folder>
+	<Folder Name="/GLFW3/">
+		<Project Path="thirdparty/glfw/docs/docs.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f87059d4-f77c-3ec4-9a27-8050a8dbfa2b">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glfw/src/glfw.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="17960a95-7a19-374d-8d69-619240b1a5a0">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glfw/uninstall.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="bef90b8c-1733-3b89-9210-2bfbe07e51db">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="thirdparty/glfw/src/update_mappings.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="88012fb8-edd1-35b3-81ab-fd48ec115380">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+	</Folder>
+	<Folder Name="/glslang/">
+		<Project Path="thirdparty/glslang/glslang/GenericCodeGen.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2691721a-8dc4-3dac-bfc5-4cab35b4694a">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glslang/glslang/MachineIndependent.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="744ae68a-18a9-30a0-9c51-312cc6f7f519">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glslang/glslang/OSDependent/Windows/OSDependent.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5c4156c2-723c-33b9-a44f-160533a90dcb">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glslang/SPIRV/SPIRV.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="30cd2f46-8f2a-3dcb-92f6-158e8d73f16f">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glslang/glslang/glslang.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2379780e-5051-3e6e-906d-d0f25c25c1e4">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+		<Project Path="thirdparty/glslang/glslang/glslang-default-resource-limits.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1d5633c5-cfeb-38ed-b86f-7fe74e2e50c6">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		</Project>
+	</Folder>
+	<Folder Name="/tools/">
+		<Project Path="thirdparty/glslang/StandAlone/glslang-standalone.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="160d8664-a683-368a-9cba-fd4dfa25ba64">
+			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/glslang.vcxproj"/>
+			<BuildDependency Project="thirdparty/glslang/glslang/glslang-default-resource-limits.vcxproj"/>
+		</Project>
+	</Folder>
+</Solution>

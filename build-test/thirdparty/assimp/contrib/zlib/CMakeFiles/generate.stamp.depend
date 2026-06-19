@@ -1,0 +1,10 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckFunctionExists.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckIncludeFileCXX.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CheckTypeSize.cmake
+D:/repos/engines/ZeusEngine/build-test/CMakeFiles/cmake.verify_globs
+D:/repos/engines/ZeusEngine/thirdparty/assimp/contrib/zlib/CMakeLists.txt
+D:/repos/engines/ZeusEngine/thirdparty/assimp/contrib/zlib/zconf.h.cmakein
+D:/repos/engines/ZeusEngine/thirdparty/assimp/contrib/zlib/zlib.pc.cmakein

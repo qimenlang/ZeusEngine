@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\CameraComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\MeshComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\TransformComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\object\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\scene\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\ComputeShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\View.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\AssetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\CubeGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\QuadGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\SphereGeometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\textures\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\BlendScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ComputeShaderScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\CubeScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\DepthScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\FBOScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingStarScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ModelScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRTextureScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ShadowScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\StencilScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\repos\engines\ZeusEngine\engine\runtime\vulkanStart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\backend\GLEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\backend\GLUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\core\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\CameraComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\MeshComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\component\TransformComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\object\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\framework\world\world_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\ComputeShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\function\render\View.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\include\KHR\khrplatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\include\glad\glad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\AssetManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\CubeGeometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\Geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\QuadGeometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\geometries\SphereGeometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\resource\textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\BlendScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ComputeShaderScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\CubeScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\DepthScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\FBOScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\InstancingStarScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ModelScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\PBRTextureScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\ShadowScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\samples\StencilScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\repos\engines\ZeusEngine\engine\runtime\utils\DebugHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repos\engines\ZeusEngine\engine\runtime\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E3600C47-A9F5-361D-B026-7D00D53CC616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3223A4EB-08E0-3C61-9A64-4909D5BFE9C2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

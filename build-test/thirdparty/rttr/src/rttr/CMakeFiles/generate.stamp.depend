@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+D:/repos/engines/ZeusEngine/build-test/CMakeFiles/cmake.verify_globs
+D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/CMakeLists.txt
+D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/detail/base/version.h.in
+D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/detail/base/version.rc.in
+D:/repos/engines/ZeusEngine/thirdparty/rttr/src/rttr/rttr.cmake
