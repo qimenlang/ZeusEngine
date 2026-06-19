@@ -13,11 +13,20 @@ set(ENABLE_OPT OFF)
 add_subdirectory("glslang")
 add_subdirectory("osg")
 
-message("###Compiler:" ${CMAKE_CXX_COMPILER_ID})
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    add_compile_options(-Wno-error=implicit-const-int-float-conversion)
-endif()
 add_subdirectory("rttr")
+# post fix : disable -Werror for rttr targets when using clang
+set(RTTR_TARGETS
+    rttr_core_lib
+    rttr_lib
+)
+foreach(t ${RTTR_TARGETS})
+    if(TARGET ${t})
+        target_compile_options(${t} PRIVATE
+            $<$<CXX_COMPILER_ID:Clang>:-Wno-error>
+            $<$<CXX_COMPILER_ID:Clang>:-Wno-microsoft-unqualified-friend>
+        )
+    endif()
+endforeach()
 
 set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/imgui)
 
@@ -30,4 +39,3 @@ file(GLOB IMGUI_SOURCES
 add_library(imgui STATIC ${IMGUI_SOURCES})
 target_link_libraries(imgui PUBLIC glfw)
 target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
-

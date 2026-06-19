@@ -2,6 +2,30 @@
     "version": 8,
     "configurePresets": [
         {
+            "name": "clang",
+            "displayName": "Clang 19.1.0 x86_64-pc-windows-msvc",
+            "description": "正在使用编译器: C = C:\\Program Files\\LLVM\\bin\\clang.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang++.exe",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "clang-cl",
+            "displayName": "Clang-cl 19.1.0 x86_64-pc-windows-msvc",
+            "description": "正在使用编译器: C = C:\\Program Files\\LLVM\\bin\\clang-cl.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang-cl.exe",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang-cl.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
             "name": "vs2026",
             "displayName": "vs2026",
             "description": "将编译器用于 Visual Studio 18 2026 (x64 体系结构),存在msb 1011错误时请使用ninja-msvc",
@@ -31,8 +55,11 @@
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
                 "ASSIMP_BUILD_ASSIMP_VIEW": "OFF",
                 "ASSIMP_WARNINGS_AS_ERRORS": "OFF",
+                "ASSIMP_BUILD_ASSIMP_TOOLS": "OFF",
+                "ASSIMP_BUILD_TESTS": "OFF",
                 "DYNAMIC_OPENSCENEGRAPH":"OFF",
                 "DYNAMIC_OPENTHREADS":"OFF",
                 "BUILD_OSG_PLUGINS_BY_DEFAULT": "OFF",
