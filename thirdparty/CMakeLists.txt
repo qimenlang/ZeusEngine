@@ -38,3 +38,8 @@ file(GLOB IMGUI_SOURCES
 add_library(imgui STATIC ${IMGUI_SOURCES})
 target_link_libraries(imgui PUBLIC glfw)
 target_include_directories(imgui PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/backends)
+
+add_subdirectory("VulkanSceneGraph")
+add_subdirectory("vsgXChange")
+add_subdirectory("vsgImgui")
+add_subdirectory("vsgExamples")

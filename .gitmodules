@@ -22,3 +22,15 @@
 [submodule "thirdparty/glslang"]
 	path = thirdparty/glslang
 	url = https://github.com/KhronosGroup/glslang.git
+[submodule "thirdparty/VulkanSceneGraph"]
+	path = thirdparty/VulkanSceneGraph
+	url = git@github.com:vsg-dev/VulkanSceneGraph.git
+[submodule "thirdparty/vsgExamples"]
+	path = thirdparty/vsgExamples
+	url = git@github.com:vsg-dev/vsgExamples.git
+[submodule "thirdparty/vsgXChange"]
+	path = thirdparty/vsgXChange
+	url = git@github.com:vsg-dev/vsgXchange.git
+[submodule "thirdparty/vsgImgui"]
+	path = thirdparty/vsgImgui
+	url = git@github.com:vsg-dev/vsgImGui.git
