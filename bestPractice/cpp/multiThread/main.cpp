@@ -22,6 +22,9 @@ int main() {
     // synchronization::testConditionVariable2();
     // synchronization::testasync();
     // synchronization::testPromise();
-    synchronization::testSharedFuture();
+    // synchronization::testSharedFuture();
+    // synchronization::testBarrier();
+    // synchronization::testLatch();
+    synchronization::testLatchTaskBatch();
     return 0;
 }

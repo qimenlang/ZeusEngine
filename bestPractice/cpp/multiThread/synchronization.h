@@ -1,7 +1,9 @@
 #pragma once
+#include <barrier>
 #include <chrono>
 #include <condition_variable>
 #include <iostream>
+#include <latch>
 #include <mutex>
 #include <queue>
 
@@ -63,5 +65,8 @@ void testConditionVariable2();
 void testasync();
 void testPromise();
 void testSharedFuture();
+void testBarrier();
+void testLatch();
+void testLatchTaskBatch();
 
 }  // namespace synchronization
